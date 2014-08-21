@@ -7,8 +7,6 @@
 
   (define-key help-mode-map [(meta left)] 'help-go-back)
   (define-key help-mode-map [(meta right)] 'help-go-forward)
-  (define-key help-mode-map [left] 'help-go-back)
-  (define-key help-mode-map [right] 'help-go-forward)
   )
 
 
