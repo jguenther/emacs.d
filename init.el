@@ -81,8 +81,10 @@
 (require 'init-ruby-mode)
 (require 'init-rails)
 (require 'init-sql)
+(require 'init-help)
 
-(require 'init-paredit)
+;; disabled paredit-mode -- annoying
+;(require 'init-paredit)
 (require 'init-lisp)
 (require 'init-slime)
 (require 'init-clojure)
