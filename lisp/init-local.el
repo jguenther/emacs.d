@@ -128,9 +128,8 @@
 ;(ebs-initialize)
 ;(global-set-key [(control tab)] 'ebs-switch-buffer)
 
-; disable electric-pair-mode in modes derived from text-mode
-(add-hook 'text-mode-hook
-          (lambda () (set (make-local-variable 'electric-pair-mode) nil)))
-
+(require 'auto-async-byte-compile)
+;(setq auto-async-byte-compile-exclude-files-regexp "/junk/")
+(add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
 
 (provide 'init-local)
