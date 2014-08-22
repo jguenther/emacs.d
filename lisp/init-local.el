@@ -8,15 +8,14 @@
    version-control t)       ; use versioned backups
 
 
-(add-to-list 'package-archives
-  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;; (add-to-list 'package-archives
+;;   '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 
 (setq visible-bell t)
 (setq load-path (cons "/home/jguenther/.emacs-lisp" load-path))
 (setq load-path (cons "/usr/local/share/emacs/site-lisp" load-path))
 (setq load-path (cons "/home/jguenther/share/emacs/site-lisp" load-path))
-;(setq load-path (cons "/usr/share/emacs/site-lisp/git" load-path))
 (setq load-path (cons "/usr/share/emacs/site-lisp" load-path))
 
 (require 'ess-site)
@@ -77,44 +76,39 @@
 ;(require 'grep-buffers)
 
 (show-paren-mode 1)
-(global-set-key (quote [f5]) (quote compile))
-(global-set-key (quote [f7]) (quote recompile))
+;(global-set-key (quote [f5]) (quote compile))
+;(global-set-key (quote [f7]) (quote recompile))
 (column-number-mode 1)
 (line-number-mode 1)
+
 (defsubst yank-secondary ()
   "Insert the secondary selection at point.
   Moves point to the end of the inserted text.  Does not change mark."
   (interactive) (insert (x-get-selection 'SECONDARY)))
-(setq hcz-set-cursor-color-color "")
-(setq hcz-set-cursor-color-buffer "")
-(defun hcz-set-cursor-color-according-to-mode ()
-  "change cursor color according to some minor modes."
-  ;; set-cursor-color is somewhat costly, so we only call it when needed:
-  (let ((color
-	 (if buffer-read-only "black"
-	   (if overwrite-mode "red"
-	     "blue"))))
-    (unless (and
-	     (string= color hcz-set-cursor-color-color)
-	     (string= (buffer-name) hcz-set-cursor-color-buffer))
-      (set-cursor-color (setq hcz-set-cursor-color-color color))
-      (setq hcz-set-cursor-color-buffer (buffer-name)))))
-(add-hook 'post-command-hook 'hcz-set-cursor-color-according-to-mode)
-(setq cperl-invalid-face nil) 
+
+;; (setq hcz-set-cursor-color-color "")
+;; (setq hcz-set-cursor-color-buffer "")
+;; (defun hcz-set-cursor-color-according-to-mode ()
+;;   "change cursor color according to some minor modes."
+;;   ;; set-cursor-color is somewhat costly, so we only call it when needed:
+;;   (let ((color
+;; 	 (if buffer-read-only "black"
+;; 	   (if overwrite-mode "red"
+;; 	     "blue"))))
+;;     (unless (and
+;; 	     (string= color hcz-set-cursor-color-color)
+;; 	     (string= (buffer-name) hcz-set-cursor-color-buffer))
+;;       (set-cursor-color (setq hcz-set-cursor-color-color color))
+;;       (setq hcz-set-cursor-color-buffer (buffer-name)))))
+;; (add-hook 'post-command-hook 'hcz-set-cursor-color-according-to-mode)
+
+(require 'cursor-chg)  ; Load the library
+(toggle-cursor-type-when-idle 1) ; Turn on cursor change when Emacs is idle
+(change-cursor-mode 1) ; Turn on change for overwrite, read-only, and input mode
+
+;(setq cperl-invalid-face nil)
 (setq fill-column 79)
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
-
-(require 'desktop)
-(setq history-length 250)
-(desktop-save-mode 1)
-(setq desktop-buffers-not-to-save
-      (concat "\\(" "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
-              "\\|\\.emacs.*\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb" 
-              "\\)$"))
-(add-to-list 'desktop-modes-not-to-save 'dired-mode)
-(add-to-list 'desktop-modes-not-to-save 'Info-mode)
-(add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
-(add-to-list 'desktop-modes-not-to-save 'fundamental-mode)
 
 (defadvice load (after give-my-keybindings-priority)
   "Try to ensure that my keybindings always have priority."
@@ -131,5 +125,19 @@
 (require 'auto-async-byte-compile)
 ;(setq auto-async-byte-compile-exclude-files-regexp "/junk/")
 (add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
+
+; don't check emacs lisp documentation
+(eval-after-load 'flycheck
+  '(setq flycheck-checkers (delq 'emacs-lisp-checkdoc flycheck-checkers)))
+
+;; (defadvice desktop-restore-file-buffer
+;;     (around desktop-read)
+;;   "Be non-interactive while starting a daemon."
+;;   (unless (and (daemonp)
+;;            (server-process))
+;;       (ad-do-it)))
+;; (ad-activate 'desktop-restore-file-buffer)
+
+(global-set-key (kbd "C-c r") 'desktop-read)
 
 (provide 'init-local)
