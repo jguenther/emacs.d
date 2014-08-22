@@ -126,10 +126,6 @@
 ;(setq auto-async-byte-compile-exclude-files-regexp "/junk/")
 (add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
 
-; don't check emacs lisp documentation
-(eval-after-load 'flycheck
-  '(setq flycheck-checkers (delq 'emacs-lisp-checkdoc flycheck-checkers)))
-
 ;; (defadvice desktop-restore-file-buffer
 ;;     (around desktop-read)
 ;;   "Be non-interactive while starting a daemon."
