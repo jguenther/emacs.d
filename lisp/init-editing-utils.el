@@ -139,6 +139,7 @@
 ;;----------------------------------------------------------------------------
 ;; Rectangle selections, and overwrite text when the selection is active
 ;;----------------------------------------------------------------------------
+(setq cua-rectangle-mark-key (kbd "C-S-<return>"))
 (cua-selection-mode t)                  ; for rectangles, CUA is nice
 
 

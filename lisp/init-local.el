@@ -136,4 +136,27 @@
 
 (global-set-key (kbd "C-c r") 'desktop-read)
 
+(global-set-key (kbd "C-c C-h") 'helm-mini)
+(global-set-key (kbd "C-c C-p") 'helm-perldoc)
+
+(add-hook 'cperl-mode-hook
+          (lambda () (require 'perl-completion)
+            (perl-completion-mode t)))
+
+(add-hook  'cperl-mode-hook
+           (lambda ()
+             (when (require 'auto-complete nil t)
+               (auto-complete-mode t)
+               (make-variable-buffer-local 'ac-sources)
+               (setq ac-sources
+                     '(ac-source-perl-completion)))))
+
+(add-hook 'cperl-mode-hook 'cperl-mode-my-keys)
+
+(defun cperl-mode-my-keys ()
+  "Set up the keymap for `cperl-mode'."
+
+  (define-key cperl-mode-map [C-return] 'plcmp-cmd-smart-complete)
+  )
+
 (provide 'init-local)

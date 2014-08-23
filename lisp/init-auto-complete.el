@@ -44,6 +44,7 @@
                ac-source-words-in-all-buffer))
 
 (dolist (mode '(magit-log-edit-mode
+                cperl-mode
                 log-edit-mode org-mode text-mode haml-mode
                 git-commit-mode
                 sass-mode yaml-mode csv-mode espresso-mode haskell-mode
