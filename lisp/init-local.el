@@ -65,8 +65,7 @@
 
 ; imenu bindings
 (global-set-key [S-mouse-3] 'imenu)
-(global-set-key (kbd "C-c i") 'imenu)
-
+(global-set-key (kbd "C-'") 'imenu-anywhere)
 
 (require 'tabbar)
 (tabbar-mode 1)
@@ -122,9 +121,9 @@
 ;(ebs-initialize)
 ;(global-set-key [(control tab)] 'ebs-switch-buffer)
 
-(require 'auto-async-byte-compile)
+;(require 'auto-async-byte-compile)
 ;(setq auto-async-byte-compile-exclude-files-regexp "/junk/")
-(add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
+;(add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
 
 ;; (defadvice desktop-restore-file-buffer
 ;;     (around desktop-read)
@@ -138,6 +137,8 @@
 
 (global-set-key (kbd "C-c C-h") 'helm-mini)
 (global-set-key (kbd "C-c C-p") 'helm-perldoc)
+
+(add-hook 'cperl-mode-hook 'imenu-add-menubar-index)
 
 (add-hook 'cperl-mode-hook
           (lambda () (require 'perl-completion)
