@@ -1,7 +1,7 @@
 (setq
    backup-by-copying t      ; don't clobber symlinks
    backup-directory-alist
-    '(("." . "~/.emacs.saves"))    ; don't litter my fs tree
+    '(("." . "~/.emacs.d/saves"))    ; don't litter my fs tree
    delete-old-versions t
    kept-new-versions 6
    kept-old-versions 2
@@ -42,17 +42,19 @@
 (global-set-key "\M-g" 'goto-line)
 (mouse-wheel-mode 1)
 
-(defalias 'perl-mode 'cperl-mode)
-
-
-(add-to-list 'auto-mode-alist
-             '("\\.\\([pP][Llm]\\|al\\|t\\|xs\\|tl\\)\\'" . cperl-mode))
-(add-to-list 'interpreter-mode-alist '("perl" . cperl-mode))
-(add-to-list 'interpreter-mode-alist '("perl5" . cperl-mode))
-(add-to-list 'interpreter-mode-alist '("miniperl" . cperl-mode))
-
 (require 'imenu+)
+
+(require 'doremi)
+(require 'doremi-frm)
+(require 'doremi-cmd)
+(autoload 'define-doremi "doremi-mac"
+  "Define a Do Re Mi command." nil 'macro)
+
+(require 'help+)
+(require 'help-fns+)
+(require 'thumb-frm)
 (require 'menu-bar+)
+
 ;(require 'frame-cmds)
 ;(require 'compile-)
 ;(require 'compile+)
@@ -70,7 +72,6 @@
 (require 'tabbar)
 (tabbar-mode 1)
 (global-font-lock-mode 1)
-(require 'tool-bar+)
 
 ;(require 'grep-buffers)
 
@@ -105,7 +106,6 @@
 (toggle-cursor-type-when-idle 1) ; Turn on cursor change when Emacs is idle
 (change-cursor-mode 1) ; Turn on change for overwrite, read-only, and input mode
 
-;(setq cperl-invalid-face nil)
 (setq fill-column 79)
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
@@ -135,8 +135,15 @@
 
 (global-set-key (kbd "C-c r") 'desktop-read)
 
-(global-set-key (kbd "C-c C-h") 'helm-mini)
-(global-set-key (kbd "C-c C-p") 'helm-perldoc)
+
+(defalias 'perl-mode 'cperl-mode)
+(require 'cperl-mode)
+
+(add-to-list 'auto-mode-alist
+             '("\\.\\([pP][Llm]\\|al\\|t\\|xs\\|tl\\)\\'" . cperl-mode))
+(add-to-list 'interpreter-mode-alist '("perl" . cperl-mode))
+(add-to-list 'interpreter-mode-alist '("perl5" . cperl-mode))
+(add-to-list 'interpreter-mode-alist '("miniperl" . cperl-mode))
 
 (add-hook 'cperl-mode-hook 'imenu-add-menubar-index)
 

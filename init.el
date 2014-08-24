@@ -83,9 +83,10 @@
 (require 'init-rails)
 (require 'init-sql)
 (require 'init-help)
+;; Emacs::PDE broken in emacs >24
+;(require 'init-pde)
 
-;; disabled paredit-mode -- annoying
-;(require 'init-paredit)
+(require 'init-paredit)
 (require 'init-lisp)
 (require 'init-slime)
 (require 'init-clojure)

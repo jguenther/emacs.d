@@ -31,6 +31,7 @@
  '(flycheck-disabled-checkers (quote (emacs-lisp-checkdoc perl-perlcritic)))
  '(flycheck-perlcritic-verbosity 4)
  '(ido-everywhere t)
+ '(make-backup-files t)
  '(mouse-wheel-progressive-speed nil)
  '(session-use-package t nil (session))
  '(show-trailing-whitespace nil)
