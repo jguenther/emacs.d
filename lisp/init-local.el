@@ -42,6 +42,8 @@
 (global-set-key "\M-g" 'goto-line)
 (mouse-wheel-mode 1)
 
+(require 'bookmark+)
+
 (require 'imenu+)
 
 (require 'doremi)
@@ -107,7 +109,7 @@
 (change-cursor-mode 1) ; Turn on change for overwrite, read-only, and input mode
 
 (setq fill-column 79)
-(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+;(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
 (defadvice load (after give-my-keybindings-priority)
   "Try to ensure that my keybindings always have priority."
@@ -133,7 +135,7 @@
 ;;       (ad-do-it)))
 ;; (ad-activate 'desktop-restore-file-buffer)
 
-(global-set-key (kbd "C-c r") 'desktop-read)
+;(global-set-key (kbd "C-c r") 'desktop-read)
 
 
 (defalias 'perl-mode 'cperl-mode)
@@ -166,5 +168,34 @@
 
   (define-key cperl-mode-map [C-return] 'plcmp-cmd-smart-complete)
   )
+
+;; (autoload 'test-case-mode "test-case-mode" nil t)
+;; (autoload 'enable-test-case-mode-if-test "test-case-mode")
+;; (autoload 'test-case-find-all-tests "test-case-mode" nil t)
+;; (autoload 'test-case-compilation-finish-run-all "test-case-mode")
+
+;; ;To enable it automatically when opening test files:
+;; (add-hook 'find-file-hook 'enable-test-case-mode-if-test)
+
+;; ;If you want to run all visited tests after a compilation, add:
+;; (add-hook 'compilation-finish-functions
+;;           'test-case-compilation-finish-run-all)
+
+;(require 'tabbar)
+;(require 'tab-group)
+
+(require 'tabbar-ruler)
+
+(setq tabbar-ruler-global-tabbar t)   ; If you want tabbar
+;(setq tabbar-ruler-global-ruler t)    ; if you want a global ruler
+
+(scroll-bar-mode t)
+
+;; ;; el-get stuff -- assume el-get has been installed
+;; (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+;; (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+;; (add-to-list 'el-get-user-package-directory "~/.emacs.d/el-get-init")
+
+;; (el-get 'sync)
 
 (provide 'init-local)

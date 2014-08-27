@@ -30,6 +30,7 @@
  '(fill-column 79)
  '(flycheck-disabled-checkers (quote (emacs-lisp-checkdoc perl-perlcritic)))
  '(flycheck-perlcritic-verbosity 4)
+ '(ido-create-new-buffer (quote always))
  '(ido-everywhere t)
  '(make-backup-files t)
  '(mouse-wheel-progressive-speed nil)

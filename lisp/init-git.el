@@ -82,5 +82,10 @@
 (require-package 'git-messenger)
 (global-set-key (kbd "C-x v p") #'git-messenger:popup-message)
 
+(require-package 'git-gutter-fringe+)
+(setq git-gutter-fr:side 'right-fringe)
+
+;; Optional: Activate minimal skin
+;(after-load )(git-gutter-fr+-minimal)
 
 (provide 'init-git)

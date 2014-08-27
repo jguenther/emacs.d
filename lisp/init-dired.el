@@ -11,5 +11,9 @@
   (add-hook 'dired-mode-hook
             (lambda () (guide-key/add-local-guide-key-sequence "%"))))
 
+(require 'dired-hacks-utils)
+(require 'dired-filter)
+(require 'dired-imenu)
+(require 'dired-sort-menu)
 
 (provide 'init-dired)

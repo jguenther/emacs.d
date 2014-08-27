@@ -1,7 +1,10 @@
 ;; Use C-f during file selection to switch to regular find-file
 (require 'ido)
 
+;; suppress warnings
 (defvar ido-cur-item nil)
+(defvar ido-default-item nil)
+(defvar ido-cur-list nil)
 
 (add-hook 'ido-setup-hook 'ido-my-keys)
 
@@ -9,6 +12,7 @@
   "Set up the keymap for `ido'."
 
 ;;   ;; common keys
+  (define-key ido-completion-map "\C-l" 'ido-toggle-literal)
 
 ;;   ;; keys used in file and dir environment
   (when (memq ido-cur-item '(file dir))
@@ -36,11 +40,16 @@
   (global-set-key [remap execute-extended-command] 'smex))
 
 (require-package 'idomenu)
+(autoload 'idomenu "idomenu" nil t)
 
 ;; Allow the same buffer to be open in different frames
 (setq ido-default-buffer-method 'selected-window)
 
 ;; http://www.reddit.com/r/emacs/comments/21a4p9/use_recentf_and_ido_together/cgbprem
 (add-hook 'ido-setup-hook (lambda () (define-key ido-completion-map [up] 'previous-history-element)))
+
+;; display ido lists vertically
+(require 'ido-vertical-mode)
+(ido-vertical-mode t)
 
 (provide 'init-ido)
