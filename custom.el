@@ -30,12 +30,15 @@
  '(fill-column 79)
  '(flycheck-disabled-checkers (quote (emacs-lisp-checkdoc perl-perlcritic)))
  '(flycheck-perlcritic-verbosity 4)
+ '(git-gutter-fr+-side (quote right-fringe))
+ '(global-magit-wip-save-mode t)
  '(ido-create-new-buffer (quote always))
  '(ido-everywhere t)
  '(make-backup-files t)
  '(mouse-wheel-progressive-speed nil)
  '(session-use-package t nil (session))
  '(show-trailing-whitespace nil)
+ '(tabbar-ruler-swap-faces t)
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
    (quote

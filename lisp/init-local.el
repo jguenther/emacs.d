@@ -71,8 +71,9 @@
 (global-set-key [S-mouse-3] 'imenu)
 (global-set-key (kbd "C-'") 'imenu-anywhere)
 
-(require 'tabbar)
-(tabbar-mode 1)
+;(require 'tabbar)
+;(tabbar-mode 1)
+
 (global-font-lock-mode 1)
 
 ;(require 'grep-buffers)
@@ -149,17 +150,18 @@
 
 (add-hook 'cperl-mode-hook 'imenu-add-menubar-index)
 
-(add-hook 'cperl-mode-hook
-          (lambda () (require 'perl-completion)
-            (perl-completion-mode t)))
+;; (add-hook 'cperl-mode-hook
+;;           (lambda () (require 'perl-completion)
+;;             (perl-completion-mode t)))
 
 (add-hook  'cperl-mode-hook
            (lambda ()
              (when (require 'auto-complete nil t)
                (auto-complete-mode t)
                (make-variable-buffer-local 'ac-sources)
-               (setq ac-sources
-                     '(ac-source-perl-completion)))))
+               ;; (setq ac-sources
+               ;;       '(ac-source-perl-completion))
+               )))
 
 (add-hook 'cperl-mode-hook 'cperl-mode-my-keys)
 
@@ -182,12 +184,13 @@
 ;;           'test-case-compilation-finish-run-all)
 
 ;(require 'tabbar)
-;(require 'tab-group)
 
-(require 'tabbar-ruler)
+;(require 'tab-group)
+;(tabbar-mode t)
 
 (setq tabbar-ruler-global-tabbar t)   ; If you want tabbar
-;(setq tabbar-ruler-global-ruler t)    ; if you want a global ruler
+
+(require 'tabbar-ruler)
 
 (scroll-bar-mode t)
 
@@ -197,5 +200,12 @@
 ;; (add-to-list 'el-get-user-package-directory "~/.emacs.d/el-get-init")
 
 ;; (el-get 'sync)
+
+(require 'git-gutter-fringe+)
+(global-git-gutter+-mode t)
+(git-gutter+-enable-fringe-display-mode)
+
+;; Optional: Activate minimal skin
+;(after-load )(git-gutter-fr+-minimal)
 
 (provide 'init-local)
