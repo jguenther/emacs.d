@@ -133,15 +133,22 @@
 
 ;; change some bindings for tabbar mousewheel
 (add-hook 'tabbar-mwheel-mode-hook
-          '(lambda ()
-             (define-key tabbar-mwheel-mode-map
-               [header-line (kbd "<mouse-4>")] 'tabbar-mwheel-backward-tab)
-             (define-key tabbar-mwheel-mode-map
-               [header-line (kbd "<mouse-5>")] 'tabbar-mwheel-forward-tab)
-             (define-key tabbar-mwheel-mode-map
-               [header-line (kbd "<C-mouse-4>")] 'tabbar-mwheel-backward-tab)
-             (define-key tabbar-mwheel-mode-map
-               [header-line (kbd "<C-mouse-5>")] 'tabbar-mwheel-forward-tab)))
+          (lambda ()
+            (let ((up   (tabbar--mwheel-key tabbar--mwheel-up-event))
+                  (down (tabbar--mwheel-key tabbar--mwheel-down-event)))
+              (define-key tabbar-mwheel-mode-map `[header-line ,down]
+                'tabbar-mwheel-backward-tab)
+              (define-key tabbar-mwheel-mode-map `[header-line ,up]
+                'tabbar-mwheel-forward-tab)
+              (define-key tabbar-mwheel-mode-map `[header-line (control ,down)]
+                'tabbar-mwheel-backward-group)
+              (define-key tabbar-mwheel-mode-map `[header-line (control ,up)]
+                'tabbar-mwheel-forward-group)
+              (define-key tabbar-mwheel-mode-map `[header-line (shift ,down)]
+                'tabbar-mwheel-backward)
+              (define-key tabbar-mwheel-mode-map `[header-line (shift ,up)]
+                'tabbar-mwheel-forward)
+              )))
 
 (defun tabbar-buffer-groups ()
   "Return the list of group names the current buffer belongs to.
@@ -157,6 +164,7 @@
     ((eq major-mode 'dired-mode)
      "Dired"
      )
+                                        ; TODO: split buffers by major mode
     (t
      "User Buffers"
      )
@@ -164,8 +172,8 @@
 
 (setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
 
-(global-set-key [M-S-left] 'tabbar-backward)
-(global-set-key [M-S-right] 'tabbar-forward)
+(global-set-key [M-S-left] 'tabbar-backward-tab)
+(global-set-key [M-S-right] 'tabbar-forward-tab)
 
 (scroll-bar-mode t)
 
