@@ -71,9 +71,6 @@
 (global-set-key [S-mouse-3] 'imenu)
 (global-set-key (kbd "C-'") 'imenu-anywhere)
 
-;(require 'tabbar)
-;(tabbar-mode 1)
-
 (global-font-lock-mode 1)
 
 ;(require 'grep-buffers)
@@ -183,14 +180,13 @@
 ;; (add-hook 'compilation-finish-functions
 ;;           'test-case-compilation-finish-run-all)
 
-;(require 'tabbar)
-
+(require 'tabbar)
+(tabbar-mode t)
 ;(require 'tab-group)
-;(tabbar-mode t)
 
-(setq tabbar-ruler-global-tabbar t)   ; If you want tabbar
+;(setq tabbar-ruler-global-tabbar t)   ; If you want tabbar
 
-(require 'tabbar-ruler)
+;(require 'tabbar-ruler)
 
 (scroll-bar-mode t)
 
