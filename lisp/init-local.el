@@ -201,7 +201,16 @@
 (global-git-gutter+-mode t)
 (git-gutter+-enable-fringe-display-mode)
 
-;; Optional: Activate minimal skin
-;(after-load )(git-gutter-fr+-minimal)
+(require 'win-switch)
+(win-switch-setup-keys-esdf "\C-xO")
+
+(defun tak/after-load-info ()
+  "Load `info+' and removes its mousewheel bindings."
+  (require 'info+)
+  (define-key Info-mode-map (kbd "<mouse-4>") nil)
+  (define-key Info-mode-map (kbd "<mouse-5>") nil)
+  (message "Rebound mousewheel for info."))
+
+(eval-after-load "info" '(tak/after-load-info))
 
 (provide 'init-local)
