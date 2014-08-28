@@ -21,7 +21,7 @@
 (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
 
 ; custom keybindings
-;(define-key my-keys-minor-mode-map (kbd "C-i") 'imenu)
+(define-key my-keys-minor-mode-map (kbd "C-S-i") 'imenu)
 
 (define-minor-mode my-keys-minor-mode
   "A minor mode so that my key settings override annoying major modes."
@@ -54,9 +54,10 @@
 ;(require 'compile-)
 ;(require 'compile+)
 ;(require 'lib-requires)
-;(defun try-to-add-imenu ()
-;  (condition-case nil (imenu-add-to-menubar "imenu") (error nil)))
-; (add-hook 'font-lock-mode-hook 'try-to-add-imenu)
+
+(defun try-to-add-imenu ()
+ (condition-case nil (imenu-add-to-menubar "imenu") (error nil)))
+(add-hook 'font-lock-mode-hook 'try-to-add-imenu)
 
 ; imenu bindings
 (global-set-key [S-mouse-3] 'imenu)
@@ -67,8 +68,8 @@
 ;(require 'grep-buffers)
 
 (show-paren-mode 1)
-;(global-set-key (quote [f5]) (quote compile))
-;(global-set-key (quote [f7]) (quote recompile))
+(global-set-key (quote [f5]) (quote compile))
+(global-set-key (quote [f7]) (quote recompile))
 (column-number-mode 1)
 (line-number-mode 1)
 
@@ -130,6 +131,41 @@
 (require 'tabbar)
 (tabbar-mode t)
 
+;; change some bindings for tabbar mousewheel
+(add-hook 'tabbar-mwheel-mode-hook
+          '(lambda ()
+             (define-key tabbar-mwheel-mode-map
+               [header-line (kbd "<mouse-4>")] 'tabbar-mwheel-backward-tab)
+             (define-key tabbar-mwheel-mode-map
+               [header-line (kbd "<mouse-5>")] 'tabbar-mwheel-forward-tab)
+             (define-key tabbar-mwheel-mode-map
+               [header-line (kbd "<C-mouse-4>")] 'tabbar-mwheel-backward-tab)
+             (define-key tabbar-mwheel-mode-map
+               [header-line (kbd "<C-mouse-5>")] 'tabbar-mwheel-forward-tab)))
+
+(defun tabbar-buffer-groups ()
+  "Return the list of group names the current buffer belongs to.
+   This function is a custom function for tabbar-mode's tabbar-buffer-groups.
+   This function group all buffers into 3 groups:
+   Those Dired, those user buffer, and those emacs buffer.
+   Emacs buffer are those starting with “*”."
+  (list
+   (cond
+    ((string-equal "*" (substring (buffer-name) 0 1))
+     "Emacs Buffers"
+     )
+    ((eq major-mode 'dired-mode)
+     "Dired"
+     )
+    (t
+     "User Buffers"
+     )
+    ))) 
+
+(setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
+
+(global-set-key [M-S-left] 'tabbar-backward)
+(global-set-key [M-S-right] 'tabbar-forward)
 
 (scroll-bar-mode t)
 
