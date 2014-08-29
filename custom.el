@@ -41,7 +41,6 @@
  '(tabbar-buffer-home-button (quote (("[+]") "[-]")))
  '(tabbar-cycle-scope (quote groups))
  '(tabbar-home-button (quote (("[o]") "[x]")))
- '(tabbar-mode t nil (tabbar))
  '(tabbar-mwheel-mode t nil (tabbar))
  '(tabbar-ruler-swap-faces t)
  '(tabbar-scroll-left-button (quote ((" <") " =")))
