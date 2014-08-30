@@ -29,6 +29,7 @@
  '(fci-rule-color "#eee8d5")
  '(fill-column 79)
  '(flycheck-disabled-checkers (quote (emacs-lisp-checkdoc perl-perlcritic)))
+ '(flycheck-idle-change-delay 1.5)
  '(flycheck-perlcritic-verbosity 4)
  '(git-gutter-fr+-side (quote right-fringe))
  '(global-magit-wip-save-mode t)
