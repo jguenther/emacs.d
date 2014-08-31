@@ -68,8 +68,7 @@
 ;(require 'grep-buffers)
 
 (show-paren-mode 1)
-(global-set-key (quote [f5]) (quote compile))
-(global-set-key (quote [f7]) (quote recompile))
+
 (column-number-mode 1)
 (line-number-mode 1)
 
