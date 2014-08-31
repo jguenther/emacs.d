@@ -22,7 +22,7 @@
   (if (not (tak/file-is-pm-or-t))
       (executable-make-buffer-file-executable-if-script-p)))
 
-(add-hook 'after-save-hook 'tak/maybe-make-buffer-file-executable)
+;(add-hook 'after-save-hook 'tak/maybe-make-buffer-file-executable)
 
 (setq goto-address-mail-face 'link)
 
