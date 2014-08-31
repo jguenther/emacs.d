@@ -35,6 +35,7 @@
  '(global-magit-wip-save-mode t)
  '(ido-create-new-buffer (quote always))
  '(ido-everywhere t)
+ '(magit-repo-dirs (quote ("~/.emacs.d" "~/code/PRIPchip")))
  '(make-backup-files t)
  '(mouse-wheel-progressive-speed nil)
  '(session-use-package t nil (session))
