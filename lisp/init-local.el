@@ -147,4 +147,9 @@
 
 (global-set-key "\C-\M-_" 'undo-tree-redo)
 
+(autoload 'octave-mode "octave" "Octave Mode" t)
+(add-to-list
+ 'auto-mode-alist
+ '("\\.m$" . octave-mode))
+
 (provide 'init-local)
