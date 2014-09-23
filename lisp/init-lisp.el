@@ -217,11 +217,14 @@
   (require-package 'rainbow-mode)
 
   (defun sanityinc/enable-rainbow-mode-if-theme ()
-    (when (string-match "-theme\\.el" (buffer-name))
+    (when (string-match "\\(color-theme-\\|-theme\\.el\\)" (buffer-name))
       (rainbow-mode 1)))
 
   (add-hook 'emacs-lisp-mode-hook 'sanityinc/enable-rainbow-mode-if-theme))
 
+(when (eval-when-compile (>= emacs-major-version 24))
+  (require-package 'highlight-quoted)
+  (add-hook 'emacs-lisp-mode-hook 'highlight-quoted-mode))
 
 
 (provide 'init-lisp)
