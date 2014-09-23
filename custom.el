@@ -42,6 +42,7 @@
  '(make-backup-files t)
  '(mouse-wheel-progressive-speed nil)
  '(session-use-package t nil (session))
+ '(sh-basic-offset 2)
  '(show-trailing-whitespace nil)
  '(tabbar-buffer-home-button (quote (("[+]") "[-]")))
  '(tabbar-cycle-scope (quote groups))
