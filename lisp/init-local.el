@@ -147,9 +147,19 @@
 
 (global-set-key "\C-\M-_" 'undo-tree-redo)
 
-(autoload 'octave-mode "octave" "Octave Mode" t)
-(add-to-list
- 'auto-mode-alist
- '("\\.m$" . octave-mode))
+;(autoload 'octave-mode "octave" "Octave Mode" t)
+;; (add-to-list
+;;  'auto-mode-alist
+;;  '("\\.m$" . octave-mode))
+
+(add-to-list 'load-path "~/code/emacs-matlab/matlab-emacs")
+(require 'matlab-load)
+
+(autoload 'matlab-mode "matlab" "Matlab Editing Mode" t)
+ (add-to-list
+  'auto-mode-alist
+  '("\\.m$" . matlab-mode))
+ (setq matlab-indent-function t)
+ (setq matlab-shell-command "matlab")
 
 (provide 'init-local)

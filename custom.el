@@ -40,6 +40,8 @@
  '(ido-everywhere t)
  '(magit-repo-dirs (quote ("~/.emacs.d" "~/code/PRIPchip")))
  '(make-backup-files t)
+ '(matlab-indent-level 2)
+ '(matlab-shell-command-switches (quote ("-nodesktop" "-nosplash")))
  '(mouse-wheel-progressive-speed nil)
  '(session-use-package t nil (session))
  '(sh-basic-offset 2)
