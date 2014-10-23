@@ -43,6 +43,14 @@
  '(matlab-indent-level 2)
  '(matlab-shell-command-switches (quote ("-nodesktop" "-nosplash")))
  '(mouse-wheel-progressive-speed nil)
+ '(safe-local-variable-values
+   (quote
+    ((no-byte-compile t)
+     (ruby-compilation-executable . "ruby")
+     (ruby-compilation-executable . "ruby1.8")
+     (ruby-compilation-executable . "ruby1.9")
+     (ruby-compilation-executable . "rbx")
+     (ruby-compilation-executable . "jruby"))))
  '(session-use-package t nil (session))
  '(sh-basic-offset 2)
  '(sh-indentation 2)
