@@ -152,7 +152,6 @@
 ;;  'auto-mode-alist
 ;;  '("\\.m$" . octave-mode))
 
-(add-to-list 'load-path "~/code/emacs-matlab/matlab-emacs")
 (require 'matlab-load)
 
 (autoload 'matlab-mode "matlab" "Matlab Editing Mode" t)
