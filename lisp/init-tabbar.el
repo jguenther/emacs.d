@@ -46,6 +46,26 @@
      )
     )))
 
+(setq tabbar-buffer-home-button '(("[+]") "[-]")
+      tabbar-cycle-scope 'groups
+      tabbar-home-button '(("[o]") "[x]")
+      tabbar-mwheel-mode t
+      tabbar-ruler-swap-faces t
+      tabbar-scroll-left-button '((" <") " =")
+      tabbar-scroll-right-button '((" >") " =")
+      tabbar-separator '("|"))
+
+;;
+;; copied from custom.el -- untested
+(setq tabbar-button '((t (:inherit tabbar-default :box (:line-width 2 :color "white" :style released-button))))
+      tabbar-button-highlight '((t (:inherit tabbar-highlight)))
+      tabbar-default '((t (:inherit variable-pitch :background "gray40" :foreground "light gray" :box (:line-width 1 :color "white" :style released-button))))
+      tabbar-highlight '((t (:foreground "gray5" :box (:line-width 2 :color "grey75" :style released-button) :underline t)))
+      tabbar-modified '((t (:inherit tabbar-default :foreground "green")))
+      tabbar-selected '((t (:inherit tabbar-default :background "gray13" :foreground "white" :box (:line-width 1 :color "white" :style pressed-button))))
+      tabbar-separator '((t (:inherit tabbar-default :weight semi-bold :height 1.2)))
+      tabbar-unselected '((t (:inherit tabbar-button :box (:line-width 1 :color "white" :style released-button)))))
+
 (setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
 
 (global-set-key [M-S-left] 'tabbar-backward-tab)

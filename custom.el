@@ -55,27 +55,10 @@
  '(show-trailing-whitespace nil)
  '(standard-indent 2)
  '(tab-always-indent t)
- '(tabbar-buffer-home-button (quote (("[+]") "[-]")))
- '(tabbar-cycle-scope (quote groups))
- '(tabbar-home-button (quote (("[o]") "[x]")))
- '(tabbar-mwheel-mode t nil (tabbar))
- '(tabbar-ruler-swap-faces t)
- '(tabbar-scroll-left-button (quote ((" <") " =")))
- '(tabbar-scroll-right-button (quote ((" >") " =")))
- '(tabbar-separator (quote ("|")))
  '(win-switch-idle-time 1.5))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(cperl-array-face ((t (:foreground "yellow" :weight bold))))
- '(cperl-hash-face ((t (:foreground "Red" :slant italic :weight bold))))
- '(tabbar-button ((t (:inherit tabbar-default :box (:line-width 2 :color "white" :style released-button)))))
- '(tabbar-button-highlight ((t (:inherit tabbar-highlight))))
- '(tabbar-default ((t (:inherit variable-pitch :background "gray40" :foreground "light gray" :box (:line-width 1 :color "white" :style released-button)))))
- '(tabbar-highlight ((t (:foreground "gray5" :box (:line-width 2 :color "grey75" :style released-button) :underline t))))
- '(tabbar-modified ((t (:inherit tabbar-default :foreground "green"))))
- '(tabbar-selected ((t (:inherit tabbar-default :background "gray13" :foreground "white" :box (:line-width 1 :color "white" :style pressed-button)))))
- '(tabbar-separator ((t (:inherit tabbar-default :weight semi-bold :height 1.2))))
- '(tabbar-unselected ((t (:inherit tabbar-button :box (:line-width 1 :color "white" :style released-button))))))
+ )
