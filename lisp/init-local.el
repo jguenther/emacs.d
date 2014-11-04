@@ -1,11 +1,10 @@
 (setq
-   backup-by-copying t               ; don't clobber symlinks
-   backup-directory-alist
-    '(("." . "~/.emacs.d/saves"))    ; don't litter my fs tree
-   delete-old-versions t
-   kept-new-versions 6
-   kept-old-versions 2
-   version-control t)                ; use versioned backups
+ backup-by-copying t
+ backup-directory-alist '(("." . "~/.emacs.d/saves"))
+ delete-old-versions t
+ kept-new-versions 6
+ kept-old-versions 2
+ version-control t)
 
 (setq visible-bell t)
 (setq load-path (cons "/home/jguenther/.emacs-lisp" load-path))
@@ -15,12 +14,12 @@
 
 (require 'ess-site)
 
-;
-; override keybindings with new minor mode
-;
+;;
+;; override keybindings with new minor mode
+;;
 (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
 
-; custom keybindings
+;; custom keybindings
 (define-key my-keys-minor-mode-map (kbd "C-S-i") 'imenu)
 
 (define-minor-mode my-keys-minor-mode
@@ -29,7 +28,7 @@
 
 (my-keys-minor-mode 1)
 
-; make sure my-keys-minor-mode doesn't mess with minibuffer
+;; make sure my-keys-minor-mode doesn't mess with minibuffer
 (defun my-minibuffer-setup-hook ()
   (my-keys-minor-mode 0))
 (add-hook 'minibuffer-setup-hook 'my-minibuffer-setup-hook)
@@ -50,22 +49,15 @@
 (require 'thumb-frm)
 (require 'menu-bar+)
 
-;(require 'frame-cmds)
-;(require 'compile-)
-;(require 'compile+)
-;(require 'lib-requires)
-
 (defun try-to-add-imenu ()
- (condition-case nil (imenu-add-to-menubar "imenu") (error nil)))
+  (condition-case nil (imenu-add-to-menubar "imenu") (error nil)))
 (add-hook 'font-lock-mode-hook 'try-to-add-imenu)
 
-; imenu bindings
+;; imenu bindings
 (global-set-key [S-mouse-3] 'imenu)
 (global-set-key (kbd "C-'") 'imenu-anywhere)
 
 (global-font-lock-mode 1)
-
-;(require 'grep-buffers)
 
 (show-paren-mode 1)
 
@@ -77,25 +69,10 @@
   Moves point to the end of the inserted text.  Does not change mark."
   (interactive) (insert (x-get-selection 'SECONDARY)))
 
-;; (setq hcz-set-cursor-color-color "")
-;; (setq hcz-set-cursor-color-buffer "")
-;; (defun hcz-set-cursor-color-according-to-mode ()
-;;   "change cursor color according to some minor modes."
-;;   ;; set-cursor-color is somewhat costly, so we only call it when needed:
-;;   (let ((color
-;; 	 (if buffer-read-only "black"
-;; 	   (if overwrite-mode "red"
-;; 	     "blue"))))
-;;     (unless (and
-;; 	     (string= color hcz-set-cursor-color-color)
-;; 	     (string= (buffer-name) hcz-set-cursor-color-buffer))
-;;       (set-cursor-color (setq hcz-set-cursor-color-color color))
-;;       (setq hcz-set-cursor-color-buffer (buffer-name)))))
-;; (add-hook 'post-command-hook 'hcz-set-cursor-color-according-to-mode)
-
 (require 'cursor-chg)
 (toggle-cursor-type-when-idle 1) ; Turn on cursor change when Emacs is idle
-(change-cursor-mode 1)           ; Turn on change for overwrite, read-only, and input mode
+(change-cursor-mode 1)           ; Turn on change for overwrite, read-only, and
+                                 ; input mode
 
 (setq fill-column 79)
 
@@ -118,14 +95,14 @@
 
 (add-hook 'cperl-mode-hook 'imenu-add-menubar-index)
 
-(add-hook  'cperl-mode-hook
-           (lambda ()
-             (when (require 'auto-complete nil t)
-               (auto-complete-mode t)
-               (make-variable-buffer-local 'ac-sources)
-               ;; (setq ac-sources
-               ;;       '(ac-source-perl-completion))
-               )))
+(add-hook 'cperl-mode-hook
+          (lambda ()
+            (when (require 'auto-complete nil t)
+              (auto-complete-mode t)
+              (make-variable-buffer-local 'ac-sources)
+              ;; (setq ac-sources
+              ;;       '(ac-source-perl-completion))
+              )))
 
 (scroll-bar-mode t)
 
@@ -147,19 +124,13 @@
 
 (global-set-key "\C-\M-_" 'undo-tree-redo)
 
-;(autoload 'octave-mode "octave" "Octave Mode" t)
-;; (add-to-list
-;;  'auto-mode-alist
-;;  '("\\.m$" . octave-mode))
-
 (require 'matlab-load)
 
 (autoload 'matlab-mode "matlab" "Matlab Editing Mode" t)
- (add-to-list
-  'auto-mode-alist
-  '("\\.m$" . matlab-mode))
- (setq matlab-indent-function t)
- (setq matlab-shell-command "matlab")
+(add-to-list 'auto-mode-alist
+             '("\\.m\\'" . matlab-mode))
+(setq matlab-indent-function t)
+(setq matlab-shell-command "matlab")
 
 (add-to-list 'auto-mode-alist
              '("\\(inputrc\\|bashrc\\)\\'" . sh-mode))
@@ -202,7 +173,10 @@
 (define-key endless/toggle-map "f" #'auto-fill-mode)
 (define-key endless/toggle-map "l" #'toggle-truncate-lines)
 (define-key endless/toggle-map "q" #'toggle-debug-on-quit)
-;(define-key endless/toggle-map "t" #'endless/toggle-theme)
+
+;; can't find defun for endless/toggle-theme
+;;(define-key endless/toggle-map "t" #'endless/toggle-theme)
+
 ;;; Generalized version of `read-only-mode'.
 (define-key endless/toggle-map "r" #'dired-toggle-read-only)
 (autoload 'dired-toggle-read-only "dired" nil t)
