@@ -11,12 +11,12 @@
 (defun ido-my-keys ()
   "Set up the keymap for `ido'."
 
-;;   ;; common keys
+  ;;   ;; common keys
   (define-key ido-completion-map "\C-l" 'ido-toggle-literal)
 
-;;   ;; keys used in file and dir environment
+  ;;   ;; keys used in file and dir environment
   (when (memq ido-cur-item '(file dir))
-    ; remove remap and map ido-delete-backward-updir to M-backspace
+                                        ; remove remap and map ido-delete-backward-updir to M-backspace
     (define-key ido-completion-map [remap delete-backward-char] nil)
     (define-key ido-completion-map [(meta backspace)] 'ido-delete-backward-updir)
     ))
@@ -29,6 +29,8 @@
 (setq ido-use-virtual-buffers t)
 
 (when (maybe-require-package 'ido-ubiquitous)
+  (defvar ido-context-switch-command nil)
+                                        ; suppress warning
   (ido-ubiquitous-mode t))
 
 ;; Use smex to handle M-x
