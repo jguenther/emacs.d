@@ -164,6 +164,8 @@
 (add-to-list 'auto-mode-alist
              '("\\(inputrc\\|bashrc\\)\\'" . sh-mode))
 
+(global-set-key (kbd "C-S-k") 'kill-whole-line)
+
 ;;; Custom keymaps
 
 ;;
