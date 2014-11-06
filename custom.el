@@ -23,6 +23,7 @@
  '(desktop-save-mode nil)
  '(electric-indent-mode t)
  '(electric-pair-mode nil)
+ '(ess-default-style (quote OWN))
  '(ess-fancy-comments nil)
  '(fill-column 79)
  '(flycheck-checkers

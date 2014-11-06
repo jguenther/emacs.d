@@ -182,4 +182,12 @@
 (autoload 'dired-toggle-read-only "dired" nil t)
 (define-key endless/toggle-map "w" #'whitespace-mode)
 
+(add-hook 'ess-mode-hook
+          (lambda ()
+            (setq ess-indent-level 2)))
+(ess-toggle-underscore nil)
+(ess-default-style (quote OWN))
+
+(global-aggressive-indent-mode t)
+
 (provide 'init-local)
