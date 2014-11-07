@@ -6,20 +6,23 @@
 (defvar ido-default-item nil)
 (defvar ido-cur-list nil)
 
-(add-hook 'ido-setup-hook 'ido-my-keys)
-
 (defun ido-my-keys ()
   "Set up the keymap for `ido'."
+  )
+(add-hook 'ido-setup-hook
+          (lambda ()
+                                        ; common keys
+            (define-key ido-completion-map "\C-l" 'ido-toggle-literal)
+            (define-key ido-completion-map (kbd "<C-return>") 'ido-select-text)
 
-  ;;   ;; common keys
-  (define-key ido-completion-map "\C-l" 'ido-toggle-literal)
-
-  ;;   ;; keys used in file and dir environment
-  (when (memq ido-cur-item '(file dir))
-                                        ; remove remap and map ido-delete-backward-updir to M-backspace
-    (define-key ido-completion-map [remap delete-backward-char] nil)
-    (define-key ido-completion-map [(meta backspace)] 'ido-delete-backward-updir)
-    ))
+                                        ; keys used in file and dir environment
+            (when (memq ido-cur-item '(file dir))
+                                        ; remove remap and map
+                                        ; ido-delete-backward-updir to
+                                        ; M-backspace
+              (define-key ido-completion-map [remap delete-backward-char] nil)
+              (define-key ido-completion-map [(meta backspace)] 'ido-delete-backward-updir)
+              )))
 
 (ido-mode t)
 (ido-everywhere t)
