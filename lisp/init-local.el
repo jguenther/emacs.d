@@ -188,6 +188,6 @@
 (ess-toggle-underscore nil)
 (ess-default-style (quote OWN))
 
-(global-aggressive-indent-mode t)
+;(global-aggressive-indent-mode t)
 
 (provide 'init-local)
