@@ -21,19 +21,27 @@
 ;;
 (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
 
-;; custom keybindings
-(define-key my-keys-minor-mode-map (kbd "C-S-i") 'imenu)
-
 (define-minor-mode my-keys-minor-mode
   "A minor mode so that my key settings override annoying major modes."
-  t " my-keys" 'my-keys-minor-mode-map)
+  t "" 'my-keys-minor-mode-map)
 
-(my-keys-minor-mode 1)
+;; custom keybindings
+;; no longer needed -- C-I is not bound, can't remember what was binding this
+;(define-key my-keys-minor-mode-map (kbd "C-I") 'imenu)
+;(my-keys-minor-mode 1)
 
 ;; make sure my-keys-minor-mode doesn't mess with minibuffer
 (defun my-minibuffer-setup-hook ()
   (my-keys-minor-mode 0))
 (add-hook 'minibuffer-setup-hook 'my-minibuffer-setup-hook)
+
+(defadvice load (after give-my-keybindings-priority)
+  "Try to ensure that my keybindings always have priority."
+  (if (not (eq (car (car minor-mode-map-alist)) 'my-keys-minor-mode))
+      (let ((mykeys (assq 'my-keys-minor-mode minor-mode-map-alist)))
+        (assq-delete-all 'my-keys-minor-mode minor-mode-map-alist)
+        (add-to-list 'minor-mode-map-alist mykeys))))
+(ad-activate 'load)
 
 (global-set-key "\M-g" 'goto-line)
 (mouse-wheel-mode 1)
@@ -58,6 +66,7 @@
 ;; imenu bindings
 (global-set-key [S-mouse-3] 'imenu)
 (global-set-key (kbd "C-'") 'imenu-anywhere)
+(global-set-key (kbd "C-S-i") 'imenu)
 
 (global-font-lock-mode 1)
 
@@ -77,14 +86,6 @@
                                  ; input mode
 
 (setq fill-column 79)
-
-(defadvice load (after give-my-keybindings-priority)
-  "Try to ensure that my keybindings always have priority."
-  (if (not (eq (car (car minor-mode-map-alist)) 'my-keys-minor-mode))
-      (let ((mykeys (assq 'my-keys-minor-mode minor-mode-map-alist)))
-        (assq-delete-all 'my-keys-minor-mode minor-mode-map-alist)
-        (add-to-list 'minor-mode-map-alist mykeys))))
-(ad-activate 'load)
 
 (defalias 'perl-mode 'cperl-mode)
 (require 'cperl-mode)
