@@ -4,9 +4,10 @@
  delete-old-versions t
  kept-new-versions 6
  kept-old-versions 2
- version-control t)
+ version-control t
+ fill-column 79
+ visible-bell t)
 
-(setq visible-bell t)
 (let ((load-paths '("/home/jguenther/.emacs-lisp"
                     "/usr/local/share/emacs/site-lisp"
                     "/home/jguenther/share/emacs/site-lisp"
@@ -84,8 +85,6 @@
 (toggle-cursor-type-when-idle 1) ; Turn on cursor change when Emacs is idle
 (change-cursor-mode 1)           ; Turn on change for overwrite, read-only, and
                                  ; input mode
-
-(setq fill-column 79)
 
 (defalias 'perl-mode 'cperl-mode)
 (require 'cperl-mode)
