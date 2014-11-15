@@ -59,7 +59,9 @@
  '(show-trailing-whitespace nil)
  '(standard-indent 2)
  '(tab-always-indent t)
- '(win-switch-idle-time 1.5))
+ '(win-switch-idle-time 1.5)
+ '(win-switch-other-window-first nil)
+ '(win-switch-window-threshold 0))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
