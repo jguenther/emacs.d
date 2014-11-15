@@ -23,7 +23,7 @@
  '(desktop-save-mode nil)
  '(electric-indent-mode t)
  '(electric-pair-mode nil)
- '(emacs-lisp-docstring-fill-column 50)
+ '(emacs-lisp-docstring-fill-column 70)
  '(ess-default-style (quote OWN))
  '(ess-fancy-comments nil)
  '(fill-column 79)
