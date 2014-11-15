@@ -7,10 +7,12 @@
  version-control t)
 
 (setq visible-bell t)
-(setq load-path (cons "/home/jguenther/.emacs-lisp" load-path))
-(setq load-path (cons "/usr/local/share/emacs/site-lisp" load-path))
-(setq load-path (cons "/home/jguenther/share/emacs/site-lisp" load-path))
-(setq load-path (cons "/usr/share/emacs/site-lisp" load-path))
+(let ((load-paths '("/home/jguenther/.emacs-lisp"
+                    "/usr/local/share/emacs/site-lisp"
+                    "/home/jguenther/share/emacs/site-lisp"
+                    "/usr/share/emacs/site-lisp")))
+  (dolist (path load-paths)
+    (add-to-list 'load-path path)))
 
 (require 'ess-site)
 
