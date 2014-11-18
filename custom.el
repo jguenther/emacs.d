@@ -37,7 +37,7 @@
  '(global-magit-wip-save-mode t)
  '(ido-create-new-buffer (quote always))
  '(ido-everywhere t)
- '(magit-diff-refine-hunk nil)
+ '(magit-diff-refine-hunk t)
  '(magit-highlight-whitespace nil)
  '(magit-repo-dirs (quote ("~/.emacs.d" "~/code/PRIPchip")))
  '(make-backup-files t)
