@@ -59,6 +59,7 @@
  '(show-trailing-whitespace nil)
  '(standard-indent 2)
  '(tab-always-indent t)
+ '(vc-follow-symlinks t)
  '(win-switch-idle-time 1.5)
  '(win-switch-other-window-first nil)
  '(win-switch-window-threshold 0))
