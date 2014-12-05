@@ -44,6 +44,10 @@
  '(matlab-indent-level 2)
  '(matlab-shell-command-switches (quote ("-nodesktop" "-nosplash")))
  '(mouse-wheel-progressive-speed nil)
+ '(org-list-indent-offset 2)
+ '(org-modules
+   (quote
+    (org-bbdb org-bibtex org-ctags org-docview org-gnus org-habit org-id org-info org-inlinetask org-irc org-mhe org-mouse org-protocol org-rmail org-w3m org-annotate-file org-bookmark org-bullets org-checklist org-choose org-collector org-drill org-elisp-symbol org-eshell org-eval-light org-eval org-expiry org-favtable org-git-link org-panel org-registry org-secretary orgtbl-sqlinsert org-toc org-track)))
  '(safe-local-variable-values
    (quote
     ((no-byte-compile t)
