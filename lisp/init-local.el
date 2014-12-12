@@ -106,6 +106,9 @@
               ;;       '(ac-source-perl-completion))
               )))
 
+;; arma script syntax is very similar to c
+(add-to-list 'auto-mode-alist '("\\.sq[fm]$" . c-mode))
+
 (scroll-bar-mode t)
 
 (require 'git-gutter-fringe+)
