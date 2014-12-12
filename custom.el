@@ -44,6 +44,7 @@
  '(make-backup-files t)
  '(matlab-indent-level 2)
  '(matlab-shell-command-switches (quote ("-nodesktop" "-nosplash")))
+ '(message-confirm-send t)
  '(mouse-wheel-progressive-speed nil)
  '(org-list-indent-offset 2)
  '(org-modules
