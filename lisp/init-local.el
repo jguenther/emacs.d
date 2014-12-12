@@ -15,8 +15,6 @@
   (dolist (path load-paths)
     (add-to-list 'load-path path)))
 
-(require 'ess-site)
-
 ;;
 ;; override keybindings with new minor mode
 ;;
@@ -190,9 +188,10 @@
 
 (add-hook 'ess-mode-hook
           (lambda ()
-            (setq ess-indent-level 2)))
-(ess-toggle-underscore nil)
-(ess-default-style (quote OWN))
+            (setq ess-indent-level 2)
+            (ess-toggle-underscore nil)))
+
+(load "ess-site")
 
 ;(global-aggressive-indent-mode t)
 
