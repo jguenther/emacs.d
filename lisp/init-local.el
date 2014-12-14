@@ -127,14 +127,6 @@
 
 (global-set-key "\C-\M-_" 'undo-tree-redo)
 
-(require 'matlab-load)
-
-(autoload 'matlab-mode "matlab" "Matlab Editing Mode" t)
-(add-to-list 'auto-mode-alist
-             '("\\.m\\'" . matlab-mode))
-(setq matlab-indent-function t)
-(setq matlab-shell-command "matlab")
-
 (add-to-list 'auto-mode-alist
              '("\\(inputrc\\|bashrc\\)\\'" . sh-mode))
 
@@ -185,13 +177,6 @@
 (define-key endless/toggle-map "r" #'dired-toggle-read-only)
 (autoload 'dired-toggle-read-only "dired" nil t)
 (define-key endless/toggle-map "w" #'whitespace-mode)
-
-(add-hook 'ess-mode-hook
-          (lambda ()
-            (setq ess-indent-level 2)
-            (ess-toggle-underscore nil)))
-
-(load "ess-site")
 
 ;(global-aggressive-indent-mode t)
 
