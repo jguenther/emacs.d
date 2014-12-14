@@ -59,6 +59,7 @@
      (ruby-compilation-executable . "rbx")
      (ruby-compilation-executable . "jruby"))))
  '(scroll-bar-mode (quote right))
+ '(send-mail-function (quote sendmail-send-it))
  '(session-use-package t nil (session))
  '(sh-basic-offset 2)
  '(sh-indentation 2)
