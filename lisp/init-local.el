@@ -169,6 +169,7 @@
 (define-key endless/toggle-map "l" #'toggle-truncate-lines)
 (define-key endless/toggle-map "t" #'toggle-truncate-lines)
 (define-key endless/toggle-map "q" #'toggle-debug-on-quit)
+(define-key endless/toggle-map "S" #'dired-toggle-sudo)
 
 ;; can't find defun for endless/toggle-theme
 ;;(define-key endless/toggle-map "t" #'endless/toggle-theme)
