@@ -178,7 +178,31 @@
 (define-key endless/toggle-map "r" #'dired-toggle-read-only)
 (autoload 'dired-toggle-read-only "dired" nil t)
 (define-key endless/toggle-map "w" #'whitespace-mode)
-(define-key endless/toggle-map "h" #'magit-diff-toggle-refine-hunk)
+
+(defvar tak/magit-highlight-whitespace magit-highlight-whitespace
+  "Enable or disable whitespace highlighting in `magit-mode`.
+
+Used by `tak/toggle-magit-highlight-whitespace`.")
+
+(defun tak/toggle-magit-highlight-whitespace ()
+  "Toggles highlighting of whitespace in `magit-mode` buffers.
+
+Toggles the value of `tak/magit-highlight-whitespace`, assigning its
+new value to `magit-highlight-whitespace`. Does not currently
+differentiate `t` from `status` in this variable, and will toggle
+between `nil` and `t` no matter the original value of
+`magit-highlight-whitespace`."
+  (interactive)
+  (let ((highlight (setq tak/magit-highlight-whitespace
+                         (not tak/magit-highlight-whitespace))))
+    (setq magit-highlight-whitespace highlight)))
+
+;; vc/magit-mode bindings
+(define-prefix-command 'tak/vc-toggle-map)
+(define-key endless/toggle-map "v" 'tak/vc-toggle-map)
+(define-key tak/vc-toggle-map "h" #'magit-diff-toggle-refine-hunk)
+(define-key tak/vc-toggle-map "d" #'magit-diff-toggle-refine-hunk)
+(define-key tak/vc-toggle-map "w" #'tak/toggle-magit-highlight-whitespace)
 
 ;(global-aggressive-indent-mode t)
 
