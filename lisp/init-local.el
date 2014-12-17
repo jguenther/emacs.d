@@ -178,6 +178,7 @@
 (define-key endless/toggle-map "r" #'dired-toggle-read-only)
 (autoload 'dired-toggle-read-only "dired" nil t)
 (define-key endless/toggle-map "w" #'whitespace-mode)
+(define-key endless/toggle-map "h" #'magit-diff-toggle-refine-hunk)
 
 ;(global-aggressive-indent-mode t)
 
