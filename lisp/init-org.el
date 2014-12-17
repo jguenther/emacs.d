@@ -134,8 +134,6 @@
   ;; "verbatim" here, and replace "~" with "=" below.
   '(push '(code . "<kbd>%s</kbd>") org-html-text-markup-alist))
 
-(define-key org-mode-map "\C-ck" #'endless/insert-key)
-
 (defun endless/insert-key (key)
   "Ask for a key then insert its description.
 Will work on both org-mode and any mode that accepts plain html."
@@ -149,5 +147,7 @@ Will work on both org-mode and any mode that accepts plain html."
       (insert (format tag ""))
       (forward-char (if orgp -1 -6)))))
 
+(after-load 'org
+  (define-key org-mode-map "\C-ck" #'endless/insert-key))
 
 (provide 'init-org)
