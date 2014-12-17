@@ -181,4 +181,6 @@
 
 ;(global-aggressive-indent-mode t)
 
+(require 'init-private nil t)
+
 (provide 'init-local)
