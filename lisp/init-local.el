@@ -56,7 +56,8 @@
 (require 'help+)
 (require 'help-fns+)
 (require 'thumb-frm)
-(require 'menu-bar+)
+
+(eval-after-load "menu-bar" '(require 'menu-bar+))
 
 (defun try-to-add-imenu ()
   (condition-case nil (imenu-add-to-menubar "imenu") (error nil)))
