@@ -37,3 +37,6 @@ recentf
 /eshell
 /lisp/init-private.el
 /places
+/eshell
+/.cask/
+/.sx/
