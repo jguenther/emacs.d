@@ -218,4 +218,28 @@ between `nil` and `t` no matter the original value of
   (let ((user-init-file custom-file))
     ad-do-it))
 
+;; adapted from http://www.emacswiki.org/emacs/DisabledCommands
+(defun enable-all-disabled-commands (&optional just-list-them)
+  "Enable all commands, reporting on which were disabled.
+
+If `just-list-them' is non-nil, prints disabled commands but doesn't
+enable them."
+  (interactive)
+  (with-output-to-temp-buffer "*Disabled commands*"
+    (mapatoms
+     (function
+      (lambda (symbol)
+        (when (get symbol 'disabled)
+          (unless just-list-them (put symbol 'disabled nil))
+          (prin1 symbol)
+          (princ "\n")))))))
+
+(defun list-disabled-commands ()
+  "Prints a list of disabled commands in a new temporary buffer.
+
+See also: `enable-all-disabled-commands'."
+  (interactive)
+  (enable-all-disabled-commands t))
+
+
 (provide 'init-local)
