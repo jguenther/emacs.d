@@ -45,6 +45,9 @@
 (global-set-key "\M-g" 'goto-line)
 (mouse-wheel-mode 1)
 
+(require 'scroll-restore)
+(scroll-restore-mode 1)
+
 (require 'bookmark+)
 
 (require 'doremi)
