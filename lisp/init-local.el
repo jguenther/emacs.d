@@ -184,6 +184,11 @@
 (require 'darkroom)
 (define-key endless/toggle-map "D" #'darkroom-tentative-mode)
 
+(require 'minimap)
+(setq minimap-resizes-buffer t)
+(setq minimap-width-fraction 0.15)
+(define-key endless/toggle-map "m" #'minimap-toggle)
+
 ;; can't find defun for endless/toggle-theme
 ;;(define-key endless/toggle-map "t" #'endless/toggle-theme)
 
