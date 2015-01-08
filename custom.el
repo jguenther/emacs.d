@@ -61,6 +61,7 @@
      (ruby-compilation-executable . "rbx")
      (ruby-compilation-executable . "jruby"))))
  '(scroll-bar-mode (quote right))
+ '(scroll-preserve-screen-position nil)
  '(send-mail-function (quote sendmail-send-it))
  '(session-use-package t nil (session))
  '(sh-basic-offset 2)
