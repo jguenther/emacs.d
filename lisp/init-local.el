@@ -209,4 +209,10 @@ between `nil` and `t` no matter the original value of
 
 (require 'init-private nil t)
 
+;; enable disabled commands in custom.el instead of init.el
+(defadvice en/disable-command (around put-in-custom-file activate)
+  "Put declarations in `custom-file'."
+  (let ((user-init-file custom-file))
+    ad-do-it))
+
 (provide 'init-local)
