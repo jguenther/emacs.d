@@ -175,6 +175,15 @@
 (define-key endless/toggle-map "q" #'toggle-debug-on-quit)
 (define-key endless/toggle-map "S" #'dired-toggle-sudo)
 
+;;doesn't work well with multimonitor setup -- doesn't maximize window, instead
+;;it resizes it offscreen
+;;
+;;(require 'tabula-rasa)
+;;(define-key endless/toggle-map "D" #'tabula-rasa-mode)
+
+(require 'darkroom)
+(define-key endless/toggle-map "D" #'darkroom-tentative-mode)
+
 ;; can't find defun for endless/toggle-theme
 ;;(define-key endless/toggle-map "t" #'endless/toggle-theme)
 
