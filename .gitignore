@@ -34,7 +34,6 @@ site-lisp/package/
 ido.last
 recentf
 /site-lisp
-/eshell
 /lisp/init-private.el
 /places
 /eshell

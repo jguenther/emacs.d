@@ -15,35 +15,11 @@
   (dolist (path load-paths)
     (add-to-list 'load-path path)))
 
-;;
-;; override keybindings with new minor mode
-;;
-(defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
-
-(define-minor-mode my-keys-minor-mode
-  "A minor mode so that my key settings override annoying major modes."
-  t "" 'my-keys-minor-mode-map)
-
-;; custom keybindings
-;; no longer needed -- C-I is not bound, can't remember what was binding this
-;(define-key my-keys-minor-mode-map (kbd "C-I") 'imenu)
-;(my-keys-minor-mode 1)
-
-;; make sure my-keys-minor-mode doesn't mess with minibuffer
-(defun my-minibuffer-setup-hook ()
-  (my-keys-minor-mode 0))
-(add-hook 'minibuffer-setup-hook 'my-minibuffer-setup-hook)
-
-(defadvice load (after give-my-keybindings-priority)
-  "Try to ensure that my keybindings always have priority."
-  (if (not (eq (car (car minor-mode-map-alist)) 'my-keys-minor-mode))
-      (let ((mykeys (assq 'my-keys-minor-mode minor-mode-map-alist)))
-        (assq-delete-all 'my-keys-minor-mode minor-mode-map-alist)
-        (add-to-list 'minor-mode-map-alist mykeys))))
-(ad-activate 'load)
-
 (global-set-key "\M-g" 'goto-line)
 (mouse-wheel-mode 1)
+
+;;(require 'scroll-restore)
+;;(scroll-restore-mode 1)
 
 (require 'bookmark+)
 
@@ -172,6 +148,20 @@
 (define-key endless/toggle-map "q" #'toggle-debug-on-quit)
 (define-key endless/toggle-map "S" #'dired-toggle-sudo)
 
+;;doesn't work well with multimonitor setup -- doesn't maximize window, instead
+;;it resizes it offscreen
+;;
+;;(require 'tabula-rasa)
+;;(define-key endless/toggle-map "D" #'tabula-rasa-mode)
+
+(require 'darkroom)
+(define-key endless/toggle-map "D" #'darkroom-tentative-mode)
+
+(require 'minimap)
+(setq minimap-resizes-buffer t)
+(setq minimap-width-fraction 0.15)
+(define-key endless/toggle-map "m" #'minimap-toggle)
+
 ;; can't find defun for endless/toggle-theme
 ;;(define-key endless/toggle-map "t" #'endless/toggle-theme)
 
@@ -205,8 +195,38 @@ between `nil` and `t` no matter the original value of
 (define-key tak/vc-toggle-map "d" #'magit-diff-toggle-refine-hunk)
 (define-key tak/vc-toggle-map "w" #'tak/toggle-magit-highlight-whitespace)
 
-;(global-aggressive-indent-mode t)
+(global-aggressive-indent-mode t)
 
 (require 'init-private nil t)
+
+;; enable disabled commands in custom.el instead of init.el
+(defadvice en/disable-command (around put-in-custom-file activate)
+  "Put declarations in `custom-file'."
+  (let ((user-init-file custom-file))
+    ad-do-it))
+
+;; adapted from http://www.emacswiki.org/emacs/DisabledCommands
+(defun enable-all-disabled-commands (&optional just-list-them)
+  "Enable all commands, reporting on which were disabled.
+
+If `just-list-them' is non-nil, prints disabled commands but doesn't
+enable them."
+  (interactive)
+  (with-output-to-temp-buffer "*Disabled commands*"
+    (mapatoms
+     (function
+      (lambda (symbol)
+        (when (get symbol 'disabled)
+          (unless just-list-them (put symbol 'disabled nil))
+          (prin1 symbol)
+          (princ "\n")))))))
+
+(defun list-disabled-commands ()
+  "Prints a list of disabled commands in a new temporary buffer.
+
+See also: `enable-all-disabled-commands'."
+  (interactive)
+  (enable-all-disabled-commands t))
+
 
 (provide 'init-local)
