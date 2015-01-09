@@ -18,22 +18,36 @@
 (global-set-key "\M-g" 'goto-line)
 (mouse-wheel-mode 1)
 
-;;(require 'scroll-restore)
-;;(scroll-restore-mode 1)
+(require-package 'scroll-restore)
+(require 'scroll-restore)
+(scroll-restore-mode 1)
 
-(require 'bookmark+)
+(require-package 'bookmark+)
+(after-load 'bookmark
+  (require 'bookmark+))
 
+(require-package 'doremi)
 (require 'doremi)
+(require-package 'doremi-frm)
 (require 'doremi-frm)
+(require-package 'doremi-cmd)
 (require 'doremi-cmd)
 (autoload 'define-doremi "doremi-mac"
   "Define a Do Re Mi command." nil 'macro)
 
-(require 'help+)
-(require 'help-fns+)
+(require-package 'help+)
+(require-package 'help-fns+)
+
+(after-load 'help
+  (require 'help+)
+  (require 'help-fns+))
+
+(require-package 'thumb-frm)
 (require 'thumb-frm)
 
-(eval-after-load "menu-bar" '(require 'menu-bar+))
+(require-package 'menu-bar+)
+(after-load 'menu-bar
+  (require 'menu-bar+))
 
 (defun try-to-add-imenu ()
   (condition-case nil (imenu-add-to-menubar "imenu") (error nil)))
@@ -56,13 +70,14 @@
   Moves point to the end of the inserted text.  Does not change mark."
   (interactive) (insert (x-get-selection 'SECONDARY)))
 
+(require-package 'cursor-chg)
 (require 'cursor-chg)
 (toggle-cursor-type-when-idle 1) ; Turn on cursor change when Emacs is idle
 (change-cursor-mode 1)           ; Turn on change for overwrite, read-only, and
-                                 ; input mode
+                                        ; input mode
 
+(require-package 'cperl-mode)
 (defalias 'perl-mode 'cperl-mode)
-(require 'cperl-mode)
 
 (add-to-list 'auto-mode-alist
              '("\\.\\([pP][Llm]\\|al\\|t\\|xs\\|tl\\)\\'" . cperl-mode))
@@ -86,13 +101,19 @@
 
 (scroll-bar-mode t)
 
-(require 'git-gutter-fringe+)
-(global-git-gutter+-mode t)
-(git-gutter+-enable-fringe-display-mode)
+(require-package 'git-gutter-fringe+)
+(after-load 'magit
+  (require 'git-gutter-fringe+)
+  (global-git-gutter+-mode t)
+  (git-gutter+-enable-fringe-display-mode)
+  (setq git-gutter-fr+-side 'right-fringe)
+  (message "after load magit"))
 
+(require-package 'win-switch)
 (require 'win-switch)
 (win-switch-setup-keys-esdf "\C-xO")
 
+(require-package 'info+)
 (defun tak/after-load-info ()
   "Load `info+' and removes its mousewheel bindings."
   (require 'info+)
@@ -154,12 +175,15 @@
 ;;(require 'tabula-rasa)
 ;;(define-key endless/toggle-map "D" #'tabula-rasa-mode)
 
-(require 'darkroom)
+(require-package 'darkroom)
+(autoload 'darkroom-tentative-mode "darkroom" nil t)
 (define-key endless/toggle-map "D" #'darkroom-tentative-mode)
 
-(require 'minimap)
-(setq minimap-resizes-buffer t)
-(setq minimap-width-fraction 0.15)
+(require-package 'minimap)
+(autoload 'minimap-toggle "minimap" nil t)
+(after-load 'minimap
+  (setq minimap-resizes-buffer t)
+  (setq minimap-width-fraction 0.15))
 (define-key endless/toggle-map "m" #'minimap-toggle)
 
 ;; can't find defun for endless/toggle-theme
