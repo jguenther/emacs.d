@@ -183,7 +183,7 @@
 (autoload 'minimap-toggle "minimap" nil t)
 (after-load 'minimap
   (setq minimap-resizes-buffer t)
-  (setq minimap-width-fraction 0.15))
+  (setq minimap-width-fraction 0.17))
 (define-key endless/toggle-map "m" #'minimap-toggle)
 
 ;; can't find defun for endless/toggle-theme
