@@ -252,5 +252,15 @@ See also: `enable-all-disabled-commands'."
   (interactive)
   (enable-all-disabled-commands t))
 
+(defun tak/maybe-revert-buffer ()
+  "Reverts the current buffer without confirmation if it is unmodified.
+
+If buffer has been modified since it was last read from disk or saved,
+the user will be asked for confirmation before the buffer is reverted."
+  (interactive)
+  (revert-buffer t (not (buffer-modified-p))))
+
+(define-key ctl-x-map "R" 'tak/maybe-revert-buffer)
+
 
 (provide 'init-local)
