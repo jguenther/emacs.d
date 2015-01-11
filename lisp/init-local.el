@@ -265,5 +265,10 @@ the user will be asked for confirmation before the buffer is reverted."
 
 (define-key ctl-x-map "R" 'tak/maybe-revert-buffer)
 
+(require-package 'workgroups2)
+(require 'workgroups2)
+(setq wg-prefix-key (kbd "C-x w"))
+(setq wg-session-file (concat user-emacs-directory ".workgroups"))
+(workgroups-mode 1)
 
 (provide 'init-local)
