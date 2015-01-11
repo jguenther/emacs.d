@@ -80,6 +80,13 @@ locate PACKAGE."
 (fullframe list-packages quit-window)
 
 
+;; use paradox to manage packages
+(require-package 'paradox)
+(require 'paradox)
+(setq paradox-automatically-star t)
+(paradox-enable)
+(fullframe paradox-list-packages paradox-quit-and-close)
+
 (require-package 'cl-lib)
 (require 'cl-lib)
 
