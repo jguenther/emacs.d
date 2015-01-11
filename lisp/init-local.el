@@ -107,7 +107,7 @@
   (global-git-gutter+-mode t)
   (git-gutter+-enable-fringe-display-mode)
   (setq git-gutter-fr+-side 'right-fringe)
-  (message "after load magit"))
+  (diminish 'git-gutter+-mode))
 
 (require-package 'win-switch)
 (require 'win-switch)
