@@ -221,6 +221,7 @@ between `nil` and `t` no matter the original value of
 (define-key tak/vc-toggle-map "d" #'magit-diff-toggle-refine-hunk)
 (define-key tak/vc-toggle-map "w" #'tak/toggle-magit-highlight-whitespace)
 
+(add-to-list 'aggressive-indent-excluded-modes 'cperl-mode t)
 (global-aggressive-indent-mode t)
 
 (require 'init-private nil t)
