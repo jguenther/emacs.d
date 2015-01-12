@@ -114,14 +114,12 @@
 (win-switch-setup-keys-esdf "\C-xO")
 
 (require-package 'info+)
-(defun tak/after-load-info ()
-  "Load `info+' and removes its mousewheel bindings."
+                                        ; Load `info+' and removes its
+                                        ; mousewheel bindings.
+(after-load 'info
   (require 'info+)
   (define-key Info-mode-map (kbd "<mouse-4>") nil)
-  (define-key Info-mode-map (kbd "<mouse-5>") nil)
-  (message "Rebound mousewheel for info."))
-
-(eval-after-load "info" '(tak/after-load-info))
+  (define-key Info-mode-map (kbd "<mouse-5>") nil))
 
 (global-set-key "\C-\M-_" 'undo-tree-redo)
 
