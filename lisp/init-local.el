@@ -7,7 +7,9 @@
  version-control t
  fill-column 79
  visible-bell t
- message-log-max 10000)
+ message-log-max 10000
+ auto-revert-verbose t
+ )
 
 (dolist (path '("/home/jguenther/.emacs-lisp"
                 "/usr/local/share/emacs/site-lisp"
