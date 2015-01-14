@@ -274,7 +274,11 @@ the user will be asked for confirmation before the buffer is reverted."
 (require 'workgroups2)
 (setq wg-prefix-key (kbd "C-x w"))
 (setq wg-session-file (concat user-emacs-directory ".workgroups"))
-(workgroups-mode 1)
+
+;; don't use this in all buffers -- workgroups-mode rebinds `winner-undo' and
+;; `winner-redo', but wg undo command doesn't work unless there's an active
+;; workgroup
+;;(workgroups-mode 1)
 
 (dolist (regex '("/.git/" "/sudo:"))
   (add-to-list 'recentf-exclude regex))
