@@ -269,4 +269,7 @@ the user will be asked for confirmation before the buffer is reverted."
 (setq wg-session-file (concat user-emacs-directory ".workgroups"))
 (workgroups-mode 1)
 
+(dolist (regex '("/.git/" "/sudo:"))
+  (add-to-list 'recentf-exclude regex))
+
 (provide 'init-local)
