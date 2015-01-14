@@ -49,7 +49,6 @@
  '(org-modules
    (quote
     (org-bbdb org-bibtex org-ctags org-docview org-gnus org-habit org-id org-info org-inlinetask org-irc org-mhe org-mouse org-protocol org-rmail org-w3m org-annotate-file org-bookmark org-bullets org-checklist org-choose org-collector org-drill org-elisp-symbol org-eshell org-eval-light org-eval org-expiry org-favtable org-git-link org-panel org-registry org-secretary orgtbl-sqlinsert org-toc org-track)))
- '(paradox-automatically-star nil)
  '(safe-local-variable-values
    (quote
     ((no-byte-compile t)
@@ -67,10 +66,7 @@
  '(show-trailing-whitespace nil)
  '(standard-indent 2)
  '(tab-always-indent t)
- '(vc-follow-symlinks t)
- '(win-switch-idle-time 1.5)
- '(win-switch-other-window-first nil)
- '(win-switch-window-threshold 0))
+ '(vc-follow-symlinks t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

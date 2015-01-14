@@ -109,9 +109,11 @@
   (diminish 'git-gutter+-mode))
 
 (require-package 'win-switch)
-(after-load 'win-switch
-  (win-switch-setup-keys-esdf "\C-xO")
-  (setq win-switch-other-window-first t))
+(require 'win-swith)
+(setq win-switch-other-window-first t
+      win-switch-idle-time 1.5
+      win-switch-window-threshold 0)
+(win-switch-setup-keys-esdf "\C-xO")
 
 (require-package 'info+)
                                         ; Load `info+' and removes its
