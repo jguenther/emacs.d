@@ -112,8 +112,9 @@
 (require 'win-swith)
 (setq win-switch-other-window-first t
       win-switch-idle-time 1.5
-      win-switch-window-threshold 0)
-(win-switch-setup-keys-esdf "\C-xO")
+      win-switch-window-threshold 0
+      win-switch-set-wrap-around 1)
+(win-switch-setup-keys-ijkl "\C-xO")
 
 (require-package 'info+)
                                         ; Load `info+' and removes its
