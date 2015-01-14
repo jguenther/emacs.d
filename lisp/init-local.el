@@ -291,11 +291,9 @@ the user will be asked for confirmation before the buffer is reverted."
   (add-to-list 'default-frame-alist property)
   (add-to-list 'initial-frame-alist property))
 
-
 (dolist (property '((right . 1)
                     (top . 1)))
   (add-to-list 'initial-frame-alist property))
-
 
 
 (provide 'init-local)
