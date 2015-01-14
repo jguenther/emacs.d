@@ -20,7 +20,6 @@
  '(desktop-restore-eager 3)
  '(desktop-restore-in-current-display t)
  '(desktop-save (quote if-exists))
- '(desktop-save-mode nil)
  '(electric-indent-mode t)
  '(electric-pair-mode nil)
  '(emacs-lisp-docstring-fill-column 70)
