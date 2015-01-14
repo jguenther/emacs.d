@@ -114,6 +114,9 @@
       win-switch-idle-time 1.5
       win-switch-window-threshold 0
       win-switch-set-wrap-around 1)
+                                        ; this doesn't work
+(define-key ctl-x-map "\C-o" 'win-switch-dispatch-once)
+
 (win-switch-setup-keys-ijkl "\C-xO")
 
 (require-package 'info+)
