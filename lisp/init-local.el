@@ -98,7 +98,7 @@
 ;; arma script syntax is very similar to c
 (add-to-list 'auto-mode-alist '("\\.sq[fm]$" . c-mode))
 
-(scroll-bar-mode t)
+(set-scroll-bar-mode t)
 
 (require-package 'git-gutter-fringe+)
 (after-load 'magit
