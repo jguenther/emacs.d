@@ -109,7 +109,7 @@
   (diminish 'git-gutter+-mode))
 
 (require-package 'win-switch)
-(require 'win-swith)
+(require 'win-switch)
 (setq win-switch-other-window-first t
       win-switch-idle-time 1.5
       win-switch-window-threshold 0
