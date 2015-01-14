@@ -286,7 +286,7 @@ the user will be asked for confirmation before the buffer is reverted."
 
 
 ;; set initial and default frame parameters
-(dolist (property '((width . 90)
+(dolist (property '((width . 85)
                     (height . 50)))
   (add-to-list 'default-frame-alist property)
   (add-to-list 'initial-frame-alist property))
