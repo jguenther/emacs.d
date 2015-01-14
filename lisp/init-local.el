@@ -8,12 +8,11 @@
  fill-column 79
  visible-bell t)
 
-(let ((load-paths '("/home/jguenther/.emacs-lisp"
-                    "/usr/local/share/emacs/site-lisp"
-                    "/home/jguenther/share/emacs/site-lisp"
-                    "/usr/share/emacs/site-lisp")))
-  (dolist (path load-paths)
-    (add-to-list 'load-path path)))
+(dolist (path '("/home/jguenther/.emacs-lisp"
+                "/usr/local/share/emacs/site-lisp"
+                "/home/jguenther/share/emacs/site-lisp"
+                "/usr/share/emacs/site-lisp"))
+  (add-to-list 'load-path path))
 
 (global-set-key "\M-g" 'goto-line)
 (mouse-wheel-mode 1)
