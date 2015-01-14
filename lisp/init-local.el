@@ -262,7 +262,6 @@ See also: `enable-all-disabled-commands'."
 
 (defun tak/maybe-revert-buffer ()
   "Reverts the current buffer without confirmation if it is unmodified.
-
 If buffer has been modified since it was last read from disk or saved,
 the user will be asked for confirmation before the buffer is reverted."
   (interactive)
