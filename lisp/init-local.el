@@ -284,8 +284,6 @@ the user will be asked for confirmation before the buffer is reverted."
 (dolist (regex '("/.git/" "/sudo:"))
   (add-to-list 'recentf-exclude regex))
 
-(add-to-list 'revert-without-query "\*Help\*")
-
 
 ;; set initial and default frame parameters
 (dolist (property '((width . 90)

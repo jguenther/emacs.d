@@ -1,9 +1,15 @@
 (require 'help-mode)
 
+(defun help-mode-revert-buffer-noconfirm (ignore-auto noconfirm)
+  "Always revert `help-mode' buffers without confirmation."
+  (help-mode-revert-buffer ignore-auto t))
+
 (add-hook 'help-mode-hook
           (lambda ()
             (define-key help-mode-map [(meta left)] 'help-go-back)
-            (define-key help-mode-map [(meta right)] 'help-go-forward)))
+            (define-key help-mode-map [(meta right)] 'help-go-forward)
+            (set (make-local-variable 'revert-buffer-function)
+                 'help-mode-revert-buffer-noconfirm)))
 
 ;;; describe this point lisp only
 ;;
