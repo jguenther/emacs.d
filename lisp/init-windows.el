@@ -2,6 +2,9 @@
 ;; Navigate window layouts with "C-c <left>" and "C-c <right>"
 ;;----------------------------------------------------------------------------
 (winner-mode 1)
+                                        ; convenience keybinds
+(define-key mode-specific-map (kbd "C-<left>") 'winner-undo)
+(define-key mode-specific-map (kbd "C-<right>") 'winner-redo)
 
 
 
