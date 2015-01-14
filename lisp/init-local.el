@@ -259,7 +259,8 @@ See also: `enable-all-disabled-commands'."
 If buffer has been modified since it was last read from disk or saved,
 the user will be asked for confirmation before the buffer is reverted."
   (interactive)
-  (revert-buffer t (not (buffer-modified-p))))
+  (save-excursion
+    (revert-buffer t (not (buffer-modified-p)))))
 
 (define-key ctl-x-map "R" 'tak/maybe-revert-buffer)
 
