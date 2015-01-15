@@ -10,6 +10,9 @@
  message-log-max 10000
  auto-revert-verbose t
  guide-key/idle-delay 2.0
+
+ ;; org-mode
+ org-replace-disputed-keys t
  )
 
 (dolist (path '("/home/jguenther/.emacs-lisp"
