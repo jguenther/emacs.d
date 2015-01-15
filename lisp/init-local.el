@@ -1,15 +1,15 @@
 (setq
+ auto-revert-verbose t
  backup-by-copying t
  backup-directory-alist '(("." . "~/.emacs.d/saves"))
  delete-old-versions t
+ fill-column 79
+ guide-key/idle-delay 2.0
  kept-new-versions 6
  kept-old-versions 2
- version-control t
- fill-column 79
- visible-bell t
  message-log-max 10000
- auto-revert-verbose t
- guide-key/idle-delay 2.0
+ version-control t
+ visible-bell t
 
  ;; org-mode
  org-replace-disputed-keys t
