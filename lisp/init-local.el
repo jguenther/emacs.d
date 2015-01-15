@@ -5,6 +5,8 @@
  delete-old-versions t
  fill-column 79
  guide-key/idle-delay 2.0
+                                        ; scale text down
+ guide-key/text-scale-amount -1.5
  kept-new-versions 6
  kept-old-versions 2
  message-log-max 10000
@@ -313,4 +315,16 @@ the user will be asked for confirmation before the buffer is reverted."
 (global-set-key "\C-c0" 'tak/set-default-frame-parameters)
 
 
+
+;;; guide-key setup
+(add-hook 'org-mode-hook
+          (lambda ()
+            (guide-key/add-local-guide-key-sequence "C-c")
+            (guide-key/add-local-guide-key-sequence "C-c C-x")
+            (guide-key/add-local-highlight-command-regexp "org-")))
+
+(add-to-list 'guide-key/guide-key-sequence "C-x r" t)
+
+
+
 (provide 'init-local)
