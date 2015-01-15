@@ -9,6 +9,7 @@
  visible-bell t
  message-log-max 10000
  auto-revert-verbose t
+ guide-key/idle-delay 2.0
  )
 
 (dolist (path '("/home/jguenther/.emacs-lisp"
