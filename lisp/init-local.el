@@ -155,9 +155,9 @@
 (define-key launcher-map "h" #'man) ; Help
 (define-key launcher-map "i" #'package-install-from-buffer)
 (define-key launcher-map "n" #'nethack)
-(define-key launcher-map "p" (lambda () (interactive)
+(define-key launcher-map "p" '(lambda () (interactive)
                                         ; don't autorefresh package list
-                               (paradox-list-packages t)))
+                                (paradox-list-packages t)))
 (define-key launcher-map "s" #'shell)
 (define-key launcher-map "t" #'proced) ; top
 (define-key launcher-map "a" #'ansi-term)
