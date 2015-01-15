@@ -188,9 +188,10 @@
 ;;(require 'tabula-rasa)
 ;;(define-key endless/toggle-map "D" #'tabula-rasa-mode)
 
-(require-package 'darkroom)
-(autoload 'darkroom-tentative-mode "darkroom" nil t)
-(define-key endless/toggle-map "D" #'darkroom-tentative-mode)
+;; darkroom seems to be causing problems
+;;(require-package 'darkroom)
+;;(autoload 'darkroom-tentative-mode "darkroom" nil t)
+;;(define-key endless/toggle-map "D" #'darkroom-tentative-mode)
 
 (require-package 'minimap)
 (autoload 'minimap-toggle "minimap" nil t)
