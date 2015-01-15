@@ -298,5 +298,15 @@ the user will be asked for confirmation before the buffer is reverted."
                        (user-position . t)))
     (add-to-list 'initial-frame-alist parameter)))
 
+(defun tak/set-default-frame-parameters ()
+  (interactive)
+  (dolist (parameter '((width . 85)
+                       (height . 50)
+                       (left . -10)
+                       (top . 35)))
+    (set-frame-parameter nil (car parameter) (cdr parameter))))
+
+(global-set-key "\C-c0" 'tak/set-default-frame-parameters)
+
 
 (provide 'init-local)
