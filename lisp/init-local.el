@@ -15,6 +15,12 @@
 
  ;; org-mode
  org-replace-disputed-keys t
+ org-agenda-files (list "~/org/agenda/")
+
+ ;; open new remote tabs in chrome using chrome-open-url script
+ ;; not yet working
+ ;;browse-url-browser-function 'browse-url-generic
+ ;;browse-url-generic-program "chrome-open-url"
  )
 
 (dolist (path '("/home/jguenther/.emacs-lisp"
@@ -293,6 +299,7 @@ the user will be asked for confirmation before the buffer is reverted."
   (add-to-list 'recentf-exclude regex))
 
 
+
 ;; set initial and default frame parameters
 (dolist (parameter '((width . 85)
                      (height . 50)))
