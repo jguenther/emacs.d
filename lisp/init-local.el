@@ -9,6 +9,15 @@
  guide-key/text-scale-amount -1.5
  kept-new-versions 6
  kept-old-versions 2
+
+ ;; magit
+ git-gutter-fr+-side 'right-fringe
+ magit-revert-backup t
+ global-magit-wip-save-mode t
+ magit-diff-refine-hunk t
+ magit-highlight-whitespace nil
+ magit-repo-dirs (quote ("~/.emacs.d" "~/code/PRIPchip"))
+ 
  message-log-max 10000
  version-control t
  visible-bell t
@@ -120,7 +129,6 @@
   (require 'git-gutter-fringe+)
   (global-git-gutter+-mode t)
   (git-gutter+-enable-fringe-display-mode)
-  (setq git-gutter-fr+-side 'right-fringe)
   (diminish 'git-gutter+-mode))
 
 (require-package 'win-switch)
