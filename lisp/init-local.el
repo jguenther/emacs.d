@@ -243,16 +243,19 @@ new value to `magit-highlight-whitespace`. Does not currently
 differentiate `t` from `status` in this variable, and will toggle
 between `nil` and `t` no matter the original value of
 `magit-highlight-whitespace`."
-  (interactive)
+  (interactive)   
   (let ((highlight (setq tak/magit-highlight-whitespace
                          (not tak/magit-highlight-whitespace))))
-    (setq magit-highlight-whitespace highlight)))
+    (setq magit-highlight-whitespace highlight)
+    (message "Whitespace highlighting %s"
+             (if magit-highlight-whitespace
+                 '"enabled"
+               '"disabled"))))
 
 ;; vc/magit-mode bindings
 (define-prefix-command 'tak/vc-toggle-map)
-(define-key endless/toggle-map "v" 'tak/vc-toggle-map)
+(define-key endless/toggle-map "v" #'tak/vc-toggle-map)
 (define-key tak/vc-toggle-map "h" #'magit-diff-toggle-refine-hunk)
-(define-key tak/vc-toggle-map "d" #'magit-diff-toggle-refine-hunk)
 (define-key tak/vc-toggle-map "w" #'tak/toggle-magit-highlight-whitespace)
 
 (add-to-list 'aggressive-indent-excluded-modes 'cperl-mode t)
