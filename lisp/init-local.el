@@ -129,7 +129,13 @@
       win-switch-idle-time 1.5
       win-switch-window-threshold 0
       win-switch-set-wrap-around 1)
-                                        ; this doesn't work
+
+;; workaround for https://github.com/genovese/win-switch/issues/4
+(define-prefix-command 'win-switch-dispatch-once)
+(map-keymap (lambda (event binding)
+              (define-key win-switch-dispatch-once (vector event) binding))
+            win-switch-once-map)
+
 (define-key ctl-x-map "\C-o" 'win-switch-dispatch-once)
 
 (win-switch-setup-keys-ijkl "\C-xO")
