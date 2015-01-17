@@ -44,6 +44,10 @@
 (require-package 'scroll-restore)
 (require 'scroll-restore)
 (scroll-restore-mode 1)
+                                        ; make cursor invisible when offscreen
+(setq scroll-restore-handle-cursor nil)
+(dolist (cmd '(scroll-left scroll-right))
+  (add-to-list 'scroll-restore-commands cmd))
 
 (require-package 'bookmark+)
 (after-load 'bookmark
@@ -350,5 +354,13 @@ the user will be asked for confirmation before the buffer is reverted."
 (add-to-list 'guide-key/guide-key-sequence "C-x r" t)
 
 
+;;; Scrolling
+
+;; swap scroll-left and scroll-right default binds
+(global-set-key (kbd "C-x >") 'scroll-left)
+(global-set-key (kbd "C-x <") 'scroll-right)
+
+(global-set-key (kbd "<mouse-7>") 'scroll-left)
+(global-set-key (kbd "<mouse-6>") 'scroll-right)
 
 (provide 'init-local)
