@@ -363,4 +363,9 @@ the user will be asked for confirmation before the buffer is reverted."
 (global-set-key (kbd "<mouse-7>") 'scroll-left)
 (global-set-key (kbd "<mouse-6>") 'scroll-right)
 
+
+
+(require-package 'goto-last-change)
+(global-set-key (kbd "C-x C-\\") 'goto-last-change)
+
 (provide 'init-local)
