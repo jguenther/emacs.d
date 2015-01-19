@@ -123,6 +123,10 @@
               ;;       '(ac-source-perl-completion))
               )))
 
+(add-hook 'cperl-mode-hook
+          (lambda ()
+            (require 'init-perlysense)))
+
 ;; arma script syntax is very similar to c
 (add-to-list 'auto-mode-alist '("\\.sq[fm]$" . c-mode))
 
