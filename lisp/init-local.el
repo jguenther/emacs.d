@@ -25,7 +25,8 @@
  ;; org-mode
  org-replace-disputed-keys t
  org-agenda-files (list "~/org/agenda/")
-
+ org-modules '(org-bbdb org-bibtex org-ctags org-docview org-gnus org-habit org-id org-info org-inlinetask org-irc org-mhe org-mouse org-protocol org-rmail org-w3m org-annotate-file org-bookmark org-bullets org-checklist org-choose org-collector org-drill org-elisp-symbol org-eshell org-eval-light org-eval org-expiry org-favtable org-git-link org-panel org-registry org-secretary org-toc org-track)
+ 
  ;; open new remote tabs in chrome using chrome-open-url script
  ;; not yet working
  ;;browse-url-browser-function 'browse-url-generic
