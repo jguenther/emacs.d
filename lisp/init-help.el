@@ -1,7 +1,9 @@
-(require 'help-mode)
+;;(require 'help-mode)
 
 (defun help-mode-revert-buffer-noconfirm (ignore-auto noconfirm)
-  "Always revert `help-mode' buffers without confirmation."
+  "Always revert `help-mode' buffers without confirmation.
+The NOCONFIRM parameter to this function is for compatibility and is
+ignored."
   (help-mode-revert-buffer ignore-auto t))
 
 (add-hook 'help-mode-hook
