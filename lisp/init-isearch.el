@@ -70,6 +70,7 @@ This is useful when followed by an immediate kill."
 
 (define-key isearch-mode-map [(control return)] 'isearch-exit-other-end)
 
-(eval-after-load "isearch" '(require 'isearch+))
+(after-load 'isearch
+  (require 'isearch+))
 
 (provide 'init-isearch)
