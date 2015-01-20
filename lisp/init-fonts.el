@@ -47,9 +47,8 @@ by the :height face attribute."
   (interactive)
   (sanityinc/increment-default-font-height -10))
 
-; fuck these functions
-;(global-set-key (kbd "C-M-=") 'sanityinc/increase-default-font-height)
-;(global-set-key (kbd "C-M--") 'sanityinc/decrease-default-font-height)
+(global-set-key (kbd "C-M-=") 'sanityinc/increase-default-font-height)
+(global-set-key (kbd "C-M--") 'sanityinc/decrease-default-font-height)
 
 
 
