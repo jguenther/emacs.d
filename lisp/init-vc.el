@@ -1,9 +1,11 @@
 (require-package 'diff-hl)
 
-;; diff-hl-mode is annoying -- changed to keybinding instead
-;(add-hook 'prog-mode-hook 'turn-on-diff-hl-mode)
-;(add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode)
+;; diff-hl-mode can be annoying -- change to key in toggle-map instead
+(defun tak/add-diff-hl-toggle-command ()
+  (define-key tak/vc-toggle-map "d" 'diff-hl-mode))
 
-(define-key prog-mode-map [(kbd "C-c d")] 'turn-on-diff-hl-mode)
+(add-hook 'prog-mode-hook 'tak/add-diff-hl-toggle-command)
+(add-hook 'vc-dir-mode-hook 'tak/add-diff-hl-toggle-command)
+
 
 (provide 'init-vc)
