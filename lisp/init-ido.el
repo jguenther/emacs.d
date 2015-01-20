@@ -6,9 +6,6 @@
 (defvar ido-default-item nil)
 (defvar ido-cur-list nil)
 
-(defun ido-my-keys ()
-  "Set up the keymap for `ido'."
-  )
 (add-hook 'ido-setup-hook
           (lambda ()
                                         ; common keys
