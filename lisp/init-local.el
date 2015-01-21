@@ -61,8 +61,7 @@
 (require 'doremi-frm)
 (require-package 'doremi-cmd)
 (require 'doremi-cmd)
-(autoload 'define-doremi "doremi-mac"
-  "Define a Do Re Mi command." nil 'macro)
+(autoload 'define-doremi "doremi-mac" "Define a Do Re Mi command." nil 'macro)
 
 (require-package 'help+)
 (require-package 'help-fns+)
@@ -96,7 +95,7 @@
 
 (defsubst yank-secondary ()
   "Insert the secondary selection at point.
-  Moves point to the end of the inserted text.  Does not change mark."
+Moves point to the end of the inserted text. Does not change mark."
   (interactive) (insert (x-get-selection 'SECONDARY)))
 
 (require-package 'cursor-chg)
@@ -242,12 +241,10 @@
 
 (defvar tak/magit-highlight-whitespace magit-highlight-whitespace
   "Enable or disable whitespace highlighting in `magit-mode`.
-
 Used by `tak/toggle-magit-highlight-whitespace`.")
 
 (defun tak/toggle-magit-highlight-whitespace ()
   "Toggles highlighting of whitespace in `magit-mode` buffers.
-
 Toggles the value of `tak/magit-highlight-whitespace`, assigning its
 new value to `magit-highlight-whitespace`. Does not currently
 differentiate `t` from `status` in this variable, and will toggle
@@ -282,7 +279,6 @@ between `nil` and `t` no matter the original value of
 ;; adapted from http://www.emacswiki.org/emacs/DisabledCommands
 (defun enable-all-disabled-commands (&optional just-list-them)
   "Enable all commands, reporting on which were disabled.
-
 If `just-list-them' is non-nil, prints disabled commands but doesn't
 enable them."
   (interactive)
@@ -297,7 +293,6 @@ enable them."
 
 (defun list-disabled-commands ()
   "Prints a list of disabled commands in a new temporary buffer.
-
 See also: `enable-all-disabled-commands'."
   (interactive)
   (enable-all-disabled-commands t))
