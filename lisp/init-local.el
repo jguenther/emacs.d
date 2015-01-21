@@ -27,7 +27,6 @@
  ;; org-mode
  org-replace-disputed-keys t
  org-agenda-files (list "~/org/")
- org-modules '(org-bbdb org-bibtex org-ctags org-docview org-gnus org-habit org-id org-info org-inlinetask org-irc org-mhe org-mouse org-protocol org-rmail org-w3m org-annotate-file org-bookmark org-bullets org-checklist org-choose org-collector org-drill org-elisp-symbol org-eshell org-eval-light org-eval org-expiry org-favtable org-git-link org-panel org-registry org-secretary org-toc org-track)
  
  ;; open new remote tabs in chrome using chrome-open-url script
  ;; not yet working
@@ -386,6 +385,34 @@ the user will be asked for confirmation before the buffer is reverted."
 (add-hook 'org-mode-hook
           (lambda ()
             (define-key org-mode-map (kbd "C-M-<return>") 'org-insert-todo-heading)))
+
+(after-load 'org-mode
+  (dolist (element '(org-annotate-file
+                     org-bookmark
+                     org-bullets
+                     org-checklist
+                     org-choose
+                     org-collector
+                     org-ctags
+                     org-drill
+                     org-elisp-symbol
+                     org-eshell
+                     org-eval
+                     org-eval-light
+                     org-expiry
+                     org-favtable
+                     org-git-link
+                     org-habit
+                     org-id
+                     org-inlinetask
+                     org-mouse
+                     org-panel
+                     org-protocol
+                     org-registry
+                     org-secretary
+                     org-toc
+                     org-track))
+    (add-to-list 'org-modules element)))
 
 
 
