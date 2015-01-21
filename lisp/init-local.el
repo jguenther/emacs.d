@@ -387,4 +387,12 @@ the user will be asked for confirmation before the buffer is reverted."
           (lambda ()
             (define-key org-mode-map (kbd "C-M-<return>") 'org-insert-todo-heading)))
 
+
+
+;; paredit-newline replaces C-j binding
+(after-load 'lisp-mode
+  (define-key emacs-lisp-mode-map (kbd "C-x C-M-e") 'eval-print-last-sexp))
+
+
+
 (provide 'init-local)
