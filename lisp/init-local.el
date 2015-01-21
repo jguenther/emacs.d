@@ -26,7 +26,7 @@
 
  ;; org-mode
  org-replace-disputed-keys t
- org-agenda-files (list "~/org/agenda/")
+ org-agenda-files (list "~/org/")
  org-modules '(org-bbdb org-bibtex org-ctags org-docview org-gnus org-habit org-id org-info org-inlinetask org-irc org-mhe org-mouse org-protocol org-rmail org-w3m org-annotate-file org-bookmark org-bullets org-checklist org-choose org-collector org-drill org-elisp-symbol org-eshell org-eval-light org-eval org-expiry org-favtable org-git-link org-panel org-registry org-secretary org-toc org-track)
  
  ;; open new remote tabs in chrome using chrome-open-url script
@@ -380,5 +380,11 @@ the user will be asked for confirmation before the buffer is reverted."
 ;; http://oremacs.com/2015/01/20/introducing-hydra/
 (require-package 'hydra)
 
+
+
+;; org-mode setup
+(add-hook 'org-mode-hook
+          (lambda ()
+            (define-key org-mode-map (kbd "C-M-<return>") 'org-insert-todo-heading)))
 
 (provide 'init-local)
