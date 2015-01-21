@@ -24,6 +24,7 @@ site-lisp/package/
 /.sqli_history
 /frame-restore-parameters
 /.workgroups
+/srecode-map.el
 /.achievements
 /.bookmarks.el
 /history
