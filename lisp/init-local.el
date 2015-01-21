@@ -16,8 +16,10 @@
  global-magit-wip-save-mode t
  magit-diff-refine-hunk t
  magit-highlight-whitespace nil
- magit-repo-dirs (quote ("~/.emacs.d" "~/code/PRIPchip"))
- 
+ magit-repo-dirs (quote ("~/.emacs.d"
+                         "~/code/PRIPchip"
+                         "~/org"
+                         "~/code/scripts"))
  message-log-max 10000
  version-control t
  visible-bell t
