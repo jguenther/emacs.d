@@ -1,4 +1,4 @@
-(setq
+(setq-default
  auto-revert-verbose t
  backup-by-copying t
  backup-directory-alist '(("." . "~/.emacs.d/saves"))
@@ -46,7 +46,7 @@
 (require 'scroll-restore)
 (scroll-restore-mode 1)
                                         ; make cursor invisible when offscreen
-(setq scroll-restore-handle-cursor nil)
+(setq-default scroll-restore-handle-cursor nil)
 (dolist (cmd '(scroll-left scroll-right))
   (add-to-list 'scroll-restore-commands cmd))
 
@@ -142,10 +142,10 @@
 
 (require-package 'win-switch)
 (require 'win-switch)
-(setq win-switch-other-window-first t
-      win-switch-idle-time 1.5
-      win-switch-window-threshold 0
-      win-switch-set-wrap-around 1)
+(setq-default win-switch-other-window-first t
+              win-switch-idle-time 1.5
+              win-switch-window-threshold 0
+              win-switch-set-wrap-around 1)
 
 ;; workaround for https://github.com/genovese/win-switch/issues/4
 (define-prefix-command 'win-switch-dispatch-once)
@@ -190,9 +190,9 @@
 (define-key launcher-map "h" #'man) ; Help
 (define-key launcher-map "i" #'package-install-from-buffer)
 (define-key launcher-map "n" #'nethack)
-(define-key launcher-map "p" '(lambda () (interactive)
+(define-key launcher-map "p" (lambda () (interactive)
                                         ; don't autorefresh package list
-                                (paradox-list-packages t)))
+                               (paradox-list-packages t)))
 (define-key launcher-map "s" #'shell)
 (define-key launcher-map "t" #'proced) ; top
 (define-key launcher-map "a" #'ansi-term)
@@ -227,8 +227,8 @@
 (require-package 'minimap)
 (autoload 'minimap-toggle "minimap" nil t)
 (after-load 'minimap
-  (setq minimap-resizes-buffer t)
-  (setq minimap-width-fraction 0.17))
+  (setq-default minimap-resizes-buffer t)
+  (setq-default minimap-width-fraction 0.17))
 (define-key endless/toggle-map "m" #'minimap-toggle)
 
 ;; can't find defun for endless/toggle-theme
@@ -313,8 +313,8 @@ the user will be asked for confirmation before the buffer is reverted."
 
 (require-package 'workgroups2)
 (require 'workgroups2)
-(setq wg-prefix-key (kbd "C-x w"))
-(setq wg-session-file (concat user-emacs-directory ".workgroups"))
+(setq-default wg-prefix-key (kbd "C-x w"))
+(setq-default wg-session-file (concat user-emacs-directory ".workgroups"))
 
 ;; don't use this in all buffers -- workgroups-mode rebinds `winner-undo' and
 ;; `winner-redo', but wg undo command doesn't work unless there's an active
@@ -372,5 +372,11 @@ the user will be asked for confirmation before the buffer is reverted."
 
 (require-package 'goto-last-change)
 (global-set-key (kbd "C-x C-\\") 'goto-last-change)
+
+
+
+;; http://oremacs.com/2015/01/20/introducing-hydra/
+(require-package 'hydra)
+
 
 (provide 'init-local)
