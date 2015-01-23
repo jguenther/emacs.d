@@ -407,8 +407,40 @@ the user will be asked for confirmation before the buffer is reverted."
                    org-registry
                    org-secretary
                    org-toc
-                   org-track))
-  (add-to-list 'org-modules element))
+                   org-track
+
+                   org-ac
+                   org-autolist
+                   org-caldav
+                   org-cliplink
+                   org-context
+                   org-cua-dwim
+                   org-dotemacs
+                   org-drill-table
+                   org-ehtml
+                   org-elisp-help
+                   org-fstree
+                   org-gcal
+                   org-linkany
+                   org-magit
+                   org-mobile-sync
+                   org-page
+                   org-pomodoro
+                   org-present
+                   org-repo-todo
+                   org-screenshot
+                   org-trello
+                   org-wc
+                   ))
+  (add-to-list 'org-modules element t))
+
+;;; disabled org-modules -- problems while loading
+;;org-grep
+;;org-pandoc
+;;org-agenda-proper
+
+;; don't need to add this to org-modules
+;;org-plus-contrib  
 
 
 
