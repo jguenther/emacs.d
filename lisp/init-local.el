@@ -21,6 +21,9 @@
                          "~/org"
                          "~/code/scripts"))
  message-log-max 10000
+
+ scroll-restore-handle-cursor nil
+ 
  version-control t
  visible-bell t
 
@@ -47,7 +50,6 @@
 (require 'scroll-restore)
 (scroll-restore-mode 1)
                                         ; make cursor invisible when offscreen
-(setq-default scroll-restore-handle-cursor nil)
 (dolist (cmd '(scroll-left scroll-right))
   (add-to-list 'scroll-restore-commands cmd))
 
