@@ -40,7 +40,7 @@
                 "/usr/share/emacs/site-lisp"))
   (add-to-list 'load-path path))
 
-(global-set-key "\M-g" 'goto-line)
+(global-set-key (kbd "C-x M-g") 'goto-line)
 (mouse-wheel-mode 1)
 
 (require-package 'scroll-restore)
