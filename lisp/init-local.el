@@ -383,33 +383,32 @@ the user will be asked for confirmation before the buffer is reverted."
           (lambda ()
             (define-key org-mode-map (kbd "C-M-<return>") 'org-insert-todo-heading)))
 
-(after-load 'org-mode
-  (dolist (element '(org-annotate-file
-                     org-bookmark
-                     org-bullets
-                     org-checklist
-                     org-choose
-                     org-collector
-                     org-ctags
-                     org-drill
-                     org-elisp-symbol
-                     org-eshell
-                     org-eval
-                     org-eval-light
-                     org-expiry
-                     org-favtable
-                     org-git-link
-                     org-habit
-                     org-id
-                     org-inlinetask
-                     org-mouse
-                     org-panel
-                     org-protocol
-                     org-registry
-                     org-secretary
-                     org-toc
-                     org-track))
-    (add-to-list 'org-modules element)))
+(dolist (element '(org-annotate-file
+                   org-bookmark
+                   org-bullets
+                   org-checklist
+                   org-choose
+                   org-collector
+                   org-ctags
+                   org-drill
+                   org-elisp-symbol
+                   org-eshell
+                   org-eval
+                   org-eval-light
+                   org-expiry
+                   org-favtable
+                   org-git-link
+                   org-habit
+                   org-id
+                   org-inlinetask
+                   org-mouse
+                   org-panel
+                   org-protocol
+                   org-registry
+                   org-secretary
+                   org-toc
+                   org-track))
+  (add-to-list 'org-modules element))
 
 
 
