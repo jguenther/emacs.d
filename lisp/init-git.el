@@ -87,5 +87,16 @@
 (require-package 'git-messenger)
 (global-set-key (kbd "C-x v p") #'git-messenger:popup-message)
 
+
+
+;; magit-filenotify
+(require-package 'magit-filenotify)
+(add-hook 'magit-mode-hook
+          (lambda ()
+            (magit-filenotify-mode 1)))
+(after-load 'magit-filenotify
+  (diminish 'magit-filenotify-mode))
+
+
 
 (provide 'init-git)
