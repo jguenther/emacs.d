@@ -20,5 +20,9 @@
 ;; always free, whereas C-c t is used by some modes.
 (define-key ctl-x-map "t" 'endless/toggle-map)
 
+;; `vc-mode'-related toggle keymap
+(define-prefix-command 'tak/vc-toggle-map)
+(define-key endless/toggle-map "v" #'tak/vc-toggle-map)
+
 
 (provide 'init-preload-local)

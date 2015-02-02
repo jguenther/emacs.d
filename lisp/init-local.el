@@ -251,8 +251,6 @@ between `nil` and `t` no matter the original value of
                '"disabled"))))
 
 ;; vc/magit-mode bindings
-(define-prefix-command 'tak/vc-toggle-map)
-(define-key endless/toggle-map "v" #'tak/vc-toggle-map)
 (define-key tak/vc-toggle-map "h" #'magit-diff-toggle-refine-hunk)
 (define-key tak/vc-toggle-map "w" #'tak/toggle-magit-highlight-whitespace)
 
