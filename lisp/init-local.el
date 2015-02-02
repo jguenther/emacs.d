@@ -174,16 +174,9 @@ Moves point to the end of the inserted text. Does not change mark."
 
 (global-set-key (kbd "C-S-k") 'kill-whole-line)
 
-;;; Custom keymaps
+
 
-;;
-;; http://endlessparentheses.com/launcher-keymap-for-standalone-features.html
-;;
-(define-prefix-command 'launcher-map)
-;; C-x l is `count-lines-page' by default. If you
-;; use that, you can try s-l or <C-return>.
-(define-key ctl-x-map "l" 'launcher-map)
-;;(global-set-key (kbd "s-l") 'launcher-map)
+;;; launcher keymap
 (define-key launcher-map "c" #'calc)
 (define-key launcher-map "d" #'ediff-buffers)
 (define-key launcher-map "f" #'find-dired)
@@ -199,13 +192,7 @@ Moves point to the end of the inserted text. Does not change mark."
 (define-key launcher-map "t" #'proced) ; top
 (define-key launcher-map "a" #'ansi-term)
 
-;;
-;; http://endlessparentheses.com/the-toggle-map-and-wizardry.html
-;;
-(define-prefix-command 'endless/toggle-map)
-;; The manual recommends C-c for user keys, but C-x t is
-;; always free, whereas C-c t is used by some modes.
-(define-key ctl-x-map "t" 'endless/toggle-map)
+;; toggle keymap
 (define-key endless/toggle-map "c" #'column-number-mode)
 (define-key endless/toggle-map "d" #'toggle-debug-on-error)
 (define-key endless/toggle-map "e" #'toggle-debug-on-error)
@@ -214,6 +201,8 @@ Moves point to the end of the inserted text. Does not change mark."
 (define-key endless/toggle-map "t" #'toggle-truncate-lines)
 (define-key endless/toggle-map "q" #'toggle-debug-on-quit)
 (define-key endless/toggle-map "S" #'dired-toggle-sudo)
+
+
 
 ;;doesn't work well with multimonitor setup -- doesn't maximize window, instead
 ;;it resizes it offscreen
