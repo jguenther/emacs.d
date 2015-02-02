@@ -91,7 +91,6 @@
 (require 'init-help)
 ;; Emacs::PDE broken in emacs >24
 ;(require 'init-pde)
-(require 'init-compile)
 (require 'init-stats)
 (require 'init-paredit)
 (require 'init-lisp)
