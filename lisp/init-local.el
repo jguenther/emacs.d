@@ -335,11 +335,6 @@ the user will be asked for confirmation before the buffer is reverted."
 
 
 ;;; guide-key setup
-(add-hook 'org-mode-hook
-          (lambda ()
-            (guide-key/add-local-guide-key-sequence "C-c")
-            (guide-key/add-local-guide-key-sequence "C-c C-x")
-            (guide-key/add-local-highlight-command-regexp "org-")))
 
 (add-to-list 'guide-key/guide-key-sequence "C-x r" t)
 
@@ -368,72 +363,64 @@ the user will be asked for confirmation before the buffer is reverted."
 ;; org-mode setup
 (add-hook 'org-mode-hook
           (lambda ()
-            (define-key org-mode-map (kbd "C-M-<return>") 'org-insert-todo-heading)))
+            (guide-key/add-local-guide-key-sequence "C-c")
+            (guide-key/add-local-guide-key-sequence "C-c C-x")
+            (guide-key/add-local-highlight-command-regexp "org-")
+            (define-key org-mode-map
+              (kbd "C-M-<return>") 'org-insert-todo-heading)))
 
-(dolist (element '(org-annotate-file
-                   org-bookmark
-                   org-bullets
-                   org-checklist
-                   org-choose
-                   org-collector
-                   org-ctags
-                   org-drill
-                   org-elisp-symbol
-                   org-eshell
-                   org-eval
-                   org-eval-light
-                   org-expiry
-                   org-favtable
-                   org-git-link
-                   org-habit
-                   org-id
-                   org-inlinetask
-                   org-mouse
-                   org-panel
-                   org-protocol
-                   org-registry
-                   org-secretary
-                   org-toc
-                   org-track
+(after-load 'org
+  (dolist (element '(org-annotate-file
+                     org-bookmark
+                     org-bullets
+                     org-checklist
+                     org-choose
+                     org-collector
+                     org-ctags
+                     org-drill
+                     org-elisp-symbol
+                     org-eshell
+                     org-eval
+                     org-eval-light
+                     org-expiry
+                     org-favtable
+                     org-git-link
+                     org-habit
+                     org-id
+                     org-inlinetask
+                     org-mouse
+                     org-panel
+                     org-protocol
+                     org-registry
+                     org-secretary
+                     org-toc
+                     org-track
 
-                   org-ac
-                   org-autolist
-                   org-caldav
-                   org-cliplink
-                   org-context
-                   org-cua-dwim
-                   org-dotemacs
-                   org-drill-table
-                   org-ehtml
-                   org-elisp-help
-                   org-fstree
-                   org-gcal
-                   org-linkany
-                   org-magit
-                   org-mobile-sync
-                   org-page
-                   org-pomodoro
-                   org-present
-                   org-repo-todo
-                   org-screenshot
-                   org-trello
-                   org-wc
-                   ))
-  (add-to-list 'org-modules element t))
-
-;;; disabled org-modules -- problems while loading
-;;org-grep
-;;org-pandoc
-;;org-agenda-proper
-
-;; don't need to add this to org-modules
-;;org-plus-contrib  
-
-
-
-;; paredit-newline replaces C-j binding
-(after-load 'lisp-mode
-  (define-key emacs-lisp-mode-map (kbd "C-x C-M-e") 'eval-print-last-sexp))
+                     org-ac
+                     org-autolist
+                     org-caldav
+                     org-cliplink
+                     org-context
+                     org-cua-dwim
+                     org-dotemacs
+                     org-drill-table
+                     org-ehtml
+                     org-elisp-help
+                     org-fstree
+                     org-gcal
+                     org-linkany
+                     org-magit
+                     org-mobile-sync
+                     org-page
+                     org-pomodoro
+                     org-present
+                     org-repo-todo
+                     org-screenshot
+                     org-trello
+                     org-wc
+                     ))
+    (add-to-list 'org-modules element t))
+  (org-reload))
 
 
 
