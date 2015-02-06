@@ -324,7 +324,7 @@ the user will be asked for confirmation before the buffer is reverted."
 
 (defun tak/set-default-frame-parameters ()
   (interactive)
-  (dolist (parameter '((width . 90)
+  (dolist (parameter '((width . 82)
                        (height . 50)
                        (left . -10)
                        (top . 35)))
