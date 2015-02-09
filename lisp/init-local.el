@@ -401,23 +401,26 @@ the user will be asked for confirmation before the buffer is reverted."
                      org-caldav
                      org-cliplink
                      org-context
-                     org-cua-dwim
-                     org-dotemacs
-                     org-drill-table
-                     org-ehtml
                      org-elisp-help
                      org-fstree
                      org-gcal
                      org-linkany
                      org-magit
-                     org-mobile-sync
                      org-page
                      org-pomodoro
                      org-present
                      org-repo-todo
                      org-screenshot
-                     org-trello
                      org-wc
+                     
+                     ;;; disabled/uninstalled
+                     ;;org-cua-dwim
+                     ;;org-dotemacs
+                     ;;org-drill-table
+                     ;;org-ehtml
+                     ;;org-mobile-sync
+                     ;;org-trello
+
                      ))
     (add-to-list 'org-modules element t))
   (org-reload))
