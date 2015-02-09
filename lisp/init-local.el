@@ -296,10 +296,10 @@ the user will be asked for confirmation before the buffer is reverted."
 
 (define-key ctl-x-map "R" 'tak/maybe-revert-buffer)
 
-(require-package 'workgroups2)
-(require 'workgroups2)
-(setq-default wg-prefix-key (kbd "C-x w"))
-(setq-default wg-session-file (concat user-emacs-directory ".workgroups"))
+;;(require-package 'workgroups2)
+;;(require 'workgroups2)
+;;(setq-default wg-prefix-key (kbd "C-x w"))
+;;(setq-default wg-session-file (concat user-emacs-directory ".workgroups"))
 
 ;; don't use this in all buffers -- workgroups-mode rebinds `winner-undo' and
 ;; `winner-redo', but wg undo command doesn't work unless there's an active
