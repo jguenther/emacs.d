@@ -306,7 +306,7 @@ the user will be asked for confirmation before the buffer is reverted."
 ;; workgroup
 ;;(workgroups-mode 1)
 
-(dolist (regex '("/.git/" "/sudo:"))
+(dolist (regex (list "/.git/" "/sudo:" (concat user-emacs-directory "elpa")))
   (add-to-list 'recentf-exclude regex))
 
 
