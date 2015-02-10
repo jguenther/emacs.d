@@ -294,7 +294,7 @@ the user will be asked for confirmation before the buffer is reverted."
   (save-excursion
     (revert-buffer t (not (buffer-modified-p)))))
 
-(define-key ctl-x-map "R" 'tak/maybe-revert-buffer)
+(global-set-key (kbd "C-x C-S-R") 'tak/maybe-revert-buffer)
 
 ;;(require-package 'workgroups2)
 ;;(require 'workgroups2)
