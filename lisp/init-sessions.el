@@ -79,10 +79,11 @@
     (require-package 'frame-restore)
     (frame-restore)))
 
-(setq-default session-set-file-name-exclude-regexp
+(after-load 'session
+ (setq-default session-set-file-name-exclude-regexp
               (concat session-set-file-name-exclude-regexp
                       "\\|\\.emacs\\.d/elpa/"
-                      "\\|/\\.git/\\(COMMIT\\|MERGE\\)_\\(EDIT\\)?MSG"))
+                      "\\|/\\.git/\\(COMMIT\\|MERGE\\)_\\(EDIT\\)?MSG")))
 
 
 (provide 'init-sessions)
