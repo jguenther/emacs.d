@@ -5,4 +5,9 @@
 
 (setq csv-separators '("," ";" "|" " "))
 
+;; auto-soft-align csv fields
+(add-hook 'csv-mode-hook
+          (lambda ()
+            (csv-align-fields nil (point-min) (point-max))))
+
 (provide 'init-csv)
