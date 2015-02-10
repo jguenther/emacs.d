@@ -427,4 +427,9 @@ the user will be asked for confirmation before the buffer is reverted."
 
 
 
+;; so git-wip-mode doesn't depend on running magit-status first
+(require 'magit)
+
+
+
 (provide 'init-local)
