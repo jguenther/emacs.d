@@ -382,7 +382,8 @@ the user will be asked for confirmation before the buffer is reverted."
                      org-gcal
                      orgit
                      orglink
-                     org-linkany
+                     ;; disabled -- don't use anything.el/helm.el yet
+                     ;;org-linkany
                      org-mac-link
                      org-pomodoro
                      org-present
