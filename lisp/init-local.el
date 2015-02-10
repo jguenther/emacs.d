@@ -380,14 +380,10 @@ the user will be asked for confirmation before the buffer is reverted."
                      org-elisp-help
                      org-fstree
                      org-gcal
-                     org-grep
                      orgit
                      orglink
                      org-linkany
                      org-mac-link
-                     org-magit
-                     org-pandoc
-                     org-plus-contrib
                      org-pomodoro
                      org-present
                      org-repo-todo
