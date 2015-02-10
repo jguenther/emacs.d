@@ -43,4 +43,18 @@ if tak/buffer-file-ext-is-noexec-p returns `nil'."
 (add-hook 'after-save-hook
           'tak/maybe-make-buffer-file-executable t nil)
 
+;; adapted from http://www.emacswiki.org/emacs/ListModificationLibrary
+(defun regexp-filter (regexp list &optional invert-match)
+  "Filter LIST of strings with REGEXP.
+
+Returns elements of LIST that match REGEXP. If INVERT-MATCH is
+non-nil, inverts the matching operation."
+  (let (new)
+    (dolist (string list)
+      (let ((matches (string-match regexp string)))
+        (when (or (and matches (not invert-match))
+                  (and (not matches) invert-match))
+          (setq new (cons string new)))))
+    (nreverse new)))
+
 (provide 'init-misc)
