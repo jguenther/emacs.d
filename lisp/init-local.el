@@ -370,60 +370,33 @@ the user will be asked for confirmation before the buffer is reverted."
               (kbd "C-M-<return>") 'org-insert-todo-heading)))
 
 (after-load 'org
-  (dolist (element '(org-annotate-file
-                     org-bookmark
-                     org-bullets
-                     org-checklist
-                     org-choose
-                     org-collector
-                     org-ctags
-                     org-drill
-                     org-elisp-symbol
-                     org-eshell
-                     org-eval
-                     org-eval-light
-                     org-expiry
-                     org-favtable
-                     org-git-link
-                     org-habit
-                     org-id
-                     org-inlinetask
-                     org-mouse
-                     org-panel
-                     org-protocol
-                     org-registry
-                     org-secretary
-                     org-toc
-                     org-track
-
-                     org-ac
+  (dolist (element '(org-ac
+                     org-agenda-property
                      org-autolist
+                     org-bullets
                      org-caldav
                      org-cliplink
                      org-context
                      org-elisp-help
                      org-fstree
                      org-gcal
+                     org-grep
+                     orgit
+                     orglink
                      org-linkany
+                     org-mac-link
                      org-magit
-                     org-page
+                     org-pandoc
+                     org-plus-contrib
                      org-pomodoro
                      org-present
                      org-repo-todo
                      org-screenshot
-                     org-wc
-                     
-                     ;;; disabled/uninstalled
-                     ;;org-cua-dwim
-                     ;;org-dotemacs
-                     ;;org-drill-table
-                     ;;org-ehtml
-                     ;;org-mobile-sync
-                     ;;org-trello
-
+                     org-toc
+                     org-wc                     
                      ))
     (add-to-list 'org-modules element t))
-  (org-reload))
+  (org-load-modules-maybe t))
 
 
 
