@@ -19,6 +19,7 @@
  '(desktop-lazy-idle-delay 3)
  '(desktop-restore-eager 3)
  '(desktop-restore-in-current-display t)
+ '(desktop-restore-reuses-frames :keep)
  '(desktop-save (quote if-exists))
  '(electric-indent-mode t)
  '(electric-pair-mode nil)
