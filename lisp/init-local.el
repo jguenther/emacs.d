@@ -330,7 +330,7 @@ the user will be asked for confirmation before the buffer is reverted."
                        (top . 35)))
     (set-frame-parameter nil (car parameter) (cdr parameter))))
 
-(global-set-key "\C-c0" 'tak/set-default-frame-parameters)
+(global-set-key (kbd "C-x C-9") 'tak/set-default-frame-parameters)
 
 
 
