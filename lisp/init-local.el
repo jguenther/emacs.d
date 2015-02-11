@@ -31,7 +31,7 @@
 
  ;; org-mode
  org-replace-disputed-keys t
- org-agenda-files (list "~/org/thesis/" "~/org/agenda/")
+ org-agenda-files "~/org/agenda/agenda.org"
  
  ;; open new remote tabs in chrome using chrome-open-url script
  ;; not yet working
