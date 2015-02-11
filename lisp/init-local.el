@@ -37,6 +37,13 @@
  ;; not yet working
  ;;browse-url-browser-function 'browse-url-generic
  ;;browse-url-generic-program "chrome-open-url"
+
+ ;; disable display reordering by default for performance reasons
+ ;;bidi-display-reordering nil
+
+ ;; use this instead for now, is recommended way of doing this -- test and see
+ ;; if it helps perf in large files with long lines
+ bidi-paragraph-direction 'left-to-right
  )
 
 (dolist (path '("/home/jguenther/.emacs-lisp"
