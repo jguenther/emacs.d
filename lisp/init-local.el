@@ -135,7 +135,7 @@ Moves point to the end of the inserted text. Does not change mark."
           (lambda ()
             (when (require 'auto-complete nil t)
               (auto-complete-mode t)
-              (make-variable-buffer-local 'ac-sources)
+              ;;(make-variable-buffer-local 'ac-sources)
               ;; (setq ac-sources
               ;;       '(ac-source-perl-completion))
               )))
