@@ -31,7 +31,7 @@
    (quote
     (ledger haskell-hdevtools ada-gnat asciidoc c/c++-clang c/c++-gcc c/c++-cppcheck cfengine chef-foodcritic coffee coffee-coffeelint coq css-csslint d-dmd elixir emacs-lisp emacs-lisp-checkdoc erlang eruby-erubis fortran-gfortran go-gofmt go-golint go-vet go-build go-test go-errcheck haml handlebars haskell-ghc haskell-hlint html-tidy javascript-jshint javascript-eslint javascript-gjslint json-jsonlint less lua make perl perl-perlcritic php php-phpmd php-phpcs puppet-parser puppet-lint python-flake8 racket rst rst-sphinx ruby-rubocop ruby-rubylint ruby ruby-jruby rust sass scala scala-scalastyle scss sh-bash sh-posix-dash sh-posix-bash sh-zsh sh-shellcheck slim tex-chktex tex-lacheck texinfo verilog-verilator xml-xmlstarlet xml-xmllint yaml-jsyaml yaml-ruby)))
  '(flycheck-disabled-checkers (quote (emacs-lisp-checkdoc perl-perlcritic)))
- '(flycheck-idle-change-delay 1.5)
+ '(flycheck-idle-change-delay 3)
  '(flycheck-perlcritic-severity 4)
  '(git-gutter-fr+-side (quote right-fringe))
  '(ido-create-new-buffer (quote always))
