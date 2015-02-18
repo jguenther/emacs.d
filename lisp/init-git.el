@@ -100,4 +100,13 @@
 
 
 
+;; in case color.ui=always
+(after-load 'magit
+ (setq-default magit-git-standard-options
+              (append magit-git-standard-options (list "-c" "color.ui=true"))))
+
+
+
+
+
 (provide 'init-git)
