@@ -25,7 +25,10 @@
  message-log-max 10000
 
  scroll-restore-handle-cursor nil
- 
+
+ ;; shell-mode
+ shell-completion-execonly nil
+
  version-control t
  visible-bell t
 
