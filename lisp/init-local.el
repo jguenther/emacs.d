@@ -344,8 +344,12 @@ the user will be asked for confirmation before the buffer is reverted."
 
 
 ;;; guide-key setup
-
-(add-to-list 'guide-key/guide-key-sequence "C-x r" t)
+(dolist (key '(
+               "C-x r"
+               "C-x l"
+               "C-x j"
+               ))
+  (add-to-list 'guide-key/guide-key-sequence key t))
 
 
 ;;; Scrolling
