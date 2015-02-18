@@ -6,13 +6,8 @@
 (global-unset-key "\C-o")
 (setq ps/key-prefix "\C-o")
 
-;; ** Flymake **
-;; Load flymake if t
-;; Flymake must be installed.
-;; It is included in Emacs 22
-;;     (or http://flymake.sourceforge.net/, put flymake.el in your load-path)
-(setq ps/load-flymake t)
-;; Note: more flymake config below, after loading PerlySense
+;; TODO: use flycheck -- flymake is outdated
+(setq ps/load-flymake nil)
 
 ;; *** PerlySense load (don't touch) ***
 (setq ps/external-dir (shell-command-to-string "perly_sense external_dir"))
