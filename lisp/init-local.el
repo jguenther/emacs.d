@@ -193,9 +193,7 @@ Moves point to the end of the inserted text. Does not change mark."
 (define-key launcher-map "h" #'man) ; Help
 (define-key launcher-map "i" #'package-install-from-buffer)
 (define-key launcher-map "n" #'nethack)
-(define-key launcher-map "p" (lambda () (interactive)
-                                        ; don't autorefresh package list
-                               (paradox-list-packages t)))
+(define-key launcher-map "p" #'paradox-list-packages)
 (define-key launcher-map "s" #'shell)
 (define-key launcher-map "t" #'proced) ; top
 (define-key launcher-map "a" #'ansi-term)
