@@ -24,6 +24,8 @@
                          "~/code/scripts"))
  message-log-max 10000
 
+ guide-key/recursive-key-sequence-flag t
+
  scroll-restore-handle-cursor nil
 
  ;; shell-mode
@@ -345,6 +347,10 @@ the user will be asked for confirmation before the buffer is reverted."
                "C-x r"
                "C-x l"
                "C-x j"
+                                        ; win-switch-dispatch-once doesn't
+                                        ; currently seem to work with guide-key
+               "C-x C-o"
+               (redshank-mode  "C-x C-r")
                ))
   (add-to-list 'guide-key/guide-key-sequence key t))
 
