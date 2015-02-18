@@ -433,4 +433,15 @@ the user will be asked for confirmation before the buffer is reverted."
 ;; translate ANSI color control sequences into text properties
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
+
+
+;; auto-completion
+(setq-default ac-trigger-key "TAB")
+
+
+
+(global-set-key (kbd "C-S-o") 'sanityinc/open-line-with-reindent)
+
+
+
 (provide 'init-local)
