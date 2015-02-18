@@ -161,12 +161,6 @@ Moves point to the end of the inserted text. Does not change mark."
               win-switch-window-threshold 0
               win-switch-set-wrap-around 1)
 
-;; workaround for https://github.com/genovese/win-switch/issues/4
-(define-prefix-command 'win-switch-dispatch-once)
-(map-keymap (lambda (event binding)
-              (define-key win-switch-dispatch-once (vector event) binding))
-            win-switch-once-map)
-
 (define-key ctl-x-map "\C-o" 'win-switch-dispatch-once)
 
 (win-switch-setup-keys-ijkl "\C-xO")
