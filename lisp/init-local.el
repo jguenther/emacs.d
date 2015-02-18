@@ -417,6 +417,7 @@ the user will be asked for confirmation before the buffer is reverted."
 (require 'magit)
 
 
+;; shell-mode init
 
 ;; bash-completion for shell-mode
 ;; from https://github.com/szermatt/emacs-bash-completion
@@ -429,5 +430,8 @@ the user will be asked for confirmation before the buffer is reverted."
 
 (add-hook 'shell-command-complete-functions
           'bash-completion-dynamic-complete)
+
+;; translate ANSI color control sequences into text properties
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
 (provide 'init-local)
