@@ -59,7 +59,6 @@
  '(sh-indentation 2)
  '(show-trailing-whitespace nil)
  '(standard-indent 2)
- '(tab-always-indent t)
  '(vc-follow-symlinks t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
