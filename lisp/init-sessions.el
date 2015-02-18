@@ -85,5 +85,12 @@
                       "\\|\\.emacs\\.d/elpa/"
                       "\\|/\\.git/\\(COMMIT\\|MERGE\\)_\\(EDIT\\)?MSG")))
 
+(after-load 'desktop
+  (dolist (mode '(
+                  shell-mode
+                  eshell-mode
+                  paradox-menu-mode
+                  ))
+    (add-to-list 'desktop-modes-not-to-save mode)))
 
 (provide 'init-sessions)
