@@ -27,9 +27,9 @@
         (message "Adding PerlySense elisp directory %s to load-path..."
                  ps-external-emacs-dir)
         (add-to-list 'load-path ps-external-emacs-dir t)))
-  (message "Could not identify PerlySense install dir. Is "
-           "Devel::PerlySense installed properly? Does 'perly_sense "
-           "external_dir' give you a proper directory? (%s)"
+  (message "Could not identify PerlySense install dir. Is
+           Devel::PerlySense installed properly? Does `perly_sense
+           external_dir' give you a proper directory? (%s)"
            ps/external-dir))
 
 (add-hook 'cperl-mode-hook
