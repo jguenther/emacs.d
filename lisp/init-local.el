@@ -34,6 +34,11 @@
  version-control t
  visible-bell t
 
+ ;; flycheck-mode
+ flycheck-check-syntax-automatically '(idle-change mode-enabled)
+ flycheck-idle-change-delay 4
+ flycheck-perlcritic-severity 4
+ 
  ;; org-mode
  org-replace-disputed-keys t
  org-agenda-files "~/org/agenda/agenda.org"
