@@ -424,6 +424,8 @@ the user will be asked for confirmation before the buffer is reverted."
 
 ;; bash-completion for shell-mode
 ;; from https://github.com/szermatt/emacs-bash-completion
+(require-package 'bash-completion)
+
 (autoload 'bash-completion-dynamic-complete 
   "bash-completion"
   "BASH completion hook")
