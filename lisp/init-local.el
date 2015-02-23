@@ -450,4 +450,18 @@ the user will be asked for confirmation before the buffer is reverted."
 
 
 
+;; discovery modes
+
+(require-package 'discover)
+(require-package 'discover-my-major)
+
+(global-set-key (kbd "C-h M-m") 'discover-my-major)
+
+(require 'discover)
+(global-discover-mode 1)
+
+
+
+
+
 (provide 'init-local)
