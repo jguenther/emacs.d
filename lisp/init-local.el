@@ -65,12 +65,13 @@
 (global-set-key (kbd "C-x M-g") 'goto-line)
 (mouse-wheel-mode 1)
 
-(require-package 'scroll-restore)
-(require 'scroll-restore)
-(scroll-restore-mode 1)
-                                        ; make cursor invisible when offscreen
-(dolist (cmd '(scroll-left scroll-right))
-  (add-to-list 'scroll-restore-commands cmd))
+;;scroll-restore seems to cause more problems than it's worth
+;; (require-package 'scroll-restore)
+;; (require 'scroll-restore)
+;; (scroll-restore-mode 1)
+;;                                         ; make cursor invisible when offscreen
+;; (dolist (cmd '(scroll-left scroll-right))
+;;   (add-to-list 'scroll-restore-commands cmd))
 
 (require-package 'bookmark+)
 (after-load 'bookmark
