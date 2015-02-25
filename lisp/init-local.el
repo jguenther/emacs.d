@@ -23,6 +23,7 @@
                          "~/org"
                          "~/code/scripts"
                          "~/data/genechip"
+                         "~/dotfiles"
                          ))
  message-log-max 10000
 
