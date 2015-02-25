@@ -21,7 +21,9 @@
  magit-repo-dirs (quote ("~/.emacs.d"
                          "~/code/PRIPchip"
                          "~/org"
-                         "~/code/scripts"))
+                         "~/code/scripts"
+                         "~/data/genechip"
+                         ))
  message-log-max 10000
 
  guide-key/recursive-key-sequence-flag t
