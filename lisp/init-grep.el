@@ -10,5 +10,9 @@
   (setq-default ag-highlight-search t)
   (global-set-key (kbd "M-?") 'ag-project))
 
+(after-load 'grep
+					; avoid rgrep matching ELPA archives
+  (add-to-list 'grep-find-ignored-directories
+	       (join-path user-emacs-directory "elpa" "archives")))
 
 (provide 'init-grep)
