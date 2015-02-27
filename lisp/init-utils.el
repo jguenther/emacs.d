@@ -85,5 +85,15 @@
         (error "Cannot open tramp file")
       (browse-url (concat "file://" file-name)))))
 
+;; adapted from
+;; https://stackoverflow.com/questions/3964715/what-is-the-correct-way-to-join-multiple-path-components-into-a-single-complete
+(defun join-path (root &rest dirs)
+  "Joins a path together, like Python's os.path.join."
+  (if (not dirs)
+      root
+    (apply 'join-path
+           (expand-file-name (car dirs) root)
+           (cdr dirs))))
+
 
 (provide 'init-utils)
