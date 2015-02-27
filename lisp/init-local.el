@@ -39,7 +39,7 @@
 
  ;; flycheck-mode
  flycheck-check-syntax-automatically '(idle-change mode-enabled)
- flycheck-idle-change-delay 4
+ flycheck-idle-change-delay 3
  flycheck-perlcritic-severity 4
  
  ;; org-mode
