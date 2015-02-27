@@ -2,8 +2,8 @@
  auto-revert-verbose t
  backup-by-copying t
  backup-directory-alist '(("." . "~/.emacs.d/saves"))
- make-backup-files t
- vc-make-backup-files t
+ make-backup-files nil
+ vc-make-backup-files nil
  delete-old-versions t
  fill-column 79
  guide-key/idle-delay 2.0
