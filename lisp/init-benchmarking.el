@@ -20,6 +20,17 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
                                                            require-start-time))
                      t)))))
 
+(defun tak/print-require-times ()
+  "Prints the require times stored in `sanityinc/require-times'."
+  (interactive)
+  (let ((list sanityinc/require-times))
+    (while list
+      (let ((package-time (car list)))
+        (setq list (cdr list))
+        (let ((package (car package-time))
+              (time (cdr package-time)))
+          (message "feature `%s': %d ms." package time))))))
+
 
 
 (provide 'init-benchmarking)
