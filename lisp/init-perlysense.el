@@ -20,10 +20,6 @@
 ;; cperl-mode binds
 (global-unset-key (kbd "C-o"))
 
-                                        ; rebind C-o C-g to C-o M-g
-(global-set-key (kbd "C-o C-g") nil)
-(global-set-key (kbd "C-o M-g") 'ps/smart-go-to-at-point)
-
 ;; add PerlySense external emacs dir to load-path
 (if (string-match "Devel.PerlySense.external" ps/external-dir)
     (progn
@@ -40,7 +36,8 @@
                                         ; load PerlySense if it hasn't already
                                         ; been loaded
           (unless (boundp 'ps/perl-module-at-point)
-            (load "perly-sense"))
-          )
+            (load "perly-sense")
+            (global-set-key (kbd "C-o C-g") nil)
+            (global-set-key (kbd "C-o M-g") 'ps/smart-go-to-at-point)))
 
 (provide 'init-perlysense)
