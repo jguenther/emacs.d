@@ -92,9 +92,7 @@
 
 ;; magit-filenotify
 (require-package 'magit-filenotify)
-(add-hook 'magit-status-mode-hook
-          (lambda ()
-            (magit-filenotify-mode 1)))
+(add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
 (after-load 'magit-filenotify
   (diminish 'magit-filenotify-mode))
 
