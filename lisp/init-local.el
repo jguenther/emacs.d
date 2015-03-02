@@ -468,7 +468,13 @@ the user will be asked for confirmation before the buffer is reverted."
 (require 'discover)
 (global-discover-mode 1)
 
+
 
+;; smart-mode-line
+
+;; disable for now -- minor modes appear way off to the right and get cut off
+;; for some reason
+;; (require 'init-smart-mode-line)
 
 
 
