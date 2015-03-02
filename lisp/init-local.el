@@ -476,6 +476,14 @@ the user will be asked for confirmation before the buffer is reverted."
 (setq-default auto-revert-notify-exclude-dir-regexp
               (concat auto-revert-notify-exclude-dir-regexp "\\|/blib/"))
 
+(dolist (re '(
+                                        ; ExtUtils::CBuilder-related temporary files
+              "\\`compilet-.+\\.\\(?:cc?\\|s?o\\).*"
+                                        ; emacs auto-save files
+              "\\`#\\.+#\\'"
+              ))
+  (add-to-list 'magit-filenotify-ignored re))
+
 
 
 ;; smart-mode-line
