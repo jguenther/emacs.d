@@ -472,6 +472,12 @@ the user will be asked for confirmation before the buffer is reverted."
 
 
 
+;; exclude dirs from auto-revert-notify that cause slowdowns
+(setq-default auto-revert-notify-exclude-dir-regexp
+              (concat auto-revert-notify-exclude-dir-regexp "\\|/blib/"))
+
+
+
 ;; smart-mode-line
 
 ;; disable for now -- minor modes appear way off to the right and get cut off
