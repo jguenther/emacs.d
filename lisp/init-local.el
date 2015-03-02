@@ -60,6 +60,8 @@
 
  ;; csv-mode
  csv-separators '(",")
+
+ initial-scratch-message ";; *scratch*\n\n"
  )
 
 (dolist (path '("/home/jguenther/.emacs-lisp"
