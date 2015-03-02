@@ -57,6 +57,9 @@
  ;; use this instead for now, is recommended way of doing this -- test and see
  ;; if it helps perf in large files with long lines
  bidi-paragraph-direction 'left-to-right
+
+ ;; csv-mode
+ csv-separators '(",")
  )
 
 (dolist (path '("/home/jguenther/.emacs-lisp"
