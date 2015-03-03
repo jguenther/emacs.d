@@ -50,6 +50,7 @@
             (define-key ido-completion-map [up] 'previous-history-element)))
 
 ;; display ido lists vertically
+(require-package 'ido-vertical-mode)
 (require 'ido-vertical-mode)
 (ido-vertical-mode t)
 
