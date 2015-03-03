@@ -44,3 +44,4 @@ recentf
 /.cask/
 /.sx/
 /org-clock-save.el
+/server/
