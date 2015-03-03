@@ -94,14 +94,20 @@
 (require-package 'magit-filenotify)
 (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
 (after-load 'magit-filenotify
-  (diminish 'magit-filenotify-mode))
-
+  (diminish 'magit-filenotify-mode)
+  (dolist (re '(                        ; ignore ExtUtils::CBuilder-related
+                                        ; temporary files
+                "\\`compilet-.+\\.\\(?:cc?\\|s?o\\).*"
+                                        ; ignore emacs auto-save files
+                "\\`#\\.+#\\'"
+                ))
+    (add-to-list 'magit-filenotify-ignored re)))
 
 
 ;; in case color.ui=always
 (after-load 'magit
- (setq-default magit-git-standard-options
-              (append magit-git-standard-options (list "-c" "color.ui=true"))))
+  (setq-default magit-git-standard-options
+                (append magit-git-standard-options (list "-c" "color.ui=true"))))
 
 
 
