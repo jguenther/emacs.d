@@ -2,8 +2,8 @@
  auto-revert-verbose t
  backup-by-copying t
  backup-directory-alist '(("." . "~/.emacs.d/saves"))
- make-backup-files t
- vc-make-backup-files t
+ make-backup-files nil
+ vc-make-backup-files nil
  delete-old-versions t
  fill-column 79
  guide-key/idle-delay 2.0
@@ -21,7 +21,10 @@
  magit-repo-dirs (quote ("~/.emacs.d"
                          "~/code/PRIPchip"
                          "~/org"
-                         "~/code/scripts"))
+                         "~/code/scripts"
+                         "~/data/genechip"
+                         "~/dotfiles"
+                         ))
  message-log-max 10000
 
  guide-key/recursive-key-sequence-flag t
@@ -34,6 +37,11 @@
  version-control t
  visible-bell t
 
+ ;; flycheck-mode
+ flycheck-check-syntax-automatically '(idle-change mode-enabled)
+ flycheck-idle-change-delay 3
+ flycheck-perlcritic-severity 4
+ 
  ;; org-mode
  org-replace-disputed-keys t
  org-agenda-files "~/org/agenda/agenda.org"
@@ -49,6 +57,11 @@
  ;; use this instead for now, is recommended way of doing this -- test and see
  ;; if it helps perf in large files with long lines
  bidi-paragraph-direction 'left-to-right
+
+ ;; csv-mode
+ csv-separators '(",")
+
+ initial-scratch-message ";; *scratch*\n\n"
  )
 
 (dolist (path '("/home/jguenther/.emacs-lisp"
@@ -60,12 +73,13 @@
 (global-set-key (kbd "C-x M-g") 'goto-line)
 (mouse-wheel-mode 1)
 
-(require-package 'scroll-restore)
-(require 'scroll-restore)
-(scroll-restore-mode 1)
-                                        ; make cursor invisible when offscreen
-(dolist (cmd '(scroll-left scroll-right))
-  (add-to-list 'scroll-restore-commands cmd))
+;;scroll-restore seems to cause more problems than it's worth
+;; (require-package 'scroll-restore)
+;; (require 'scroll-restore)
+;; (scroll-restore-mode 1)
+;;                                         ; make cursor invisible when offscreen
+;; (dolist (cmd '(scroll-left scroll-right))
+;;   (add-to-list 'scroll-restore-commands cmd))
 
 (require-package 'bookmark+)
 (after-load 'bookmark
@@ -412,7 +426,8 @@ the user will be asked for confirmation before the buffer is reverted."
 
 
 ;; so git-wip-mode doesn't depend on running magit-status first
-(require 'magit)
+(after-load 'init-git
+  (require 'magit))
 
 
 ;; shell-mode init
@@ -442,6 +457,40 @@ the user will be asked for confirmation before the buffer is reverted."
 
 
 (global-set-key (kbd "C-S-o") 'sanityinc/open-line-with-reindent)
+
+
+
+;; discovery modes
+
+(require-package 'discover)
+(require-package 'discover-my-major)
+
+(global-set-key (kbd "C-h M-m") 'discover-my-major)
+
+(require 'discover)
+(global-discover-mode 1)
+
+
+
+;; exclude dirs from auto-revert-notify that cause slowdowns
+(setq-default auto-revert-notify-exclude-dir-regexp
+              (concat auto-revert-notify-exclude-dir-regexp "\\|/blib/"))
+
+(dolist (re '(
+                                        ; ExtUtils::CBuilder-related temporary files
+              "\\`compilet-.+\\.\\(?:cc?\\|s?o\\).*"
+                                        ; emacs auto-save files
+              "\\`#\\.+#\\'"
+              ))
+  (add-to-list 'magit-filenotify-ignored re))
+
+
+
+;; smart-mode-line
+
+;; disable for now -- minor modes appear way off to the right and get cut off
+;; for some reason
+;; (require 'init-smart-mode-line)
 
 
 

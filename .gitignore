@@ -1,3 +1,4 @@
+/games
 /url/cache
 /.emacs.desktop
 /auto-save-list
@@ -42,4 +43,5 @@ recentf
 /eshell
 /.cask/
 /.sx/
+/org-clock-save.el
 /server/
