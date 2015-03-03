@@ -91,17 +91,21 @@
 
 
 ;; magit-filenotify
-(require-package 'magit-filenotify)
-(add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
-(after-load 'magit-filenotify
-  (diminish 'magit-filenotify-mode)
-  (dolist (re '(                        ; ignore ExtUtils::CBuilder-related
+(unless (eq system-type 'windows-nt)
+                                        ; magit-filenotify is slow on windows
+                                        ; with msysgit
+  (require-package 'magit-filenotify)
+  (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
+  (after-load 'magit-filenotify
+    (diminish 'magit-filenotify-mode)
+    (dolist (re '(                        ; ignore ExtUtils::CBuilder-related
                                         ; temporary files
-                "\\`compilet-.+\\.\\(?:cc?\\|s?o\\).*"
+                  "\\`compilet-.+\\.\\(?:cc?\\|s?o\\).*"
                                         ; ignore emacs auto-save files
-                "\\`#\\.+#\\'"
-                ))
-    (add-to-list 'magit-filenotify-ignored re)))
+                  "\\`#\\.+#\\'"
+                  ))
+      (add-to-list 'magit-filenotify-ignored re))))
+
 
 
 ;; in case color.ui=always
