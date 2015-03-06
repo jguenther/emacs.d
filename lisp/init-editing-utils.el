@@ -109,10 +109,22 @@
 
 
 (require-package 'browse-kill-ring)
+(require-package 'browse-kill-ring+)
+(require-package 'second-sel)
+
 (setq browse-kill-ring-separator "\f")
 (after-load 'page-break-lines
   (push 'browse-kill-ring-mode page-break-lines-modes))
+(after-load 'browse-kill-ring
+  (require 'second-sel)
+  (require 'browse-kill-ring+))
 
+;; second-sel recommended binds
+(global-set-key (kbd "C-M-y") 'secondary-dwim)
+(define-key esc-map "y" 'yank-pop-commands)
+(define-key isearch-mode-map (kbd "C-M-y") 'isearch-yank-secondary)
+(global-set-key (kbd "C-x C-M-SPC") 'set-secondary-start)
+(global-set-key (kbd "C-x C-M-<return>") 'secondary-save-then-kill)
 
 ;;----------------------------------------------------------------------------
 ;; Don't disable narrowing commands
