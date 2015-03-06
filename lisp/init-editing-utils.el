@@ -108,6 +108,16 @@
 
 
 
+
+(require-package 'clipmon)              ; monitor the system clipboard and add
+                                        ; any changes to the kill ring
+(add-hook 'after-init-hook 'clipmon-mode-start)
+                                        ; persist the kill ring between
+                                        ; sessions
+(add-hook 'after-init-hook 'clipmon-persist)
+
+(setq-default kill-ring-max 1000)
+
 (require-package 'browse-kill-ring)
 (require-package 'browse-kill-ring+)
 (require-package 'second-sel)
