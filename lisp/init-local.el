@@ -355,7 +355,6 @@ the user will be asked for confirmation before the buffer is reverted."
 
 ;;; guide-key setup
 (dolist (key '(
-               "C-x r"
                "C-x l"
                "C-x j"
                                         ; win-switch-dispatch-once doesn't
