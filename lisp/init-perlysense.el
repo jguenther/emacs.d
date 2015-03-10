@@ -35,9 +35,10 @@
 (add-hook 'cperl-mode-hook
                                         ; load PerlySense if it hasn't already
                                         ; been loaded
-          (unless (boundp 'ps/perl-module-at-point)
-            (load "perly-sense")
-            (global-set-key (kbd "C-o C-g") nil)
-            (global-set-key (kbd "C-o M-g") 'ps/smart-go-to-at-point)))
+          (lambda ()
+            (unless (boundp 'ps/perl-module-at-point)
+              (require 'perly-sense)
+              (global-set-key (kbd "C-o C-g") nil)
+              (global-set-key (kbd "C-o M-g") 'ps/smart-go-to-at-point))))
 
 (provide 'init-perlysense)
