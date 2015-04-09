@@ -494,4 +494,13 @@ the user will be asked for confirmation before the buffer is reverted."
 
 
 
+;; turn on save place so that when opening a file, the cursor will be at the
+;; last position.
+(require 'saveplace)
+(setq save-place-file
+      (concat user-emacs-directory "saveplace.el") ) ; use standard emacs dir
+(setq-default save-place t)
+
+
+
 (provide 'init-local)
