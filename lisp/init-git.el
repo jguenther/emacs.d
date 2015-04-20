@@ -95,12 +95,13 @@
                                         ; magit-filenotify is slow on windows
                                         ; with msysgit
   (require-package 'magit-filenotify)
-  (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
+  ;; magit-filenotify seems quite slow no matter what I do
+  ;; (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
   (after-load 'magit-filenotify
     (diminish 'magit-filenotify-mode)
     (dolist (re '(                      ; ignore ExtUtils::CBuilder-related
                                         ; temporary files
-                  "\\`compilet-.+\\.\\(?:cc?\\|s?o\\).*"
+                  "\\`compilet-.+\\.\\(?:cc?\\|cpp\\|cxx\\|h\\|hpp\\|hxx\\|s?o\\).*"
                                         ; ignore emacs auto-save files
                   "\\`#\\.+#\\'"
                   ))
