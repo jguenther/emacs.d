@@ -419,6 +419,8 @@ the user will be asked for confirmation before the buffer is reverted."
 
 
 
+(require-package 'org-plus-contrib)
+
 ;; org-mode setup
 (add-hook 'org-mode-hook
           (lambda ()
@@ -429,28 +431,24 @@ the user will be asked for confirmation before the buffer is reverted."
               (kbd "C-M-<return>") 'org-insert-todo-heading)))
 
 (after-load 'org
-  (dolist (element '(org-ac
-                     org-agenda-property
-                     org-autolist
+  (dolist (element '(
                      org-bullets
-                     org-caldav
                      org-cliplink
-                     org-context
                      org-elisp-help
                      org-fstree
-                     org-gcal
+                     
+                     ;;org-gcal
+                     
                      orgit
                      orglink
+                     
                      ;; disabled -- don't use anything.el/helm.el yet
                      ;;org-linkany
-                     org-mac-link
-                     org-pomodoro
-                     org-present
+                     
                      org-repo-todo
-                     org-screenshot
-                     org-toc
-                     org-wc                     
+                     org-trello
                      ))
+    (maybe-require-package element)
     (add-to-list 'org-modules element t))
   (org-load-modules-maybe t))
 
