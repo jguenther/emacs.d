@@ -14,6 +14,8 @@
 
  ;; magit
  git-gutter-fr+-side 'right-fringe
+ git-gutter-fr:side 'right-fringe
+ 
  magit-revert-backup t
  global-magit-wip-save-mode t
  magit-diff-refine-hunk t
@@ -162,12 +164,41 @@ Moves point to the end of the inserted text. Does not change mark."
 
 (set-scroll-bar-mode t)
 
-(require-package 'git-gutter-fringe+)
+
+
+;; magit setup
+
+(require-package 'git-timemachine)
+(require-package 'git-wip-timemachine)
+
+(require-package 'git-gutter-fringe)
+(require-package 'git-gutter)
+;;(require-package 'git-gutter+)
+
 (after-load 'magit
-  (require 'git-gutter-fringe+)
-  (global-git-gutter+-mode t)
-  (git-gutter+-enable-fringe-display-mode)
-  (diminish 'git-gutter+-mode))
+  (require 'git-gutter)
+  (require 'git-gutter-fringe)
+  
+  (global-git-gutter-mode t)
+  ;;  (global-git-gutter+-mode t)
+  (diminish 'git-gutter-mode))
+
+(global-set-key (kbd "C-x g g") 'git-gutter:toggle)
+
+(global-set-key (kbd "C-x v =") 'git-gutter:popup-hunk)
+(global-set-key (kbd "C-x g =") 'git-gutter:popup-hunk)
+
+;; Jump to next/previous hunk
+(global-set-key (kbd "C-x g p") 'git-gutter:previous-hunk)
+(global-set-key (kbd "C-x g n") 'git-gutter:next-hunk)
+
+;; Stage current hunk
+(global-set-key (kbd "C-x g s") 'git-gutter:stage-hunk)
+
+;; Revert current hunk
+(global-set-key (kbd "C-x g r") 'git-gutter:revert-hunk)
+
+
 
 (require-package 'win-switch)
 (require 'win-switch)
