@@ -5,6 +5,6 @@
 
 (require-package 'mkdown)
 (after-load 'markdown-mode
-  (setq-default markdown-css-path mkdown-css-file-name))
+  (setq-default markdown-css-paths mkdown-css-file-name))
 
 (provide 'init-markdown)
