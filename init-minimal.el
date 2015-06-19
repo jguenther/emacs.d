@@ -1,6 +1,5 @@
-;; -*-no-byte-compile: t; -*-
-;;
 ;;; This file loads a minimal configuration for init debugging purposes.
+;;;
 
 (let ((minver "23.3"))
   (when (version<= emacs-version "23.1")
@@ -17,9 +16,15 @@
 ;;----------------------------------------------------------------------------
 ;; Bootstrap config
 ;;----------------------------------------------------------------------------
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (require 'init-compat)
 (require 'init-utils)
 (require 'init-site-lisp) ;; Must come before elpa, as it may provide package.el
 ;; Calls (package-initialize)
 (require 'init-elpa)      ;; Machinery for installing required packages
 (require 'init-exec-path) ;; Set up $PATH
+
+(provide 'init-minimal)
+
+;; -*-no-byte-compile: t; -*-
+;;
