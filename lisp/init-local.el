@@ -27,6 +27,7 @@
                          "~/data/genechip"
                          "~/dotfiles"
                          ))
+ magit-last-seen-setup-instructions "1.4.0"
  message-log-max 10000
 
  guide-key/recursive-key-sequence-flag t
