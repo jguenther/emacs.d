@@ -35,8 +35,6 @@ site-lisp/package/
 /emms/
 /.smex-items
 /image-dired/
-ido.last
-recentf
 /site-lisp
 /lisp/init-private.el
 /places
@@ -46,3 +44,6 @@ recentf
 /org-clock-save.el
 /server/
 /ditaa*.jar
+/ido.last
+/recentf
+/viper

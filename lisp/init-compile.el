@@ -60,8 +60,34 @@
   (interactive)
   (message "Nearest compilation filename: %s" (tak/get-nearest-compilation-file)))
 
+(defvar sanityinc/last-compilation-buffer nil
+  "The last buffer in which compilation took place.")
+
+(defadvice compilation-start (after sanityinc/save-compilation-buffer activate)
+  "Save the compilation buffer to find it later."
+  (setq sanityinc/last-compilation-buffer next-error-last-buffer))
+
+(defadvice recompile (around sanityinc/find-prev-compilation (&optional edit-command) activate)
+  "Find the previous compilation buffer, if present, and recompile there."
+  (if (and (null edit-command)
+           (not (derived-mode-p 'compilation-mode))
+           sanityinc/last-compilation-buffer
+           (buffer-live-p (get-buffer sanityinc/last-compilation-buffer)))
+      (with-current-buffer sanityinc/last-compilation-buffer
+        ad-do-it)
+    ad-do-it))
+
 (global-set-key [f5] 'tak/compile-nearest-compilation-file)
 (global-set-key (kbd "S-<f5>") 'tak/print-nearest-compilation-file)
 (global-set-key [f7] 'recompile)
+
+(defadvice shell-command-on-region
+    (after sanityinc/shell-command-in-view-mode
+           (start end command &optional output-buffer replace error-buffer display-error-buffer)
+           activate)
+  "Put \"*Shell Command Output*\" buffers into view-mode."
+  (unless output-buffer
+    (with-current-buffer "*Shell Command Output*"
+      (view-mode 1))))
 
 (provide 'init-compile)
