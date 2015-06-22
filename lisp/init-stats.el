@@ -1,3 +1,6 @@
+(require-package 'matlab-mode)
+(require-package 'ess)
+
 (setq auto-mode-alist
       (append '(("\\.R\\'" . R-mode)
                 ("\\.r\\'" . R-mode)
@@ -5,7 +8,6 @@
 		("\\.S\\'" . S-mode)
                 ("\\.m\\'" . matlab-mode))
               auto-mode-alist))
-
 
 (autoload 'matlab-mode "matlab-load" "MatLab editing mode" t)
 (add-hook 'matlab-mode-hook
