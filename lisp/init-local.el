@@ -184,7 +184,7 @@ Moves point to the end of the inserted text. Does not change mark."
   ;;  (global-git-gutter+-mode t)
   (diminish 'git-gutter-mode))
 
-(global-set-key (kbd "C-x g g") 'git-gutter:toggle)
+(global-set-key (kbd "C-x g t") 'git-gutter:toggle)
 
 (global-set-key (kbd "C-x v =") 'git-gutter:popup-hunk)
 (global-set-key (kbd "C-x g =") 'git-gutter:popup-hunk)
