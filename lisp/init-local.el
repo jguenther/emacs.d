@@ -251,6 +251,7 @@ Moves point to the end of the inserted text. Does not change mark."
 (define-key endless/toggle-map "l" #'toggle-truncate-lines)
 (define-key endless/toggle-map "t" #'toggle-truncate-lines)
 (define-key endless/toggle-map "q" #'toggle-debug-on-quit)
+(define-key endless/toggle-map "g" #'toggle-debug-on-quit)
 (define-key endless/toggle-map "S" #'dired-toggle-sudo)
 
 
