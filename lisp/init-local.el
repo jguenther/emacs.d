@@ -1,5 +1,6 @@
 (setq-default
  auto-revert-verbose t
+ revert-without-query (quote (".*"))
  backup-by-copying t
  backup-directory-alist '(("." . "~/.emacs.d/saves"))
  make-backup-files nil
