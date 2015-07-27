@@ -412,8 +412,10 @@ the user will be asked for confirmation before the buffer is reverted."
 (global-set-key (kbd "C-x >") 'scroll-left)
 (global-set-key (kbd "C-x <") 'scroll-right)
 
-(global-set-key (kbd "<mouse-7>") 'scroll-left)
-(global-set-key (kbd "<mouse-6>") 'scroll-right)
+; mouse buttons are different on osx
+(when *is-a-mac*
+  (global-set-key (kbd "<wheel-right>") 'scroll-left)
+  (global-set-key (kbd "<wheel-left>") 'scroll-right))
 
 
 
