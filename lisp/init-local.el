@@ -85,17 +85,17 @@
 ;; (dolist (cmd '(scroll-left scroll-right))
 ;;   (add-to-list 'scroll-restore-commands cmd))
 
-(require-package 'bookmark+)
-(after-load 'bookmark
-  (require 'bookmark+))
+;; (require-package 'bookmark+)
+;; (after-load 'bookmark
+;;   (require 'bookmark+))
 
-(require-package 'doremi)
-(require 'doremi)
-(require-package 'doremi-frm)
-(require 'doremi-frm)
-(require-package 'doremi-cmd)
-(require 'doremi-cmd)
-(autoload 'define-doremi "doremi-mac" "Define a Do Re Mi command." nil 'macro)
+;; (require-package 'doremi)
+;; (require 'doremi)
+;; (require-package 'doremi-frm)
+;; (require 'doremi-frm)
+;; (require-package 'doremi-cmd)
+;; (require 'doremi-cmd)
+;; (autoload 'define-doremi "doremi-mac" "Define a Do Re Mi command." nil 'macro)
 
 (require-package 'help+)
 (require-package 'help-fns+)
@@ -104,16 +104,21 @@
   (require 'help+)
   (require 'help-fns+))
 
-(require-package 'thumb-frm)
-(require 'thumb-frm)
+;;(require-package 'thumb-frm)
+;;(require 'thumb-frm)
 
-(require-package 'menu-bar+)
-(after-load 'menu-bar
-  (require 'menu-bar+))
+;;(require-package 'menu-bar+)
+;; (after-load 'menu-bar
+;;   (require 'menu-bar+))
 
 (defun try-to-add-imenu ()
   (condition-case nil (imenu-add-to-menubar "imenu") (error nil)))
 (add-hook 'font-lock-mode-hook 'try-to-add-imenu)
+
+(when *is-a-mac*
+  ;; rebind home/end for macos
+  (global-set-key (kbd "<home>") 'move-beginning-of-line)
+  (global-set-key (kbd "<end>") 'move-end-of-line))
 
 ;; imenu bindings
 (global-set-key [S-mouse-3] 'imenu)
@@ -268,12 +273,12 @@ Moves point to the end of the inserted text. Does not change mark."
 ;;(autoload 'darkroom-tentative-mode "darkroom" nil t)
 ;;(define-key endless/toggle-map "D" #'darkroom-tentative-mode)
 
-(require-package 'minimap)
-(autoload 'minimap-toggle "minimap" nil t)
-(after-load 'minimap
-  (setq-default minimap-resizes-buffer t)
-  (setq-default minimap-width-fraction 0.17))
-(define-key endless/toggle-map "m" #'minimap-toggle)
+;;(require-package 'minimap)
+;;(autoload 'minimap-toggle "minimap" nil t)
+;; (after-load 'minimap
+;;   (setq-default minimap-resizes-buffer t)
+;;   (setq-default minimap-width-fraction 0.17))
+;; (define-key endless/toggle-map "m" #'minimap-toggle)
 
 ;; can't find defun for endless/toggle-theme
 ;;(define-key endless/toggle-map "t" #'endless/toggle-theme)
@@ -418,7 +423,7 @@ the user will be asked for confirmation before the buffer is reverted."
 
 
 ;; http://oremacs.com/2015/01/20/introducing-hydra/
-(require-package 'hydra)
+;;(require-package 'hydra)
 
 
 
@@ -435,21 +440,21 @@ the user will be asked for confirmation before the buffer is reverted."
 
 (after-load 'org
   (dolist (element '(
-                     org-bullets
-                     org-cliplink
-                     org-elisp-help
+                     ;;org-bullets
+                     ;;org-cliplink
+                     ;;org-elisp-help
                      org-fstree
                      
                      ;;org-gcal
                      
-                     orgit
+                     ;;orgit
                      orglink
                      
                      ;; disabled -- don't use anything.el/helm.el yet
                      ;;org-linkany
                      
                      org-repo-todo
-                     org-trello
+                                        ;org-trello
                      ))
     (maybe-require-package element)
     (add-to-list 'org-modules element t))
