@@ -27,18 +27,20 @@
  '(ess-default-style (quote OWN))
  '(ess-fancy-comments nil)
  '(fill-column 79)
- '(flycheck-checkers
+ '(flycheck-disabled-checkers
    (quote
-    (ledger haskell-hdevtools ada-gnat asciidoc c/c++-clang c/c++-gcc c/c++-cppcheck cfengine chef-foodcritic coffee coffee-coffeelint coq css-csslint d-dmd elixir emacs-lisp emacs-lisp-checkdoc erlang eruby-erubis fortran-gfortran go-gofmt go-golint go-vet go-build go-test go-errcheck haml handlebars haskell-ghc haskell-hlint html-tidy javascript-jshint javascript-eslint javascript-gjslint json-jsonlint less lua make perl perl-perlcritic php php-phpmd php-phpcs puppet-parser puppet-lint python-flake8 racket rst rst-sphinx ruby-rubocop ruby-rubylint ruby ruby-jruby rust sass scala scala-scalastyle scss sh-bash sh-posix-dash sh-posix-bash sh-zsh sh-shellcheck slim tex-chktex tex-lacheck texinfo verilog-verilator xml-xmlstarlet xml-xmllint yaml-jsyaml yaml-ruby)))
- '(flycheck-disabled-checkers (quote (emacs-lisp-checkdoc perl-perlcritic)))
+    (emacs-lisp-checkdoc perl-perlcritic)))
  '(ido-create-new-buffer (quote always))
  '(ido-everywhere t)
+ '(js-indent-level 4 t)
+ '(js2-basic-offset 4 t)
  '(make-backup-files t)
  '(matlab-indent-level 2)
  '(matlab-shell-command-switches (quote ("-nodesktop" "-nosplash")))
  '(menu-bar-mode t)
  '(message-confirm-send t)
- '(mouse-wheel-progressive-speed nil)
+ '(mouse-scroll-delay 0.2)
+ '(mouse-wheel-progressive-speed t)
  '(org-list-indent-offset 2)
  '(safe-local-variable-values
    (quote
