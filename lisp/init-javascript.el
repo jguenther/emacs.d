@@ -98,4 +98,8 @@
               (lambda () (inferior-js-keys-mode -1)))))
 
 
+(require-package 'jinja2-mode)
+(require-package 'jquery-doc)
+
+
 (provide 'init-javascript)
