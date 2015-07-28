@@ -18,7 +18,6 @@
  git-gutter-fr:side 'right-fringe
  
  magit-revert-backup t
- global-magit-wip-save-mode t
  magit-diff-refine-hunk t
  magit-highlight-whitespace nil
  magit-repo-dirs (quote ("~/.emacs.d"
@@ -188,7 +187,8 @@ Moves point to the end of the inserted text. Does not change mark."
   
   (global-git-gutter-mode t)
   ;;  (global-git-gutter+-mode t)
-  (diminish 'git-gutter-mode))
+  (diminish 'git-gutter-mode)
+  (magit-wip-after-save-mode 1))
 
 (global-set-key (kbd "C-x g t") 'git-gutter:toggle)
 
