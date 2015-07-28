@@ -6,18 +6,16 @@
 (require-package 'pip-requirements)
 (add-hook 'pip-requirements-mode-hook #'pip-requirements-auto-complete-setup)
 
-;;; disable elpy for now -- use jedi
-;; (require-package 'elpy)
+(require-package 'elpy)
 
-;; (when (require 'flycheck nil t)
-;;   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-;;   (add-hook 'elpy-mode 'flycheck-mode))
+(after-load 'elpy
+  (when (require 'flycheck nil t)
+    (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))))
 
-;; (elpy-enable)
+(elpy-enable)
 
-;;(require-package 'flycheck-pyflakes)
-;;(add-hook 'python-mode-hook 'flycheck-mode)
-
+(require-package 'flycheck-pyflakes)
+(add-hook 'python-mode-hook 'flycheck-mode)
 
 (require-package 'jedi)
 (add-hook 'python-mode-hook 'jedi:setup)
