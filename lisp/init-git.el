@@ -82,9 +82,10 @@
 
 
 ;; magit-filenotify
-(unless (eq system-type 'windows-nt)
+(unless (or (eq system-type 'windows-nt) *is-a-mac*)
                                         ; magit-filenotify is slow on windows
-                                        ; with msysgit
+                                        ; with msysgit, and file notifications
+                                        ; don't work at all on MacOS
   (require-package 'magit-filenotify)
   (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
   (after-load 'magit-filenotify
