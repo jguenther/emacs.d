@@ -27,9 +27,8 @@
  '(ess-default-style (quote OWN))
  '(ess-fancy-comments nil)
  '(fill-column 79)
- '(flycheck-disabled-checkers
-   (quote
-    (emacs-lisp-checkdoc perl-perlcritic)))
+ '(flycheck-disabled-checkers (quote (emacs-lisp-checkdoc perl-perlcritic)))
+ '(flycheck-keymap-prefix "`")
  '(ido-create-new-buffer (quote always))
  '(ido-everywhere t)
  '(js-indent-level 4 t)
