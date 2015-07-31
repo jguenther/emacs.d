@@ -18,6 +18,7 @@
 (add-hook 'python-mode-hook 'flycheck-mode)
 
 (require-package 'jedi)
+(setq jedi:setup-keys t)
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq-default jedi:complete-on-dot t)                 ; optional
 ;; run `(jedi:install-server)' manually after installation and after each
@@ -67,5 +68,24 @@
   (interactive
    (list (gud-query-cmdline pdb-path
 	 		    (file-name-nondirectory buffer-file-name)))))
+
+;; (defvar server-buffer-clients)
+;; (when (and (fboundp 'server-start) (string-equal (getenv "TERM") 'xterm))
+;;   (server-start)
+;;   (defun fp-kill-server-with-buffer-routine ()
+;;     (and server-buffer-clients (server-done)))
+;;   (add-hook 'kill-buffer-hook 'fp-kill-server-with-buffer-routine))
+
+;; ipython setup
+(setq python-shell-interpreter "ipython"
+      python-shell-interpreter-args ""
+      python-shell-prompt-regexp "In \\[[0-9]+\\]: "
+      python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
+      python-shell-completion-setup-code
+      "from IPython.core.completerlib import module_completion"
+      python-shell-completion-module-string-code
+      "';'.join(module_completion('''%s'''))\n"
+      python-shell-completion-string-code
+      "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
 
 (provide 'init-python-mode)
