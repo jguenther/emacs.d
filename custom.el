@@ -31,6 +31,7 @@
  '(flycheck-keymap-prefix "`")
  '(ido-create-new-buffer (quote always))
  '(ido-everywhere t)
+ '(jedi:use-shortcuts t)
  '(js-indent-level 4 t)
  '(js2-basic-offset 4 t)
  '(make-backup-files t)
@@ -41,6 +42,7 @@
  '(mouse-scroll-delay 0.2)
  '(mouse-wheel-progressive-speed t)
  '(org-list-indent-offset 2)
+ '(python-fill-docstring-style (quote django))
  '(safe-local-variable-values
    (quote
     ((no-byte-compile t)
