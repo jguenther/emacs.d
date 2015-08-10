@@ -260,6 +260,9 @@ Moves point to the end of the inserted text. Does not change mark."
 (define-key endless/toggle-map "g" #'toggle-debug-on-quit)
 (define-key endless/toggle-map "S" #'dired-toggle-sudo)
 
+(define-key endless/toggle-map "C" #'comment-region)
+(define-key endless/toggle-map "#" #'comment-region)
+
 
 
 ;;doesn't work well with multimonitor setup -- doesn't maximize window, instead
