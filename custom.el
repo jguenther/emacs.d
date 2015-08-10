@@ -31,6 +31,7 @@
  '(flycheck-keymap-prefix "`")
  '(ido-create-new-buffer (quote always))
  '(ido-everywhere t)
+ '(jedi:install-imenu t)
  '(jedi:use-shortcuts t)
  '(js-indent-level 4 t)
  '(js2-basic-offset 4 t)
