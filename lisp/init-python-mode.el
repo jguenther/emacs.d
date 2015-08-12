@@ -1,7 +1,10 @@
-(setq auto-mode-alist
-      (append '(("SConstruct\\'" . python-mode)
-		("SConscript\\'" . python-mode))
-              auto-mode-alist))
+(setq-default auto-mode-alist (append '(("SConstruct\\'" . python-mode)
+                                        ("SConscript\\'" . python-mode))
+                                      auto-mode-alist)
+              elpy-rpc-backend "jedi"
+              indent-guide-recursive t
+              jedi:setup-keys t
+              jedi:complete-on-dot t)
 
 (require-package 'pip-requirements)
 (add-hook 'pip-requirements-mode-hook #'pip-requirements-auto-complete-setup)
@@ -9,7 +12,6 @@
 (require-package 'elpy)
 
 (require-package 'yasnippet)
-(require-package 'indent-guide)
 
 (after-load 'elpy
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
@@ -33,14 +35,13 @@
 
 (elpy-enable)
 
-(setq-default indent-guide-recursive t)
+(require-package 'indent-guide)
 (require 'indent-guide)
 
 ;;(require-package 'flycheck-pyflakes)
 
 (require-package 'jedi)
-(setq jedi:setup-keys t)
-(setq jedi:complete-on-dot t)                 ; optional
+
 
 ;; run `(jedi:install-server)' manually after installation and after each
 ;; update to jedi
@@ -138,21 +139,49 @@
 
 ;; Use the regular major mode hook to add a buffer-local hack-local-variables-hook
 (defun tak/python-setup ()
-  (message "in tak/jedi-setup")
-  (add-hook 'hack-local-variables-hook
-            (lambda ()
-              (add-hook 'python-mode-hook 'jedi:setup)
-              ;;(add-hook 'python-mode-hook 'jedi:start-dedicated-server)
-              (add-hook 'python-mode-hook 'flycheck-mode)
-              (add-hook 'python-mode-hook 'indent-guide-mode)
-              (add-hook 'python-mode-hook 'annotate-pdb-breakpoints)
+  (message "in tak/python-setup")
+  (add-hook
+   'hack-local-variables-hook
+   (lambda ()
+     (message "in tak/python-setup lambda")
+     (add-hook 'python-mode-hook 'jedi:setup)
+     ;;(add-hook 'python-mode-hook 'jedi:start-dedicated-server)
+     (add-hook 'python-mode-hook 'flycheck-mode)
+     (add-hook 'python-mode-hook 'indent-guide-mode)
+     (add-hook 'python-mode-hook 'annotate-pdb-breakpoints)
 
-              (require 'pytest)
-              ;;(volatile-highlights-mode t)
-              )))
+     (require 'pytest)
+     ;;(volatile-highlights-mode t)
+     ) nil t))
+
+;; ;; alternate method
+;; (add-hook 'hack-local-variables-hook 'run-local-vars-mode-hook)
+;; (defun run-local-vars-mode-hook ()
+;;   "Run a hook for the major-mode after the local variables have been processed."
+;;   (run-hooks (intern (concat (symbol-name major-mode) "-local-vars-hook"))))
+;; (add-hook 'python-mode-local-vars-hook 'cr/python-mode-shell-setup)
+
 
 ;; This is necessary since python sys.path is set in dirlocals which is not
 ;; visible until after python-mode-hook has run
 (add-hook 'python-mode-hook 'tak/python-setup)
+
+(defadvice elpy-test (around manipulate-environment activate)
+  "Prepends the contents of `python-shell-extra-pythonpaths' to the PYTHONPATH
+environment variable."
+  (message "in elpy-rpc-open advice")
+  (let ((pythonpath (getenv "PYTHONPATH"))
+        (term       (getenv "TERM")))
+    ;;(unwind-protect)
+    (progn
+      (setenv "PYTHONPATH"
+              (s-join ":" python-shell-extra-pythonpaths))
+      (setenv "TERM" "linux")
+      ad-do-it)
+    (setenv "PYTHONPATH" pythonpath)
+    (setenv "TERM" term)
+    ))
+
+(require 'pytest-emacs)
 
 (provide 'init-python-mode)
