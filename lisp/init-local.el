@@ -545,4 +545,9 @@ the user will be asked for confirmation before the buffer is reverted."
 
 
 
+(require-package 'projectile)
+(require-package 'org-projectile)
+
+
+
 (provide 'init-local)

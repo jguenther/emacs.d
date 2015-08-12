@@ -4,6 +4,7 @@
 (require-package 'dired-filter)
 (require-package 'dired-imenu)
 (require-package 'dired-sort-menu)
+(require-package 'dired-toggle-sudo)
 
 (setq-default diredp-hide-details-initially-flag nil
               dired-dwim-target t)
