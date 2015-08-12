@@ -33,7 +33,7 @@
  '(ido-everywhere t)
  '(jedi:install-imenu t)
  '(jedi:use-shortcuts t)
- '(js-indent-level 4 t)
+ '(js-indent-level 4)
  '(js2-basic-offset 4 t)
  '(make-backup-files t)
  '(matlab-indent-level 2)
@@ -46,7 +46,8 @@
  '(python-fill-docstring-style (quote django))
  '(safe-local-variable-values
    (quote
-    ((no-byte-compile t)
+    ((flycheck-pylintrc "/Users/jguenther/Projects/CS/tools/vbuild/pylintrc")
+     (no-byte-compile t)
      (ruby-compilation-executable . "ruby")
      (ruby-compilation-executable . "ruby1.8")
      (ruby-compilation-executable . "ruby1.9")
