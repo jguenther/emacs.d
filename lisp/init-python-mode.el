@@ -46,16 +46,9 @@
 ;; run `(jedi:install-server)' manually after installation and after each
 ;; update to jedi
 
-;;(require-package 'pydoc)
-
-;;; disable pylint -- covered by flycheck
-;;(require-package 'pylint)
-;;(autoload 'pylint "pylint")
-;;(add-hook 'python-mode-hook 'pylint-add-menu-items)
-;;(add-hook 'python-mode-hook 'pylint-add-key-bindings)
+(require-package 'pydoc)
 
 (require-package 'pytest)
-;;(require-package 'volatile-highlights)
 
 (require-package 'python-x)
 (eval-after-load 'python
@@ -72,17 +65,14 @@
 ;;(require-package 'pungi)
 ;;(add-hook 'python-mode-hook (lambda () (pungi:setup-jedi)))
 
-;;(require-package 'python-docstring)
+(require-package 'python-docstring)
 ;;(require-package 'python-info)
-;;(require-package 'pydoc-info)
 
-;; (after-load 'python-mode
-;;   (require 'pydoc-info))
+(require-package 'pydoc-info)
+(after-load 'python-mode
+  (require 'pydoc-info))
 
 ;;(require-package 'company-jedi)
-
-;;(require-package helm-flycheck)
-;;(require-package helm-pydoc)
 
 ;;pdb setup, note the python version
 (setq pdb-path '/usr/lib/python2.7/pdb.py
@@ -131,13 +121,19 @@
   (newline-and-indent)
   (previous-line)
   (beginning-of-line)
-  (insert "import ipdb; ipdb.set_trace()")
+  ;;  (insert "import ipdb; ipdb.set_trace()")
+  (insert "import pdb; pdb.set_trace()")
   (indent-according-to-mode)
   )
 
 (define-key python-mode-map (kbd "C-c <SPC>") 'python-add-breakpoint)
+(define-key python-mode-map (kbd "C-c C-<SPC>") 'python-add-breakpoint)
 
 ;; Use the regular major mode hook to add a buffer-local hack-local-variables-hook
+;;
+;; This is necessary since python sys.path is set in dirlocals which is not
+;; visible until after python-mode-hook has run
+;;
 (defun tak/python-setup ()
   (message "in tak/python-setup")
   (add-hook
@@ -161,11 +157,9 @@
 ;;   (run-hooks (intern (concat (symbol-name major-mode) "-local-vars-hook"))))
 ;; (add-hook 'python-mode-local-vars-hook 'cr/python-mode-shell-setup)
 
-
-;; This is necessary since python sys.path is set in dirlocals which is not
-;; visible until after python-mode-hook has run
 (add-hook 'python-mode-hook 'tak/python-setup)
 
+;; TODO make this append to PYTHONPATH instead of replacing it
 (defadvice elpy-test (around manipulate-environment activate)
   "Prepends the contents of `python-shell-extra-pythonpaths' to the PYTHONPATH
 environment variable."
