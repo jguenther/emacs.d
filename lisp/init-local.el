@@ -551,4 +551,7 @@ the user will be asked for confirmation before the buffer is reverted."
 
 
 
+(global-set-key (kbd "M-g o") 'occur)
+(global-set-key (kbd "M-g C-o") 'occur)
+
 (provide 'init-local)
