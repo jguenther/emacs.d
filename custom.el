@@ -48,6 +48,8 @@
    (quote
     ((flycheck-pylintrc "/Users/jguenther/Projects/CS/tools/vbuild/pylintrc")
      (flycheck-pylintrc "/Users/jguenther/Projects/VBC/tools/vbuild/pylintrc")
+     (flycheck-pylintrc "/Users/jguenther/Projects/CS/test/.pylintrc_test")
+     (flycheck-pylintrc "/Users/jguenther/Projects/VBC/test/.pylintrc_test")
      (no-byte-compile t)
      (ruby-compilation-executable . "ruby")
      (ruby-compilation-executable . "ruby1.8")
