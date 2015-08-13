@@ -26,12 +26,12 @@
     (define-key elpy-mode-map (kbd key) nil))
   
   ;; Skeletons
-  (define-key python-mode-map "\C-c\C-tc" 'python-skeleton-class)
-  (define-key python-mode-map "\C-c\C-td" 'python-skeleton-def)
-  (define-key python-mode-map "\C-c\C-tf" 'python-skeleton-for)
-  (define-key python-mode-map "\C-c\C-ti" 'python-skeleton-if)
-  (define-key python-mode-map "\C-c\C-tt" 'python-skeleton-try)
-  (define-key python-mode-map "\C-c\C-tw" 'python-skeleton-while))
+  (define-key python-mode-map "\C-csc" 'python-skeleton-class)
+  (define-key python-mode-map "\C-csd" 'python-skeleton-def)
+  (define-key python-mode-map "\C-csf" 'python-skeleton-for)
+  (define-key python-mode-map "\C-csi" 'python-skeleton-if)
+  (define-key python-mode-map "\C-cst" 'python-skeleton-try)
+  (define-key python-mode-map "\C-csw" 'python-skeleton-while))
 
 (elpy-enable)
 
