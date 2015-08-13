@@ -9,7 +9,7 @@
  fill-column 79
  guide-key/idle-delay 2.0
                                         ; scale text down
- guide-key/text-scale-amount -1.5
+ guide-key/text-scale-amount -1.15
  kept-new-versions 6
  kept-old-versions 2
 
@@ -404,6 +404,7 @@ the user will be asked for confirmation before the buffer is reverted."
                "C-x C-o"
                (redshank-mode "C-x C-r")
                (cperl-mode "C-o")
+               "M-g"
                "ESC"
                ))
   (add-to-list 'guide-key/guide-key-sequence key t))
