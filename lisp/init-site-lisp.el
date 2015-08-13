@@ -15,6 +15,8 @@
 (sanityinc/add-subdirs-to-load-path
  (expand-file-name "site-lisp/" user-emacs-directory))
 
+(add-to-list 'load-path (expand-file-name "~/code/pytest-emacs"))
+
 ;;; Utilities for grabbing upstream libs
 
 (defun site-lisp-dir-for (name)
