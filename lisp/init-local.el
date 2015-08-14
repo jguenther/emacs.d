@@ -3,7 +3,7 @@
  revert-without-query (quote (".*"))
  backup-by-copying t
  backup-directory-alist '(("." . "~/.emacs.d/saves"))
- make-backup-files nil
+ make-backup-files t
  vc-make-backup-files nil
  delete-old-versions t
  fill-column 79
@@ -21,10 +21,8 @@
  magit-diff-refine-hunk t
  magit-highlight-whitespace nil
  magit-repo-dirs (quote ("~/.emacs.d"
-                         "~/code/PRIPchip"
                          "~/org"
                          "~/code/scripts"
-                         "~/data/genechip"
                          "~/dotfiles"
                          ))
  magit-last-seen-setup-instructions "1.4.0"
@@ -66,6 +64,7 @@
 
  initial-scratch-message ";; *scratch*\n\n"
  )
+
 
 (dolist (path '("/home/jguenther/.emacs-lisp"
                 "/usr/local/share/emacs/site-lisp"
