@@ -129,6 +129,15 @@
 (define-key python-mode-map (kbd "C-c <SPC>") 'python-add-breakpoint)
 (define-key python-mode-map (kbd "C-c C-<SPC>") 'python-add-breakpoint)
 
+(add-hook 'python-mode-hook 'indent-guide-mode)
+(add-hook 'magit-blame-mode (lambda () (when indent-guide-mode
+                                    (indent-guide-mode))))
+
+(add-hook 'python-mode-hook 'annotate-pdb-breakpoints)
+
+;; enable this mode in tak/python-setup
+(add-hook 'python-mode-hook (lambda () (flycheck-mode -1)))
+
 ;; Use the regular major mode hook to add a buffer-local hack-local-variables-hook
 ;;
 ;; This is necessary since python sys.path is set in dirlocals which is not
@@ -143,8 +152,6 @@
      (add-hook 'python-mode-hook 'jedi:setup)
      ;;(add-hook 'python-mode-hook 'jedi:start-dedicated-server)
      (add-hook 'python-mode-hook 'flycheck-mode)
-     (add-hook 'python-mode-hook 'indent-guide-mode)
-     (add-hook 'python-mode-hook 'annotate-pdb-breakpoints)
 
      (require 'pytest)
      ;;(volatile-highlights-mode t)
