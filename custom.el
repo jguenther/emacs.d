@@ -5,6 +5,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(backup-directory-alist (quote (("." . "~/.emacs.d/saves"))))
  '(blink-cursor-mode nil)
  '(cperl-close-paren-offset -2)
  '(cperl-comment-column 40)
@@ -27,7 +28,7 @@
  '(ess-default-style (quote OWN))
  '(ess-fancy-comments nil)
  '(fill-column 79)
- '(flycheck-disabled-checkers (quote (emacs-lisp-checkdoc perl-perlcritic)))
+ '(flycheck-disabled-checkers (quote (emacs-lisp-checkdoc perl-perlcritic html-tidy)))
  '(flycheck-keymap-prefix "`")
  '(ido-create-new-buffer (quote always))
  '(ido-everywhere t)
