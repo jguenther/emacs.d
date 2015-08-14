@@ -48,7 +48,7 @@
 
 (require-package 'pydoc)
 
-(require-package 'pytest)
+;;(require-package 'pytest)
 
 (require-package 'python-x)
 (eval-after-load 'python
