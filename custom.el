@@ -33,6 +33,7 @@
  '(ido-create-new-buffer (quote always))
  '(ido-everywhere t)
  '(jedi:install-imenu t)
+ '(jedi:tooltip-method (quote (pos-tip)))
  '(jedi:use-shortcuts t)
  '(js-indent-level 4)
  '(js2-basic-offset 4 t)
