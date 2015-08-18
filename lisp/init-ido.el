@@ -9,7 +9,6 @@
 (add-hook 'ido-setup-hook
           (lambda ()
                                         ; common keys
-            (define-key ido-completion-map "\C-l" 'ido-toggle-literal)
             (define-key ido-completion-map (kbd "<C-return>") 'ido-select-text)
 
                                         ; keys used in file and dir environment
