@@ -1,9 +1,18 @@
+;; local changes
+/.python-environments
+/session.*
+/.workgroups
+/srecode-map.el
+/site-lisp
+/lisp/init-private.el
+/places
+/server/
+
 /games
 /url/cache
 /.emacs.desktop
 /auto-save-list
 /.session
-/session.*
 *.elc
 CVS
 .svn
@@ -25,8 +34,6 @@ site-lisp/package/
 /var
 /.sqli_history
 /frame-restore-parameters
-/.workgroups
-/srecode-map.el
 /.achievements
 /.bookmarks.el
 /history
@@ -35,16 +42,11 @@ site-lisp/package/
 /emms/
 /.smex-items
 /image-dired/
-/site-lisp
-/lisp/init-private.el
-/places
 /eshell
 /.cask/
 /.sx/
 /org-clock-save.el
-/server/
 /ditaa*.jar
 /ido.last
 /recentf
 /viper
-/.python-environments
