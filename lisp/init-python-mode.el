@@ -108,8 +108,9 @@
 
 (after-load 'python
   (define-key python-mode-map "\C-cx" 'jedi-direx:pop-to-buffer)
-  (require 'realgud)
-  (require 'pytest))
+  ;;(require 'realgud)
+  ;;(require 'pytest)
+  )
 (add-hook 'jedi-mode-hook 'jedi-direx:setup)
 
 (add-hook 'comint-output-filter-functions 'python-pdbtrack-comint-output-filter-function)
@@ -144,10 +145,10 @@
 (add-hook 'python-mode-hook (lambda () (flycheck-mode -1)))
 
 ;;; emacs-dbgr / realgud
-(require-package 'test-simple)
-(require-package 'load-relative)
-(require-package 'loc-changes)
-(require-package 'realgud)
+;;(require-package 'test-simple)
+;;(require-package 'load-relative)
+;;(require-package 'loc-changes)
+;;(require-package 'realgud)
 
 
 ;; Use the regular major mode hook to add a buffer-local hack-local-variables-hook
