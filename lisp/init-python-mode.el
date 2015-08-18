@@ -103,8 +103,13 @@
 ;;       python-shell-completion-string-code
 ;;       "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
 
-(eval-after-load "python"
-  '(define-key python-mode-map "\C-cx" 'jedi-direx:pop-to-buffer))
+
+;; realgud: use pdb, trepan2, or pydbgr
+
+(after-load 'python
+  (define-key python-mode-map "\C-cx" 'jedi-direx:pop-to-buffer)
+  (require 'realgud)
+  (require 'pytest))
 (add-hook 'jedi-mode-hook 'jedi-direx:setup)
 
 (add-hook 'comint-output-filter-functions 'python-pdbtrack-comint-output-filter-function)
@@ -137,6 +142,13 @@
 
 ;; enable this mode in tak/python-setup
 (add-hook 'python-mode-hook (lambda () (flycheck-mode -1)))
+
+;;; emacs-dbgr / realgud
+(require-package 'test-simple)
+(require-package 'load-relative)
+(require-package 'loc-changes)
+(require-package 'realgud)
+
 
 ;; Use the regular major mode hook to add a buffer-local hack-local-variables-hook
 ;;

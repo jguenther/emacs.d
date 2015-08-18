@@ -21,7 +21,8 @@
 (global-set-key (kbd "M-:") 'pp-eval-expression)
 
 (after-load 'lisp-mode
-  (define-key emacs-lisp-mode-map (kbd "C-x C-e") 'sanityinc/eval-last-sexp-or-region))
+  (define-key emacs-lisp-mode-map (kbd "C-x C-e") 'sanityinc/eval-last-sexp-or-region)
+  (define-key emacs-lisp-mode-map (kbd "C-x M-p") 'eval-print-last-sexp))
 
 (require-package 'ipretty)
 (ipretty-mode 1)
