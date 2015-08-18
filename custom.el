@@ -7,6 +7,7 @@
  ;; If there is more than one, they won't work right.
  '(backup-directory-alist (quote (("." . "~/.emacs.d/saves"))))
  '(blink-cursor-mode nil)
+ '(compilation-ask-about-save nil)
  '(cperl-close-paren-offset -2)
  '(cperl-comment-column 40)
  '(cperl-highlight-variables-indiscriminately t)
