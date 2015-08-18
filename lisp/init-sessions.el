@@ -7,10 +7,6 @@
     (desktop-save-mode 1)
   (desktop-save-mode 0))
 
-(defadvice desktop-read (around trace-desktop-errors activate)
-  (let ((debug-on-error t))
-    ad-do-it))
-
 (defadvice desktop-read (around time-restore activate)
   (let ((start-time (current-time)))
     (prog1

@@ -144,6 +144,8 @@ Moves point to the end of the inserted text. Does not change mark."
 (require-package 'cperl-mode)
 (defalias 'perl-mode 'cperl-mode)
 
+(add-to-list 'ac-modes 'cperl-mode)
+
 (add-to-list 'auto-mode-alist
              '("\\.\\([pP][Llm]\\|al\\|t\\|xs\\|tl\\)\\'" . cperl-mode))
 (add-to-list 'interpreter-mode-alist '("perl" . cperl-mode))
