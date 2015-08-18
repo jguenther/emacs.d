@@ -45,9 +45,7 @@
 (setq ido-default-buffer-method 'selected-window)
 
 ;; http://www.reddit.com/r/emacs/comments/21a4p9/use_recentf_and_ido_together/cgbprem
-(add-hook 'ido-setup-hook
-          (lambda ()
-            (define-key ido-completion-map [up] 'previous-history-element)))
+(add-hook 'ido-setup-hook (lambda () (define-key ido-completion-map [up] 'previous-history-element)))
 
 ;; display ido lists vertically
 (require-package 'ido-vertical-mode)
