@@ -11,7 +11,8 @@
 ;; Make "C-x o" prompt for a target window when there are more than 2
 (require-package 'switch-window)
 (require 'switch-window)
-(setq switch-window-shortcut-style 'alphabet)
+(setq-default switch-window-shortcut-style 'alphabet)
+(setq-default switch-window-timeout nil)
 (global-set-key (kbd "C-x o") 'switch-window)
 
 
@@ -70,6 +71,10 @@ Call a second time to restore the original window configuration."
     (switch-to-buffer-other-window nil)))
 
 (global-set-key (kbd "<f7>") 'sanityinc/split-window)
+
+
+
+(windmove-default-keybindings 'control)
 
 
 (provide 'init-windows)
