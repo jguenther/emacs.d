@@ -259,8 +259,8 @@ Moves point to the end of the inserted text. Does not change mark."
 (define-key endless/toggle-map "g" #'toggle-debug-on-quit)
 (define-key endless/toggle-map "S" #'dired-toggle-sudo)
 
-(define-key endless/toggle-map "C" #'comment-region)
-(define-key endless/toggle-map "#" #'comment-region)
+(define-key endless/toggle-map "C" #'comment-or-uncomment-region)
+(define-key endless/toggle-map "#" #'comment-or-uncomment-region)
 
 
 
@@ -354,7 +354,8 @@ the user will be asked for confirmation before the buffer is reverted."
   (save-excursion
     (revert-buffer t (not (buffer-modified-p)))))
 
-(global-set-key (kbd "C-x C-S-R") 'tak/maybe-revert-buffer)
+;;(global-set-key (kbd "C-x C-S-R") 'tak/maybe-revert-buffer)
+(global-set-key (kbd "C-x C-S-R") 'revert-buffer)
 
 ;;(require-package 'workgroups2)
 ;;(require 'workgroups2)
