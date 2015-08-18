@@ -135,7 +135,7 @@
 (define-key python-mode-map (kbd "C-c C-<SPC>") 'python-add-breakpoint)
 
 (add-hook 'python-mode-hook 'indent-guide-mode)
-(add-hook 'magit-blame-mode (lambda () (when indent-guide-mode
+(add-hook 'magit-blame-mode-hook (lambda () (when indent-guide-mode
                                     (indent-guide-mode))))
 
 (add-hook 'python-mode-hook 'annotate-pdb-breakpoints)
