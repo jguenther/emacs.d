@@ -190,6 +190,7 @@ Moves point to the end of the inserted text. Does not change mark."
   ;;  (global-git-gutter+-mode t)
   (diminish 'git-gutter-mode)
   (magit-wip-after-save-mode 1)
+  (diminish 'magit-wip-after-save-local-mode)
 
   (global-magit-file-buffer-mode)
   )
