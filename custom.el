@@ -39,7 +39,7 @@
  '(jedi:use-shortcuts t)
  '(js-indent-level 4 t)
  '(js2-basic-offset 4 t)
- '(magit-revert-buffers 2)
+ '(magit-revert-buffers nil)
  '(magit-save-repository-buffers (quote dontask))
  '(make-backup-files t)
  '(matlab-indent-level 2)
