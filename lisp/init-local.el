@@ -195,20 +195,20 @@ Moves point to the end of the inserted text. Does not change mark."
   (global-magit-file-buffer-mode)
   )
 
-(global-set-key (kbd "C-x g t") 'git-gutter:toggle)
+(global-set-key (kbd "C-c u t") 'git-gutter:toggle)
 
 (global-set-key (kbd "C-x v =") 'git-gutter:popup-hunk)
-(global-set-key (kbd "C-x g =") 'git-gutter:popup-hunk)
+(global-set-key (kbd "C-c u =") 'git-gutter:popup-hunk)
 
 ;; Jump to next/previous hunk
-(global-set-key (kbd "C-x g p") 'git-gutter:previous-hunk)
-(global-set-key (kbd "C-x g n") 'git-gutter:next-hunk)
+(global-set-key (kbd "C-c u p") 'git-gutter:previous-hunk)
+(global-set-key (kbd "C-c u n") 'git-gutter:next-hunk)
 
 ;; Stage current hunk
-(global-set-key (kbd "C-x g s") 'git-gutter:stage-hunk)
+(global-set-key (kbd "C-c u s") 'git-gutter:stage-hunk)
 
 ;; Revert current hunk
-(global-set-key (kbd "C-x g r") 'git-gutter:revert-hunk)
+(global-set-key (kbd "C-c u r") 'git-gutter:revert-hunk)
 
 
 
