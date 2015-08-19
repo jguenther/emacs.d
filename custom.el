@@ -25,6 +25,7 @@
  '(desktop-save (quote if-exists))
  '(electric-indent-mode t)
  '(electric-pair-mode nil)
+ '(elpy-test-runner (quote elpy-test-pytest-runner))
  '(emacs-lisp-docstring-fill-column 70)
  '(ess-default-style (quote OWN))
  '(ess-fancy-comments nil)
@@ -38,7 +39,7 @@
  '(jedi:use-shortcuts t)
  '(js-indent-level 4 t)
  '(js2-basic-offset 4 t)
- '(magit-revert-buffers nil)
+ '(magit-revert-buffers 2)
  '(magit-save-repository-buffers (quote dontask))
  '(make-backup-files t)
  '(matlab-indent-level 2)
@@ -51,7 +52,9 @@
  '(python-fill-docstring-style (quote django))
  '(safe-local-variable-values
    (quote
-    ((flycheck-pylintrc "/Users/jguenther/Projects/CS/tools/vbuild/pylintrc")
+    ((flycheck-pylintrc "/Users/jguenther/Projects/harvester-service/tools/vbuild/pylintrc")
+     (flycheck-pylintrc "/Users/jguenther/Projects/harvester-service/test/.pylintrc_test")
+     (flycheck-pylintrc "/Users/jguenther/Projects/CS/tools/vbuild/pylintrc")
      (flycheck-pylintrc "/Users/jguenther/Projects/VBC/tools/vbuild/pylintrc")
      (flycheck-pylintrc "/Users/jguenther/Projects/CS/test/.pylintrc_test")
      (flycheck-pylintrc "/Users/jguenther/Projects/VBC/test/.pylintrc_test")
