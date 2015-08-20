@@ -15,8 +15,6 @@
 (sanityinc/add-subdirs-to-load-path
  (expand-file-name "site-lisp/" user-emacs-directory))
 
-(add-to-list 'load-path (expand-file-name "~/code/pytest-emacs"))
-
 ;; homebrew site-lisp dirs
 (let ((default-directory "/usr/local/share/emacs/site-lisp/"))
   (normal-top-level-add-subdirs-to-load-path))

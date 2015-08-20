@@ -8,6 +8,11 @@
               jedi:complete-on-dot t
               jedi-direx:hide-imports t)
 
+;; local fork of elpy
+(add-to-list 'load-path
+             (expand-file-name "~/code/elpy/"))
+
+
 (require-package 'pip-requirements)
 (add-hook 'pip-requirements-mode-hook #'pip-requirements-auto-complete-setup)
 
