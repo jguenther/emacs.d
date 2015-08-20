@@ -392,11 +392,21 @@ the user will be asked for confirmation before the buffer is reverted."
 
 (defun tak/set-default-frame-parameters ()
   (interactive)
-  (dolist (parameter '((width . 82)
-                       (height . 50)
-                       (left . -10)
-                       (top . 35)))
-    (set-frame-parameter nil (car parameter) (cdr parameter))))
+  (let* ((params-mac     '((width . 100)
+                           (height . 55)
+                           (left . -1)
+                           (top . 23)))
+         
+         (params-default '((width . 90)
+                           (height . 50)
+                           (left . -10)
+                           (top . 35)))
+         (params (if *is-a-mac*
+                     params-mac
+                   params-default)))
+    (dolist (parameter params)
+      (set-frame-parameter nil (car parameter) (cdr parameter))
+      )))
 
 (global-set-key (kbd "C-x C-9") 'tak/set-default-frame-parameters)
 
