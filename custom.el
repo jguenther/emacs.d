@@ -32,12 +32,13 @@
  '(fill-column 79)
  '(flycheck-disabled-checkers (quote (emacs-lisp-checkdoc perl-perlcritic html-tidy)))
  '(flycheck-keymap-prefix "`")
+ '(git-commit-finish-query-functions nil)
  '(ido-create-new-buffer (quote always))
  '(ido-everywhere t)
  '(jedi:install-imenu t)
  '(jedi:tooltip-method (quote (pos-tip)))
  '(jedi:use-shortcuts t)
- '(js-indent-level 4 t)
+ '(js-indent-level 4)
  '(js2-basic-offset 4 t)
  '(magit-revert-buffers nil)
  '(magit-save-repository-buffers (quote dontask))
@@ -52,7 +53,9 @@
  '(python-fill-docstring-style (quote django))
  '(safe-local-variable-values
    (quote
-    ((flycheck-pylintrc "/Users/jguenther/Projects/harvester-service/tools/vbuild/pylintrc")
+    ((flycheck-pylintrc
+      (expand-file-name "~/Projects/VBC/test/.pylintrc_test"))
+     (flycheck-pylintrc "/Users/jguenther/Projects/harvester-service/tools/vbuild/pylintrc")
      (flycheck-pylintrc "/Users/jguenther/Projects/harvester-service/test/.pylintrc_test")
      (flycheck-pylintrc "/Users/jguenther/Projects/CS/tools/vbuild/pylintrc")
      (flycheck-pylintrc "/Users/jguenther/Projects/VBC/tools/vbuild/pylintrc")
