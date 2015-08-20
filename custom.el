@@ -53,7 +53,8 @@
  '(python-fill-docstring-style (quote django))
  '(safe-local-variable-values
    (quote
-    ((flycheck-pylintrc
+    ((flycheck-pylintrc "/Users/jguenther/Projects/harvester-service/.pylintrc")
+     (flycheck-pylintrc
       (expand-file-name "~/Projects/VBC/test/.pylintrc_test"))
      (flycheck-pylintrc "/Users/jguenther/Projects/harvester-service/tools/vbuild/pylintrc")
      (flycheck-pylintrc "/Users/jguenther/Projects/harvester-service/test/.pylintrc_test")
