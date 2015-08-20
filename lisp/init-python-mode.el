@@ -1,6 +1,7 @@
 (setq-default auto-mode-alist (append '(("SConstruct\\'" . python-mode)
                                         ("SConscript\\'" . python-mode))
                                       auto-mode-alist)
+              python-indent-offset 4
               elpy-rpc-backend "jedi"
               indent-guide-recursive nil
               jedi:setup-keys t
@@ -60,8 +61,6 @@
 
   ;; enable this mode in tak/python-setup instead
   (add-hook 'python-mode-hook (lambda () (flycheck-mode -1)))
-
-  
 
   (add-hook 'comint-output-filter-functions 'python-pdbtrack-comint-output-filter-function)
 
@@ -202,8 +201,10 @@ environment variable."
   (indent-according-to-mode)
   )
 
-(define-key python-mode-map (kbd "C-c <SPC>") 'python-add-breakpoint)
-(add-hook 'python-mode-hook 'annotate-pdb-breakpoints)
+(after-load 'python
+  (define-key python-mode-map (kbd "C-c <SPC>") 'python-add-breakpoint)
+  (add-hook 'python-mode-hook 'annotate-pdb-breakpoints)
+  )
 
 ;; (let ((pythonpath "PYTHONPATH")
 ;;       (pythonpaths '("a" "b")))
@@ -294,6 +295,8 @@ environment variable."
    'hack-local-variables-hook
    (lambda ()
      (add-hook 'python-mode-hook 'jedi:setup)
+     
+     (add-to-list 'flycheck-disabled-checkers 'python-flake8)
      (add-hook 'python-mode-hook 'flycheck-mode)
      
      ;; (setq elpy-rpc-pythonpath (mapconcat 'concat '(elpy-rpc-pythonpath
@@ -308,7 +311,9 @@ environment variable."
 ;;   (run-hooks (intern (concat (symbol-name major-mode) "-local-vars-hook"))))
 ;; (add-hook 'python-mode-local-vars-hook 'cr/python-mode-shell-setup)
 
-(add-hook 'python-mode-hook 'tak/python-setup)
+(after-load 'python  
+  (add-hook 'python-mode-hook 'tak/python-setup)
+  )
 
 (elpy-enable)
 
