@@ -22,7 +22,13 @@
   (unless (require 'yasnippet nil t)
     (setq elpy-modules (delq 'elpy-module-yasnippet elpy-modules)))
 
-  (cl-dolist (key '("n" "p"))
+                                        ; flymake
+  (cl-dolist (key '("n" "p" "C-n" "C-p"
+                                        ; refactor (deprecated)
+                    "C-r"
+                                        ; ??
+                    "R"
+                    ))
     (define-key elpy-mode-map (kbd key) nil))
   
   ;; Skeletons
@@ -32,8 +38,6 @@
   (define-key python-mode-map "\C-csi" 'python-skeleton-if)
   (define-key python-mode-map "\C-cst" 'python-skeleton-try)
   (define-key python-mode-map "\C-csw" 'python-skeleton-while))
-
-(elpy-enable)
 
 (require-package 'indent-guide)
 (require 'indent-guide)
@@ -134,7 +138,7 @@
   )
 
 (define-key python-mode-map (kbd "C-c <SPC>") 'python-add-breakpoint)
-(define-key python-mode-map (kbd "C-c C-<SPC>") 'python-add-breakpoint)
+;;(define-key python-mode-map (kbd "C-c C-<SPC>") 'python-add-breakpoint)
 
 (add-hook 'python-mode-hook 'indent-guide-mode)
 (add-hook 'magit-blame-mode-hook (lambda () (when indent-guide-mode
@@ -144,6 +148,8 @@
 
 ;; enable this mode in tak/python-setup instead
 (add-hook 'python-mode-hook (lambda () (flycheck-mode -1)))
+
+(add-hook 'python-mode-hook 'superword-mode)
 
 ;;; emacs-dbgr / realgud
 ;;(require-package 'test-simple)
@@ -273,5 +279,8 @@ environment variable."
 
 ;;; for virtualenv setup with jedi (out of date?):
 ;;; http://stackoverflow.com/questions/21246218/how-can-i-make-emacs-jedi-use-project-specific-virtualenvs
+
+(elpy-enable)
+
 
 (provide 'init-python-mode)
