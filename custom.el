@@ -75,7 +75,8 @@
  '(sh-indentation 2)
  '(show-trailing-whitespace nil)
  '(standard-indent 2)
- '(vc-follow-symlinks t))
+ '(vc-follow-symlinks t)
+ '(yas-also-auto-indent-first-line t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
