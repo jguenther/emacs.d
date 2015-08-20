@@ -17,7 +17,6 @@
 ;; Bootstrap config
 ;;----------------------------------------------------------------------------
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(load custom-file)
 
 (require 'init-compat)
 (require 'init-utils)
@@ -25,6 +24,8 @@
 ;; Calls (package-initialize)
 (require 'init-elpa)      ;; Machinery for installing required packages
 (require 'init-exec-path) ;; Set up $PATH
+
+(load custom-file)
 
 (provide 'init-minimal)
 
