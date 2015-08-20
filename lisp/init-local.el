@@ -379,13 +379,14 @@ the user will be asked for confirmation before the buffer is reverted."
 
 
 ;; set initial and default frame parameters
-(dolist (parameter '((width . 85)
-                     (height . 50)))
+(dolist (parameter '((width . 90)
+                     (height . 55)))
   (add-to-list 'default-frame-alist parameter)
-  (add-to-list 'initial-frame-alist parameter))
+  (add-to-list 'initial-frame-alist parameter)
+  )
 
 (dolist (parameter '((left . -10)
-                     (top . 35)
+                     (top . 23)
                      (user-position . t)))
   (add-to-list 'initial-frame-alist parameter))
 
