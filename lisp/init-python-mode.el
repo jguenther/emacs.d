@@ -106,6 +106,7 @@
 
 ;; realgud: use pdb, trepan2, or pydbgr
 
+(require-package 'jedi-direx)
 (after-load 'python
   (define-key python-mode-map "\C-cx" 'jedi-direx:pop-to-buffer)
   ;;(require 'realgud)
@@ -141,7 +142,7 @@
 
 (add-hook 'python-mode-hook 'annotate-pdb-breakpoints)
 
-;; enable this mode in tak/python-setup
+;; enable this mode in tak/python-setup instead
 (add-hook 'python-mode-hook (lambda () (flycheck-mode -1)))
 
 ;;; emacs-dbgr / realgud
@@ -157,17 +158,18 @@
 ;; visible until after python-mode-hook has run
 ;;
 (defun tak/python-setup ()
-  (message "in tak/python-setup")
+  ;;(message "in tak/python-setup")
   (add-hook
    'hack-local-variables-hook
    (lambda ()
-     (message "in tak/python-setup lambda")
+     ;;(message "in tak/python-setup lambda")
      (add-hook 'python-mode-hook 'jedi:setup)
      ;;(add-hook 'python-mode-hook 'jedi:start-dedicated-server)
      (add-hook 'python-mode-hook 'flycheck-mode)
-
-     (require 'pytest)
-     ;;(volatile-highlights-mode t)
+     
+     ;; (setq elpy-rpc-pythonpath (mapconcat 'concat '(elpy-rpc-pythonpath
+     ;;                                                python-shell-extra-pythonpaths)))
+     
      ) nil t))
 
 ;; ;; alternate method
@@ -196,6 +198,80 @@ environment variable."
     (setenv "TERM" term)
     ))
 
+
+;; (let ((pythonpath "PYTHONPATH")
+;;       (pythonpaths '("a" "b")))
+;;   (message
+;;    (s-join ":"
+;;            (list pythonpaths (if
+;;                                  (not
+;;                                   (= (length pythonpath)))
+;;                                  pythonpath
+;;                                nil))
+;;            )))
+
 (require 'pytest-emacs)
+
+
+;; from https://gist.github.com/TauPan/17305751a883005872dc
+;; (use-package elpy
+;;              :config
+;;              (progn (elpy-enable)
+;;                     (defun elpy-nose-test-spec (module test)
+;;                       (cond (test
+;;                              (format "%s:%s" module test))
+;;                             (module module)
+;;                             (t "")))
+;;                     (defun elpy-test-nose-pdb-runner (top file module test)
+;;                       "Test the project using the nose test runner with the --pdb arg.
+
+;; This requires the nose package to be installed."
+;;                       (interactive (elpy-test-at-point))
+;;                       (let ((default-directory top))
+;;                         (pdb (format "nosetests --pdb %s"
+;;                                      (elpy-nose-test-spec module test)))))
+;;                     (put 'elpy-test-nose-pdb-runner 'elpy-test-runner-p t)
+;;                     (defvar elpy-test-pdb-runner
+;;                       #'elpy-test-nose-pdb-runner
+;;                       "Test runner to run with pdb")
+;;                     (defun elpy-test-django-nose-pdb-runner (top file module test)
+;;                       "Test the project using the django-nose test runner with the --pdb arg.
+
+;; This requires the django-nose package to be installed and
+;; properly configured for the django project."
+;;                       (interactive (elpy-test-at-point))
+;;                       (let ((default-directory top))
+;;                         (pdb (format "django-admin.py test --noinput %s --pdb"
+;;                                      (elpy-nose-test-spec module test)))))
+;;                     (defun elpy-test-pdb (&optional test-whole-project)
+;;                       "Run test the current project with the elpy-test-pdb-runner
+
+;;             prefix args have the same semantics as for `elpy-test'"
+;;                       (interactive "P")
+;;                       (let ((elpy-test-runner elpy-test-pdb-runner))
+;;                         (elpy-test test-whole-project)))
+;;                     (eval-after-load 'elpy
+;;                       '(progn
+;;                          (define-key elpy-mode-map
+;;                            (kbd "C-c t") 'elpy-test-pdb)))))
+
+;;; from https://github.com/russell/dotfiles/blob/master/emacs.d/init-programming.d/python.el
+;; (defvar python-source-setup-code
+;;   "def source(filename):
+;;     import os
+;;     import subprocess
+;;     command = ['bash', '-c', 'source %s && env' % filename]
+;;     proc = subprocess.Popen(command, stdout = subprocess.PIPE)
+;;     for line in proc.stdout:
+;;         (key, _, value) = line.partition(\"=\")
+;;         os.environ[key] = value[:-1]  # strip newline
+;;     proc.communicate()
+;; ")
+
+;; (add-to-list 'python-shell-setup-codes 'python-source-setup-code)
+
+
+;;; for virtualenv setup with jedi (out of date?):
+;;; http://stackoverflow.com/questions/21246218/how-can-i-make-emacs-jedi-use-project-specific-virtualenvs
 
 (provide 'init-python-mode)
