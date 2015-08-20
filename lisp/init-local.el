@@ -512,7 +512,10 @@ the user will be asked for confirmation before the buffer is reverted."
 
 
 ;; auto-completion
-(setq-default ac-trigger-key "TAB")
+(setq-default
+ ac-trigger-key (kbd "C-c TAB")
+ ac-use-fuzzy t
+ )
 
 
 
