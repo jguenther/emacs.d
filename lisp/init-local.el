@@ -185,37 +185,36 @@ Moves point to the end of the inserted text. Does not change mark."
 (require-package 'git-timemachine)
 (require-package 'git-wip-timemachine)
 
-(require-package 'git-gutter-fringe)
-(require-package 'git-gutter)
-;;(require-package 'git-gutter+)
+;;(require-package 'git-gutter-fringe)
+;;(require-package 'git-gutter)
 
 (after-load 'magit
-  (require 'git-gutter)
-  (require 'git-gutter-fringe)
+  ;; (require 'git-gutter)
+  ;; (require 'git-gutter-fringe)
   
-  (global-git-gutter-mode t)
-  ;;  (global-git-gutter+-mode t)
-  (diminish 'git-gutter-mode)
+  ;; (global-git-gutter-mode t)
+  ;; (diminish 'git-gutter-mode)
+
   (magit-wip-after-save-mode 1)
   (diminish 'magit-wip-after-save-local-mode)
 
   (global-magit-file-buffer-mode)
   )
 
-(global-set-key (kbd "C-c u t") 'git-gutter:toggle)
+;; (global-set-key (kbd "C-c u t") 'git-gutter:toggle)
 
-(global-set-key (kbd "C-x v =") 'git-gutter:popup-hunk)
-(global-set-key (kbd "C-c u =") 'git-gutter:popup-hunk)
+;; (global-set-key (kbd "C-x v =") 'git-gutter:popup-hunk)
+;; (global-set-key (kbd "C-c u =") 'git-gutter:popup-hunk)
 
-;; Jump to next/previous hunk
-(global-set-key (kbd "C-c u p") 'git-gutter:previous-hunk)
-(global-set-key (kbd "C-c u n") 'git-gutter:next-hunk)
+;; ;; Jump to next/previous hunk
+;; (global-set-key (kbd "C-c u p") 'git-gutter:previous-hunk)
+;; (global-set-key (kbd "C-c u n") 'git-gutter:next-hunk)
 
-;; Stage current hunk
-(global-set-key (kbd "C-c u s") 'git-gutter:stage-hunk)
+;; ;; Stage current hunk
+;; (global-set-key (kbd "C-c u s") 'git-gutter:stage-hunk)
 
-;; Revert current hunk
-(global-set-key (kbd "C-c u r") 'git-gutter:revert-hunk)
+;; ;; Revert current hunk
+;; (global-set-key (kbd "C-c u r") 'git-gutter:revert-hunk)
 
 
 
