@@ -227,6 +227,50 @@ environment variable."
   (add-hook 'python-mode-hook 'annotate-pdb-breakpoints)
   )
 
+
+
+;;; pytest pdb
+;; c.f. https://bitbucket.org/hpk42/py-trunk/commits/1d7b0838917f
+
+(defun elpy-test-pytest-pdb-runner (top file module test)
+  "Test the project using the py.test test runner with --pdb -s (capture disabled).
+
+This requires the pytest package to be installed."
+  (interactive (elpy-test-at-point))
+  (let ((runner-command
+         (list (executable-find
+                (car elpy-test-pytest-runner-command)))))
+    (cond
+     (test
+      (let ((test-list (split-string test "\\.")))
+        (apply #'elpy-test-run-pdb
+               top
+               (append runner-command
+                       (list (mapconcat #'identity (cons file test-list) "::")
+                             "--pdb" "-s")))))
+     (module
+      (apply #'elpy-test-run-pdb top (append runner-command
+                                             (list file "--pdb" "-s"))))
+     (t
+      (apply #'elpy-test-run-pdb top (append runner-command
+                                             (list "--pdb" "-s")))))))
+
+(put 'elpy-test-pytest-pdb-runner 'elpy-test-runner-p t)
+
+(defun elpy-test-run-pdb (working-directory command &rest args)
+  "Run COMMAND with ARGS in WORKING-DIRECTORY as a test command using pdb."
+  (let* ((default-directory working-directory)
+         (cmdline (combine-and-quote-strings (cons command args)))
+         (gud-chdir-before-run nil)
+         (gud-pdb-command-name
+          (executable-find (car elpy-test-pytest-runner-command))))
+    (message "running pdb: `%s'" cmdline)
+    (pdb cmdline)))
+
+(set 'elpy-test-runner 'elpy-test-pytest-pdb-runner)
+
+
+
 ;; (let ((pythonpath "PYTHONPATH")
 ;;       (pythonpaths '("a" "b")))
 ;;   (message
@@ -337,46 +381,6 @@ environment variable."
 (after-load 'python  
   (add-hook 'python-mode-hook 'tak/python-setup)
   )
-
-;;; pytest pdb
-;; c.f. https://bitbucket.org/hpk42/py-trunk/commits/1d7b0838917f
-
-(defun elpy-test-pytest-pdb-runner (top file module test)
-  "Test the project using the py.test test runner with --pdb -s (capture disabled).
-
-This requires the pytest package to be installed."
-  (interactive (elpy-test-at-point))
-  (let ((runner-command
-         (list (executable-find
-                (car elpy-test-pytest-runner-command)))))
-    (cond
-     (test
-      (let ((test-list (split-string test "\\.")))
-        (apply #'elpy-test-run-pdb
-               top
-               (append runner-command
-                       (list (mapconcat #'identity (cons file test-list) "::")
-                             "--pdb" "-s")))))
-     (module
-      (apply #'elpy-test-run-pdb top (append runner-command
-                                             (list file "--pdb" "-s"))))
-     (t
-      (apply #'elpy-test-run-pdb top (append runner-command
-                                             (list "--pdb" "-s")))))))
-
-(put 'elpy-test-pytest-pdb-runner 'elpy-test-runner-p t)
-
-(defun elpy-test-run-pdb (working-directory command &rest args)
-  "Run COMMAND with ARGS in WORKING-DIRECTORY as a test command using pdb."
-  (let* ((default-directory working-directory)
-         (cmdline (combine-and-quote-strings (cons command args)))
-         (gud-chdir-before-run nil)
-         (gud-pdb-command-name
-          (executable-find (car elpy-test-pytest-runner-command))))
-    (message "running pdb: `%s'" cmdline)
-    (pdb cmdline)))
-
-(set 'elpy-test-runner 'elpy-test-pytest-pdb-runner)
 
 (elpy-enable)
 
