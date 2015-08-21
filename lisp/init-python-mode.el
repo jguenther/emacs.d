@@ -186,7 +186,7 @@ environment variable."
     (progn
       (setenv "PYTHONPATH"
               (s-join ":" python-shell-extra-pythonpaths))
-      (setenv "TERM" "linux")
+      (setenv "TERM" "xterm-256color")
       ad-do-it)
     (setenv "PYTHONPATH" pythonpath)
     (setenv "TERM" term)
@@ -247,27 +247,36 @@ This requires the pytest package to be installed."
                top
                (append runner-command
                        (list (mapconcat #'identity (cons file test-list) "::")
-                             "--pdb" "-s")))))
+                             "--pdb" ;"-s"
+                             )))))
      (module
       (apply #'elpy-test-run-pdb top (append runner-command
-                                             (list file "--pdb" "-s"))))
+                                             (list file "--pdb" ;"-s"
+                                                   ))))
      (t
       (apply #'elpy-test-run-pdb top (append runner-command
-                                             (list "--pdb" "-s")))))))
+                                             (list "--pdb" ;"-s"
+                                                   )))))))
 
 (put 'elpy-test-pytest-pdb-runner 'elpy-test-runner-p t)
 
 (defun elpy-test-run-pdb (working-directory command &rest args)
   "Run COMMAND with ARGS in WORKING-DIRECTORY as a test command using pdb."
   (let* ((default-directory working-directory)
-         (cmdline (combine-and-quote-strings (cons command args)))
          (gud-chdir-before-run nil)
-         (gud-pdb-command-name
-          (executable-find (car elpy-test-pytest-runner-command))))
+         (gud-pdb-command-name "python")
+         (cmdline (combine-and-quote-strings (cons gud-pdb-command-name (cons command args))))
+         )
     (message "running pdb: `%s'" cmdline)
     (pdb cmdline)))
 
 (set 'elpy-test-runner 'elpy-test-pytest-pdb-runner)
+
+(defun pdb-color-filter (output)
+  (ansi-color-filter-apply output))
+
+(add-hook 'comint-output-filter-functions 'pdb-color-filter)
+
 
 
 
