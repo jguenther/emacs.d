@@ -34,6 +34,8 @@
   ;; use jedi completion instead
   (setq elpy-modules (delq 'elpy-module-company elpy-modules))
 
+  (elpy-use-ipython)
+
   (unless (require 'yasnippet nil t)
     (setq elpy-modules (delq 'elpy-module-yasnippet elpy-modules)))
 
@@ -192,7 +194,7 @@ environment variable."
 
 ;;
 ;; pdb setup, note the python version
-(setq pdb-path '/usr/lib/python2.7/pdb.py
+(setq pdb-path '/usr/local/bin/pdb
       gud-pdb-command-name (symbol-name pdb-path))
 
 (defadvice pdb (before gud-query-cmdline activate)
@@ -353,23 +355,28 @@ This requires the pytest package to be installed."
         (apply #'elpy-test-run-pdb
                top
                (append runner-command
-                       (list "--pdb" "-s" (mapconcat #'identity
-                                                     (cons file test-list)
-                                                     "::"))))))
+                       (list (mapconcat #'identity (cons file test-list) "::")
+                             "--pdb" "-s")))))
      (module
       (apply #'elpy-test-run-pdb top (append runner-command
-                                             (list "--pdb" "-s" file))))
+                                             (list file "--pdb" "-s"))))
      (t
-      (apply #'elpy-test-run-pdb top (append runner-command (list "--pdb" "-s")))))))
+      (apply #'elpy-test-run-pdb top (append runner-command
+                                             (list "--pdb" "-s")))))))
 
 (put 'elpy-test-pytest-pdb-runner 'elpy-test-runner-p t)
 
 (defun elpy-test-run-pdb (working-directory command &rest args)
   "Run COMMAND with ARGS in WORKING-DIRECTORY as a test command using pdb."
-  (let ((default-directory working-directory))
-    (pdb (combine-and-quote-strings (cons command args)))))
+  (let* ((default-directory working-directory)
+         (cmdline (combine-and-quote-strings (cons command args)))
+         (gud-chdir-before-run nil)
+         (gud-pdb-command-name
+          (executable-find (car elpy-test-pytest-runner-command))))
+    (message "running pdb: `%s'" cmdline)
+    (pdb cmdline)))
 
-(setq 'elpy-test-runner 'elpy-test-pytest-pdb-runner)
+(set 'elpy-test-runner 'elpy-test-pytest-pdb-runner)
 
 (elpy-enable)
 
