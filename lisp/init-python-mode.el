@@ -336,6 +336,41 @@ environment variable."
   (add-hook 'python-mode-hook 'tak/python-setup)
   )
 
+;;; pytest pdb
+;; c.f. https://bitbucket.org/hpk42/py-trunk/commits/1d7b0838917f
+
+(defun elpy-test-pytest-pdb-runner (top file module test)
+  "Test the project using the py.test test runner with --pdb -s (capture disabled).
+
+This requires the pytest package to be installed."
+  (interactive (elpy-test-at-point))
+  (let ((runner-command
+         (list (executable-find
+                (car elpy-test-pytest-runner-command)))))
+    (cond
+     (test
+      (let ((test-list (split-string test "\\.")))
+        (apply #'elpy-test-run-pdb
+               top
+               (append runner-command
+                       (list "--pdb" "-s" (mapconcat #'identity
+                                                     (cons file test-list)
+                                                     "::"))))))
+     (module
+      (apply #'elpy-test-run-pdb top (append runner-command
+                                             (list "--pdb" "-s" file))))
+     (t
+      (apply #'elpy-test-run-pdb top (append runner-command (list "--pdb" "-s")))))))
+
+(put 'elpy-test-pytest-pdb-runner 'elpy-test-runner-p t)
+
+(defun elpy-test-run-pdb (working-directory command &rest args)
+  "Run COMMAND with ARGS in WORKING-DIRECTORY as a test command using pdb."
+  (let ((default-directory working-directory))
+    (pdb (combine-and-quote-strings (cons command args)))))
+
+(setq 'elpy-test-runner 'elpy-test-pytest-pdb-runner)
+
 (elpy-enable)
 
 (provide 'init-python-mode)
