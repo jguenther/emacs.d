@@ -65,7 +65,7 @@
                                            (indent-guide-mode))))
 
   ;; enable this mode in tak/python-setup instead
-  (add-hook 'python-mode-hook (lambda () (flycheck-mode -1)))
+  ;;(add-hook 'python-mode-hook (lambda () (flycheck-mode -1)))
 
   (add-hook 'comint-output-filter-functions 'python-pdbtrack-comint-output-filter-function)
 
@@ -159,8 +159,19 @@
 ;;(require-package 'loc-changes)
 ;;(require-package 'realgud)
 
-;; disabled--elpy appears to provide all functionality
-;;(require-package 'pytest)
+(require-package 'pytest)
+(after-load 'python
+  (require 'pytest))
+(add-hook 'python-mode-hook
+          (lambda ()
+            (local-set-key "\C-cta" 'pytest-all)
+            (local-set-key "\C-ctm" 'pytest-module)
+            (local-set-key "\C-ct." 'pytest-one)
+            (local-set-key "\C-ctd" 'pytest-directory)
+            (local-set-key "\C-cpa" 'pytest-pdb-all)
+            (local-set-key "\C-cpm" 'pytest-pdb-module)
+            (local-set-key "\C-cp." 'pytest-pdb-one)))
+
 
 ;; TODO make this append to PYTHONPATH instead of replacing it
 (defadvice elpy-test (around manipulate-environment activate)
@@ -192,22 +203,25 @@ environment variable."
 
 (defun annotate-pdb-breakpoints ()
   (interactive)
-  (highlight-lines-matching-regexp "import i?pdb")
-  (highlight-lines-matching-regexp "i?pdb.set_trace()"))
+  (highlight-lines-matching-regexp "\\(import i?pdb\\|i?pdb.set_trace()\\)"))
 
 (defun python-add-breakpoint ()
   (interactive)
-  (beginning-of-line)
-  (newline-and-indent)
-  (previous-line)
-  (beginning-of-line)
-  ;;  (insert "import ipdb; ipdb.set_trace()")
-  (insert "import pdb; pdb.set_trace()")
-  (indent-according-to-mode)
+  (let* ((i (if (string-equal python-shell-interpreter "ipython")
+                "i"
+              ""))
+         (breakpoint-string (format "import %spdb; %spdb.set_trace()" i i)))
+    (beginning-of-line)
+    (newline-and-indent)
+    (previous-line)
+    (beginning-of-line)
+    (insert breakpoint-string)
+    (indent-according-to-mode))
   )
 
 (after-load 'python
   (define-key python-mode-map (kbd "C-c <SPC>") 'python-add-breakpoint)
+  (define-key python-mode-map (kbd "C-c C-<SPC>") 'python-add-breakpoint)
   (add-hook 'python-mode-hook 'annotate-pdb-breakpoints)
   )
 
@@ -302,6 +316,8 @@ environment variable."
      (add-hook 'python-mode-hook 'jedi:setup)
      
      (add-to-list 'flycheck-disabled-checkers 'python-flake8)
+     (if flycheck-mode
+         (flycheck-mode -1))
      (add-hook 'python-mode-hook 'flycheck-mode)
      
      ;; (setq elpy-rpc-pythonpath (mapconcat 'concat '(elpy-rpc-pythonpath
