@@ -120,6 +120,9 @@
   
   ;; unbind CMD-w kill-frame
   (global-unset-key (kbd "s-w"))
+
+  ;; paste utf-8
+  (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
   )
 
 ;; imenu bindings
@@ -572,12 +575,13 @@ See also: `enable-all-disabled-commands'."
 
 
 (require-package 'free-keys)
+(require 'free-keys)
 
 (global-set-key (kbd "C-h C-k") 'free-keys)
 
 ;; add super if on mac
 (when *is-a-mac*
-  (add-to-list 'free-keys-modifiers "s"))
+  (add-to-list 'free-keys-modifiers "s" t))
 
 
 (global-set-key (kbd "") 'customize-group)
