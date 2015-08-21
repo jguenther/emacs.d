@@ -116,7 +116,11 @@
 (when *is-a-mac*
   ;; rebind home/end for macos
   (global-set-key (kbd "<home>") 'move-beginning-of-line)
-  (global-set-key (kbd "<end>") 'move-end-of-line))
+  (global-set-key (kbd "<end>") 'move-end-of-line)
+  
+  ;; unbind CMD-w kill-frame
+  (global-unset-key (kbd "s-w"))
+  )
 
 ;; imenu bindings
 (global-set-key [S-mouse-3] 'imenu)
@@ -352,15 +356,6 @@ See also: `enable-all-disabled-commands'."
   (interactive)
   (enable-all-disabled-commands t))
 
-(defun tak/maybe-revert-buffer ()
-  "Reverts the current buffer without confirmation if it is unmodified.
-If buffer has been modified since it was last read from disk or saved,
-the user will be asked for confirmation before the buffer is reverted."
-  (interactive)
-  (save-excursion
-    (revert-buffer t (not (buffer-modified-p)))))
-
-;;(global-set-key (kbd "C-x C-S-R") 'tak/maybe-revert-buffer)
 (global-set-key (kbd "C-x C-S-R") 'revert-buffer)
 
 ;;(require-package 'workgroups2)
@@ -574,7 +569,18 @@ the user will be asked for confirmation before the buffer is reverted."
 (global-set-key (kbd "M-g o") 'occur)
 (global-set-key (kbd "M-g C-o") 'occur)
 
-;; unbind CMD-w kill-frame
-(global-unset-key (kbd "s-w"))
+
+
+(require-package 'free-keys)
+
+(global-set-key (kbd "C-h C-k") 'free-keys)
+
+;; add super if on mac
+(when *is-a-mac*
+  (add-to-list 'free-keys-modifiers "s"))
+
+
+(global-set-key (kbd "") 'customize-group)
+(global-set-key (kbd "") 'customize-variable)
 
 (provide 'init-local)
