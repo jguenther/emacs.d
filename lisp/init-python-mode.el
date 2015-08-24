@@ -156,23 +156,25 @@
 
 ;; realgud: use pdb, trepan2, or pydbgr
 
+;; TODO make realgud-trepan2 work with elpy-test
+(require-package 'realgud)
 ;;(require-package 'test-simple)
 ;;(require-package 'load-relative)
 ;;(require-package 'loc-changes)
-;;(require-package 'realgud)
 
 (require-package 'pytest)
 (after-load 'python
-  (require 'pytest))
-(add-hook 'python-mode-hook
-          (lambda ()
-            (local-set-key "\C-cta" 'pytest-all)
-            (local-set-key "\C-ctm" 'pytest-module)
-            (local-set-key "\C-ct." 'pytest-one)
-            (local-set-key "\C-ctd" 'pytest-directory)
-            (local-set-key "\C-cpa" 'pytest-pdb-all)
-            (local-set-key "\C-cpm" 'pytest-pdb-module)
-            (local-set-key "\C-cp." 'pytest-pdb-one)))
+  (require 'pytest)
+  (define-key python-mode-map (kbd "C-c t a") 'pytest-all)
+  (define-key python-mode-map (kbd "C-c t m") 'pytest-module)
+  (define-key python-mode-map (kbd "C-c t .") 'pytest-one)
+  (define-key python-mode-map (kbd "C-c t d") 'pytest-directory)
+  (define-key python-mode-map (kbd "C-c p a") 'pytest-pdb-all)
+  (define-key python-mode-map (kbd "C-c p m") 'pytest-pdb-module)
+  (define-key python-mode-map (kbd "C-c p .") 'pytest-pdb-one)
+
+  (require 'realgud))
+
 
 
 ;; TODO make this append to PYTHONPATH instead of replacing it
@@ -209,9 +211,7 @@ environment variable."
 
 (defun python-add-breakpoint ()
   (interactive)
-  (let* ((i (if (string-equal python-shell-interpreter "ipython")
-                "i"
-              ""))
+  (let* ((i (if (string-equal python-shell-interpreter "ipython") "i" ""))
          (breakpoint-string (format "import %spdb; %spdb.set_trace()" i i)))
     (beginning-of-line)
     (newline-and-indent)
@@ -231,6 +231,15 @@ environment variable."
 
 ;;; pytest pdb
 ;; c.f. https://bitbucket.org/hpk42/py-trunk/commits/1d7b0838917f
+
+(defun elpy-copy-test-at-point ()
+  "Copy test at point to kill-ring"
+  (interactive)
+  (let ((test (elpy-test-at-point)))
+    (if test
+        (kill-new (test))
+      (message "ERROR: elpy-test-at-point returned nil")))
+  )
 
 (defun elpy-test-pytest-pdb-runner (top file module test)
   "Test the project using the py.test test runner with --pdb -s (capture disabled).
@@ -271,11 +280,6 @@ This requires the pytest package to be installed."
     (pdb cmdline)))
 
 (set 'elpy-test-runner 'elpy-test-pytest-pdb-runner)
-
-(defun pdb-color-filter (output)
-  (ansi-color-filter-apply output))
-
-(add-hook 'comint-output-filter-functions 'pdb-color-filter)
 
 
 
