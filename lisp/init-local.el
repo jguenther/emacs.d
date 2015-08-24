@@ -489,6 +489,16 @@ See also: `enable-all-disabled-commands'."
 
 ;; shell-mode init
 
+;; use color term for shell
+(defadvice tak/shell-setup-environment (around shell activate)
+  "Setup environment for shell.
+
+Sets TERM=xterm-256color"
+  (let ((term (getenv "TERM")))
+    (setenv "TERM" "xterm-256color")
+    ad-do-it)
+  (setenv "TERM" term))
+
 ;; bash-completion for shell-mode
 ;; from https://github.com/szermatt/emacs-bash-completion
 (require-package 'bash-completion)
@@ -505,6 +515,7 @@ See also: `enable-all-disabled-commands'."
 
 ;; translate ANSI color control sequences into text properties
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
 
 
 
