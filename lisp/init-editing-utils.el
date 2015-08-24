@@ -175,9 +175,14 @@
 ;; To be able to M-x without meta
 (global-set-key (kbd "C-x C-m") 'execute-extended-command)
 
+(defun join-line-with-following-line ()
+  "Joins this line to following line."
+  (interactive)
+  (join-line 1))
+
 ;; Vimmy alternatives to M-^ and C-u M-^
-(global-set-key (kbd "C-c j") 'join-line)
-(global-set-key (kbd "C-c J") (lambda () (interactive) (join-line 1)))
+(define-key mode-specific-map (kbd "j") 'join-line)
+(define-key mode-specific-map (kbd "J") 'join-line-with-following-line)
 
 (global-set-key (kbd "C-.") 'set-mark-command)
 (global-set-key (kbd "C-x C-.") 'pop-global-mark)
@@ -191,12 +196,12 @@
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-+") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+(define-key mode-specific-map (kbd "C-<") 'mc/mark-all-like-this)
 ;; From active region to multiple cursors:
-(global-set-key (kbd "C-c c r") 'set-rectangular-region-anchor)
-(global-set-key (kbd "C-c c c") 'mc/edit-lines)
-(global-set-key (kbd "C-c c e") 'mc/edit-ends-of-lines)
-(global-set-key (kbd "C-c c a") 'mc/edit-beginnings-of-lines)
+(define-key mode-specific-map (kbd "c r") 'set-rectangular-region-anchor)
+(define-key mode-specific-map (kbd "c c") 'mc/edit-lines)
+(define-key mode-specific-map (kbd "c e") 'mc/edit-ends-of-lines)
+(define-key mode-specific-map (kbd "c a") 'mc/edit-beginnings-of-lines)
 
 
 ;; Train myself to use M-f and M-b instead

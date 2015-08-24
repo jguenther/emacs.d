@@ -6,8 +6,8 @@
   (autoload 'org-mac-grab-link "org-mac-link" nil t)
   (require-package 'org-mac-iCal))
 
-(define-key global-map (kbd "C-c l") 'org-store-link)
-(define-key global-map (kbd "C-c a") 'org-agenda)
+(define-key mode-specific-map (kbd "l") 'org-store-link)
+(define-key mode-specific-map (kbd "a") 'org-agenda)
 
 ;; Various preferences
 (setq org-log-done t
@@ -87,7 +87,7 @@ typical word processor."
 
 ;;; Capturing
 
-(global-set-key (kbd "C-c c") 'org-capture)
+(define-key mode-specific-map (kbd "c") 'org-capture)
 
 (setq org-capture-templates
       `(("t" "todo" entry (file "")  ; "" => org-default-notes-file

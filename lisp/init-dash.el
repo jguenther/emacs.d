@@ -15,6 +15,6 @@
     (require-package 'dash-at-point)))
 
 (when (package-installed-p 'dash-at-point)
-  (global-set-key (kbd "C-c D") 'dash-at-point))
+  (define-key mode-specific-map (kbd "D") 'dash-at-point))
 
 (provide 'init-dash)
