@@ -63,16 +63,18 @@
  csv-separators '(",")
 
  initial-scratch-message ";; *scratch*\n\n"
+
+ ;; auto-completion
+ ac-use-fuzzy t
  )
 
 
-(dolist (path '("/home/jguenther/.emacs-lisp"
-                "/usr/local/share/emacs/site-lisp"
-                "/home/jguenther/share/emacs/site-lisp"
-                "/usr/share/emacs/site-lisp"))
-  (add-to-list 'load-path path))
+;;(dolist (path '("/home/jguenther/.emacs-lisp"
+;;                "/usr/local/share/emacs/site-lisp"
+;;                "/home/jguenther/share/emacs/site-lisp"
+;;                "/usr/share/emacs/site-lisp"))
+;;  (add-to-list 'load-path path))
 
-(global-set-key (kbd "C-x M-g") 'goto-line)
 (mouse-wheel-mode 1)
 
 ;;scroll-restore seems to cause more problems than it's worth
@@ -508,15 +510,6 @@ Sets TERM=xterm-256color"
 
 ;; translate ANSI color control sequences into text properties
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-
-
-
-
-;; auto-completion
-(setq-default
- ac-trigger-key (kbd "C-c TAB")
- ac-use-fuzzy t
- )
 
 
 
