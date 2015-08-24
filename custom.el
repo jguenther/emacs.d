@@ -29,6 +29,7 @@
  '(emacs-lisp-docstring-fill-column 70)
  '(ess-default-style (quote OWN))
  '(ess-fancy-comments nil)
+ '(ess-indent-with-fancy-comments nil)
  '(fill-column 79)
  '(flycheck-disabled-checkers (quote (emacs-lisp-checkdoc perl-perlcritic html-tidy)))
  '(flycheck-keymap-prefix "`")
@@ -39,7 +40,7 @@
  '(jedi:tooltip-method (quote (pos-tip)))
  '(jedi:use-shortcuts t)
  '(js-indent-level 4)
- '(js2-basic-offset 4 t)
+ '(js2-basic-offset 4)
  '(magit-revert-buffers nil)
  '(magit-save-repository-buffers (quote dontask))
  '(make-backup-files t)
@@ -53,7 +54,8 @@
  '(python-fill-docstring-style (quote django))
  '(safe-local-variable-values
    (quote
-    ((flycheck-pylintrc "/Users/jguenther/Projects/harvester-service/.pylintrc")
+    ((whitespace-style face tabs spaces trailing lines space-before-tab::space newline indentation::space empty space-after-tab::space space-mark tab-mark newline-mark)
+     (flycheck-pylintrc "/Users/jguenther/Projects/harvester-service/.pylintrc")
      (flycheck-pylintrc
       (expand-file-name "~/Projects/VBC/test/.pylintrc_test"))
      (flycheck-pylintrc "/Users/jguenther/Projects/harvester-service/tools/vbuild/pylintrc")
