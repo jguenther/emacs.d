@@ -441,16 +441,17 @@ See also: `enable-all-disabled-commands'."
 
 
 
+;; org-mode setup
+
 (require-package 'org-plus-contrib)
 
-;; org-mode setup
-(add-hook 'org-mode-hook
-          (lambda ()
-            (guide-key/add-local-highlight-command-regexp "org-")
-            (define-key org-mode-map
-              (kbd "C-M-<return>") 'org-insert-todo-heading)))
+;; (add-hook 'org-mode-hook
+;;           (lambda ()
+;;             (guide-key/add-local-highlight-command-regexp "org-")
+;;             ))
 
 (after-load 'org
+  (define-key org-mode-map (kbd "C-M-<return>") 'org-insert-todo-heading)
   (dolist (element '(
                      ;;org-bullets
                      ;;org-cliplink
