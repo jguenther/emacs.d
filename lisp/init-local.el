@@ -597,4 +597,12 @@ Sets TERM=xterm-256color"
 ;; (global-set-key (kbd "") 'customize-group)
 ;; (global-set-key (kbd "") 'customize-variable)
 
+
+
+
+;;(require-package 'ace-jump-mode)
+;;(global-set-key (kbd "C-;") 'ace-jump-mode)
+;;(global-set-key (kbd "C-:") 'ace-jump-word-mode)
+
+
 (provide 'init-local)
