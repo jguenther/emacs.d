@@ -411,12 +411,6 @@ See also: `enable-all-disabled-commands'."
 
 ;;; guide-key setup
 (dolist (key '(
-               "C-x l"
-               "C-x j"
-                                        ; win-switch-dispatch-once doesn't
-                                        ; currently seem to work with guide-key
-               "C-x C-o"
-               (redshank-mode "C-x C-r")
                (cperl-mode "C-o")
                "M-g"
                "ESC"
@@ -452,8 +446,6 @@ See also: `enable-all-disabled-commands'."
 ;; org-mode setup
 (add-hook 'org-mode-hook
           (lambda ()
-            (guide-key/add-local-guide-key-sequence "C-c")
-            (guide-key/add-local-guide-key-sequence "C-c C-x")
             (guide-key/add-local-highlight-command-regexp "org-")
             (define-key org-mode-map
               (kbd "C-M-<return>") 'org-insert-todo-heading)))
