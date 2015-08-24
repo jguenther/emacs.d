@@ -447,10 +447,10 @@ See also: `enable-all-disabled-commands'."
 
 (require-package 'org-plus-contrib)
 
-;; (add-hook 'org-mode-hook
-;;           (lambda ()
-;;             (guide-key/add-local-highlight-command-regexp "org-")
-;;             ))
+(add-hook 'org-mode-hook
+          (lambda ()
+            (guide-key/add-local-highlight-command-regexp "org-")
+            ))
 
 (after-load 'org
   (define-key org-mode-map (kbd "C-M-<return>") 'org-insert-todo-heading)

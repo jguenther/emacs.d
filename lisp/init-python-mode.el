@@ -50,7 +50,8 @@
                                         ; elpy-check
                     "C-c C-v"
                     ))
-    (define-key elpy-mode-map (kbd key) nil)))
+    (define-key elpy-mode-map (kbd key) nil))
+  )
 
 (after-load 'python
   ;; Skeletons
@@ -199,12 +200,6 @@ environment variable."
 (setq pdb-path '/usr/local/bin/pdb
       gud-pdb-command-name (symbol-name pdb-path))
 
-(defadvice pdb (before gud-query-cmdline activate)
-  "Provide a better default command line when called interactively."
-  (interactive
-   (list (gud-query-cmdline pdb-path
-	 		    (file-name-nondirectory buffer-file-name)))))
-
 (defun annotate-pdb-breakpoints ()
   (interactive)
   (highlight-lines-matching-regexp "\\(import i?pdb\\|i?pdb.set_trace()\\)"))
@@ -222,7 +217,6 @@ environment variable."
   )
 
 (after-load 'python
-  (define-key python-mode-map (kbd "C-c <SPC>") 'python-add-breakpoint)
   (define-key python-mode-map (kbd "C-c C-<SPC>") 'python-add-breakpoint)
   (add-hook 'python-mode-hook 'annotate-pdb-breakpoints)
   )
@@ -256,17 +250,16 @@ This requires the pytest package to be installed."
                top
                (append runner-command
                        (list (mapconcat #'identity (cons file test-list) "::")
-                             "--pdb" ;"-s"
+                             "--pdb" "-s"
                              )))))
      (module
       (apply #'elpy-test-run-pdb top (append runner-command
-                                             (list file "--pdb" ;"-s"
+                                             (list file "--pdb" "-s"
                                                    ))))
      (t
       (apply #'elpy-test-run-pdb top (append runner-command
-                                             (list "--pdb" ;"-s"
+                                             (list "--pdb" "-s"
                                                    )))))))
-
 (put 'elpy-test-pytest-pdb-runner 'elpy-test-runner-p t)
 
 (defun elpy-test-run-pdb (working-directory command &rest args)
