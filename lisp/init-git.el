@@ -26,7 +26,7 @@
   (define-key magit-status-mode-map (kbd "<backtab>") 'magit-section-cycle-global)
   (add-hook 'magit-popup-mode-hook 'sanityinc/no-trailing-whitespace))
 
-;; (require-package 'fullframe)
+(require-package 'fullframe)
 ;; (after-load 'magit
 ;;   (fullframe magit-status magit-mode-quit-window))
 
