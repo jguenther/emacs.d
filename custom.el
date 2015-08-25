@@ -79,7 +79,8 @@
  '(show-trailing-whitespace nil)
  '(standard-indent 2)
  '(vc-follow-symlinks t)
- '(yas-also-auto-indent-first-line t))
+ '(yas-also-auto-indent-first-line t)
+ '(yas-expand-only-for-last-commands (quote (self-insert-command))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
