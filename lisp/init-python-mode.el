@@ -274,63 +274,7 @@ This requires the pytest package to be installed."
 
 (set 'elpy-test-runner 'elpy-test-pytest-pdb-runner)
 
-
 
-
-;; (let ((pythonpath "PYTHONPATH")
-;;       (pythonpaths '("a" "b")))
-;;   (message
-;;    (s-join ":"
-;;            (list pythonpaths (if
-;;                                  (not
-;;                                   (= (length pythonpath)))
-;;                                  pythonpath
-;;                                nil))
-;;            )))
-
-
-
-;; from https://gist.github.com/TauPan/17305751a883005872dc
-;; (use-package elpy
-;;              :config
-;;              (progn (elpy-enable)
-;;                     (defun elpy-nose-test-spec (module test)
-;;                       (cond (test
-;;                              (format "%s:%s" module test))
-;;                             (module module)
-;;                             (t "")))
-;;                     (defun elpy-test-nose-pdb-runner (top file module test)
-;;                       "Test the project using the nose test runner with the --pdb arg.
-
-;; This requires the nose package to be installed."
-;;                       (interactive (elpy-test-at-point))
-;;                       (let ((default-directory top))
-;;                         (pdb (format "nosetests --pdb %s"
-;;                                      (elpy-nose-test-spec module test)))))
-;;                     (put 'elpy-test-nose-pdb-runner 'elpy-test-runner-p t)
-;;                     (defvar elpy-test-pdb-runner
-;;                       #'elpy-test-nose-pdb-runner
-;;                       "Test runner to run with pdb")
-;;                     (defun elpy-test-django-nose-pdb-runner (top file module test)
-;;                       "Test the project using the django-nose test runner with the --pdb arg.
-
-;; This requires the django-nose package to be installed and
-;; properly configured for the django project."
-;;                       (interactive (elpy-test-at-point))
-;;                       (let ((default-directory top))
-;;                         (pdb (format "django-admin.py test --noinput %s --pdb"
-;;                                      (elpy-nose-test-spec module test)))))
-;;                     (defun elpy-test-pdb (&optional test-whole-project)
-;;                       "Run test the current project with the elpy-test-pdb-runner
-
-;;             prefix args have the same semantics as for `elpy-test'"
-;;                       (interactive "P")
-;;                       (let ((elpy-test-runner elpy-test-pdb-runner))
-;;                         (elpy-test test-whole-project)))
-;;                     (eval-after-load 'elpy
-;;                       '(progn
-;;                          (define-key elpy-mode-map
-;;                            (kbd "C-c t") 'elpy-test-pdb)))))
 
 ;;; from https://github.com/russell/dotfiles/blob/master/emacs.d/init-programming.d/python.el
 ;; (defvar python-source-setup-code
@@ -377,16 +321,16 @@ This requires the pytest package to be installed."
      
      ) nil t))
 
+(after-load 'python  
+  (add-hook 'python-mode-hook 'tak/python-setup)
+  )
+
 ;; ;; alternate method
 ;; (add-hook 'hack-local-variables-hook 'run-local-vars-mode-hook)
 ;; (defun run-local-vars-mode-hook ()
 ;;   "Run a hook for the major-mode after the local variables have been processed."
 ;;   (run-hooks (intern (concat (symbol-name major-mode) "-local-vars-hook"))))
 ;; (add-hook 'python-mode-local-vars-hook 'cr/python-mode-shell-setup)
-
-(after-load 'python  
-  (add-hook 'python-mode-hook 'tak/python-setup)
-  )
 
 (elpy-enable)
 
