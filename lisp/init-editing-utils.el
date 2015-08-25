@@ -198,10 +198,10 @@
 (global-set-key (kbd "C-+") 'mc/mark-next-like-this)
 (define-key mode-specific-map (kbd "C-<") 'mc/mark-all-like-this)
 ;; From active region to multiple cursors:
-(define-key mode-specific-map (kbd "c r") 'set-rectangular-region-anchor)
-(define-key mode-specific-map (kbd "c c") 'mc/edit-lines)
-(define-key mode-specific-map (kbd "c e") 'mc/edit-ends-of-lines)
-(define-key mode-specific-map (kbd "c a") 'mc/edit-beginnings-of-lines)
+(define-key mode-specific-map (kbd "C r") 'set-rectangular-region-anchor)
+(define-key mode-specific-map (kbd "C c") 'mc/edit-lines)
+(define-key mode-specific-map (kbd "C e") 'mc/edit-ends-of-lines)
+(define-key mode-specific-map (kbd "C a") 'mc/edit-beginnings-of-lines)
 
 
 ;; Train myself to use M-f and M-b instead
