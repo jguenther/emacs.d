@@ -174,6 +174,8 @@
   (define-key python-mode-map (kbd "C-c p m") 'pytest-pdb-module)
   (define-key python-mode-map (kbd "C-c p .") 'pytest-pdb-one)
 
+  (define-key python-mode-map (kbd "C-x C-q") 'realgud-short-key-mode)
+
   (require 'realgud))
 
 
@@ -182,7 +184,6 @@
 (defadvice elpy-test (around manipulate-environment activate)
   "Prepends the contents of `python-shell-extra-pythonpaths' to the PYTHONPATH
 environment variable."
-  (message "in elpy-rpc-open advice")
   (let ((pythonpath (getenv "PYTHONPATH"))
         (term       (getenv "TERM")))
     ;;(unwind-protect)
