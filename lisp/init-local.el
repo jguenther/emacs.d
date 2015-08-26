@@ -553,10 +553,10 @@ Sets TERM=xterm-256color"
 
 ;; turn on save place so that when opening a file, the cursor will be at the
 ;; last position.
-(require 'saveplace)
-(setq save-place-file
-      (concat user-emacs-directory "saveplace.el") ) ; use standard emacs dir
 (setq-default save-place t)
+(setq save-place-file
+      (concat user-emacs-directory ".saved-places"))
+(require 'saveplace)
 
 
 
