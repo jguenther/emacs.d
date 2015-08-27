@@ -151,10 +151,10 @@
 Moves point to the end of the inserted text. Does not change mark."
   (interactive) (insert (x-get-selection 'SECONDARY)))
 
-(require-package 'cursor-chg)
-(require 'cursor-chg)
-(toggle-cursor-type-when-idle 1) ; Turn on cursor change when Emacs is idle
-(change-cursor-mode 1)           ; Turn on change for overwrite, read-only, and
+;;(require-package 'cursor-chg)
+;;(require 'cursor-chg)
+;;(toggle-cursor-type-when-idle 1) ; Turn on cursor change when Emacs is idle
+;;(change-cursor-mode 1)           ; Turn on change for overwrite, read-only, and
                                         ; input mode
 
 (require-package 'cperl-mode)
