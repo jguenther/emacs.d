@@ -44,6 +44,7 @@
  '(magit-revert-buffers nil)
  '(magit-save-repository-buffers (quote dontask))
  '(make-backup-files t)
+ '(mark-ring-max 32)
  '(matlab-indent-level 2)
  '(matlab-shell-command-switches (quote ("-nodesktop" "-nosplash")))
  '(menu-bar-mode t)
