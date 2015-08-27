@@ -595,5 +595,52 @@ Sets TERM=xterm-256color"
 (global-set-key (kbd "C-;") 'ace-jump-mode)
 (global-set-key (kbd "C-:") 'ace-jump-word-mode)
 
+
+;; from http://stackoverflow.com/questions/3393834/how-to-move-forward-and-backward-in-emacs-mark-ring/3399064#3399064
+(defun unpop-to-mark-command ()
+  "Unpop off mark ring into the buffer's actual mark.
+Does not set point.  Does nothing if mark ring is empty."
+  (interactive)
+  (let ((num-times (if (equal last-command 'pop-to-mark-command) 2
+                     (if (equal last-command 'unpop-to-mark-command) 1
+                       (error "Previous command was not a (un)pop-to-mark-command")))))
+    (dotimes (x num-times)
+      (when mark-ring
+        (setq mark-ring (cons (copy-marker (mark-marker)) mark-ring))
+        (set-marker (mark-marker) (+ 0 (car (last mark-ring))) (current-buffer))
+        (when (null (mark t)) (ding))
+        (setq mark-ring (nbutlast mark-ring))
+        (goto-char (mark t)))
+      (deactivate-mark))))
+
+;; from http://stackoverflow.com/questions/3393834/how-to-move-forward-and-backward-in-emacs-mark-ring/5117076#5117076
+(defmacro my-unpop-to-mark-advice ()
+  "Enable reversing direction with un/pop-to-mark.
+
+To unpop, simply supply a negative prefix argument. e.g. `C-- C-SPC'.
+
+After an initial `C-- C-SPC' you can continue un-popping with just
+`C-SPC'. To reverse the direction again and call pop-to-mark, simply
+supply a positive argument once more with C-u C-SPC."
+  `(defadvice ,(key-binding (kbd "C-SPC")) (around my-unpop-to-mark activate)
+     "Unpop-to-mark with negative arg"
+     (let* ((arg (ad-get-arg 0))
+            (num (prefix-numeric-value arg)))
+       (cond
+        ;; Enabled repeated un-pops with C-SPC
+        ((eq last-command 'unpop-to-mark-command)
+         (if (and arg (> num 0) (<= num 4))
+             ad-do-it ;; C-u C-SPC reverses back to normal direction
+           ;; Otherwise continue to un-pop
+           (setq this-command 'unpop-to-mark-command)
+           (unpop-to-mark-command)))
+        ;; Negative argument un-pops: C-- C-SPC
+        ((< num 0)
+         (setq this-command 'unpop-to-mark-command)
+         (unpop-to-mark-command))
+        (t
+         ad-do-it)))))
+(my-unpop-to-mark-advice)
+
 
 (provide 'init-local)
