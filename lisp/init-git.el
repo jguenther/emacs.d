@@ -40,9 +40,9 @@
 
 
 
-;; Convenient binding for vc-git-grep
-(global-set-key (kbd "C-x v f") 'vc-git-grep)
 
+(global-set-key (kbd "C-x v f") 'vc-git-grep)
+(global-set-key (kbd "C-x v g") 'magit-blame)
 
 
 ;;; git-svn support
@@ -127,6 +127,11 @@
     ))
 
 (add-hook 'magit-mode-hook #'endless/add-PR-fetch)
+
+
+
+;; silver-searcher
+(global-set-key (kbd "C-x v F") 'ag)
 
 
 
