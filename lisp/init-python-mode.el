@@ -38,30 +38,9 @@
 
   (unless (require 'yasnippet nil t)
     (setq elpy-modules (delq 'elpy-module-yasnippet elpy-modules)))
-
-  ;; remove unnecessary binds
-  (cl-dolist (key '(
-                                        ; flymake
-                    "C-c n" "C-c p" "C-c C-n" "C-c C-p"
-                                        ; refactor (deprecated)
-                    "C-c C-r"
-                                        ; ??
-                    "C-c R"
-                                        ; elpy-check
-                    "C-c C-v"
-                    ))
-    (define-key elpy-mode-map (kbd key) nil))
   )
 
 (after-load 'python
-  ;; Skeletons
-  (define-key python-mode-map (kbd "C-c s c") 'python-skeleton-class)
-  (define-key python-mode-map (kbd "C-c s d") 'python-skeleton-def)
-  (define-key python-mode-map (kbd "C-c s f") 'python-skeleton-for)
-  (define-key python-mode-map (kbd "C-c s i") 'python-skeleton-if)
-  (define-key python-mode-map (kbd "C-c s t") 'python-skeleton-try)
-  (define-key python-mode-map (kbd "C-c s w") 'python-skeleton-while)
-
   (add-hook 'python-mode-hook 'superword-mode)
   (add-hook 'python-mode-hook 'indent-guide-mode)
   (add-hook 'magit-blame-mode-hook (lambda () (when indent-guide-mode
@@ -71,14 +50,6 @@
   ;;(add-hook 'python-mode-hook (lambda () (flycheck-mode -1)))
 
   (add-hook 'comint-output-filter-functions 'python-pdbtrack-comint-output-filter-function)
-
-  ;; python-x binds
-  (define-key python-mode-map (kbd "C-c ! C-j") 'python-shell-send-line)
-  (define-key python-mode-map (kbd "C-c ! C-n") 'python-shell-send-line-and-step)
-  (define-key python-mode-map (kbd "C-c ! C-f") 'python-shell-send-defun)
-  (define-key python-mode-map (kbd "C-c ! C-b") 'python-shell-send-buffer)
-  (define-key python-mode-map (kbd "C-c ! C-c") 'python-shell-send-dwim)
-  (define-key python-mode-map (kbd "C-c ! p") 'python-shell-print-region-or-symbol)
   )
 
 
@@ -91,17 +62,8 @@
 (require-package 'jedi)
 (require-package 'jedi-direx)
 
-(after-load 'jedi
-  (define-key python-mode-map (kbd "C-c J t") 'jedi:toggle-log-traceback)
-  (define-key python-mode-map (kbd "C-c J d") 'jedi:toggle-debug-server)
-  (define-key python-mode-map (kbd "C-c J e") 'jedi:pop-to-epc-buffer)
-
-  (define-key python-mode-map (kbd "C-c C-.") 'jedi:goto-definition-pop-marker)
-  (define-key python-mode-map (kbd "C-.")     'jedi:goto-definition-push-marker)
-  (define-key python-mode-map (kbd "C-c C-.")   'jedi:goto-definition-push-marker)
-
+(after-load 'jedi  
   (add-hook 'jedi-mode-hook 'jedi-direx:setup)
-  (define-key python-mode-map (kbd "C-c x") 'jedi-direx:pop-to-buffer)
   )
 
 ;; pungi (jedi and virtualenv compat)
@@ -159,26 +121,12 @@
 
 ;; TODO make realgud-trepan2 work with elpy-test
 (require-package 'realgud)
-;;(require-package 'test-simple)
-;;(require-package 'load-relative)
-;;(require-package 'loc-changes)
-
 (require-package 'pytest)
+
 (after-load 'python
   (require 'pytest)
-  (define-key python-mode-map (kbd "C-c t a") 'pytest-all)
-  (define-key python-mode-map (kbd "C-c t m") 'pytest-module)
-  (define-key python-mode-map (kbd "C-c t .") 'pytest-one)
-  (define-key python-mode-map (kbd "C-c t d") 'pytest-directory)
-  (define-key python-mode-map (kbd "C-c p a") 'pytest-pdb-all)
-  (define-key python-mode-map (kbd "C-c p m") 'pytest-pdb-module)
-  (define-key python-mode-map (kbd "C-c p .") 'pytest-pdb-one)
-
-  (define-key python-mode-map (kbd "C-x C-q") 'realgud-short-key-mode)
-
-  (require 'realgud))
-
-
+  (require 'realgud)
+  )
 
 ;; TODO make this append to PYTHONPATH instead of replacing it
 (defadvice elpy-test (around manipulate-environment activate)
@@ -218,7 +166,6 @@ environment variable."
   )
 
 (after-load 'python
-  (define-key python-mode-map (kbd "C-c C-<SPC>") 'python-add-breakpoint)
   (add-hook 'python-mode-hook 'annotate-pdb-breakpoints)
   )
 
@@ -298,15 +245,73 @@ This requires the pytest package to be installed."
 
 
 
-;;; deferred setup, to deal with pythonpath issues
-
-;;
-;; Use the regular major mode hook to add a buffer-local hack-local-variables-hook
-;;
-;; This is necessary since python sys.path is set in dirlocals which is not
-;; visible until after python-mode-hook has run
-;;
 (defun tak/python-setup ()
+  "Setup python-mode.
+
+Adds keybinds and uses hack-local-variables-hook to setup sys.path."
+  ;;; setup python-mode keybinds
+
+  ;; local binds
+  (define-key python-mode-map (kbd "C-c C-<SPC>") 'python-add-breakpoint)
+
+  ;; elpy--remove unnecessary binds
+  (cl-dolist (key '(
+                                        ; flymake
+                    "C-c n" "C-c p" "C-c C-n" "C-c C-p"
+                                        ; refactor (deprecated)
+                    "C-c C-r"
+                                        ; ??
+                    "C-c R"
+                                        ; elpy-check
+                    "C-c C-v"
+                    ))
+    (define-key elpy-mode-map (kbd key) nil))
+  
+  ;;; Skeletons
+  (define-key python-mode-map (kbd "C-c s c") 'python-skeleton-class)
+  (define-key python-mode-map (kbd "C-c s d") 'python-skeleton-def)
+  (define-key python-mode-map (kbd "C-c s f") 'python-skeleton-for)
+  (define-key python-mode-map (kbd "C-c s i") 'python-skeleton-if)
+  (define-key python-mode-map (kbd "C-c s t") 'python-skeleton-try)
+  (define-key python-mode-map (kbd "C-c s w") 'python-skeleton-while)
+  
+  ;; python-x
+  (define-key python-mode-map (kbd "C-c ! C-j") 'python-shell-send-line)
+  (define-key python-mode-map (kbd "C-c ! C-n") 'python-shell-send-line-and-step)
+  (define-key python-mode-map (kbd "C-c ! C-f") 'python-shell-send-defun)
+  (define-key python-mode-map (kbd "C-c ! C-b") 'python-shell-send-buffer)
+  (define-key python-mode-map (kbd "C-c ! C-c") 'python-shell-send-dwim)
+  (define-key python-mode-map (kbd "C-c ! p") 'python-shell-print-region-or-symbol)
+
+  ;;; jedi
+  (define-key python-mode-map (kbd "C-c J t") 'jedi:toggle-log-traceback)
+  (define-key python-mode-map (kbd "C-c J d") 'jedi:toggle-debug-server)
+  (define-key python-mode-map (kbd "C-c J e") 'jedi:pop-to-epc-buffer)
+  (define-key python-mode-map (kbd "C-c C-.") 'jedi:goto-definition-pop-marker)
+  (define-key python-mode-map (kbd "C-.")     'jedi:goto-definition-push-marker)
+  (define-key python-mode-map (kbd "C-c C-.")   'jedi:goto-definition-push-marker)
+
+  ;;; jedi-direx
+  (define-key python-mode-map (kbd "C-c x") 'jedi-direx:pop-to-buffer)
+
+  ;; pytest
+  (define-key python-mode-map (kbd "C-c t a") 'pytest-all)
+  (define-key python-mode-map (kbd "C-c t m") 'pytest-module)
+  (define-key python-mode-map (kbd "C-c t .") 'pytest-one)
+  (define-key python-mode-map (kbd "C-c t d") 'pytest-directory)
+  (define-key python-mode-map (kbd "C-c p a") 'pytest-pdb-all)
+  (define-key python-mode-map (kbd "C-c p m") 'pytest-pdb-module)
+  (define-key python-mode-map (kbd "C-c p .") 'pytest-pdb-one)
+
+  ;; realgud
+  (define-key python-mode-map (kbd "C-x C-q") 'realgud-short-key-mode)
+
+  ;;
+  ;; Use the regular major mode hook to add a buffer-local hack-local-variables-hook
+  ;;
+  ;; This is necessary since python sys.path is set in dirlocals which is not
+  ;; visible until after python-mode-hook has run
+  ;;
   (add-hook
    'hack-local-variables-hook
    (lambda ()
@@ -320,18 +325,19 @@ This requires the pytest package to be installed."
      ;; (setq elpy-rpc-pythonpath (mapconcat 'concat '(elpy-rpc-pythonpath
      ;;                                                python-shell-extra-pythonpaths)))
      
-     ) nil t))
+     ) nil t)
+  ;; ;; alternate method
+  ;; (add-hook 'hack-local-variables-hook 'run-local-vars-mode-hook)
+  ;; (defun run-local-vars-mode-hook ()
+  ;;   "Run a hook for the major-mode after the local variables have been processed."
+  ;;   (run-hooks (intern (concat (symbol-name major-mode) "-local-vars-hook"))))
+  ;; (add-hook 'python-mode-local-vars-hook 'cr/python-mode-shell-setup)
+
+  )
 
 (after-load 'python  
   (add-hook 'python-mode-hook 'tak/python-setup)
   )
-
-;; ;; alternate method
-;; (add-hook 'hack-local-variables-hook 'run-local-vars-mode-hook)
-;; (defun run-local-vars-mode-hook ()
-;;   "Run a hook for the major-mode after the local variables have been processed."
-;;   (run-hooks (intern (concat (symbol-name major-mode) "-local-vars-hook"))))
-;; (add-hook 'python-mode-local-vars-hook 'cr/python-mode-shell-setup)
 
 (elpy-enable)
 
