@@ -261,6 +261,7 @@ Moves point to the end of the inserted text. Does not change mark."
 (define-key launcher-map "f" #'find-dired)
 (define-key launcher-map "g" #'lgrep)
 (define-key launcher-map "G" #'rgrep)
+(define-key launcher-map "F" #'grep-find)
 (define-key launcher-map "h" #'man) ; Help
 (define-key launcher-map "i" #'package-install-from-buffer)
 (define-key launcher-map "n" #'nethack)
