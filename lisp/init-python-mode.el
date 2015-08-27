@@ -121,10 +121,8 @@
 
 ;; TODO make realgud-trepan2 work with elpy-test
 (require-package 'realgud)
-(require-package 'pytest)
 
 (after-load 'python
-  (require 'pytest)
   (require 'realgud)
   )
 
@@ -171,7 +169,7 @@ environment variable."
 
 
 
-;;; pytest pdb
+;;; py.test pdb
 ;; c.f. https://bitbucket.org/hpk42/py-trunk/commits/1d7b0838917f
 
 (defun elpy-copy-test-at-point ()
@@ -293,15 +291,6 @@ Adds keybinds and uses hack-local-variables-hook to setup sys.path."
 
   ;;; jedi-direx
   (define-key python-mode-map (kbd "C-c x") 'jedi-direx:pop-to-buffer)
-
-  ;; pytest
-  (define-key python-mode-map (kbd "C-c t a") 'pytest-all)
-  (define-key python-mode-map (kbd "C-c t m") 'pytest-module)
-  (define-key python-mode-map (kbd "C-c t .") 'pytest-one)
-  (define-key python-mode-map (kbd "C-c t d") 'pytest-directory)
-  (define-key python-mode-map (kbd "C-c p a") 'pytest-pdb-all)
-  (define-key python-mode-map (kbd "C-c p m") 'pytest-pdb-module)
-  (define-key python-mode-map (kbd "C-c p .") 'pytest-pdb-one)
 
   ;; realgud
   (define-key python-mode-map (kbd "C-x C-q") 'realgud-short-key-mode)
