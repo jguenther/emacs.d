@@ -419,12 +419,15 @@ See also: `enable-all-disabled-commands'."
 
 
 ;;; guide-key setup
-(dolist (key '(
-               (cperl-mode "C-o")
-               "M-g"
-               "ESC"
-               ))
-  (add-to-list 'guide-key/guide-key-sequence key t))
+
+(after-load 'guide-key
+  (dolist (key '(
+                 (cperl-mode "C-o")
+                 "M-g"
+                 "ESC"
+                 "C-h"
+                 ))
+    (add-to-list 'guide-key/guide-key-sequence key t)))
 
 
 ;;; Scrolling
