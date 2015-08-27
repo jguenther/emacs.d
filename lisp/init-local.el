@@ -574,25 +574,26 @@ Sets TERM=xterm-256color"
 
 
 
-;; (require-package 'free-keys)
-;; (require 'free-keys)
+(require-package 'free-keys)
+(require 'free-keys)
 
-;; (global-set-key (kbd "C-h C-k") 'free-keys)
+(global-set-key (kbd "C-h C-k") 'free-keys)
 
-;; ;; add super if on mac
-;; (when *is-a-mac*
-;;   (add-to-list 'free-keys-modifiers "s" t))
+;; add super if on mac
+(when *is-a-mac*
+  (add-to-list 'free-keys-modifiers "s" t))
 
 
-;; (global-set-key (kbd "") 'customize-group)
-;; (global-set-key (kbd "") 'customize-variable)
+(global-set-key (kbd "C-h M-c") nil)
+(global-set-key (kbd "C-h M-c g") 'customize-group)
+(global-set-key (kbd "C-h M-c c") 'customize-variable)
+(global-set-key (kbd "C-h M-c v") 'customize-variable)
 
 
 
-
-;;(require-package 'ace-jump-mode)
-;;(global-set-key (kbd "C-;") 'ace-jump-mode)
-;;(global-set-key (kbd "C-:") 'ace-jump-word-mode)
+(require-package 'ace-jump-mode)
+(global-set-key (kbd "C-;") 'ace-jump-mode)
+(global-set-key (kbd "C-:") 'ace-jump-word-mode)
 
 
 (provide 'init-local)
