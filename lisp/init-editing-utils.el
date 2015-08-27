@@ -197,6 +197,7 @@
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-+") 'mc/mark-next-like-this)
 (define-key mode-specific-map (kbd "C-<") 'mc/mark-all-like-this)
+(define-key mode-specific-map (kbd "C A") 'mc/mark-all-like-this)
 ;; From active region to multiple cursors:
 (define-key mode-specific-map (kbd "C r") 'set-rectangular-region-anchor)
 (define-key mode-specific-map (kbd "C c") 'mc/edit-lines)

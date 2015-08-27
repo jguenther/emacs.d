@@ -115,6 +115,10 @@
   (condition-case nil (imenu-add-to-menubar "imenu") (error nil)))
 (add-hook 'font-lock-mode-hook 'try-to-add-imenu)
 
+(defun tak/auto-revert-mode-off ()
+  (interactive)
+  (auto-revert-mode -1))
+
 (when *is-a-mac*
   ;; rebind home/end for macos
   (global-set-key (kbd "<home>") 'move-beginning-of-line)
@@ -125,6 +129,9 @@
 
   ;; paste utf-8
   (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+
+  ;; disable global-auto-revert-mode due to corruption bug
+  (add-hook 'find-file-hook 'tak/auto-revert-mode-off)
   )
 
 ;; imenu bindings
