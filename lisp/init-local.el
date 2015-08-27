@@ -553,14 +553,6 @@ Sets TERM=xterm-256color"
 
 
 
-;; swap bindings for isearch-*-regexp with isearch-*
-(global-set-key (kbd "C-s") 'isearch-forward-regexp)
-(global-set-key (kbd "C-M-s") 'isearch-forward)
-(global-set-key (kbd "C-r") 'isearch-backward-regexp)
-(global-set-key (kbd "C-M-r") 'isearch-backward)
-
-
-
 ;; turn on save place so that when opening a file, the cursor will be at the
 ;; last position.
 (setq-default save-place t)
