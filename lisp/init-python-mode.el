@@ -198,7 +198,7 @@ environment variable."
 
 ;;
 ;; pdb setup, note the python version
-(setq pdb-path '/usr/local/bin/pdb
+(setq pdb-path '/usr/lib/python2.7/pdb.py
       gud-pdb-command-name (symbol-name pdb-path))
 
 (defun annotate-pdb-breakpoints ()
