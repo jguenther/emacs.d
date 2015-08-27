@@ -457,13 +457,14 @@ See also: `enable-all-disabled-commands'."
 
 (require-package 'org-plus-contrib)
 
-(add-hook 'org-mode-hook
-          (lambda ()
-            (guide-key/add-local-highlight-command-regexp "org-")
-            ))
+(defun tak/org-mode-setup ()
+  (guide-key/add-local-highlight-command-regexp "org-")
+  (define-key org-mode-map (kbd "C-M-<return>") 'org-insert-todo-heading)
+  )
+
+(add-hook 'org-mode-hook 'tak/org-mode-setup)
 
 (after-load 'org
-  (define-key org-mode-map (kbd "C-M-<return>") 'org-insert-todo-heading)
   (dolist (element '(
                      ;;org-bullets
                      ;;org-cliplink
@@ -481,8 +482,9 @@ See also: `enable-all-disabled-commands'."
                      org-repo-todo
                                         ;org-trello
                      ))
-    (maybe-require-package element)
-    (add-to-list 'org-modules element t))
+    (if (maybe-require-package element)
+        (add-to-list 'org-modules element t)))
+  
   (org-load-modules-maybe t))
 
 
