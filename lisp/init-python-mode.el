@@ -314,8 +314,12 @@ Adds keybinds and uses hack-local-variables-hook to setup sys.path."
 
   )
 
-(after-load 'python  
+(after-load 'python
   (add-hook 'python-mode-hook 'tak/python-setup)
+  (add-hook 'python-mode-hook (lambda ()
+                                (add-to-list 'flycheck-disabled-checkers 'python-flake8)
+                                (if flycheck-mode
+                                    (flycheck-mode -1))))
   )
 
 (elpy-enable)
