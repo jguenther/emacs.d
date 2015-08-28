@@ -34,7 +34,7 @@
   ;; use jedi completion instead
   (setq elpy-modules (delq 'elpy-module-company elpy-modules))
 
-  ;;(elpy-use-cpython)
+  (elpy-use-cpython)
 
   (unless (require 'yasnippet nil t)
     (setq elpy-modules (delq 'elpy-module-yasnippet elpy-modules)))
