@@ -124,6 +124,8 @@
 
 (after-load 'python
   (require 'realgud)
+  (setq pdb-path '/usr/local/bin/pdb 
+        gud-pdb-command-name (symbol-name pdb-path))
   )
 
 ;; TODO make this append to PYTHONPATH instead of replacing it
@@ -142,10 +144,6 @@ environment variable."
     (setenv "TERM" term)
     ))
 
-;;
-;; pdb setup, note the python version
-(setq pdb-path '/usr/lib/python2.7/pdb.py
-      gud-pdb-command-name (symbol-name pdb-path))
 
 (defun annotate-pdb-breakpoints ()
   (interactive)
