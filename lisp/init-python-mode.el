@@ -128,23 +128,6 @@
         gud-pdb-command-name (symbol-name pdb-path))
   )
 
-;; TODO make this append to PYTHONPATH instead of replacing it
-(defadvice elpy-test (around manipulate-environment activate)
-  "Prepends the contents of `python-shell-extra-pythonpaths' to the PYTHONPATH
-environment variable."
-  (let ((pythonpath (getenv "PYTHONPATH"))
-        (term       (getenv "TERM")))
-    ;;(unwind-protect)
-    (progn
-      (setenv "PYTHONPATH"
-              (s-join ":" python-shell-extra-pythonpaths))
-      (setenv "TERM" "xterm-256color")
-      ad-do-it)
-    (setenv "PYTHONPATH" pythonpath)
-    (setenv "TERM" term)
-    ))
-
-
 (defun annotate-pdb-breakpoints ()
   (interactive)
   (highlight-lines-matching-regexp "\\(import i?pdb\\|i?pdb.set_trace()\\)"))
@@ -241,6 +224,27 @@ This requires the pytest package to be installed."
 ;;; http://stackoverflow.com/questions/21246218/how-can-i-make-emacs-jedi-use-project-specific-virtualenvs
 
 
+(defun tak/hack-python-locals ()
+  (make-local-variable 'process-environment)
+
+  (setq process-environment
+        (let* ((extra-pythonpaths (s-join ":" python-shell-extra-pythonpaths))
+               (old-pythonpath (getenv "PYTHONPATH"))
+               (new-pythonpath (if old-pythonpath
+                                   (concat extra-pythonpaths
+                                           path-separator
+                                           old-pythonpath)
+                                 extra-pythonpaths)))
+          (cons (concat "PYTHONPATH=" new-pythonpath)
+                process-environment)))
+
+  (add-hook 'python-mode-hook 'jedi:setup nil t)
+  (add-hook 'python-mode-hook 'flycheck-mode nil t)
+  
+  ;; (setq elpy-rpc-pythonpath (mapconcat 'concat '(elpy-rpc-pythonpath
+  ;;                                                python-shell-extra-pythonpaths)))
+  
+  )
 
 (defun tak/python-setup ()
   "Setup python-mode.
@@ -300,20 +304,7 @@ Adds keybinds and uses hack-local-variables-hook to setup sys.path."
   ;; This is necessary since python sys.path is set in dirlocals which is not
   ;; visible until after python-mode-hook has run
   ;;
-  (add-hook
-   'hack-local-variables-hook
-   (lambda ()
-     (add-hook 'python-mode-hook 'jedi:setup)
-     
-     (add-to-list 'flycheck-disabled-checkers 'python-flake8)
-     (if flycheck-mode
-         (flycheck-mode -1))
-     (add-hook 'python-mode-hook 'flycheck-mode)
-     
-     ;; (setq elpy-rpc-pythonpath (mapconcat 'concat '(elpy-rpc-pythonpath
-     ;;                                                python-shell-extra-pythonpaths)))
-     
-     ) nil t)
+  (add-hook 'hack-local-variables-hook 'tak/hack-python-locals nil t)
   ;; ;; alternate method
   ;; (add-hook 'hack-local-variables-hook 'run-local-vars-mode-hook)
   ;; (defun run-local-vars-mode-hook ()
