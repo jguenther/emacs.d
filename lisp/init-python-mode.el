@@ -206,7 +206,6 @@ This requires the pytest package to be installed."
       (apply #'elpy-test-run-pdb top (append runner-command
                                              (list "--pdb" "-s"
                                                    )))))))
-(put 'elpy-test-pytest-pdb-runner 'elpy-test-runner-p t)
 
 (defun elpy-test-run-pdb (working-directory command &rest args)
   "Run COMMAND with ARGS in WORKING-DIRECTORY as a test command using pdb."
@@ -218,8 +217,10 @@ This requires the pytest package to be installed."
     (message "running pdb: `%s'" cmdline)
     (pdb cmdline)))
 
-(set 'elpy-test-runner 'elpy-test-pytest-pdb-runner)
-
+(after-load 'elpy
+  (put 'elpy-test-pytest-pdb-runner 'elpy-test-runner-p t)
+  (set 'elpy-test-runner 'elpy-test-pytest-pdb-runner)
+  )
 
 
 ;;; from https://github.com/russell/dotfiles/blob/master/emacs.d/init-programming.d/python.el
