@@ -102,7 +102,9 @@
 
 (after-load 'help
   (require 'help+)
-  (require 'help-fns+))
+  ;; disabled--no such function `auto-do-load'
+  ;;(require 'help-fns+)
+  )
 
 ;;(require-package 'thumb-frm)
 ;;(require 'thumb-frm)
