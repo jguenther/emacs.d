@@ -39,7 +39,7 @@
  '(jedi:install-imenu t)
  '(jedi:tooltip-method (quote (pos-tip)))
  '(jedi:use-shortcuts t)
- '(js-indent-level 4)
+ '(js-indent-level 4 t)
  '(js2-basic-offset 4 t)
  '(magit-revert-buffers nil)
  '(magit-save-repository-buffers (quote dontask))
@@ -55,7 +55,8 @@
  '(python-fill-docstring-style (quote django))
  '(safe-local-variable-values
    (quote
-    ((whitespace-style face tabs spaces trailing lines space-before-tab::space newline indentation::space empty space-after-tab::space space-mark tab-mark newline-mark)
+    ((flycheck-pylintrc . "/Users/jguenther/Projects/VBC/tools/vbuild/pylintrc")
+     (whitespace-style face tabs spaces trailing lines space-before-tab::space newline indentation::space empty space-after-tab::space space-mark tab-mark newline-mark)
      (flycheck-pylintrc "/Users/jguenther/Projects/harvester-service/.pylintrc")
      (flycheck-pylintrc
       (expand-file-name "~/Projects/VBC/test/.pylintrc_test"))
