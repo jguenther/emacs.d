@@ -97,11 +97,12 @@
 
 (require-package 'help+)
 (require-package 'help-fns+)
+(require-package 'help-mode+)
 
 (after-load 'help
   (require 'help+)
-  ;; disabled--no such function `auto-do-load'
-  ;;(require 'help-fns+)
+  (require 'help-fns+)
+  (require 'help-mode+)
   )
 
 ;;(require-package 'thumb-frm)
