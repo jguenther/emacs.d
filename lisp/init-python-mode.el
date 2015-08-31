@@ -21,6 +21,10 @@
 
 (require-package 'indent-guide)
 (require-package 'python-x)
+(require-package 'flycheck)
+
+(after-load 'flycheck
+  (add-to-list 'flycheck-disabled-checkers 'python-flake8))
 
 
 
@@ -238,8 +242,10 @@ This requires the pytest package to be installed."
           (cons (concat "PYTHONPATH=" new-pythonpath)
                 process-environment)))
 
-  (add-hook 'python-mode-hook 'jedi:setup nil t)
-  (add-hook 'python-mode-hook 'flycheck-mode nil t)
+  (add-hook 'python-mode-hook 'jedi:setup)
+  (add-hook 'python-mode-hook 'flycheck-mode)
+
+  (run-hooks 'python-mode-hook)
   
   ;; (setq elpy-rpc-pythonpath (mapconcat 'concat '(elpy-rpc-pythonpath
   ;;                                                python-shell-extra-pythonpaths)))
@@ -315,9 +321,8 @@ Adds keybinds and uses hack-local-variables-hook to setup sys.path."
   )
 
 (after-load 'python
-  (add-hook 'python-mode-hook 'tak/python-setup)
+  (add-hook 'python-mode-hook 'tak/python-setup t)
   (add-hook 'python-mode-hook (lambda ()
-                                (add-to-list 'flycheck-disabled-checkers 'python-flake8)
                                 (if flycheck-mode
                                     (flycheck-mode -1))))
   )
