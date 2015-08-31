@@ -3,7 +3,7 @@
 
 (add-auto-mode 'csv-mode "\\.[Cc][Ss][Vv]\\'")
 
-(setq csv-separators '("," ";" "|" " "))
+(setq csv-separators '(","))
 
 ;; auto-soft-align csv fields
 (add-hook 'csv-mode-hook
