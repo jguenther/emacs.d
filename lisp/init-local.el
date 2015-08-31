@@ -17,15 +17,13 @@
  git-gutter-fr+-side 'right-fringe
  git-gutter-fr:side 'right-fringe
  
- magit-revert-backup t
  magit-diff-refine-hunk t
- magit-highlight-whitespace nil
- magit-repo-dirs (quote ("~/.emacs.d"
-                         "~/org"
-                         "~/code/scripts"
-                         "~/dotfiles"
-                         ))
- magit-last-seen-setup-instructions "1.4.0"
+ magit-diff-highlight-trailing nil
+ magit-repository-directories (quote ("~/.emacs.d"
+                                      "~/org"
+                                      "~/code/scripts"
+                                      "~/dotfiles"
+                                      ))
  message-log-max 10000
 
  guide-key/recursive-key-sequence-flag t
