@@ -255,7 +255,8 @@ This requires the pytest package to be installed."
 (defun tak/python-setup ()
   "Setup python-mode.
 
-Adds keybinds and uses hack-local-variables-hook to setup sys.path."
+Adds and modifies keybinds and uses hack-local-variables-hook to setup
+sys.path."
   ;;; setup python-mode keybinds
 
   ;; local binds
@@ -263,14 +264,12 @@ Adds keybinds and uses hack-local-variables-hook to setup sys.path."
 
   ;; elpy--remove unnecessary binds
   (cl-dolist (key '(
-                                        ; flymake
-                    "C-c n" "C-c p" "C-c C-n" "C-c C-p"
-                                        ; refactor (deprecated)
-                    "C-c C-r"
-                                        ; ??
-                    "C-c R"
-                                        ; elpy-check
+                    "C-c C-n"
+                                        ;elpy-flymake-next-error
+                    "C-c C-p"
+                                        ;elpy-flymake-previous-error
                     "C-c C-v"
+                                        ;elpy-check
                     ))
     (define-key elpy-mode-map (kbd key) nil))
   
