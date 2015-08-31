@@ -229,23 +229,23 @@ This requires the pytest package to be installed."
 
 
 (defun tak/hack-python-locals ()
-  (make-local-variable 'process-environment)
-
-  (setq process-environment
-        (let* ((extra-pythonpaths (s-join ":" python-shell-extra-pythonpaths))
-               (old-pythonpath (getenv "PYTHONPATH"))
-               (new-pythonpath (if old-pythonpath
-                                   (concat extra-pythonpaths
-                                           path-separator
-                                           old-pythonpath)
-                                 extra-pythonpaths)))
-          (cons (concat "PYTHONPATH=" new-pythonpath)
-                process-environment)))
+  (let* ((extra-pythonpaths (s-join ":" python-shell-extra-pythonpaths))
+         (old-pythonpath (getenv "PYTHONPATH"))
+         (new-pythonpath (if old-pythonpath
+                             (concat extra-pythonpaths
+                                     path-separator
+                                     old-pythonpath)
+                           extra-pythonpaths)))
+    (set (make-local-variable 'process-environment)
+         (if (> (length extra-pythonpaths) 0)
+             (cons (concat "PYTHONPATH=" new-pythonpath)
+                   process-environment)
+           process-environment)))
 
   (add-hook 'python-mode-hook 'jedi:setup)
   (add-hook 'python-mode-hook 'flycheck-mode)
 
-  (run-hooks 'python-mode-hook)
+  ;;(run-hooks 'python-mode-hook)
   
   ;; (setq elpy-rpc-pythonpath (mapconcat 'concat '(elpy-rpc-pythonpath
   ;;                                                python-shell-extra-pythonpaths)))
@@ -309,7 +309,7 @@ sys.path."
   ;; This is necessary since python sys.path is set in dirlocals which is not
   ;; visible until after python-mode-hook has run
   ;;
-  (add-hook 'hack-local-variables-hook 'tak/hack-python-locals nil t)
+  (add-hook 'hack-local-variables-hook 'tak/hack-python-locals)
   ;; ;; alternate method
   ;; (add-hook 'hack-local-variables-hook 'run-local-vars-mode-hook)
   ;; (defun run-local-vars-mode-hook ()
