@@ -6,7 +6,10 @@
               indent-guide-recursive nil
               jedi:setup-keys t
               jedi:complete-on-dot t
-              jedi-direx:hide-imports t)
+              jedi-direx:hide-imports t
+
+              ;; run flycheck-mode after hack-local-vars-hook
+              flycheck-global-modes '(not python-mode))
 
 ;; local fork of elpy
 (add-to-list 'load-path
@@ -49,9 +52,6 @@
   (add-hook 'python-mode-hook 'indent-guide-mode)
   (add-hook 'magit-blame-mode-hook (lambda () (when indent-guide-mode
                                            (indent-guide-mode))))
-
-  ;; enable this mode in tak/python-setup instead
-  ;;(add-hook 'python-mode-hook (lambda () (flycheck-mode -1)))
 
   (add-hook 'comint-output-filter-functions 'python-pdbtrack-comint-output-filter-function)
   )
@@ -321,9 +321,6 @@ sys.path."
 
 (after-load 'python
   (add-hook 'python-mode-hook 'tak/python-setup t)
-  (add-hook 'python-mode-hook (lambda ()
-                                (if flycheck-mode
-                                    (flycheck-mode -1))))
   )
 
 (elpy-enable)
