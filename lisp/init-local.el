@@ -313,29 +313,29 @@ Moves point to the end of the inserted text. Does not change mark."
 (autoload 'dired-toggle-read-only "dired" nil t)
 (define-key endless/toggle-map "w" #'whitespace-mode)
 
-(defvar tak/magit-highlight-whitespace magit-highlight-whitespace
+(defvar tak/magit-diff-highlight-trailing magit-diff-highlight-trailing
   "Enable or disable whitespace highlighting in `magit-mode`.
-Used by `tak/toggle-magit-highlight-whitespace`.")
+Used by `tak/toggle-magit-diff-highlight-trailing`.")
 
-(defun tak/toggle-magit-highlight-whitespace ()
+(defun tak/toggle-magit-diff-highlight-trailing ()
   "Toggles highlighting of whitespace in `magit-mode` buffers.
-Toggles the value of `tak/magit-highlight-whitespace`, assigning its
-new value to `magit-highlight-whitespace`. Does not currently
+Toggles the value of `tak/magit-diff-highlight-trailing`, assigning its
+new value to `magit-diff-highlight-trailing`. Does not currently
 differentiate `t` from `status` in this variable, and will toggle
 between `nil` and `t` no matter the original value of
-`magit-highlight-whitespace`."
+`magit-diff-highlight-trailing`."
   (interactive)   
-  (let ((highlight (setq tak/magit-highlight-whitespace
-                         (not tak/magit-highlight-whitespace))))
-    (setq magit-highlight-whitespace highlight)
+  (let ((highlight (setq tak/magit-diff-highlight-trailing
+                         (not tak/magit-diff-highlight-trailing))))
+    (setq magit-diff-highlight-trailing highlight)
     (message "Whitespace highlighting %s"
-             (if magit-highlight-whitespace
+             (if magit-diff-highlight-trailing
                  '"enabled"
                '"disabled"))))
 
 ;; vc/magit-mode bindings
 (define-key tak/vc-toggle-map "h" #'magit-diff-toggle-refine-hunk)
-(define-key tak/vc-toggle-map "w" #'tak/toggle-magit-highlight-whitespace)
+(define-key tak/vc-toggle-map "w" #'tak/toggle-magit-diff-highlight-trailing)
 
 (after-load 'aggressive-indent
   (add-to-list 'aggressive-indent-excluded-modes 'cperl-mode t))
