@@ -56,7 +56,10 @@
  '(python-fill-docstring-style (quote django))
  '(safe-local-variable-values
    (quote
-    ((flycheck-pylintrc . "/Users/jguenther/Projects/VBC/tools/vbuild/pylintrc")
+    ((flycheck-python-pylint-executable . "/Users/jguenther/Projects/CS/tools/pylint/lint.py")
+     (flycheck-python-pylint-executable . "/Users/jguenther/Projects/harvester-service/tools/pylint/lint.py")
+     (flycheck-python-pylint-executable . "/Users/jguenther/Projects/VBC/tools/pylint/lint.py")
+     (flycheck-pylintrc . "/Users/jguenther/Projects/VBC/tools/vbuild/pylintrc")
      (whitespace-style face tabs spaces trailing lines space-before-tab::space newline indentation::space empty space-after-tab::space space-mark tab-mark newline-mark)
      (flycheck-pylintrc "/Users/jguenther/Projects/harvester-service/.pylintrc")
      (flycheck-pylintrc
