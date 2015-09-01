@@ -8,6 +8,9 @@
 /places
 /server/
 /games
+/projectile-bookmarks.eld
+/projectile.cache
+/async-bytecomp.log
 
 /url/cache
 /.emacs.desktop
