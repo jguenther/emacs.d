@@ -566,8 +566,22 @@ Sets TERM=xterm-256color"
 
 
 
+(require-package 'flx)
+(require-package 'flx-ido)
+(require-package 'flx-isearch)
 (require-package 'projectile)
 (require-package 'org-projectile)
+
+(after-load 'ido
+  (require 'flx-ido))
+
+(flx-ido-mode 1)
+
+(after-load 'projectile
+  (add-to-list 'projectile-project-root-files "tasks.py" t)
+  (add-to-list 'projectile-project-root-files "pytest.ini"))
+
+(projectile-global-mode)
 
 
 
