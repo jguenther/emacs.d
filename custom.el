@@ -52,6 +52,7 @@
  '(mouse-scroll-delay 0.2)
  '(mouse-wheel-progressive-speed t)
  '(org-list-indent-offset 2)
+ '(projectile-global-mode t)
  '(python-fill-docstring-style (quote django))
  '(safe-local-variable-values
    (quote
