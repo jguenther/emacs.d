@@ -658,5 +658,13 @@ supply a positive argument once more with C-u C-SPC."
          ad-do-it)))))
 (my-unpop-to-mark-advice)
 
+(defun tak/quote-grep-read-files (orig-function &rest args)
+  "Advice to put quotes around the value returned by `grep-read-files'."
+  ;; split-string
+  (let* ((result (apply orig-function args))
+         (patterns (split-string result)))
+    (s-join " " (--map (format "'%s'" it) patterns))))
+
+(advice-add 'grep-read-files :around #'tak/quote-grep-read-files)
 
 (provide 'init-local)
