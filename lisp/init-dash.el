@@ -15,6 +15,7 @@
     (require-package 'dash-at-point)))
 
 (when (package-installed-p 'dash-at-point)
-  (define-key mode-specific-map (kbd "D") 'dash-at-point))
+  (define-key mode-specific-map (kbd "D") 'dash-at-point)
+  (define-key mode-specific-map (kbd "E") 'dash-at-point-with-docset))
 
 (provide 'init-dash)

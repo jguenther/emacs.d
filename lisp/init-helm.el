@@ -15,6 +15,9 @@
 (require-package 'wgrep-helm)
 (require-package 'helm-ag)
 
+(when (sanityinc/dash-installed-p)
+  (require-package 'helm-dash))
+
 ;;; http://emacs.stackexchange.com/questions/2867/how-should-i-change-my-workflow-when-moving-from-ido-to-helm
 
 (setq-default helm-ff-transformer-show-only-basename nil
