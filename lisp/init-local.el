@@ -572,10 +572,10 @@ Sets TERM=xterm-256color"
 (require-package 'projectile)
 (require-package 'org-projectile)
 
-(after-load 'ido
-  (require 'flx-ido))
+;; (after-load 'ido
+;;   (require 'flx-ido))
 
-(flx-ido-mode 1)
+;;(flx-ido-mode 1)
 
 (after-load 'projectile
   (add-to-list 'projectile-project-root-files "tasks.py" t)
