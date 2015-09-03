@@ -89,6 +89,7 @@ locate PACKAGE."
 (setq paradox-automatically-star t)
 (paradox-enable)
 (fullframe paradox-list-packages paradox-quit-and-close)
+(define-key paradox-menu-mode-map (kbd "g") 'package-menu-refresh)
 
 (require-package 'cl-lib)
 (require 'cl-lib)
