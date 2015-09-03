@@ -199,7 +199,7 @@ This requires the pytest package to be installed."
          (gud-chdir-before-run nil)
          (gud-pdb-command-name "python")
          (cmdline (combine-and-quote-strings (cons gud-pdb-command-name (cons command args))))
-         )
+         (process-environment (tak/compute-local-python-environment)))
     (message "running pdb: `%s'" cmdline)
     (pdb cmdline)))
 
@@ -229,20 +229,29 @@ This requires the pytest package to be installed."
 ;;; http://stackoverflow.com/questions/21246218/how-can-i-make-emacs-jedi-use-project-specific-virtualenvs
 
 
-(defun tak/hack-python-locals ()
-  (let* ((extra-pythonpaths (s-join ":" python-shell-extra-pythonpaths))
+
+(defun tak/compute-local-python-environment ()
+  "Computes a new `process-environment' that appends absolute paths in
+`python-shell-extra-pythonpaths' to the PYTHONPATH environment
+variable."
+  (let* ((extra-pythonpaths (--map (file-truename (concat it "/"))
+                                   python-shell-extra-pythonpaths))
+         (extra-pythonpath (s-join ":" extra-pythonpaths))
          (old-pythonpath (getenv "PYTHONPATH"))
          (new-pythonpath (if old-pythonpath
-                             (concat extra-pythonpaths
+                             (concat extra-pythonpath
                                      path-separator
                                      old-pythonpath)
-                           extra-pythonpaths)))
-    (set (make-local-variable 'process-environment)
-         (if (> (length extra-pythonpaths) 0)
-             (cons (concat "PYTHONPATH=" new-pythonpath)
-                   process-environment)
-           process-environment)))
+                           extra-pythonpath)))
+    (if (> (length extra-pythonpath) 0)
+        (cons (concat "PYTHONPATH=" new-pythonpath)
+              process-environment)
+      process-environment)))
 
+(defun tak/hack-python-locals ()
+  (set (make-local-variable 'process-environment)
+       (tak/compute-local-python-environment))
+  
   (add-hook 'python-mode-hook 'jedi:setup)
   (add-hook 'python-mode-hook 'flycheck-mode)
 
@@ -250,7 +259,6 @@ This requires the pytest package to be installed."
   
   ;; (setq elpy-rpc-pythonpath (mapconcat 'concat '(elpy-rpc-pythonpath
   ;;                                                python-shell-extra-pythonpaths)))
-  
   )
 
 (defun tak/python-setup ()
