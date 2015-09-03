@@ -52,4 +52,6 @@
 (require 'ido-vertical-mode)
 (ido-vertical-mode t)
 
+(require-package 'ido-describe-bindings)
+
 (provide 'init-ido)
