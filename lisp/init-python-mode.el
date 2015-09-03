@@ -53,7 +53,7 @@
   (add-hook 'magit-blame-mode-hook (lambda () (when indent-guide-mode
                                            (indent-guide-mode))))
 
-  (add-hook 'comint-output-filter-functions 'python-pdbtrack-comint-output-filter-function)
+  ;;(remove-hook 'comint-output-filter-functions 'python-pdbtrack-comint-output-filter-function)
   )
 
 
