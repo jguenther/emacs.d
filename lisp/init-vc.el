@@ -1,7 +1,7 @@
 (require-package 'diff-hl)
 
-(add-hook 'prog-mode-hook 'turn-on-diff-hl-mode)
-(add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode)
+;; (add-hook 'prog-mode-hook 'turn-on-diff-hl-mode)
+;; (add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode)
 
 (defun tak/add-diff-hl-toggle-command ()
   (define-key tak/vc-toggle-map "d" 'diff-hl-mode))
