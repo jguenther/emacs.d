@@ -3,14 +3,37 @@
 
 (require-package 'fullframe)
 (after-load 'ibuffer
- (fullframe ibuffer ibuffer-quit))
+  (fullframe ibuffer ibuffer-quit))
 
 (require-package 'ibuffer-vc)
+(require-package 'ibuffer-projectile)
+
+(defvar tak/ibuffer-projectile-filter-active nil)
 
 (defun ibuffer-set-up-preferred-filters ()
+  (interactive)
+  (setq tak/ibuffer-projectile-filter-active nil)
   (ibuffer-vc-set-filter-groups-by-vc-root)
   (unless (eq ibuffer-sorting-mode 'filename/process)
-    (ibuffer-do-sort-by-filename/process)))
+    (ibuffer-do-sort-by-filename/process))
+  )
+
+(defun ibuffer-set-up-projectile-filters ()
+  (interactive)
+  (setq tak/ibuffer-projectile-filter-active t)
+  (ibuffer-projectile-set-filter-groups)
+  (unless (eq ibuffer-sorting-mode 'alphabetic)
+    (ibuffer-do-sort-by-alphabetic))
+  )
+
+(defun ibuffer-toggle-filters ()
+  (interactive)
+  (if tak/ibuffer-projectile-filter-active
+      (ibuffer-set-up-preferred-filters)
+    (ibuffer-set-up-projectile-filters))
+  )
+
+(define-key ibuffer-mode-map (kbd "P") 'ibuffer-toggle-filters)
 
 (add-hook 'ibuffer-hook 'ibuffer-set-up-preferred-filters)
 
@@ -35,21 +58,20 @@
 ;; Modify the default ibuffer-formats (toggle with `)
 (setq ibuffer-formats
       '((mark modified read-only vc-status-mini " "
-              (name 18 18 :left :elide)
+              (name 25 25 :left :elide)
               " "
               (size-h 9 -1 :right)
               " "
               (mode 16 16 :left :elide)
               " "
               filename-and-process)
+        ;; wider name column
         (mark modified read-only vc-status-mini " "
-              (name 18 18 :left :elide)
+              (name 40 40 :left :elide)
               " "
               (size-h 9 -1 :right)
               " "
               (mode 16 16 :left :elide)
-              " "
-              (vc-status 16 16 :left)
               " "
               filename-and-process)))
 
