@@ -5,7 +5,8 @@
               elpy-rpc-backend "jedi"
               indent-guide-recursive nil
               jedi:setup-keys t
-              jedi:complete-on-dot t
+              jedi:use-shortcuts t
+              jedi:complete-on-dot nil
               jedi-direx:hide-imports t
 
               ;; run flycheck-mode after hack-local-vars-hook
