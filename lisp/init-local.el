@@ -438,7 +438,7 @@ See also: `enable-all-disabled-commands'."
 (global-set-key (kbd "C-x >") 'scroll-left)
 (global-set-key (kbd "C-x <") 'scroll-right)
 
-; mouse buttons are different on osx
+;; mouse buttons are different on osx
 (when *is-a-mac*
   (global-set-key (kbd "<wheel-right>") 'scroll-left)
   (global-set-key (kbd "<wheel-left>") 'scroll-right))
