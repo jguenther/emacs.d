@@ -75,6 +75,11 @@
 
 (mouse-wheel-mode 1)
 
+(require-package 'hl-line+)
+(require 'hl-line+)
+(toggle-hl-line-when-idle 1)
+(setq-default toggle-hl-line-when-idle 1.5)
+
 ;;scroll-restore seems to cause more problems than it's worth
 ;; (require-package 'scroll-restore)
 ;; (require 'scroll-restore)
