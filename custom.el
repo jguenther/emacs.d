@@ -52,6 +52,7 @@
  '(matlab-shell-command-switches (quote ("-nodesktop" "-nosplash")))
  '(menu-bar-mode t)
  '(message-confirm-send t)
+ '(mouse-1-click-follows-link 250)
  '(mouse-scroll-delay 0.2)
  '(mouse-wheel-progressive-speed t)
  '(org-attach-git-annex-cutoff 1048576)
