@@ -78,7 +78,9 @@
  '(python-fill-docstring-style (quote django))
  '(safe-local-variable-values
    (quote
-    ((flycheck-python-pylint-executable . "/Users/jguenther/Projects/CS/tools/pylint/lint.py")
+    ((python-shell-extra-pythonpaths "/Users/jguenther/Projects/VBC" "/Users/jguenther/Projects/VBC/src" "/Users/jguenther/Projects/VBC/src/lib" "/Users/jguenther/Projects/VBC/tools" "/Users/jguenther/Projects/VBC/tools/coverage-3.5.1" "/Users/jguenther/Projects/VBC/tools/minimock" "/usr/local/google_appengine" "/usr/local/google_appengine/lib/webob-1.1.1" "/usr/local/google_appengine/lib/webapp2-2.5.1" "/usr/local/google_appengine/lib/jinja2-2.6" "/usr/local/google_appengine/lib/simplejson" "/usr/local/google_appengine/lib/yaml/lib" "/usr/local/google_appengine/lib/fancy_urllib" "/usr/local/google_appengine/lib/protorpc-1.0")
+     (python-shell-extra-pythonpaths "/Users/jguenther/Projects/CS/" "/Users/jguenther/Projects/CS/src/" "/Users/jguenther/Projects/CS/src/lib/" "/Users/jguenther/Projects/CS/test/lib/" "/Users/jguenther/Projects/CS/tools/" "/usr/local/google_appengine/" "/usr/local/google_appengine/lib/webob-1.2.3/" "/usr/local/google_appengine/lib/webapp2-2.5.2/" "/usr/local/google_appengine/lib/jinja2-2.6/" "/usr/local/google_appengine/lib/lxml-2.3/")
+     (flycheck-python-pylint-executable . "/Users/jguenther/Projects/CS/tools/pylint/lint.py")
      (flycheck-python-pylint-executable . "/Users/jguenther/Projects/harvester-service/tools/pylint/lint.py")
      (flycheck-python-pylint-executable . "/Users/jguenther/Projects/VBC/tools/pylint/lint.py")
      (flycheck-pylintrc . "/Users/jguenther/Projects/VBC/tools/vbuild/pylintrc")
