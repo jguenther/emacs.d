@@ -87,6 +87,7 @@
                   shell-mode
                   eshell-mode
                   paradox-menu-mode
+                  realgud-short-key-mode
                   ))
     (add-to-list 'desktop-modes-not-to-save mode)))
 
