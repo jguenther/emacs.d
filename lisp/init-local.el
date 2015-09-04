@@ -78,7 +78,8 @@
 (require-package 'hl-line+)
 (require 'hl-line+)
 (toggle-hl-line-when-idle 1)
-(setq-default toggle-hl-line-when-idle 1.5)
+(setq-default toggle-hl-line-when-idle 1
+              hl-line-face 'highlight)
 
 ;;scroll-restore seems to cause more problems than it's worth
 ;; (require-package 'scroll-restore)
