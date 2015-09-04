@@ -182,15 +182,15 @@ This requires the pytest package to be installed."
                top
                (append runner-command
                        (list (mapconcat #'identity (cons file test-list) "::")
-                             "--pdb" "-s"
+                             "-x" "--pdb" "-s" "-l"
                              )))))
      (module
       (apply #'elpy-test-run-pdb top (append runner-command
-                                             (list file "--pdb" "-s"
+                                             (list file "-x" "--pdb" "-s" "-l"
                                                    ))))
      (t
       (apply #'elpy-test-run-pdb top (append runner-command
-                                             (list "--pdb" "-s"
+                                             (list "-x" "--pdb" "-s" "-l"
                                                    )))))))
 
 (defun elpy-test-run-pdb (working-directory command &rest args)
