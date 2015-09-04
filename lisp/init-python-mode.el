@@ -207,6 +207,19 @@ This requires the pytest package to be installed."
   (put 'elpy-test-pytest-pdb-runner 'elpy-test-runner-p t)
   (set 'elpy-test-runner 'elpy-test-pytest-pdb-runner)
   )
+
+(defun tak/munge-pdb-buffer-name (orig-function &rest args)
+  "Advise `realgud-exec-shell' to remove `py.test'
+class/method/function specifiers from the resulting buffer name."
+  (let* ((buffer (apply orig-function args))
+         (old-buffer-name (buffer-name buffer))
+         (old-buffer-name-components (s-split "::" old-buffer-name))
+         (old-buffer-car (car old-buffer-name-components))
+         (new-buffer-name (format "%s shell*" old-buffer-car)))
+    (with-current-buffer buffer
+      (rename-buffer new-buffer-name t))))
+(advice-add 'realgud-exec-shell :around #'tak/munge-pdb-buffer-name)
+
 
 
 ;;; from https://github.com/russell/dotfiles/blob/master/emacs.d/init-programming.d/python.el
