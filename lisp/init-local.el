@@ -7,9 +7,7 @@
  vc-make-backup-files nil
  delete-old-versions t
  fill-column 79
- guide-key/idle-delay 2.0
-                                        ; scale text down
- guide-key/text-scale-amount -1.15
+ 
  kept-new-versions 6
  kept-old-versions 2
 
@@ -25,8 +23,6 @@
                                       "~/dotfiles"
                                       ))
  message-log-max 10000
-
- guide-key/recursive-key-sequence-flag t
 
  scroll-restore-handle-cursor nil
 
@@ -425,19 +421,6 @@ See also: `enable-all-disabled-commands'."
 (global-set-key (kbd "C-x C-9") 'tak/set-default-frame-parameters)
 
 
-
-;;; guide-key setup
-
-(after-load 'guide-key
-  (dolist (key '(
-                 (cperl-mode "C-o")
-                 "M-g"
-                 "ESC"
-                 "C-h"
-                 ))
-    (add-to-list 'guide-key/guide-key-sequence key t)))
-
-
 ;;; Scrolling
 
 ;; swap scroll-left and scroll-right default binds
@@ -466,7 +449,6 @@ See also: `enable-all-disabled-commands'."
 (require-package 'org-plus-contrib)
 
 (defun tak/org-mode-setup ()
-  (guide-key/add-local-highlight-command-regexp "org-")
   (define-key org-mode-map (kbd "C-M-<return>") 'org-insert-todo-heading)
   )
 
