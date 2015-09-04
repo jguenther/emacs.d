@@ -110,9 +110,9 @@
 ;;(require-package 'thumb-frm)
 ;;(require 'thumb-frm)
 
-;;(require-package 'menu-bar+)
-;; (after-load 'menu-bar
-;;   (require 'menu-bar+))
+(require-package 'menu-bar+)
+(after-load 'menu-bar
+  (require 'menu-bar+))
 
 (defun try-to-add-imenu ()
   (condition-case nil (imenu-add-to-menubar "imenu") (error nil)))
