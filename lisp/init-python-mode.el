@@ -361,7 +361,7 @@ sys.path."
 \\{pylintrc-mode-map}")
 
 (add-to-list 'auto-mode-alist
-             '("/\\.?pylintrc.*\\'" . pylintrc-mode))
+             '("/\\.?pylintrc[^/]*\\'" . pylintrc-mode))
 
 
 
