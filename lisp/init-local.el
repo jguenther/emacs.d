@@ -258,6 +258,14 @@ Moves point to the end of the inserted text. Does not change mark."
 
 
 
+(defun tak/paradox-list-packages-new-frame (&optional no-fetch)
+  "Makes a new frame, switches to it, and calls
+`paradox-list-packages' with optional prefix arg NO-FETCH."
+  (interactive "P")
+  (let ((new-frame (make-frame)))
+    (select-frame-set-input-focus new-frame)
+    (paradox-list-packages no-fetch)))
+
 ;;; launcher keymap
 (define-key launcher-map "c" #'calc)
 (define-key launcher-map "d" #'ediff-buffers)
@@ -268,7 +276,7 @@ Moves point to the end of the inserted text. Does not change mark."
 (define-key launcher-map "h" #'man) ; Help
 (define-key launcher-map "i" #'package-install-from-buffer)
 (define-key launcher-map "n" #'nethack)
-(define-key launcher-map "p" #'paradox-list-packages)
+(define-key launcher-map "p" #'tak/paradox-list-packages-new-frame)
 (define-key launcher-map "s" #'shell)
 (define-key launcher-map "t" #'proced) ; top
 (define-key launcher-map "a" #'ansi-term)
