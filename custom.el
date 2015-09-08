@@ -33,7 +33,7 @@
  '(ess-fancy-comments nil)
  '(ess-indent-with-fancy-comments nil)
  '(fill-column 79)
- '(flycheck-disabled-checkers (quote (emacs-lisp-checkdoc perl-perlcritic html-tidy)))
+ '(flycheck-disabled-checkers (quote (emacs-lisp-checkdoc perl-perlcritic html-tidy python-flake8 python-pycompile)))
  '(flycheck-keymap-prefix "`")
  '(git-commit-finish-query-functions nil)
  '(ido-auto-merge-delay-time 2)
@@ -74,6 +74,9 @@
  '(org-pretty-entities-include-sub-superscripts nil)
  '(org-startup-indented t)
  '(org-use-sub-superscripts (quote {}))
+ '(package-selected-packages
+   (quote
+    (yari yaml-mode yagist win-switch whole-line-or-region whitespace-cleanup-mode which-key wgrep-ag vc-darcs unfill undo-tree tidy textile-mode tagedit switch-window sql-indent smex smarty-mode skewer-less session second-sel scss-mode scratch sass-mode ruby-hash-syntax robe rinari regex-tool redshank realgud rainbow-mode rainbow-delimiters python-x python-docstring pydoc-info pydoc project-local-variables ppd-sr-speedbar pip-requirements php-mode paredit-everywhere paradox page-break-lines osx-location orglink org-repo-todo org-projectile org-pomodoro org-plus-contrib org-mac-link org-mac-iCal org-jira org-fstree org-cliplink ob-browser mwe-log-commands multiple-cursors move-dup mmm-mode mkdown menu-bar+ matlab-mode magit-svn magit-gh-pulls macrostep lua-mode lively less-css-mode ledger-mode json-mode js-comint jquery-doc jira-markup-mode jinja2-mode jedi-direx isearch+ ipretty info+ indent-guide idomenu ido-ubiquitous ido-describe-bindings ibuffer-vc ibuffer-projectile htmlize hl-sexp hl-line+ hippie-expand-slime highlight-symbol highlight-quoted highlight-escape-sequences help-mode+ help-fns+ help+ hayoo guide-key goto-last-change gnuplot gitignore-mode github-clone github-browse-file gitconfig-mode git-wip-timemachine git-timemachine git-messenger git-gutter-fringe git-blame ghci-completion fullframe free-keys flycheck-package flycheck-ledger flycheck-hdevtools flycheck-haskell flx-isearch flx-ido fill-column-indicator expand-region exec-path-from-shell ess erlang elpy elisp-slime-nav dsvn discover-my-major discover dired-toggle-sudo dired-sort-menu dired-sort dired-imenu dired-filter dired+ diminish diff-hl default-text-scale dash-at-point darcsum cursor-chg csv-nav csv-mode css-eldoc crontab-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized coffee-mode cl-lib-highlight bug-reference-github browse-kill-ring+ bash-completion avy auto-compile anzu aggressive-indent ag ace-jump-mode ac-slime ac-js2 ac-inf-ruby ac-haskell-process)))
  '(projectile-global-mode t)
  '(python-fill-docstring-style (quote django))
  '(safe-local-variable-values
