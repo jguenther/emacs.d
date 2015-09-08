@@ -350,4 +350,20 @@ sys.path."
 
 (elpy-enable)
 
+
+
+;;; pylint setup
+
+(define-derived-mode pylintrc-mode
+    samba-generic-mode "pylintrc"
+  "A mode for editing pylintrc files.
+
+\\{pylintrc-mode-map}")
+
+(add-to-list 'auto-mode-alist
+             '("/\\.?pylintrc.*\\'" . pylintrc-mode))
+
+
+
+
 (provide 'init-python-mode)
