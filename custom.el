@@ -33,7 +33,9 @@
  '(ess-fancy-comments nil)
  '(ess-indent-with-fancy-comments nil)
  '(fill-column 79)
- '(flycheck-disabled-checkers (quote (emacs-lisp-checkdoc perl-perlcritic html-tidy python-flake8 python-pycompile)))
+ '(flycheck-disabled-checkers
+   (quote
+    (emacs-lisp-checkdoc perl-perlcritic html-tidy python-flake8 python-pycompile)))
  '(flycheck-keymap-prefix "`")
  '(git-commit-finish-query-functions nil)
  '(ido-auto-merge-delay-time 2)
