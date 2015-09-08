@@ -458,20 +458,21 @@ See also: `enable-all-disabled-commands'."
 
 (defun tak/org-mode-setup ()
   (define-key org-mode-map (kbd "C-M-<return>") 'org-insert-todo-heading)
+  (org-bullets-mode 1)
   )
 
 (add-hook 'org-mode-hook 'tak/org-mode-setup)
 
 (after-load 'org
   (dolist (element '(
-                     ;;org-bullets
+                     org-bullets
                      ;;org-cliplink
                      ;;org-elisp-help
                      org-fstree
                      
                      ;;org-gcal
                      
-                     ;;orgit
+                     orgit
                      orglink
                      
                      ;; disabled -- don't use anything.el/helm.el yet
