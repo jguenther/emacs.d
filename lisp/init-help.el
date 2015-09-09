@@ -43,5 +43,18 @@ ignored."
 
 (global-set-key "\C-hV" 'describe-foo-at-point)
 
+(define-key Info-mode-map (kbd "M-<left>") 'info-history-back)
+(define-key Info-mode-map (kbd "M-<right>") 'info-history-forward)
+
+(require-package 'help+)
+(require-package 'help-fns+)
+(require-package 'help-mode+)
+
+(after-load 'help
+  (require 'help+)
+  (require 'help-fns+)
+  (require 'help-mode+)
+  )
+
 
 (provide 'init-help)

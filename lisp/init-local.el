@@ -97,16 +97,6 @@
 ;; (require 'doremi-cmd)
 ;; (autoload 'define-doremi "doremi-mac" "Define a Do Re Mi command." nil 'macro)
 
-(require-package 'help+)
-(require-package 'help-fns+)
-;; (require-package 'help-mode+)
-
-(after-load 'help
-  (require 'help+)
-  (require 'help-fns+)
-  ;; (require 'help-mode+)
-  )
-
 ;;(require-package 'thumb-frm)
 ;;(require 'thumb-frm)
 
