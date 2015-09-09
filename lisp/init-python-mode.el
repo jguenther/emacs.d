@@ -272,8 +272,6 @@ variable."
 Adds and modifies keybinds and uses hack-local-variables-hook to setup
 sys.path."
 
-  (add-to-list 'flycheck-disabled-checkers 'python-flake8)
-  (add-to-list 'flycheck-disabled-checkers 'python-pycompile)
   (flycheck-select-checker 'python-pylint)
 
   (hl-line-mode -1)
