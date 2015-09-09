@@ -451,7 +451,6 @@ See also: `enable-all-disabled-commands'."
   (org-bullets-mode 1)
   )
 
-(add-hook 'org-mode-hook 'tak/org-mode-setup)
 
 (after-load 'org
   (dolist (element '(
@@ -474,7 +473,9 @@ See also: `enable-all-disabled-commands'."
     (if (maybe-require-package element)
         (add-to-list 'org-modules element t)))
   
-  (org-load-modules-maybe t))
+  (org-load-modules-maybe t)
+  (add-hook 'org-mode-hook 'tak/org-mode-setup)
+  )
 
 
 
