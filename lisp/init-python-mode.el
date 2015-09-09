@@ -264,11 +264,6 @@ variable."
   
   (add-hook 'python-mode-hook 'jedi:setup)
   (add-hook 'python-mode-hook 'flycheck-mode)
-
-  ;;(run-hooks 'python-mode-hook)
-  
-  ;; (setq elpy-rpc-pythonpath (mapconcat 'concat '(elpy-rpc-pythonpath
-  ;;                                                python-shell-extra-pythonpaths)))
   )
 
 (defun tak/python-setup ()
@@ -347,6 +342,9 @@ sys.path."
 (after-load 'python
   (add-hook 'python-mode-hook 'tak/python-setup t)
   )
+
+(after-load 'realgud
+  (add-hook 'realgud-short-key-mode-hook 'tak/python-setup t))
 
 (elpy-enable)
 
