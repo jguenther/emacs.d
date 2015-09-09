@@ -105,4 +105,8 @@
 
 
 
+;; completing read over all files in repo
+(require-package 'magit-find-file)
+(define-key mode-specific-map (kbd "G") 'magit-find-file-completing-read)
+
 (provide 'init-git)
