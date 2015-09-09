@@ -66,6 +66,8 @@
                 register-alist
                 (search-ring              . 20)
                 (shell-command-history    . 50)
+                tak/last-makefile-target
+                (tak/makefile-hist        . 20)
                 tags-file-name
                 tags-table-list)))
 
