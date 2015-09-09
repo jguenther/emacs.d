@@ -660,4 +660,11 @@ supply a positive argument once more with C-u C-SPC."
 
 (advice-add 'grep-read-files :around #'tak/quote-grep-read-files)
 
+
+
+(require-package 'eshell-did-you-mean)
+(add-to-list 'eshell-preoutput-filter-functions #'eshell-did-you-mean-output-filter)
+
+
+
 (provide 'init-local)
