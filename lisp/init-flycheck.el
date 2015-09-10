@@ -1,3 +1,12 @@
+(defun tak/disable-flycheck-outside-home-dir ()
+  "Turns off `flycheck-mode' unless `buffer-file-name' is in the
+  user's home directory."
+
+  (if (and (buffer-file-name)
+           (not (file-in-directory-p (buffer-file-name) (expand-file-name "~/"))))
+      (flycheck-mode -1))
+  )
+
 (when (maybe-require-package 'flycheck)
   (add-hook 'after-init-hook 'global-flycheck-mode)
 
