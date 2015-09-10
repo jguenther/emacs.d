@@ -278,80 +278,81 @@ variable."
   )
 
 (defun tak/python-setup ()
-  "Setup python-mode.
+  "Setup python-mode in buffers where this mode is active.
 
 Adds and modifies keybinds and uses hack-local-variables-hook to setup
 sys.path."
 
-  (message "%s: in tak/python-setup" (buffer-name))
+  (when python-mode
+    (message "%s: in tak/python-setup" (buffer-name))
 
-  (when tak/flycheck-enabled
+    (when tak/flycheck-enabled
       (require 'flycheck)
       (flycheck-select-checker 'python-pylint)
-    )
+      )
 
-  (hl-line-mode -1)
-  ;;; setup python-mode keybinds
+    (hl-line-mode -1)
+    ;; setup python-mode keybinds
 
-  ;; local binds
-  (define-key python-mode-map (kbd "C-c C-<SPC>") 'python-add-breakpoint)
+    ;; local binds
+    (define-key python-mode-map (kbd "C-c C-<SPC>") 'python-add-breakpoint)
 
-  ;; elpy--remove unnecessary binds
-  (cl-dolist (key '(
-                    "C-c C-n"
+    ;; elpy--remove unnecessary binds
+    (cl-dolist (key '(
+                      "C-c C-n"
                                         ;elpy-flymake-next-error
-                    "C-c C-p"
+                      "C-c C-p"
                                         ;elpy-flymake-previous-error
-                    "C-c C-v"
+                      "C-c C-v"
                                         ;elpy-check
-                    ))
-    (define-key elpy-mode-map (kbd key) nil))
-  
-  ;;; Skeletons
-  (define-key python-mode-map (kbd "C-c s c") 'python-skeleton-class)
-  (define-key python-mode-map (kbd "C-c s d") 'python-skeleton-def)
-  (define-key python-mode-map (kbd "C-c s f") 'python-skeleton-for)
-  (define-key python-mode-map (kbd "C-c s i") 'python-skeleton-if)
-  (define-key python-mode-map (kbd "C-c s t") 'python-skeleton-try)
-  (define-key python-mode-map (kbd "C-c s w") 'python-skeleton-while)
-  
-  ;; python-x
-  (define-key python-mode-map (kbd "C-c ! C-j") 'python-shell-send-line)
-  (define-key python-mode-map (kbd "C-c ! C-n") 'python-shell-send-line-and-step)
-  (define-key python-mode-map (kbd "C-c ! C-f") 'python-shell-send-defun)
-  (define-key python-mode-map (kbd "C-c ! C-b") 'python-shell-send-buffer)
-  (define-key python-mode-map (kbd "C-c ! C-c") 'python-shell-send-dwim)
-  (define-key python-mode-map (kbd "C-c ! p") 'python-shell-print-region-or-symbol)
+                      ))
+      (define-key elpy-mode-map (kbd key) nil))
+    
+    ;; Skeletons
+    (define-key python-mode-map (kbd "C-c s c") 'python-skeleton-class)
+    (define-key python-mode-map (kbd "C-c s d") 'python-skeleton-def)
+    (define-key python-mode-map (kbd "C-c s f") 'python-skeleton-for)
+    (define-key python-mode-map (kbd "C-c s i") 'python-skeleton-if)
+    (define-key python-mode-map (kbd "C-c s t") 'python-skeleton-try)
+    (define-key python-mode-map (kbd "C-c s w") 'python-skeleton-while)
+    
+    ;; python-x
+    (define-key python-mode-map (kbd "C-c ! C-j") 'python-shell-send-line)
+    (define-key python-mode-map (kbd "C-c ! C-n") 'python-shell-send-line-and-step)
+    (define-key python-mode-map (kbd "C-c ! C-f") 'python-shell-send-defun)
+    (define-key python-mode-map (kbd "C-c ! C-b") 'python-shell-send-buffer)
+    (define-key python-mode-map (kbd "C-c ! C-c") 'python-shell-send-dwim)
+    (define-key python-mode-map (kbd "C-c ! p") 'python-shell-print-region-or-symbol)
 
-  ;;; jedi
-  (define-key python-mode-map (kbd "C-c J t") 'jedi:toggle-log-traceback)
-  (define-key python-mode-map (kbd "C-c J d") 'jedi:toggle-debug-server)
-  (define-key python-mode-map (kbd "C-c J e") 'jedi:pop-to-epc-buffer)
-  (define-key python-mode-map (kbd "C-c C-.") 'jedi:goto-definition-pop-marker)
-  (define-key python-mode-map (kbd "C-.")     'jedi:goto-definition-push-marker)
-  (define-key python-mode-map (kbd "C-c C-.")   'jedi:goto-definition-push-marker)
+    ;; jedi
+    (define-key python-mode-map (kbd "C-c J t") 'jedi:toggle-log-traceback)
+    (define-key python-mode-map (kbd "C-c J d") 'jedi:toggle-debug-server)
+    (define-key python-mode-map (kbd "C-c J e") 'jedi:pop-to-epc-buffer)
+    (define-key python-mode-map (kbd "C-c C-.") 'jedi:goto-definition-pop-marker)
+    (define-key python-mode-map (kbd "C-.")     'jedi:goto-definition-push-marker)
+    (define-key python-mode-map (kbd "C-c C-.")   'jedi:goto-definition-push-marker)
 
-  ;;; jedi-direx
-  (define-key python-mode-map (kbd "C-c x") 'jedi-direx:pop-to-buffer)
+    ;; jedi-direx
+    (define-key python-mode-map (kbd "C-c x") 'jedi-direx:pop-to-buffer)
 
-  ;; realgud
-  (define-key python-mode-map (kbd "C-x C-q") 'realgud-short-key-mode)
+    ;; realgud
+    (define-key python-mode-map (kbd "C-x C-q") 'realgud-short-key-mode)
 
-  ;;
-  ;; Use the regular major mode hook to add a buffer-local hack-local-variables-hook
-  ;;
-  ;; This is necessary since python sys.path is set in dirlocals which is not
-  ;; visible until after python-mode-hook has run
-  ;;
-  (add-hook 'hack-local-variables-hook 'tak/hack-python-locals)
-  ;; ;; alternate method
-  ;; (add-hook 'hack-local-variables-hook 'run-local-vars-mode-hook)
-  ;; (defun run-local-vars-mode-hook ()
-  ;;   "Run a hook for the major-mode after the local variables have been processed."
-  ;;   (run-hooks (intern (concat (symbol-name major-mode) "-local-vars-hook"))))
-  ;; (add-hook 'python-mode-local-vars-hook 'cr/python-mode-shell-setup)
+    ;;
+    ;; Use the regular major mode hook to add a buffer-local hack-local-variables-hook
+    ;;
+    ;; This is necessary since python sys.path is set in dirlocals which is not
+    ;; visible until after python-mode-hook has run
+    ;;
+    (add-hook 'hack-local-variables-hook 'tak/hack-python-locals)
+    ;; ;; alternate method
+    ;; (add-hook 'hack-local-variables-hook 'run-local-vars-mode-hook)
+    ;; (defun run-local-vars-mode-hook ()
+    ;;   "Run a hook for the major-mode after the local variables have been processed."
+    ;;   (run-hooks (intern (concat (symbol-name major-mode) "-local-vars-hook"))))
+    ;; (add-hook 'python-mode-local-vars-hook 'cr/python-mode-shell-setup)
 
-  )
+    ))
 
 (after-load 'python
   (add-hook 'python-mode-hook 'tak/python-setup t)
