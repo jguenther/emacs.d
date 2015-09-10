@@ -285,7 +285,7 @@ variable."
 Adds and modifies keybinds and uses hack-local-variables-hook to setup
 sys.path."
 
-  (when python-mode
+  (when (eq major-mode 'python-mode)
     (message "%s: in tak/python-setup" (buffer-name))
 
     (when tak/flycheck-enabled
