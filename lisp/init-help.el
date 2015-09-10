@@ -48,12 +48,12 @@ ignored."
 
 (require-package 'help+)
 (require-package 'help-fns+)
-(require-package 'help-mode+)
+;;(require-package 'help-mode+)
 
 (after-load 'help
   (require 'help+)
   (require 'help-fns+)
-  (require 'help-mode+)
+  ;;(require 'help-mode+)
   )
 
 
