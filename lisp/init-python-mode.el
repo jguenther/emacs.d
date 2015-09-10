@@ -45,11 +45,14 @@
     (setq elpy-modules (delq 'elpy-module-yasnippet elpy-modules)))
   )
 
+(defun tak/magit-blame-indent-guide-mode-off ()
+  (if indent-guide-mode
+      (indent-guide-mode)))
+
 (after-load 'python
   (add-hook 'python-mode-hook 'superword-mode)
   (add-hook 'python-mode-hook 'indent-guide-mode)
-  (add-hook 'magit-blame-mode-hook (lambda () (when indent-guide-mode
-                                           (indent-guide-mode))))
+  (add-hook 'magit-blame-mode-hook 'tak/magit-blame-indent-guide-mode-off)
 
   ;;(remove-hook 'comint-output-filter-functions 'python-pdbtrack-comint-output-filter-function)
   )
