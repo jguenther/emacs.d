@@ -42,9 +42,10 @@
  '(ido-create-new-buffer (quote always))
  '(ido-default-file-method (quote selected-window))
  '(ido-everywhere t)
+ '(jedi:complete-on-dot t t)
  '(jedi:install-imenu t)
  '(jedi:tooltip-method (quote (pos-tip)))
- '(jedi:use-shortcuts t)
+ '(jedi:use-shortcuts t t)
  '(js-indent-level 4 t)
  '(js2-basic-offset 4 t)
  '(magit-revert-buffers 2)
@@ -83,7 +84,8 @@
  '(python-fill-docstring-style (quote django))
  '(safe-local-variable-values
    (quote
-    ((flycheck-pylintrc . "/Users/jguenther/Projects/CS/tools/vbuild/pylintrc")
+    ((python-shell-extra-pythonpaths "/Users/jguenther/Projects/CS/" "/Users/jguenther/Projects/CS/src/" "/Users/jguenther/Projects/CS/src/lib/" "/Users/jguenther/Projects/CS/test/" "/Users/jguenther/Projects/CS/test/lib/" "/Users/jguenther/Projects/CS/tools/" "/usr/local/google_appengine/" "/usr/local/google_appengine/lib/webob-1.2.3/" "/usr/local/google_appengine/lib/webapp2-2.5.2/" "/usr/local/google_appengine/lib/jinja2-2.6/" "/usr/local/google_appengine/lib/lxml-2.3/")
+     (flycheck-pylintrc . "/Users/jguenther/Projects/CS/tools/vbuild/pylintrc")
      (python-shell-extra-pythonpaths "/Users/jguenther/Projects/VBC" "/Users/jguenther/Projects/VBC/src" "/Users/jguenther/Projects/VBC/src/lib" "/Users/jguenther/Projects/VBC/tools" "/Users/jguenther/Projects/VBC/tools/coverage-3.5.1" "/Users/jguenther/Projects/VBC/tools/minimock" "/usr/local/google_appengine" "/usr/local/google_appengine/lib/webob-1.1.1" "/usr/local/google_appengine/lib/webapp2-2.5.1" "/usr/local/google_appengine/lib/jinja2-2.6" "/usr/local/google_appengine/lib/simplejson" "/usr/local/google_appengine/lib/yaml/lib" "/usr/local/google_appengine/lib/fancy_urllib" "/usr/local/google_appengine/lib/protorpc-1.0")
      (python-shell-extra-pythonpaths "/Users/jguenther/Projects/CS/" "/Users/jguenther/Projects/CS/src/" "/Users/jguenther/Projects/CS/src/lib/" "/Users/jguenther/Projects/CS/test/lib/" "/Users/jguenther/Projects/CS/tools/" "/usr/local/google_appengine/" "/usr/local/google_appengine/lib/webob-1.2.3/" "/usr/local/google_appengine/lib/webapp2-2.5.2/" "/usr/local/google_appengine/lib/jinja2-2.6/" "/usr/local/google_appengine/lib/lxml-2.3/")
      (flycheck-python-pylint-executable . "/Users/jguenther/Projects/CS/tools/pylint/lint.py")
