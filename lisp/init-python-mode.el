@@ -167,6 +167,8 @@
       (message "ERROR: elpy-test-at-point returned nil")))
   )
 
+(defvar tak/elpy-pytest-pdb-runner-args (list "-x" "--pdb" "-s"))
+
 (defun elpy-test-pytest-pdb-runner (top file module test)
   "Test the project using the py.test test runner with --pdb -s (capture disabled).
 
@@ -181,17 +183,15 @@ This requires the pytest package to be installed."
         (apply #'elpy-test-run-pdb
                top
                (append runner-command
-                       (list (mapconcat #'identity (cons file test-list) "::")
-                             "-x" "--pdb" "-s" "-l"
-                             )))))
+                       (cons
+                        (mapconcat #'identity (cons file test-list) "::")
+                        tak/elpy-pytest-pdb-runner-args)))))
      (module
       (apply #'elpy-test-run-pdb top (append runner-command
-                                             (list file "-x" "--pdb" "-s" "-l"
-                                                   ))))
+                                             (cons file tak/elpy-pytest-pdb-runner-args))))
      (t
       (apply #'elpy-test-run-pdb top (append runner-command
-                                             (list "-x" "--pdb" "-s" "-l"
-                                                   )))))))
+                                             tak/elpy-pytest-pdb-runner-args))))))
 
 (defun elpy-test-run-pdb (working-directory command &rest args)
   "Run COMMAND with ARGS in WORKING-DIRECTORY as a test command using pdb."
