@@ -240,6 +240,14 @@ class/method/function specifiers from the resulting buffer name."
 
 
 
+(defcustom tak/flycheck-enabled
+  t
+  "Whether to enable flycheck for the current buffer."
+  :group 'tak
+  :type 'boolean
+  :safe 'booleanp
+  )
+
 (defun tak/compute-local-python-environment ()
   "Computes a new `process-environment' that appends absolute paths in
 `python-shell-extra-pythonpaths' to the PYTHONPATH environment
@@ -272,7 +280,12 @@ variable."
 Adds and modifies keybinds and uses hack-local-variables-hook to setup
 sys.path."
 
-  (flycheck-select-checker 'python-pylint)
+  (message "%s: in tak/python-setup" (buffer-name))
+
+  (when tak/flycheck-enabled
+      (require 'flycheck)
+      (flycheck-select-checker 'python-pylint)
+    )
 
   (hl-line-mode -1)
   ;;; setup python-mode keybinds
