@@ -62,6 +62,8 @@
  ac-use-fuzzy t
  )
 
+(defvar 'user-home-directory (expand-file-name "~")
+  "The absolute path to the user's home directory `~'.")
 
 ;;(dolist (path '("/home/jguenther/.emacs-lisp"
 ;;                "/usr/local/share/emacs/site-lisp"
