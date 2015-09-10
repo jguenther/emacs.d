@@ -270,6 +270,8 @@ variable."
       process-environment)))
 
 (defun tak/hack-python-locals ()
+  (message "%s: in tak/hack-python-locals" (buffer-name))
+
   (set (make-local-variable 'process-environment)
        (tak/compute-local-python-environment))
   
