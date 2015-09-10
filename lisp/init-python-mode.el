@@ -270,13 +270,13 @@ variable."
       process-environment)))
 
 (defun tak/hack-python-locals ()
-  (message "%s: in tak/hack-python-locals" (buffer-name))
-
-  (set (make-local-variable 'process-environment)
-       (tak/compute-local-python-environment))
-  
-  (add-hook 'python-mode-hook 'jedi:setup)
-  (add-hook 'python-mode-hook 'flycheck-mode)
+  (when (eq major-mode 'python-mode)
+    (message "%s: in tak/hack-python-locals" (buffer-name))
+    (set (make-local-variable 'process-environment)
+         (tak/compute-local-python-environment))
+    
+    (add-hook 'python-mode-hook 'jedi:setup)
+    (add-hook 'python-mode-hook 'flycheck-mode))
   )
 
 (defun tak/python-setup ()
