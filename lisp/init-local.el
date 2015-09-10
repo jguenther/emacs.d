@@ -215,7 +215,12 @@ Moves point to the end of the inserted text. Does not change mark."
 
 
   (magit-wip-after-save-mode 1)
-  (diminish 'magit-wip-after-save-local-mode)
+  (magit-wip-after-apply-mode 1)
+  (magit-wip-before-change-mode 1)
+  
+  (diminish 'magit-wip-after-apply-mode)
+  (diminish 'magit-wip-before-change-mode)
+  (diminish 'magit-wip-after-save-local-mode "wip")
 
   (global-magit-file-buffer-mode)
   )
