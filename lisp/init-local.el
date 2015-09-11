@@ -678,4 +678,13 @@ supply a positive argument once more with C-u C-SPC."
         (expand-file-name "../emacs/src/" data-directory)))
 
 
+
+(defvar backup-dir (expand-file-name "~/.emacs.d/backups/"))
+(defvar autosave-dir (expand-file-name "~/.emacs.d/autosave/"))
+(setq backup-directory-alist (list (cons ".*" backup-dir)))
+(setq auto-save-list-file-prefix (expand-file-name "~/.emacs.d/auto-save-list/.saves-"))
+(setq auto-save-file-name-transforms `((".*" ,autosave-dir t)))
+
+
+
 (provide 'init-local)
