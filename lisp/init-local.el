@@ -682,7 +682,7 @@ supply a positive argument once more with C-u C-SPC."
 (define-minor-mode mortal-mode
   "Allow temporary departures from god-mode."
   :lighter " mortal"
-  :keymap '(([return] . (lambda ()
+  :keymap '(([escape] . (lambda ()
                           "Exit mortal-mode and resume god mode." (interactive)
                           (god-local-mode-resume)
                           (mortal-mode 0))))
