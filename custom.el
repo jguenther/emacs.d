@@ -5,6 +5,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(auto-save-timeout 120)
  '(backup-directory-alist (quote (("." . "~/.emacs.d/saves"))))
  '(blink-cursor-mode nil)
  '(compilation-ask-about-save nil)
@@ -42,11 +43,13 @@
  '(ido-create-new-buffer (quote always))
  '(ido-default-file-method (quote selected-window))
  '(ido-everywhere t)
- '(jedi:complete-on-dot t t)
+ '(ido-ignore-buffers (quote ("\\` " "\\`*epc con ")))
+ '(jedi:complete-on-dot nil)
+ '(jedi:goto-definition-marker-ring-length 32)
  '(jedi:install-imenu t)
  '(jedi:tooltip-method (quote (pos-tip)))
- '(jedi:use-shortcuts t t)
- '(js-indent-level 4 t)
+ '(jedi:use-shortcuts t)
+ '(js-indent-level 4)
  '(js2-basic-offset 4 t)
  '(magit-revert-buffers 2)
  '(magit-save-repository-buffers (quote dontask))
@@ -124,6 +127,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(realgud-backtrace-number ((t (:inherit highlight-symbol-face :weight bold)))))
 (put 'erase-buffer 'disabled nil)
 (put 'scroll-left 'disabled nil)
