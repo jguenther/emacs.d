@@ -673,4 +673,9 @@ supply a positive argument once more with C-u C-SPC."
 
 
 
+(setq find-function-C-source-directory
+      (lambda ()
+        (expand-file-name "../emacs/src/" data-directory)))
+
+
 (provide 'init-local)
