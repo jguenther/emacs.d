@@ -101,6 +101,7 @@
 
 
 ;; silver-searcher
+(require-package 'ag)
 (global-set-key (kbd "C-x v F") 'ag)
 
 
