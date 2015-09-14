@@ -77,7 +77,8 @@
 (require 'hl-line+)
 (toggle-hl-line-when-idle 1)
 (setq-default toggle-hl-line-when-idle 1
-              hl-line-face 'highlight)
+              hl-line-face 'highlight
+              hl-line-inhibit-highlighting-for-modes '(custom-mode))
 
 ;;scroll-restore seems to cause more problems than it's worth
 ;; (require-package 'scroll-restore)
@@ -685,6 +686,20 @@ supply a positive argument once more with C-u C-SPC."
 (require-package 'god-mode)
 (require 'god-mode)
 (global-set-key (kbd "<escape>") 'god-local-mode)
+
+;; (setq god-exempt-major-modes nil)
+;; (setq god-exempt-predicates nil)
+
+(defun tak/god-mode-update-modeline ()
+  (let ((limited-colors-p (> 257 (length (defined-colors)))))
+    (cond (god-local-mode (progn
+                            (set-face-background 'mode-line (if limited-colors-p "white" "#e9e2cb"))
+                            (set-face-background 'mode-line-inactive (if limited-colors-p "white" "#e9e2cb"))))
+          (t (progn
+               (set-face-background 'mode-line (if limited-colors-p "black" "#0a2832"))
+               (set-face-background 'mode-line-inactive (if limited-colors-p "black" "#0a2832")))))))
+(add-hook 'god-mode-enabled-hook 'tak/god-mode-update-modeline)
+(add-hook 'god-mode-disabled-hook 'tak/god-mode-update-modeline)
 
 ;;; from https://github.com/chrisdone/god-mode/issues/77
 ;;
