@@ -21,7 +21,7 @@
 (after-load 'magit
   (define-key magit-file-mode-map (kbd "C-x M-g") 'magit-status)
   (define-key magit-file-mode-map (kbd "C-x g") 'magit-dispatch-popup)
-  (define-key magit-file-mode-map (kbd "C-c g") 'magit-file-buffer-popup)
+  (define-key magit-file-mode-map (kbd "C-c g") 'magit-file-popup)
 
   (define-key magit-status-mode-map (kbd "C-M-<up>") 'magit-section-up)
   (define-key magit-status-mode-map (kbd "<backtab>") 'magit-section-cycle-global)
