@@ -121,6 +121,9 @@
  '(show-trailing-whitespace nil)
  '(standard-indent 2)
  '(vc-follow-symlinks t)
+ '(whitespace-cleanup-mode-ignore-modes
+   (quote
+    (markdown-mode special-mode view-mode comint-mode cider-repl-mode haskell-interactive-mode org-mode)))
  '(yas-also-auto-indent-first-line t)
  '(yas-expand-only-for-last-commands (quote (self-insert-command))))
 (custom-set-faces
