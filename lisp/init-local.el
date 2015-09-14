@@ -484,11 +484,6 @@ See also: `enable-all-disabled-commands'."
 
 
 
-;; so git-wip-mode doesn't depend on running magit-status first
-(after-load 'init-git
-  (require 'magit))
-
-
 ;; shell-mode init
 
 ;; use color term for shell

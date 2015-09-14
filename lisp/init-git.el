@@ -7,22 +7,21 @@
 (require-package 'git-messenger) ;; Though see also vc-annotate's "n" & "p" bindings
 (require-package 'git-timemachine)
 
+(require-package 'magit)
+(setq-default
+ magit-process-popup-time 10
+ magit-diff-refine-hunk t
+ magit-completing-read-function 'magit-ido-completing-read)
 
-(when (maybe-require-package 'magit)
-  (setq-default
-   magit-process-popup-time 10
-   magit-diff-refine-hunk t
-   magit-completing-read-function 'magit-ido-completing-read)
+;; Hint: customize `magit-repo-dirs' so that you can use C-u M-F12 to
+;; quickly open magit on any one of your projects.
+(global-set-key [(meta f12)] 'magit-status)
 
-  ;; Hint: customize `magit-repo-dirs' so that you can use C-u M-F12 to
-  ;; quickly open magit on any one of your projects.
-  (global-set-key [(meta f12)] 'magit-status)
-  )
 
 (after-load 'magit
-  (define-key magit-file-buffer-mode-map (kbd "C-x M-g") 'magit-status)
-  (define-key magit-file-buffer-mode-map (kbd "C-x g") 'magit-dispatch-popup)
-  (define-key magit-file-buffer-mode-map (kbd "C-c g") 'magit-file-buffer-popup)
+  (define-key magit-file-mode-map (kbd "C-x M-g") 'magit-status)
+  (define-key magit-file-mode-map (kbd "C-x g") 'magit-dispatch-popup)
+  (define-key magit-file-mode-map (kbd "C-c g") 'magit-file-buffer-popup)
 
   (define-key magit-status-mode-map (kbd "C-M-<up>") 'magit-section-up)
   (define-key magit-status-mode-map (kbd "<backtab>") 'magit-section-cycle-global)
@@ -109,5 +108,12 @@
 ;; completing read over all files in repo
 (require-package 'magit-find-file)
 (define-key mode-specific-map (kbd "G") 'magit-find-file-completing-read)
+
+
+
+;; so git-wip-mode doesn't depend on running magit-status first
+(require 'magit)
+
+
 
 (provide 'init-git)
