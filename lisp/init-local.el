@@ -194,28 +194,33 @@ Moves point to the end of the inserted text. Does not change mark."
 (require-package 'git-wip-timemachine)
 
 (require-package 'git-gutter)
+(require-package 'git-gutter+)
 (require-package 'git-gutter-fringe)
 
 (after-load 'magit
   (require 'git-gutter)
-  (require 'git-gutter-fringe)
+  ;; (require 'git-gutter-fringe)
+
+  ;; workaround visual bug with git-gutter and org-indent-mode
+  (add-to-list 'git-gutter+:disabled-modes 'org-mode)
   
-  (global-git-gutter-mode t)
-  (diminish 'git-gutter-mode)
+  ;; (global-git-gutter-mode t)
+  (global-git-gutter+-mode t)
+  (diminish 'git-gutter+-mode)
   
-  (global-set-key (kbd "C-c u t") 'git-gutter:toggle)
-  (global-set-key (kbd "C-x v =") 'git-gutter:popup-hunk)
-  (global-set-key (kbd "C-c u =") 'git-gutter:popup-hunk)
+  (global-set-key (kbd "C-c u t") 'git-gutter+:toggle)
+  (global-set-key (kbd "C-x v =") 'git-gutter+:popup-hunk)
+  (global-set-key (kbd "C-c u =") 'git-gutter+:popup-hunk)
 
   ;; Jump to next/previous hunk
-  (global-set-key (kbd "C-c u p") 'git-gutter:previous-hunk)
-  (global-set-key (kbd "C-c u n") 'git-gutter:next-hunk)
+  (global-set-key (kbd "C-c u p") 'git-gutter+:previous-hunk)
+  (global-set-key (kbd "C-c u n") 'git-gutter+:next-hunk)
 
   ;; Stage current hunk
-  (global-set-key (kbd "C-c u s") 'git-gutter:stage-hunk)
+  (global-set-key (kbd "C-c u s") 'git-gutter+:stage-hunk)
 
   ;; Revert current hunk
-  (global-set-key (kbd "C-c u r") 'git-gutter:revert-hunk)
+  (global-set-key (kbd "C-c u r") 'git-gutter+:revert-hunk)
 
 
   (magit-wip-after-save-mode 1)
@@ -559,15 +564,14 @@ Sets TERM=xterm-256color"
 
 
 (require-package 'flx)
-(require-package 'flx-ido)
+;;(require-package 'flx-ido)
 (require-package 'flx-isearch)
 (require-package 'projectile)
 (require-package 'org-projectile)
 
 ;; (after-load 'ido
-;;   (require 'flx-ido))
-
-;;(flx-ido-mode 1)
+;;   (require 'flx-ido)
+;;   (flx-ido-mode 1))
 
 (after-load 'projectile
   (add-to-list 'projectile-project-root-files "tasks.py" t)
