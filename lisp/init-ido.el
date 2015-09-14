@@ -9,15 +9,10 @@
 (defun tak/ido-setup ()
                                         ; common keys
   (define-key ido-completion-map (kbd "<C-return>") 'ido-select-text)
-
-                                        ; keys used in file and dir environment
-  (when (memq ido-cur-item '(file dir))
-                                        ; remove remap and map
-                                        ; ido-delete-backward-updir to
-                                        ; M-backspace
-    (define-key ido-completion-map [remap delete-backward-char] nil)
-    (define-key ido-completion-map [(meta backspace)] 'ido-delete-backward-updir)))
-(add-hook 'ido-setup-hook 'tak/ido-setup)
+  (define-key ido-file-dir-completion-map (kbd "C-l") nil)
+  (define-key ido-common-completion-map (kbd "C-l") 'ido-toggle-literal)
+  )
+;;(add-hook 'ido-setup-hook 'tak/ido-setup)
 
 (ido-mode t)
 (ido-everywhere t)
