@@ -519,6 +519,16 @@ Sets TERM=xterm-256color"
 (add-hook 'shell-command-complete-functions
           'bash-completion-dynamic-complete)
 
+
+
+;;; comint setup
+
+(defun tak/comint-setup ()
+  (define-key comint-mode-map [remap kill-region] 'comint-kill-region)
+  (define-key comint-mode-map [remap kill-whole-line] 'comint-kill-whole-line))
+
+(add-hook 'comint-mode-hook 'tak/comint-setup)
+
 ;; translate ANSI color control sequences into text properties
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
