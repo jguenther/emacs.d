@@ -6,18 +6,18 @@
 (defvar ido-default-item nil)
 (defvar ido-cur-list nil)
 
-(add-hook 'ido-setup-hook
-          (lambda ()
+(defun tak/ido-setup ()
                                         ; common keys
-            (define-key ido-completion-map (kbd "<C-return>") 'ido-select-text)
+  (define-key ido-completion-map (kbd "<C-return>") 'ido-select-text)
 
                                         ; keys used in file and dir environment
-            (when (memq ido-cur-item '(file dir))
+  (when (memq ido-cur-item '(file dir))
                                         ; remove remap and map
                                         ; ido-delete-backward-updir to
                                         ; M-backspace
-              (define-key ido-completion-map [remap delete-backward-char] nil)
-              (define-key ido-completion-map [(meta backspace)] 'ido-delete-backward-updir))))
+    (define-key ido-completion-map [remap delete-backward-char] nil)
+    (define-key ido-completion-map [(meta backspace)] 'ido-delete-backward-updir)))
+(add-hook 'ido-setup-hook 'tak/ido-setup)
 
 (ido-mode t)
 (ido-everywhere t)
