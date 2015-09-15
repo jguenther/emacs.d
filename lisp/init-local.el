@@ -527,11 +527,13 @@ Sets TERM=xterm-256color"
 
 ;;; comint setup
 
+(setq-default comint-prompt-read-only t)
 (defun tak/comint-setup ()
   (define-key comint-mode-map [remap kill-region] 'comint-kill-region)
   (define-key comint-mode-map [remap kill-whole-line] 'comint-kill-whole-line))
 
 (add-hook 'comint-mode-hook 'tak/comint-setup)
+(add-hook 'comint-mode-hook 'ansi-color-for-comint-mode-on)
 
 ;; translate ANSI color control sequences into text properties
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
