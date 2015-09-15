@@ -151,6 +151,14 @@
   (add-hook 'python-mode-hook 'annotate-pdb-breakpoints)
   )
 
+(defun tak/realgud-setup ()
+  (define-key realgud:shortkey-mode-map (kbd "C-c C-<SPC>") 'python-add-breakpoint)
+  )
+
+(after-load 'realgud
+  (add-hook 'realgud-short-key-mode-hook 'tak/realgud-setup)
+  )
+
 
 
 ;;; py.test pdb
