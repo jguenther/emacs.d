@@ -197,16 +197,14 @@ Moves point to the end of the inserted text. Does not change mark."
 (require-package 'git-gutter+)
 (require-package 'git-gutter-fringe)
 
-(after-load 'magit
-  (require 'git-gutter)
-  ;; (require 'git-gutter-fringe)
-
-  ;; workaround visual bug with git-gutter and org-indent-mode
-  (add-to-list 'git-gutter+:disabled-modes 'org-mode)
+(after-load 'git-gutter+
   
   ;; (global-git-gutter-mode t)
   (global-git-gutter+-mode t)
   (diminish 'git-gutter+-mode)
+  
+  ;; workaround visual bug with git-gutter and org-indent-mode
+  (add-to-list 'git-gutter:disabled-modes 'org-mode)
   
   (global-set-key (kbd "C-c u t") 'git-gutter+:toggle)
   (global-set-key (kbd "C-x v =") 'git-gutter+:popup-hunk)
@@ -222,6 +220,12 @@ Moves point to the end of the inserted text. Does not change mark."
   ;; Revert current hunk
   (global-set-key (kbd "C-c u r") 'git-gutter+:revert-hunk)
 
+  )
+
+(after-load 'magit
+  (require 'git-gutter)
+  (require 'git-gutter+)
+  ;; (require 'git-gutter-fringe)
 
   (magit-wip-after-save-mode 1)
   (magit-wip-before-change-mode 1)
