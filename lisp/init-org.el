@@ -10,7 +10,9 @@
 (define-key mode-specific-map (kbd "a") 'org-agenda)
 
 ;; Various preferences
-(setq org-log-done t
+(setq org-indent-mode-turns-off-org-adapt-indentation t
+      org-adapt-indentation nil
+      org-log-done t
       org-completion-use-ido t
       org-outline-path-complete-in-steps nil
       org-edit-timestamp-down-means-later t
