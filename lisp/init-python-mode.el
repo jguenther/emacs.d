@@ -173,40 +173,45 @@
       (message "ERROR: elpy-test-at-point returned nil")))
   )
 
-(defvar tak/elpy-pytest-pdb-runner-args (list "-x" "--pdb" "-s"))
+(defvar tak/elpy-pytest-pdb-runner-args (list "-x" "--pdb" "-s" "--color=yes"))
+(defvar tak/pdb-wrapper-script (expand-file-name "~/code/scripts/run_pytest.sh"))
 
 (defun elpy-test-pytest-pdb-runner (top file module test)
   "Test the project using the py.test test runner with --pdb -s (capture disabled).
 
 This requires the pytest package to be installed."
   (interactive (elpy-test-at-point))
-  (let ((runner-command
-         (list (executable-find
-                (car elpy-test-pytest-runner-command)))))
+  (let ((runner-command (list tak/pdb-wrapper-script))
+        (runner-args (cons "--" tak/elpy-pytest-pdb-runner-args)))
     (cond
      (test
       (let ((test-list (split-string test "\\.")))
         (apply #'elpy-test-run-pdb
                top
                (append runner-command
-                       (cons
-                        (mapconcat #'identity (cons file test-list) "::")
-                        tak/elpy-pytest-pdb-runner-args)))))
+                       (cons file
+                             (cons "-t"
+                                   (cons (mapconcat #'identity test-list "::")
+                                         runner-args)))))))
      (module
       (apply #'elpy-test-run-pdb top (append runner-command
-                                             (cons file tak/elpy-pytest-pdb-runner-args))))
+                                             (cons file runner-args))))
      (t
       (apply #'elpy-test-run-pdb top (append runner-command
-                                             tak/elpy-pytest-pdb-runner-args))))))
+                                             runner-args))))))
 
 (defun elpy-test-run-pdb (working-directory command &rest args)
   "Run COMMAND with ARGS in WORKING-DIRECTORY as a test command using pdb."
   (let* ((default-directory working-directory)
          (gud-chdir-before-run nil)
-         (gud-pdb-command-name "python")
-         (cmdline (combine-and-quote-strings (cons gud-pdb-command-name (cons command args))))
-         (process-environment (tak/compute-local-python-environment)))
+         (gud-pdb-command-name tak/pdb-wrapper-script)
+         (cmdline (combine-and-quote-strings (cons command args)))
+         (process-environment (tak/compute-local-python-environment))
+         (comint-process-echoes t)
+         (comint-use-prompt-regexp t))
+    ;;(add-hook 'comint-output-filter-functions 'python-pdbtrack-comint-output-filter-function)
     (message "running pdb: `%s'" cmdline)
+    ;; realgud:cmdbuf-associate
     (pdb cmdline)))
 
 (after-load 'elpy
@@ -224,7 +229,7 @@ class/method/function specifiers from the resulting buffer name."
          (new-buffer-name (format "%s shell*" old-buffer-car)))
     (with-current-buffer buffer
       (rename-buffer new-buffer-name t))))
-(advice-add 'realgud-exec-shell :around #'tak/munge-pdb-buffer-name)
+;;(advice-add 'realgud-exec-shell :around #'tak/munge-pdb-buffer-name)
 
 
 
@@ -261,6 +266,7 @@ class/method/function specifiers from the resulting buffer name."
   "Computes a new `process-environment' that appends absolute paths in
 `python-shell-extra-pythonpaths' to the PYTHONPATH environment
 variable."
+  (message "%s: in tak/compute-local-python-environment" (buffer-name))
   (let* ((extra-pythonpaths (--map (file-truename (concat it "/"))
                                    python-shell-extra-pythonpaths))
          (extra-pythonpath (s-join ":" extra-pythonpaths))
