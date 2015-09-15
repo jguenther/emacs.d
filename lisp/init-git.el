@@ -23,16 +23,16 @@
   (define-key magit-file-mode-map (kbd "C-c M-g") 'magit-status)
   (define-key magit-file-mode-map (kbd "C-x g") 'magit-dispatch-popup)
   (define-key magit-file-mode-map (kbd "C-c g g") 'magit-file-popup)
-                                        ; rebound under C-c g prefix
+                                        ; this doesn't make sense in magit-file-mode
   (define-key magit-file-mode-map (kbd "C-c p") nil)
 
-  (define-key magit-blob-mode-map (kbd "n") nil)
-  (define-key magit-blob-mode-map (kbd "p") nil)
+  ;; (define-key magit-blob-mode-map (kbd "n") nil)
+  ;; (define-key magit-blob-mode-map (kbd "p") nil)
 
-  (define-key magit-blob-mode-map (kbd "C-c g p") 'magit-blob-previous)
-  (define-key magit-blob-mode-map (kbd "C-c g n") 'magit-blob-next)
-  (define-key magit-blob-mode-map (kbd "C-c g a") 'magit-blob-ancestor)
-  (define-key magit-blob-mode-map (kbd "C-c g q") 'magit-kill-this-buffer)
+  ;; (define-key magit-blob-mode-map (kbd "C-c g p") 'magit-blob-previous)
+  ;; (define-key magit-blob-mode-map (kbd "C-c g n") 'magit-blob-next)
+  ;; (define-key magit-blob-mode-map (kbd "C-c g a") 'magit-blob-ancestor)
+  ;; (define-key magit-blob-mode-map (kbd "C-c g q") 'magit-kill-this-buffer)
 
   (define-key magit-status-mode-map (kbd "C-M-<up>") 'magit-section-up)
   (define-key magit-status-mode-map (kbd "<backtab>") 'magit-section-cycle-global)
