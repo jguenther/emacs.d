@@ -123,6 +123,30 @@
 
 
 
+(defun tak/insert-git-commit-prefix ()
+  "Prefixes the default git commit message with a Jira issue number.
+
+The issue number is parsed from the branch name."
+  (let* ((branch (magit-get-current-branch))
+         (ticket-id (if branch
+                        (progn
+                          (if (string-match "^\\([A-Z]+[0-9]+\\)-" branch)
+                              (match-string 1)))
+                      nil))
+         (prefix (if ticket-id
+                     (format "%s: " ticket-id)
+                   nil)))
+    (save-excursion
+      (goto-char (point-min))
+      (when prefix
+        (insert prefix)
+        (end-of-line)))))
+
+(after-load 'git-commit
+  (add-hook 'git-commit-setup-hook 'tak/insert-git-commit-prefix))
+
+
+
 ;; so git-wip-mode doesn't depend on running magit-status first
 (require 'magit)
 
