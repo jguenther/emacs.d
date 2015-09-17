@@ -276,6 +276,19 @@ class/method/function specifiers from the resulting buffer name."
   :safe 'booleanp
   )
 
+(defun tak/append-paths-to-env-var (variable paths)
+  "Appends PATHS to VARIABLE and returns the new value."
+  (let* ((old-value (getenv variable))
+         (old-paths (if old-value
+                        (s-split path-separator old-value t)
+                      (list)))
+         (new-paths (progn
+                      (dolist (path paths)
+                        (add-to-list 'old-paths path t))
+                      old-paths))
+         (new-path-string (string-join new-paths path-separator)))
+    new-path-string))
+
 (defun tak/compute-local-python-environment ()
   "Computes a new `process-environment' that appends absolute paths in
 `python-shell-extra-pythonpaths' to the PYTHONPATH environment
@@ -283,14 +296,8 @@ variable."
   (message "%s: in tak/compute-local-python-environment" (buffer-name))
   (let* ((extra-pythonpaths (--map (file-truename (concat it "/"))
                                    python-shell-extra-pythonpaths))
-         (extra-pythonpath (s-join ":" extra-pythonpaths))
-         (old-pythonpath (getenv "PYTHONPATH"))
-         (new-pythonpath (if old-pythonpath
-                             (concat extra-pythonpath
-                                     path-separator
-                                     old-pythonpath)
-                           extra-pythonpath)))
-    (if (> (length extra-pythonpath) 0)
+         (new-pythonpath (tak/append-paths-to-env-var "PYTHONPATH" extra-pythonpaths)))
+    (if (> (length new-pythonpath) 0)
         (cons (concat "PYTHONPATH=" new-pythonpath)
               process-environment)
       process-environment)))
