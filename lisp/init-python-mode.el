@@ -65,9 +65,23 @@
 (require-package 'jedi)
 (require-package 'jedi-direx)
 
-(after-load 'jedi  
+(after-load 'jedi
+  (setq jedi:install-python-jedi-dev-command
+        '("pip" "install" "--upgrade" "git+https://github.com/davidhalter/jedi.git@master#egg=jedi"))
   (add-hook 'jedi-mode-hook 'jedi-direx:setup)
   )
+
+(defun tak/disable-indent-guide-when-completing (orig-function &rest args)
+  "Advice to disable `indent-guide-mode' while `jedi:complete' is
+running."
+  (let* ((guide-active indent-guide-mode)
+         (guide-result-before (if guide-active
+                                  (indent-guide-mode)))
+         (result (apply orig-function args))
+         (guide-result-after (if guide-active
+                                 (indent-guide-mode))))))
+
+(advice-add 'jedi:complete :around #'tak/disable-indent-guide-when-completing)
 
 ;; pungi (jedi and virtualenv compat)
 ;;(require-package 'pungi)
@@ -85,7 +99,7 @@
 ;;(require-package 'python-info)
 (require-package 'pydoc-info)
 
-;; (after-load 'python-mode
+;; (after-load 'python
 ;;   (require 'pydoc-info))
 
 
