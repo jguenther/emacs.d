@@ -775,13 +775,13 @@ supply a positive argument once more with C-u C-SPC."
                  string-inflection-lisp))
   (advice-add func :around #'tak/string-inflection-save-excursion))
 
-(defun string-inflection-cycle-python ()
+(defun tak/string-inflection-cycle-python ()
   "camelCase => snake_case => UpperCamelCase"
   (interactive)
   (save-excursion
-    (insert (string-inflection-python-function (string-inflection-get-current-word t)))))
+    (insert (tak/string-inflection-python-function (string-inflection-get-current-word t)))))
 
-(defun string-inflection-python-function (str)
+(defun tak/string-inflection-python-function (str)
   "camelCase => snake_case"
   (cond
    ((string-inflection-underscore-p str)
@@ -794,13 +794,13 @@ supply a positive argument once more with C-u C-SPC."
     (string-inflection-underscore-function str))))
 
 (fset 'string-inflection-cycle 'string-inflection-all-cycle)
-(global-set-key (kbd "C-c I") 'string-inflection-cycle)
+(global-set-key (kbd "C-c I") #'string-inflection-cycle)
 (after-load 'python
-  (define-key python-mode-map (kbd "C-c I") 'string-inflection-cycle-python))
-(define-key mode-specific-map (kbd "i c") 'string-inflection-lower-camelcase)
-(define-key mode-specific-map (kbd "i C") 'string-inflection-upper-camelcase)
-(define-key mode-specific-map (kbd "i s") 'string-inflection-underscore)
-(define-key mode-specific-map (kbd "i u") 'string-inflection-underscore)
+  (define-key python-mode-map (kbd "C-c I") #'tak/string-inflection-cycle-python))
+(define-key mode-specific-map (kbd "i c") #'string-inflection-lower-camelcase)
+(define-key mode-specific-map (kbd "i C") #'string-inflection-camelcase)
+(define-key mode-specific-map (kbd "i s") #'string-inflection-underscore)
+(define-key mode-specific-map (kbd "i u") #'string-inflection-upcase)
 
 
 
