@@ -753,4 +753,59 @@ supply a positive argument once more with C-u C-SPC."
 
 
 
+;; Cycle between snake case, camel case, etc.
+;; https://github.com/akicho8/string-inflection
+;;
+(require-package 'string-inflection)
+(require 'string-inflection)
+
+(defun tak/string-inflection-save-excursion (orig-function &rest args)
+  "Advise string-inflection functions to `save-excursion'."
+  (save-excursion
+    (apply orig-function args)))
+
+(dolist (func #'(string-inflection-ruby-style-cycle
+                 string-inflection-java-style-cycle
+                 string-inflection-all-cycle
+                 string-inflection-toggle
+                 string-inflection-camelcase
+                 string-inflection-lower-camelcase
+                 string-inflection-underscore
+                 string-inflection-upcase
+                 string-inflection-lisp))
+  (advice-add func :around #'tak/string-inflection-save-excursion))
+
+(defun string-inflection-cycle-python ()
+  "camelCase => snake_case => UpperCamelCase"
+  (interactive)
+  (save-excursion
+    (insert (string-inflection-python-function (string-inflection-get-current-word t)))))
+
+(defun string-inflection-python-function (str)
+  "camelCase => snake_case"
+  (cond
+   ((string-inflection-underscore-p str)
+    (string-inflection-camelcase-function str))
+   ((string-inflection-camelcase-p str)
+    (string-inflection-lower-camelcase-function str))
+   ((string-inflection-lower-camelcase-p str)
+    (string-inflection-underscore-function str))
+   (t
+    (string-inflection-underscore-function str))))
+
+(fset 'string-inflection-cycle 'string-inflection-all-cycle)
+(global-set-key (kbd "C-c I") 'string-inflection-cycle)
+(after-load 'python
+  (define-key python-mode-map (kbd "C-c I") 'string-inflection-cycle-python))
+(define-key mode-specific-map (kbd "i c") 'string-inflection-lower-camelcase)
+(define-key mode-specific-map (kbd "i C") 'string-inflection-upper-camelcase)
+(define-key mode-specific-map (kbd "i s") 'string-inflection-underscore)
+(define-key mode-specific-map (kbd "i u") 'string-inflection-underscore)
+
+
+
+(define-key mode-specific-map (kbd "q") 'bury-buffer)
+
+
+
 (provide 'init-local)
