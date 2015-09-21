@@ -414,11 +414,12 @@ See also: `enable-all-disabled-commands'."
 
 
 ;; set initial and default frame parameters
-(dolist (parameter '((width . 90)
-                     (height . 55)))
-  (add-to-list 'default-frame-alist parameter)
-  (add-to-list 'initial-frame-alist parameter)
-  )
+
+;; (dolist (parameter '((width . 90)
+;;                      (height . 55)))
+;;   (add-to-list 'default-frame-alist parameter)
+;;   (add-to-list 'initial-frame-alist parameter)
+;;   )
 
 (dolist (parameter '((left . -10)
                      (top . 23)
