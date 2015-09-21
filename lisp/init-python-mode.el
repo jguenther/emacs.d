@@ -12,11 +12,6 @@
               ;; run flycheck-mode after hack-local-vars-hook
               flycheck-global-modes '(not python-mode))
 
-;; local fork of elpy
-(add-to-list 'load-path
-             (expand-file-name "~/code/elpy/"))
-
-
 (require-package 'pip-requirements)
 (add-hook 'pip-requirements-mode-hook #'pip-requirements-auto-complete-setup)
 
