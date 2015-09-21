@@ -64,9 +64,9 @@
  truncate-partial-width-windows t
 
  ;; blink-cursor mode
- (blink-cursor-blinks 5)
- (blink-cursor-delay 1)
- (blink-cursor-interval 0.8)
+ blink-cursor-blinks 5
+ blink-cursor-delay 1
+ blink-cursor-interval 0.8
  )
 
 (blink-cursor-mode t)
@@ -818,9 +818,5 @@ supply a positive argument once more with C-u C-SPC."
 
 
 
-(require-package 'ediff-trees)
-
-
-
 
 (provide 'init-local)
