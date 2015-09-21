@@ -818,4 +818,9 @@ supply a positive argument once more with C-u C-SPC."
 
 
 
+(require-package 'ediff-trees)
+
+
+
+
 (provide 'init-local)
