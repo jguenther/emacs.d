@@ -60,7 +60,16 @@
 
  ;; auto-completion
  ac-use-fuzzy t
+
+ truncate-partial-width-windows t
+
+ ;; blink-cursor mode
+ (blink-cursor-blinks 5)
+ (blink-cursor-delay 1)
+ (blink-cursor-interval 0.8)
  )
+
+(blink-cursor-mode t)
 
 (defvar user-home-directory (expand-file-name "~")
   "The absolute path to the user's home directory `~'.")
