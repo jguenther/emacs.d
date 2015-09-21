@@ -16,6 +16,17 @@
 (sanityinc/add-subdirs-to-load-path
  (expand-file-name "site-lisp/" user-emacs-directory))
 
+(defun tak/prepend-subdirs-to-load-path (parent-dir)
+  (let* ((default-directory parent-dir))
+    (progn
+      (setq load-path
+            (append
+             (remove-if-not
+              (lambda (dir) (file-directory-p dir))
+              (directory-files (expand-file-name parent-dir) t "^[^\\.]"))
+             load-path
+             )))))
+
 ;; homebrew site-lisp dirs
 (let ((default-directory "/usr/local/share/emacs/site-lisp/"))
   (normal-top-level-add-subdirs-to-load-path))
