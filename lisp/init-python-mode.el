@@ -271,17 +271,22 @@ class/method/function specifiers from the resulting buffer name."
   :safe 'booleanp
   )
 
-(defun tak/append-paths-to-env-var (variable paths)
-  "Appends PATHS to VARIABLE and returns the new value."
-  (let* ((old-value (getenv variable))
-         (old-paths (if old-value
-                        (s-split path-separator old-value t)
+(defun tak/append-paths-to-string (string paths)
+  "Appends PATHS to STRING and returns the new value."
+  (let* ((old-paths (if string
+                        (s-split path-separator string t)
                       (list)))
          (new-paths (progn
                       (dolist (path paths)
                         (add-to-list 'old-paths path t))
                       old-paths))
          (new-path-string (string-join new-paths path-separator)))
+    new-path-string))
+
+(defun tak/append-paths-to-env-var (variable paths)
+  "Appends PATHS to VARIABLE and returns the new value."
+  (let* ((old-value (getenv variable))
+         (new-path-string (tak/append-paths-to-string old-value paths)))
     new-path-string))
 
 (defun tak/compute-local-python-environment ()
