@@ -61,8 +61,6 @@
  ;; auto-completion
  ac-use-fuzzy t
 
- truncate-partial-width-windows t
-
  ;; blink-cursor mode
  blink-cursor-blinks 5
  blink-cursor-delay 1
