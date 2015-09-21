@@ -7,7 +7,7 @@
  ;; If there is more than one, they won't work right.
  '(auto-save-timeout 120)
  '(backup-directory-alist (quote (("." . "~/.emacs.d/saves"))))
- '(blink-cursor-mode nil)
+ '(blink-cursor-mode t)
  '(compilation-ask-about-save nil)
  '(cperl-close-paren-offset -2)
  '(cperl-comment-column 40)
@@ -53,7 +53,7 @@
     ("pip" "install" "--upgrade" "git+https://github.com/davidhalter/jedi.git@master#egg=jedi")))
  '(jedi:tooltip-method (quote (pos-tip)))
  '(jedi:use-shortcuts t)
- '(js-indent-level 4 t)
+ '(js-indent-level 4)
  '(js2-basic-offset 4 t)
  '(magit-revert-buffers 2)
  '(magit-save-repository-buffers (quote dontask))
@@ -134,6 +134,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(realgud-backtrace-number ((t (:inherit highlight-symbol-face :weight bold)))))
+ '(ediff-fine-diff-B ((t (:background "#22aa22" :foreground "black"))))
+ '(realgud-backtrace-number ((t (:inherit highlight-symbol-face :weight bold))))
+ '(smerge-refined-added ((t (:inherit smerge-refined-change :background "#22aa22" :foreground "black")))))
 (put 'erase-buffer 'disabled nil)
 (put 'scroll-left 'disabled nil)
