@@ -365,7 +365,9 @@ sys.path."
     (define-key python-mode-map (kbd "C-c J e") 'jedi:pop-to-epc-buffer)
     (define-key python-mode-map (kbd "C-c C-.") 'jedi:goto-definition-pop-marker)
     (define-key python-mode-map (kbd "C-.")     'jedi:goto-definition-push-marker)
-    (define-key python-mode-map (kbd "C-c C-.")   'jedi:goto-definition-push-marker)
+    (define-key python-mode-map (kbd "C-c C-.") 'jedi:goto-definition-push-marker)
+    (define-key python-mode-map (kbd "M-.")     'jedi:goto-definition)
+    (define-key elpy-mode-map   (kbd "M-.")     nil)
 
     ;; jedi-direx
     (define-key python-mode-map (kbd "C-c x") 'jedi-direx:pop-to-buffer)
