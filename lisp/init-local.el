@@ -213,19 +213,19 @@ Moves point to the end of the inserted text. Does not change mark."
   ;; workaround visual bug with git-gutter and org-indent-mode
   (add-to-list 'git-gutter:disabled-modes 'org-mode)
   
-  (global-set-key (kbd "C-c u t") 'git-gutter+:toggle)
-  (global-set-key (kbd "C-x v =") 'git-gutter+:popup-hunk)
-  (global-set-key (kbd "C-c u =") 'git-gutter+:popup-hunk)
+  ;;(global-set-key (kbd "C-c u t") 'git-gutter+:toggle)
+  (global-set-key (kbd "C-x v =") 'git-gutter+-popup-hunk)
+  (define-key mode-specific-map (kbd "u =") 'git-gutter+-popup-hunk)
 
   ;; Jump to next/previous hunk
-  (global-set-key (kbd "C-c u p") 'git-gutter+:previous-hunk)
-  (global-set-key (kbd "C-c u n") 'git-gutter+:next-hunk)
+  (define-key mode-specific-map (kbd "u p") 'git-gutter+-previous-hunk)
+  (define-key mode-specific-map (kbd "u n") 'git-gutter+-next-hunk)
 
   ;; Stage current hunk
-  (global-set-key (kbd "C-c u s") 'git-gutter+:stage-hunk)
+  (define-key mode-specific-map (kbd "u s") 'git-gutter+-stage-hunks)
 
   ;; Revert current hunk
-  (global-set-key (kbd "C-c u r") 'git-gutter+:revert-hunk)
+  (define-key mode-specific-map (kbd "u r") 'git-gutter+-revert-hunk)
 
   )
 
