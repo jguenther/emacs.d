@@ -276,6 +276,9 @@ class/method/function specifiers from the resulting buffer name."
   (let* ((old-paths (if string
                         (s-split path-separator string t)
                       (list)))
+         (paths (if (listp paths) 
+                    paths
+                  (list paths)))
          (new-paths (progn
                       (dolist (path paths)
                         (add-to-list 'old-paths path t))
