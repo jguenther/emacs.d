@@ -132,6 +132,11 @@ The issue number is parsed from the branch name."
 
 
 
+(define-key magit-revision-mode-map (kbd "M-<left>") 'magit-go-backward)
+(define-key magit-revision-mode-map (kbd "M-<right>") 'magit-go-forward)
+
+
+
 ;; so git-wip-mode doesn't depend on running magit-status first
 (require 'magit)
 
