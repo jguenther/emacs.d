@@ -45,4 +45,43 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 (require 'benchmark-init-loaddefs)
 (benchmark-init/activate)
 
+
+
+(defun tak/run-elp-results-after-defun (orig-function &rest args)
+  "Advice to run `elp-results' after the function
+returns. ORIG-FUNCTION must be instrumented by
+`elp-instrument-function' prior to calling it."
+  (require 'elp)
+  (apply orig-function args)
+  (elp-results))
+
+(defun tak/profile-package (package &optional function)
+  "Profiles all defuns in PACKAGE. If FUNCTION is set, advises
+FUNCTION to run `elp-results' after FUNCTION returns."
+  (require 'elp)
+  ;;(elp-restore-all)
+  (elp-instrument-package package)
+  ;; (elp-reset-all)
+  (if function
+      (advice-add function :around #'tak/run-elp-results-after-defun)))
+
+(defun tak/profile-defun (func)
+  (require 'elp)
+  ;;(elp-restore-all)
+  (elp-instrument-function function)
+  ;; (elp-reset-all)
+  (advice-add function :around #'tak/run-elp-results-after-defun))
+
+(defun tak/reset-elp ()
+  (interactive)
+  (elp-restore-all)
+  (elp-reset-all))
+
+(tak/profile-package-and-maybe-function "magit") ; 'magit-status
+
+(profile-magit)
+
+
+
+
 (provide 'init-benchmarking)
