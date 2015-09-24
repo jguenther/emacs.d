@@ -820,4 +820,15 @@ supply a positive argument once more with C-u C-SPC."
 
 
 
+;; advise browse-url-url-at-point to remove trailing quote if it exists
+
+(defun tak/remove-trailing-quote (orig-function &rest args)
+  "Advise browse-url-url-at-point to remove any trailing quote char."
+  (let* ((result (apply orig-function args))
+         (new-result (replace-regexp-in-string "['\"]$" "" result)))
+    new-result))
+(advice-add #'browse-url-url-at-point :around #'tak/remove-trailing-quote)
+
+
+
 (provide 'init-local)
