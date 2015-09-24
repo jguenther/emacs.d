@@ -1,3 +1,11 @@
+;;; setup load-path before packages start to load
+
+;; prepend site-lisp dirs
+(message "prepending site-lisp dirs to load-path")
+(tak/prepend-subdirs-to-load-path
+ (expand-file-name "site-lisp/" user-emacs-directory))
+
+
 ;;; Launcher keymap
 
 ;;
