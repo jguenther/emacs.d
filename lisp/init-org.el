@@ -91,13 +91,11 @@ typical word processor."
 
 (define-key mode-specific-map (kbd "c") 'org-capture)
 
-(setq org-capture-templates
-      `(("t" "todo" entry (file "")  ; "" => org-default-notes-file
+(push `(("t" "todo" entry (file "")  ; "" => org-default-notes-file
          "* NEXT %?\n%U\n" :clock-resume t)
         ("n" "note" entry (file "")
-         "* %? :NOTE:\n%U\n%a\n" :clock-resume t)
-        ))
-
+         "* %? :NOTE:\n%U\n%a\n" :clock-resume t))
+      org-capture-templates)
 
 
 ;;; Refiling
