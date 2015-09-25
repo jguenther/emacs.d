@@ -151,6 +151,7 @@ typical word processor."
         `(,active-project-match ("NEXT")))
 
   (setq org-agenda-compact-blocks t
+        org-agenda-restore-windows-after-quit t
         org-agenda-sticky t
         org-agenda-start-on-weekday nil
         org-agenda-span 'day
