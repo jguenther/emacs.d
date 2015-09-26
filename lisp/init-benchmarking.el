@@ -77,9 +77,7 @@ FUNCTION to run `elp-results' after FUNCTION returns."
   (elp-restore-all)
   (elp-reset-all))
 
-(tak/profile-package-and-maybe-function "magit") ; 'magit-status
-
-(profile-magit)
+(tak/profile-package "magit") ; 'magit-status
 
 
 
