@@ -6,8 +6,8 @@
 (add-hook 'prog-mode-hook 'bug-reference-prog-mode)
 
 (maybe-require-package 'github-clone)
-(maybe-require-package 'magit-gh-pulls)
+;; (if (maybe-require-package 'magit-gh-pulls)
+;;     (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
 
-(add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)
 
 (provide 'init-github)
