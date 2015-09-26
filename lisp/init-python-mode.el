@@ -38,7 +38,28 @@
 
   (unless (require 'yasnippet nil t)
     (setq elpy-modules (delq 'elpy-module-yasnippet elpy-modules)))
+
+  (require 'jedi)
+  
+  ;; note: this isn't necessary. the jedi epc server only needs to be installed
+  ;; in the venv, jedi itself can go in site packages dir
+  
+  ;; (tak/setup-elpy-rpc)
   )
+
+;; add jedi installdir in venv to elpy-rpc-pythonpath 
+(defun tak/setup-elpy-rpc ()
+  (let* ((env (if jedi:environment-root
+                  jedi:environment-root
+                python-environment-default-root-name))
+         (env-root (if (file-name-absolute-p env)
+                       env
+                     (expand-file-name env python-environment-directory)))
+         (env-lib-dir (expand-file-name "lib/python2.7/" env-root))
+         (env-lib-site-packages-dir (expand-file-name "site-packages" env-lib-dir))
+         (new-rpc-pythonpath (tak/append-paths-to-string elpy-rpc-pythonpath env-lib-dir)))
+    (setq elpy-rpc-pythonpath new-rpc-pythonpath)
+    (message "Set elpy-rpc-pythonpath to %s" elpy-rpc-pythonpath)))
 
 (defun tak/indent-guide-mode-off ()
   (if indent-guide-mode
@@ -211,15 +232,18 @@ This requires the pytest package to be installed."
 
 (defun elpy-test-run-pdb (working-directory command &rest args)
   "Run COMMAND with ARGS in WORKING-DIRECTORY as a test command using pdb."
+
+  (setq comint-process-echoes t
+        comint-use-prompt-regexp t
+        gud-chdir-before-run nil
+        gud-pdb-command-name tak/pdb-wrapper-script)
+  
   (let* ((default-directory working-directory)
-         (gud-chdir-before-run nil)
-         (gud-pdb-command-name tak/pdb-wrapper-script)
          (cmdline (combine-and-quote-strings (cons command args)))
          (process-environment (tak/compute-local-python-environment))
-         (comint-process-echoes t)
-         (comint-use-prompt-regexp t))
-    ;;(add-hook 'comint-output-filter-functions 'python-pdbtrack-comint-output-filter-function)
-    (message "running pdb: `%s'" cmdline)
+         )
+    ;; (add-hook 'comint-output-filter-functions 'python-pdbtrack-comint-output-filter-function)
+    ;; (message "running pdb: `%s'" cmdline)
     ;; realgud:cmdbuf-associate
     (pdb cmdline)))
 
@@ -296,7 +320,7 @@ class/method/function specifiers from the resulting buffer name."
   "Computes a new `process-environment' that appends absolute paths in
 `python-shell-extra-pythonpaths' to the PYTHONPATH environment
 variable."
-  (message "%s: in tak/compute-local-python-environment" (buffer-name))
+  ;; (message "%s: in tak/compute-local-python-environment" (buffer-name))
   (let* ((extra-pythonpaths (--map (file-truename (concat it "/"))
                                    python-shell-extra-pythonpaths))
          (new-pythonpath (tak/append-paths-to-env-var "PYTHONPATH" extra-pythonpaths)))
@@ -307,12 +331,13 @@ variable."
 
 (defun tak/hack-python-locals ()
   (when (eq major-mode 'python-mode)
-    (message "%s: in tak/hack-python-locals" (buffer-name))
+    ;; (message "%s: in tak/hack-python-locals" (buffer-name))
     (set (make-local-variable 'process-environment)
          (tak/compute-local-python-environment))
     
-    (add-hook 'python-mode-hook 'jedi:setup)
-    (add-hook 'python-mode-hook 'flycheck-mode))
+    (add-hook 'python-mode-hook 'jedi:setup nil t)
+    ;;(add-hook 'python-mode-hook 'flycheck-mode nil t)
+    )
   )
 
 (defun tak/python-setup ()
@@ -322,7 +347,7 @@ Adds and modifies keybinds and uses hack-local-variables-hook to setup
 sys.path."
 
   (when (eq major-mode 'python-mode)
-    (message "%s: in tak/python-setup" (buffer-name))
+    ;; (message "%s: in tak/python-setup" (buffer-name))
 
     (when tak/flycheck-enabled
       (require 'flycheck)
@@ -384,7 +409,7 @@ sys.path."
     ;; This is necessary since python sys.path is set in dirlocals which is not
     ;; visible until after python-mode-hook has run
     ;;
-    (add-hook 'hack-local-variables-hook 'tak/hack-python-locals)
+    (add-hook 'hack-local-variables-hook 'tak/hack-python-locals nil t)
     ;; ;; alternate method
     ;; (add-hook 'hack-local-variables-hook 'run-local-vars-mode-hook)
     ;; (defun run-local-vars-mode-hook ()
@@ -395,11 +420,11 @@ sys.path."
     ))
 
 (after-load 'python
-  (add-hook 'python-mode-hook 'tak/python-setup t)
+  (add-hook 'python-mode-hook 'tak/python-setup)
   )
 
-(after-load 'realgud
-  (add-hook 'realgud-short-key-mode-hook 'tak/python-setup t))
+;; (after-load 'realgud
+;;   (add-hook 'realgud-short-key-mode-hook 'tak/python-setup))
 
 (elpy-enable)
 
