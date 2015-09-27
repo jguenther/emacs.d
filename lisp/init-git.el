@@ -112,29 +112,24 @@
   "Prefixes the default git commit message with a Jira issue number.
 
 The issue number is parsed from the branch name."
-  (let* ((branch (magit-get-current-branch))
-         (ticket-id (if branch
-                        (progn
-                          (if (string-match "^\\([A-Z]+[0-9]+\\)-" branch)
-                              (match-string 1)))
-                      nil))
+  (let* ((branch (magit-get-current-branch ))
+         (ticket-id (if (and branch (string-match "^\\([A-Z]+-[0-9]+\\)-" branch))
+                        (match-string 1 branch)))
          (prefix (if ticket-id
-                     (format "%s: " ticket-id)
-                   nil)))
-    (save-excursion
-      (goto-char (point-min))
-      (when prefix
-        (insert prefix)
-        (end-of-line)))))
+                     (format "%s: " ticket-id))))
+    (goto-char (point-min))
+    (when prefix
+      (insert prefix)
+      (end-of-line))))
 
 (after-load 'git-commit
-  (add-hook 'git-commit-setup-hook 'tak/insert-git-commit-prefix))
+  (add-hook 'git-commit-setup-hook 'tak/insert-git-commit-prefix t))
 
 
 (after-load 'magit
   (define-key magit-revision-mode-map (kbd "M-<left>") 'magit-go-backward)
   (define-key magit-revision-mode-map (kbd "M-<right>") 'magit-go-forward)
-)
+  )
 
 
 ;; so git-wip-mode doesn't depend on running magit-status first
