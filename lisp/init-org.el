@@ -143,6 +143,8 @@ typical word processor."
 
 ;;; Agenda views
 
+(setq-default org-agenda-clockreport-parameter-plist '(:link t :maxlevel 3))
+
 
 (let ((active-project-match "-INBOX/PROJECT"))
 
@@ -224,7 +226,8 @@ typical word processor."
 ;;; Org clock
 
 ;; Save the running clock and all clock history when exiting Emacs, load it on startup
-(org-clock-persistence-insinuate)
+(after-load 'org
+  (org-clock-persistence-insinuate))
 (setq org-clock-persist t)
 (setq org-clock-in-resume t)
 
@@ -275,7 +278,8 @@ typical word processor."
     (beginning-of-line 0)
     (org-remove-empty-drawer-at "LOGBOOK" (point))))
 
-(add-hook 'org-clock-out-hook 'sanityinc/remove-empty-drawer-on-clock-out 'append)
+(after-load 'org-clock
+  (add-hook 'org-clock-out-hook 'sanityinc/remove-empty-drawer-on-clock-out 'append))
 
 
 
