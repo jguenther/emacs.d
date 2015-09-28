@@ -114,9 +114,15 @@
   --amend)
 
 The issue number is parsed from the branch name."
-  (let* ((branch (magit-get-current-branch ))
-         (ticket-id (if (and branch (string-match "^\\([A-Z]+-[0-9]+\\)-" branch))
-                        (match-string 1 branch)))
+  (let* ((branch (magit-get-current-branch))
+         (interactive-rebase (file-directory-p (magit-git-dir "rebase-merge")))
+         (rebase-dir  (if interactive-rebase "rebase-merge/"))
+         (head-name (if rebase-dir
+                        (-> (concat rebase-dir "head-name") magit-git-dir magit-file-line)
+                      branch))
+         (head-name (or (magit-rev-name head-name "refs/heads/*") head-name))
+         (ticket-id (if (and head-name (string-match "^\\([A-Z]+-[0-9]+\\)-" head-name))
+                        (match-string 1 head-name)))
          (len (length ticket-id))
          (prefix (if ticket-id
                      (format "%s: " ticket-id)))
