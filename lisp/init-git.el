@@ -118,12 +118,15 @@ The issue number is parsed from the branch name."
          (ticket-id (if (and branch (string-match "^\\([A-Z]+-[0-9]+\\)-" branch))
                         (match-string 1 branch)))
          (len (length ticket-id))
+         (prefix (if ticket-id
+                     (format "%s: " ticket-id)))
+         (prefix-len (length prefix))
          (prefix (save-excursion
                    (goto-char (point-min))
-                   (if (and ticket-id
+                   (if (and prefix
                             (not (re-search-forward
-                                  (concat "\\`" (regexp-quote ticket-id) ": ") (+ len 2) t)))
-                       (format "%s: " ticket-id)))))
+                                  (concat "\\`" (regexp-quote prefix)) (+ prefix-len 1) t)))
+                       prefix))))
     (when prefix
       (goto-char (point-min))
       (insert prefix)
