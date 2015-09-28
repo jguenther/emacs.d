@@ -29,7 +29,8 @@
 
 ;; homebrew site-lisp dirs
 (let ((default-directory "/usr/local/share/emacs/site-lisp/"))
-  (normal-top-level-add-subdirs-to-load-path))
+  (if (file-exists-p default-directory)
+      (normal-top-level-add-subdirs-to-load-path)))
 
 ;;; Utilities for grabbing upstream libs
 
