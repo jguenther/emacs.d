@@ -109,16 +109,23 @@
 
 
 (defun tak/insert-git-commit-prefix ()
-  "Prefixes the default git commit message with a Jira issue number.
+  "Prefixes the default git commit message with a Jira issue number,
+  if it isn't already in the default commit message (e.g. due to commit
+  --amend)
 
 The issue number is parsed from the branch name."
   (let* ((branch (magit-get-current-branch ))
          (ticket-id (if (and branch (string-match "^\\([A-Z]+-[0-9]+\\)-" branch))
                         (match-string 1 branch)))
-         (prefix (if ticket-id
-                     (format "%s: " ticket-id))))
-    (goto-char (point-min))
+         (len (length ticket-id))
+         (prefix (save-excursion
+                   (goto-char (point-min))
+                   (if (and ticket-id
+                            (not (re-search-forward
+                                  (concat "\\`" (regexp-quote ticket-id) ": ") (+ len 2) t)))
+                       (format "%s: " ticket-id)))))
     (when prefix
+      (goto-char (point-min))
       (insert prefix)
       (end-of-line))))
 
