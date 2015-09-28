@@ -93,8 +93,11 @@ Call a second time to restore the original window configuration."
 
 
 ;; from http://emacswiki.org/emacs/TransposeWindows
-(defun rotate-windows (arg)
-  "Rotate your windows; use the prefix argument to rotate the other direction"
+(defun tak/rotate-windows (arg)
+  "Rotate windows clockwise in current frame.
+
+If given a prefix argument, rotate counter-clockwise. Rotate ARG times
+with a numeric prefix argument."
   (interactive "P")
   (if (not (> (count-windows) 1))
       (message "You can't rotate a single window!")
@@ -120,6 +123,8 @@ Call a second time to restore the original window configuration."
         (setq i 0
               rotate-times
               (if (< rotate-times 0) (1+ rotate-times) (1- rotate-times)))))))
+
+(define-key mode-specific-map (kbd "<up>") 'tak/rotate-windows)
 
 
 
