@@ -812,10 +812,6 @@ supply a positive argument once more with C-u C-SPC."
 
 
 
-(define-key mode-specific-map (kbd "q") 'bury-buffer)
-
-
-
 (require-package 'diffview)
 
 
@@ -828,6 +824,17 @@ supply a positive argument once more with C-u C-SPC."
          (new-result (replace-regexp-in-string "['\"]$" "" result)))
     new-result))
 (advice-add #'browse-url-url-at-point :around #'tak/remove-trailing-quote)
+
+
+
+(defun tak/quit-other-window ()
+  "Switches to other window and runs `quit-window'."
+  (interactive)
+  (switch-window)
+  (quit-window))
+(define-key mode-specific-map (kbd "Q") #'tak/quit-other-window)
+(define-key mode-specific-map (kbd "C-q") #'tak/quit-other-window)
+(define-key mode-specific-map (kbd "q") #'quit-window)
 
 
 
