@@ -12,7 +12,11 @@
 
 (after-load 'grep
 					; avoid rgrep matching ELPA archives
-  (add-to-list 'grep-find-ignored-directories
-	       (join-path user-emacs-directory "elpa" "archives")))
+  (add-to-list 'grep-find-ignored-directories "elpa/archives")
+                                        ; homebrew .cask dir
+  (add-to-list 'grep-find-ignored-directories ".cask")
+                                        ; coverage testing results files
+  (add-to-list 'grep-find-ignored-directories "htmlcov"))
+
 
 (provide 'init-grep)
