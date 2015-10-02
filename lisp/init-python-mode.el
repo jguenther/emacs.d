@@ -359,15 +359,18 @@ sys.path."
 
     ;; local binds
     (define-key python-mode-map (kbd "C-c C-<SPC>") 'python-add-breakpoint)
-
+    (define-key python-mode-map (kbd "C-c M-p") #'run-python)
+    
     ;; elpy--remove unnecessary binds
     (cl-dolist (key '(
+                                        ; elpy-flymake-next-error
                       "C-c C-n"
-                                        ;elpy-flymake-next-error
+                                        ; elpy-flymake-previous-error
                       "C-c C-p"
-                                        ;elpy-flymake-previous-error
+                                        ; elpy-check
                       "C-c C-v"
-                                        ;elpy-check
+                                        ; run-python
+                      "C-c C-p"
                       ))
       (define-key elpy-mode-map (kbd key) nil))
     
