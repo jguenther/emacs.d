@@ -304,5 +304,20 @@
     (when (fboundp 'aggressive-indent-indent-defun)
       (aggressive-indent-indent-defun))))
 
+
+
+;; change default paredit binds
+(after-load 'paredit
+  (define-key paredit-mode-map (kbd "M-s") nil)
+  (define-key paredit-mode-map (kbd "C-M-S-s") #'paredit-splice-sexp)
+  )
+
+(after-load 'paredit-everywhere
+  (define-key paredit-everywhere-mode-map (kbd "M-s") nil)
+  (define-key paredit-everywhere-mode-map (kbd "C-M-S-s") #'paredit-splice-sexp)
+  )
+
+
+
 
 (provide 'init-lisp)
