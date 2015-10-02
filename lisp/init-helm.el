@@ -14,6 +14,7 @@
 (require-package 'helm-pydoc)
 (require-package 'wgrep-helm)
 (require-package 'helm-ag)
+(require-package 'helm-orgcard)
 
 (when (sanityinc/dash-installed-p)
   (require-package 'helm-dash))
