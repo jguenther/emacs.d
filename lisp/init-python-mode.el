@@ -360,6 +360,7 @@ sys.path."
     ;; local binds
     (define-key python-mode-map (kbd "C-c C-<SPC>") 'python-add-breakpoint)
     (define-key python-mode-map (kbd "C-c M-p") #'run-python)
+    (define-key python-mode-map [C-tab] #'jedi:complete)
     
     ;; elpy--remove unnecessary binds
     (cl-dolist (key '(
