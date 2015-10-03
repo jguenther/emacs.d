@@ -88,10 +88,46 @@ Call a second time to restore the original window configuration."
              (if was-dedicated "no longer " "")
              (buffer-name))))
 
-(global-set-key (kbd "C-c <down>") 'sanityinc/toggle-current-window-dedication)
-
+(define-key mode-specific-map (kbd "<down>") 'sanityinc/toggle-current-window-dedication)
 
 
+
+;; from http://emacswiki.org/emacs/TransposeWindows
+(defun tak/rotate-windows (arg)
+  "Rotate windows clockwise in current frame.
+
+If given a prefix argument, rotate counter-clockwise. Rotate ARG times
+with a numeric prefix argument."
+  (interactive "P")
+  (if (not (> (count-windows) 1))
+      (message "You can't rotate a single window!")
+    (let* ((rotate-times (if (and (numberp arg) (not (= arg 0))) arg 1))
+           (direction (if (or (< rotate-times 0) (equal arg '(4)))
+                          'reverse
+                        (lambda (x) x)))
+           (i 0))
+      (while (not (= rotate-times 0))
+        (while  (< i (- (count-windows) 1))
+          (let* ((w1 (elt (funcall direction (window-list)) i))
+                 (w2 (elt (funcall direction (window-list)) (+ i 1)))
+                 (b1 (window-buffer w1))
+                 (b2 (window-buffer w2))
+                 (s1 (window-start w1))
+                 (s2 (window-start w2))
+                 (p1 (window-point w1))
+                 (p2 (window-point w2)))
+            (set-window-buffer-start-and-point w1 b2 s2 p2)
+            (set-window-buffer-start-and-point w2 b1 s1 p1)
+            (setq i (1+ i))))
+
+        (setq i 0
+              rotate-times
+              (if (< rotate-times 0) (1+ rotate-times) (1- rotate-times)))))))
+
+(define-key mode-specific-map (kbd "<up>") 'tak/rotate-windows)
+
+
+
 (unless (memq window-system '(nt w32))
   (windmove-default-keybindings 'control))
 
