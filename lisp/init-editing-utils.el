@@ -391,15 +391,14 @@ With arg N, insert N newlines."
 
 
 ;; from http://emacswiki.org/emacs/DeletingWhitespace
-(defun whack-whitespace (arg)
+(defun whack-whitespace ()
   "Delete all white space from point to the next word.
 
-   With prefix ARG delete across newlines as well.  The only danger in
-this is that you don't have to actually be at the end of a word to
-make it work.  It skips over to the next whitespace and then whacks it
-all to the next word."
-  (interactive "P")
-  (let ((regexp (if arg "[ \t\n]+" "[ \t]+")))
+   The only danger in this is that you don't have to actually be at
+the end of a word to make it work.  It skips over to the next
+whitespace and then whacks it all to the next word."
+  (interactive)
+  (let ((regexp "[ \t\n]+"))
     (re-search-forward regexp nil t)
     (replace-match "" nil nil)))
 
