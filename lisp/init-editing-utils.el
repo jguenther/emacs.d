@@ -392,5 +392,22 @@ With arg N, insert N newlines."
  which-key-idle-delay 2.0
  )
 
+
+;; from http://emacswiki.org/emacs/DeletingWhitespace
+(defun whack-whitespace ()
+  "Delete all white space from point to the next word.
+
+   The only danger in this is that you don't have to actually be at
+the end of a word to make it work.  It skips over to the next
+whitespace and then whacks it all to the next word."
+  (interactive)
+  (let ((regexp "[ \t\n]+"))
+    (re-search-forward regexp nil t)
+    (replace-match "" nil nil)))
+
+(global-set-key (kbd "C-D") #'whack-whitespace)
+
+
+
 
 (provide 'init-editing-utils)
