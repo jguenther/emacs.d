@@ -556,8 +556,11 @@ Sets TERM=xterm-256color"
 
 (require-package 'discover)
 (require-package 'discover-my-major)
+(require 'discover-my-major)
 
 (global-set-key (kbd "C-h M-m") 'discover-my-major)
+(global-set-key (kbd "C-h C-M-m") 'discover-my-mode)
+(global-set-key (kbd "C-h M-M") 'discover-my-mode)
 
 (require 'discover)
 (global-discover-mode 1)
