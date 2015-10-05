@@ -161,6 +161,12 @@
 (require-package 'iedit)
 (define-key mode-specific-map (kbd ";") #'iedit-mode)
 
+
+
+(require-package 'imenu)
+(require-package 'imenu+)
+(require-package 'imenu-anywhere)
+
 ;; imenu bindings
 (global-set-key [S-mouse-3] 'imenu)
 (global-set-key (kbd "C-'") 'imenu-anywhere)
