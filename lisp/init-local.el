@@ -155,6 +155,12 @@
 (require-package 'back-button)
 (require 'back-button)
 (back-button-mode 1)
+
+
+;; iedit
+(require-package 'iedit)
+(define-key mode-specific-map (kbd ";") #'iedit-mode)
+
 ;; imenu bindings
 (global-set-key [S-mouse-3] 'imenu)
 (global-set-key (kbd "C-'") 'imenu-anywhere)
