@@ -34,7 +34,7 @@
   ;; use jedi completion instead
   (setq elpy-modules (delq 'elpy-module-company elpy-modules))
 
-  (elpy-use-cpython)
+  (elpy-use-ipython)
 
   (unless (require 'yasnippet nil t)
     (setq elpy-modules (delq 'elpy-module-yasnippet elpy-modules)))
@@ -123,26 +123,20 @@ running."
 ;;;
 ;;; ipython setup
 
-;; out of date?
-;;
-;; (defvar server-buffer-clients)
-;; (when (and (fboundp 'server-start) (string-equal (getenv "TERM") 'xterm))
-;;   (server-start)
-;;   (defun fp-kill-server-with-buffer-routine ()
-;;     (and server-buffer-clients (server-done)))
-;;   (add-hook 'kill-buffer-hook 'fp-kill-server-with-buffer-routine))
-
 ;; ipython setup
-;; (setq python-shell-interpreter "ipython"
-;;       python-shell-interpreter-args ""
-;;       python-shell-prompt-regexp "In \\[[0-9]+\\]: "
-;;       python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
-;;       python-shell-completion-setup-code
-;;       "from IPython.core.completerlib import module_completion"
-;;       python-shell-completion-module-string-code
-;;       "';'.join(module_completion('''%s'''))\n"
-;;       python-shell-completion-string-code
-;;       "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
+(setq python-shell-interpreter "ipython"
+      python-shell-interpreter-args "-i"
+      python-shell-prompt-regexp "In \\[[0-9]+\\]: "
+      python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
+      
+      ;; python-shell-completion-setup-code
+      ;; "from IPython.core.completerlib import module_completion"
+      ;; python-shell-completion-module-string-code
+      ;; "';'.join(module_completion('''%s'''))\n"
+      ;; python-shell-completion-string-code
+      ;; "';'.join(get_ipython().Completer.all_completions('''%s'''))\n"
+      
+      )
 
 
 
@@ -158,8 +152,7 @@ running."
 (after-load 'python
   (require 'realgud)
   (setq pdb-path '/usr/local/bin/pdb 
-        gud-pdb-command-name (symbol-name pdb-path))
-  )
+        gud-pdb-command-name (symbol-name pdb-path)))
 
 (defun annotate-pdb-breakpoints ()
   (interactive)
@@ -167,15 +160,16 @@ running."
 
 (defun python-add-breakpoint ()
   (interactive)
-  (let* ((i (if (string-equal python-shell-interpreter "ipython") "i" ""))
-         (breakpoint-string (format "import %spdb; %spdb.set_trace()" i i)))
+  (let* ((prefix (if (string-equal python-shell-interpreter "ipython")
+                     "i"
+                   ""))
+         (breakpoint-string (format "import %spdb; %spdb.set_trace()" prefix prefix)))
     (beginning-of-line)
     (newline-and-indent)
     (previous-line)
     (beginning-of-line)
     (insert breakpoint-string)
-    (indent-according-to-mode))
-  )
+    (indent-according-to-mode)))
 
 (after-load 'python
   (add-hook 'python-mode-hook 'annotate-pdb-breakpoints)
