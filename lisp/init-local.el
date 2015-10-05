@@ -320,8 +320,10 @@ Moves point to the end of the inserted text. Does not change mark."
 (define-key launcher-map "n" #'nethack)
 (define-key launcher-map "p" #'tak/paradox-list-packages-new-frame)
 (define-key launcher-map "s" #'shell)
+(define-key launcher-map "S" #'eshell)
 (define-key launcher-map "t" #'proced) ; top
 (define-key launcher-map "a" #'ansi-term)
+(define-key launcher-map "e" #'ielm)   ; elisp REPL
 
 ;; toggle keymap
 (define-key endless/toggle-map "c" #'column-number-mode)
