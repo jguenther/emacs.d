@@ -140,6 +140,21 @@
   ;;(add-hook 'find-file-hook 'tak/auto-revert-mode-off)
   )
 
+
+
+;; Default key bindings:
+
+;; C-x C-<SPC>    go back in `global-mark-ring', respects prefix arg
+;; C-x C-<left>   go back in `global-mark-ring'
+;; C-x C-<right>  go forward in `global-mark-ring'
+
+;; C-x <SPC>      go back in (buffer-local) `mark-ring', respects prefix arg
+;; C-x <left>     go back in (buffer-local) `mark-ring'
+;; C-x <right>    go forward in (buffer-local) `mark-ring'
+
+(require-package 'back-button)
+(require 'back-button)
+(back-button-mode 1)
 ;; imenu bindings
 (global-set-key [S-mouse-3] 'imenu)
 (global-set-key (kbd "C-'") 'imenu-anywhere)
