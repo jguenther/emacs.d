@@ -405,7 +405,7 @@ whitespace and then whacks it all to the next word."
     (re-search-forward regexp nil t)
     (replace-match "" nil nil)))
 
-(global-set-key (kbd "C-D") #'whack-whitespace)
+(global-set-key (kbd "C-S-D") #'whack-whitespace)
 
 
 
