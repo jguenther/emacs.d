@@ -176,9 +176,12 @@ running."
                        (expand-file-name
                         (format "~/code/scripts/run_pytest.sh -C %s -i"
                                 (projectile-project-root))))))
-    (set (make-local-variable 'python-shell-setup-codes) (list setup-string))))
+    (setq tak/python-shell-setup-string setup-string)
+    (add-to-list 'python-shell-setup-codes 'tak/python-shell-setup-string)
+    ))
 
 (after-load 'python
+  (add-hook 'python-mode-hook #'tak/setup-python-shell)
   (add-hook 'python-mode-hook 'annotate-pdb-breakpoints)
   (add-hook 'python-mode-hook 'ipretty-mode)
   )
@@ -318,6 +321,9 @@ class/method/function specifiers from the resulting buffer name."
          (new-path-string (tak/append-paths-to-string old-value paths)))
     new-path-string))
 
+(defun tak/project-pythonpaths ()
+  (list))
+
 (defun tak/compute-local-python-environment ()
   "Computes a new `process-environment' that appends absolute paths in
 `python-shell-extra-pythonpaths' to the PYTHONPATH environment
@@ -336,7 +342,6 @@ variable."
     ;; (message "%s: in tak/hack-python-locals" (buffer-name))
     (set (make-local-variable 'process-environment)
          (tak/compute-local-python-environment))
-    
     (add-hook 'python-mode-hook 'jedi:setup nil t)
     ;;(add-hook 'python-mode-hook 'flycheck-mode nil t)
     )
