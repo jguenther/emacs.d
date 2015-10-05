@@ -114,10 +114,6 @@
 (after-load 'menu-bar
   (require 'menu-bar+))
 
-(defun try-to-add-imenu ()
-  (condition-case nil (imenu-add-to-menubar "imenu") (error nil)))
-(add-hook 'font-lock-mode-hook 'try-to-add-imenu)
-
 (defun tak/auto-revert-mode-off ()
   (interactive)
   (auto-revert-mode -1))
@@ -188,14 +184,21 @@
 
 
 
-(require-package 'imenu)
-(require-package 'imenu+)
-(require-package 'imenu-anywhere)
+;; (require-package 'imenu)
+;; (require-package 'imenu+)
+;; (require-package 'imenu-anywhere)
+
+(defun try-to-add-imenu ()
+  (condition-case nil (imenu-add-to-menubar "imenu") (error nil)))
+
+;; (add-hook 'font-lock-mode-hook 'try-to-add-imenu)
 
 ;; imenu bindings
 (global-set-key [S-mouse-3] 'imenu)
 (global-set-key (kbd "C-'") 'imenu-anywhere)
 (global-set-key (kbd "C-S-i") 'imenu)
+
+
 
 (global-font-lock-mode 1)
 
