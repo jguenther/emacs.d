@@ -171,8 +171,16 @@ running."
     (insert breakpoint-string)
     (indent-according-to-mode)))
 
+(defun tak/setup-python-shell ()
+  (let ((setup-string (shell-command-to-string
+                       (expand-file-name
+                        (format "~/code/scripts/run_pytest.sh -C %s -i"
+                                (projectile-project-root))))))
+    (set (make-local-variable 'python-shell-setup-codes) (list setup-string))))
+
 (after-load 'python
   (add-hook 'python-mode-hook 'annotate-pdb-breakpoints)
+  (add-hook 'python-mode-hook 'ipretty-mode)
   )
 
 (defun tak/realgud-setup ()

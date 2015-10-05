@@ -24,10 +24,6 @@
   (define-key emacs-lisp-mode-map (kbd "C-x C-e") 'sanityinc/eval-last-sexp-or-region)
   (define-key emacs-lisp-mode-map (kbd "C-x M-p") 'eval-print-last-sexp))
 
-(require-package 'ipretty)
-(ipretty-mode 1)
-
-
 (defadvice pp-display-expression (after sanityinc/make-read-only (expression out-buffer-name) activate)
   "Enable `view-mode' in the output buffer - if any - so it can be closed with `\"q\"."
   (when (get-buffer out-buffer-name)
@@ -161,6 +157,7 @@
 (after-load 'redshank
   (diminish 'redshank-mode))
 
+(require-package 'ipretty)
 (maybe-require-package 'aggressive-indent)
 
 (defun sanityinc/lisp-setup ()
@@ -171,6 +168,7 @@
     (aggressive-indent-mode))
   (turn-on-eldoc-mode)
   (redshank-mode)
+  (ipretty-mode 1)
   (add-hook 'after-save-hook #'check-parens nil t))
 
 (defun sanityinc/emacs-lisp-setup ()
