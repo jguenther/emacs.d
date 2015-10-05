@@ -125,6 +125,17 @@
  '(sh-basic-offset 2)
  '(sh-indentation 2)
  '(show-trailing-whitespace nil)
+ '(speedbar-default-position (quote left))
+ '(speedbar-frame-parameters
+   (quote
+    ((minibuffer)
+     (width . 20)
+     (border-width . 0)
+     (menu-bar-lines . 0)
+     (tool-bar-lines . 0)
+     (unsplittable . t)
+     (left-fringe . 0)
+     (vertical-scroll-bars))))
  '(standard-indent 2)
  '(vc-follow-symlinks t)
  '(whitespace-cleanup-mode-ignore-modes
