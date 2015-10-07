@@ -408,6 +408,9 @@ sys.path."
     ;; realgud
     (define-key python-mode-map (kbd "C-x C-q") 'realgud-short-key-mode)
 
+    ;; override company-mode backend (even though it's disabled)
+    (define-key elpy-mode-map (kbd "C-M-i") 'jedi:complete)
+    
     ;;
     ;; Use the regular major mode hook to add a buffer-local hack-local-variables-hook
     ;;
