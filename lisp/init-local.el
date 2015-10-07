@@ -82,10 +82,11 @@
 
 (require-package 'hl-line+)
 (require 'hl-line+)
-(toggle-hl-line-when-idle 1)
-(hl-line-when-idle-interval 2)
+;;(toggle-hl-line-when-idle 1)
+;;(hl-line-when-idle-interval 2)
 (setq-default hl-line-face 'highlight
-              hl-line-inhibit-highlighting-for-modes '(custom-mode))
+              hl-line-inhibit-highlighting-for-modes '(custom-mode magit-status-mode magit-diff-mode magit-log-mode))
+(global-hl-line-mode)
 
 ;;scroll-restore seems to cause more problems than it's worth
 ;; (require-package 'scroll-restore)

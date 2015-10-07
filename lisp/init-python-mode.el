@@ -356,7 +356,6 @@ sys.path."
       (flycheck-select-checker 'python-pylint)
       )
 
-    (hl-line-mode -1)
     ;; setup python-mode keybinds
 
     ;; local binds
