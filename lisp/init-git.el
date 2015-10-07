@@ -108,6 +108,19 @@
 
 
 
+;; TODO fix bug with interactive rebase:
+
+;; (buffer-modified-p) is nil unless I type something in COMMIT_EDITMSG, even
+;; if the text of that buffer was changed by this function in
+;; git-commit-setup-hook
+;;
+;; use different hook?
+;; set a var if prefix inserted, then set-buffer-modified-p in pre-finish-hook?
+;;
+;; possibly something in with-editor.el?
+;; with-editor-pre-finish-hook?
+;; [[file:~/.emacs.d/elpa/with-editor-20150921.1018/with-editor.el::(put%20'with-editor-pre-finish-hook%20'permanent-local%20t)]]
+
 (defun tak/insert-git-commit-prefix ()
   "Prefixes the default git commit message with a Jira issue number,
   if it isn't already in the default commit message (e.g. due to commit
@@ -121,7 +134,7 @@ The issue number is parsed from the branch name."
                         (-> (concat rebase-dir "head-name") magit-git-dir magit-file-line)
                       branch))
          (head-name (or (magit-rev-name head-name "refs/heads/*") head-name))
-         (ticket-id (if (and head-name (string-match "^\\([A-Z]+-[0-9]+\\)-" head-name))
+         (ticket-id (if (and head-name (string-match "^\\([A-Z]+-[0-9]+\\)" head-name))
                         (match-string 1 head-name)))
          (len (length ticket-id))
          (prefix (if ticket-id
