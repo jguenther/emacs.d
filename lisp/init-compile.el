@@ -35,7 +35,7 @@
    `compilation-makefile-filenames'."
   (let ((dir default-directory)
         (parent-dir (file-name-directory (directory-file-name default-directory)))
-        (nearest-compilation-file 'nil))
+        (nearest-compilation-file nil))
     (while (and (not (string= dir parent-dir))
                 (not nearest-compilation-file))
       (dolist (filename compilation-makefile-filenames)
@@ -53,38 +53,41 @@
   "Runs compile on the nearest compilation file.
    See `tak/get-nearest-compilation-file' for details."
   (interactive "P")
-  (let* ((nearest-compilation-file-result (tak/get-nearest-compilation-file))
-         (compilation-command-default
-          (format "make -C %s -f %s"
-                  (file-name-directory nearest-compilation-file-result)
-                  nearest-compilation-file-result))
-         (target-exclude-regexp "\\(^\\.\\)\\|[\\$\\%]")
-         ;; from http://danamlund.dk/emacs/make-runner.html
-         (makefile-targets
-          (with-temp-buffer
-            (insert-file-contents nearest-compilation-file-result)
-            (goto-char (point-max))
-            (let ((targets nil))
-              (while (re-search-backward "^\\([^:\n#[:space:]]+?\\):"
-                                         (not 'bound) 'noerror)
-                (unless (string-match target-exclude-regexp
-                                      (match-string 1))
-                  (setq targets (cons (match-string 1) targets))))
-              targets)))
-         (makefile-target
-          (if current-prefix-arg
-              (completing-read
-               "Target: "
-               makefile-targets
-               nil nil tak/last-makefile-target
-               'tak/makefile-hist)
-            target))
-         (compilation-command
-          (if makefile-target
-              (format "%s %s" compilation-command-default makefile-target)
-            compilation-command-default)))
-    (compile compilation-command)
-    (setq tak/last-makefile-target makefile-target)))
+
+  (let ((nearest-compilation-file-result (tak/get-nearest-compilation-file)))
+    (if nearest-compilation-file-result
+        (let* ((compilation-command-default
+                (format "make -C %s -f %s"
+                        (file-name-directory nearest-compilation-file-result)
+                        nearest-compilation-file-result))
+               (target-exclude-regexp "\\(^\\.\\)\\|[\\$\\%]")
+               ;; from http://danamlund.dk/emacs/make-runner.html
+               (makefile-targets
+                (with-temp-buffer
+                  (insert-file-contents nearest-compilation-file-result)
+                  (goto-char (point-max))
+                  (let ((targets nil))
+                    (while (re-search-backward "^\\([^:\n#[:space:]]+?\\):"
+                                               (not 'bound) 'noerror)
+                      (unless (string-match target-exclude-regexp
+                                            (match-string 1))
+                        (setq targets (cons (match-string 1) targets))))
+                    targets)))
+               (makefile-target
+                (if current-prefix-arg
+                    (completing-read
+                     "Target: "
+                     makefile-targets
+                     nil nil tak/last-makefile-target
+                     'tak/makefile-hist)
+                  target))
+               (compilation-command
+                (if makefile-target
+                    (format "%s %s" compilation-command-default makefile-target)
+                  compilation-command-default)))
+          (compile compilation-command)
+          (setq tak/last-makefile-target makefile-target))
+      (error "No suitable compilation file found."))))
 
 (defun tak/print-nearest-compilation-file ()
   "Displays a message containing the nearest compilation filename."
