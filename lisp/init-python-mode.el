@@ -143,8 +143,11 @@ running."
 
 (after-load 'python
   (require 'realgud)
-  (setq pdb-path '/usr/local/bin/pdb 
-        gud-pdb-command-name (symbol-name pdb-path)))
+  (let* ((prefix (if (string-equal python-shell-interpreter "ipython") "i" ""))
+         (pdb-executable (format "/usr/local/bin/%spdb" prefix)))
+    (setq pdb-path (intern pdb-executable)
+          gud-pdb-command-name pdb-executable
+          tak/elpy-pytest-pdb-runner-args (list (format "--%spdb" prefix) "-s" "--color=yes"))))
 
 (defun annotate-pdb-breakpoints ()
   (interactive)
