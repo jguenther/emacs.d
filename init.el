@@ -48,7 +48,6 @@
 (require 'init-themes)
 (require 'init-osx-keys)
 (require 'init-gui-frames)
-(require 'init-proxies)
 (require 'init-dired)
 (require 'init-isearch)
 (require 'init-grep)
@@ -99,7 +98,7 @@
 (require 'init-lisp)
 (require 'init-slime)
 ;; causing slowdowns on OSX
-;; (when (>= emacs-major-version 24)
+;; (unless (version<= emacs-version "24.2")
 ;;   (require 'init-clojure)
 ;;   (require 'init-clojure-cider))
 (require 'init-common-lisp)

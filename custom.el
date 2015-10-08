@@ -55,7 +55,7 @@
  '(jedi:tooltip-method (quote (pos-tip)))
  '(jedi:use-shortcuts t)
  '(js-indent-level 4)
- '(js2-basic-offset 4 t)
+ '(js2-basic-offset 4)
  '(magit-push-always-verify t)
  '(magit-revert-buffers 2)
  '(magit-save-repository-buffers (quote dontask))
@@ -93,7 +93,8 @@
  '(python-fill-docstring-style (quote django))
  '(safe-local-variable-values
    (quote
-    ((python-shell-extra-pythonpaths "/Users/jguenther/Projects/CS/" "/Users/jguenther/Projects/CS/src/" "/Users/jguenther/Projects/CS/src/lib/" "/Users/jguenther/Projects/CS/test/" "/Users/jguenther/Projects/CS/test/lib/" "/Users/jguenther/Projects/CS/tools/" "/usr/local/google_appengine/" "/usr/local/google_appengine/lib/webob-1.2.3/" "/usr/local/google_appengine/lib/webapp2-2.5.2/" "/usr/local/google_appengine/lib/jinja2-2.6/" "/usr/local/google_appengine/lib/lxml-2.3/")
+    ((python-shell-extra-pythonpaths "/Users/jguenther/Projects/harvester-service" "/Users/jguenther/Projects/harvester-service/src" "/Users/jguenther/Projects/harvester-service/src/lib" "/Users/jguenther/Projects/harvester-service/test" "/Users/jguenther/Projects/harvester-service/test/lib" "/Users/jguenther/Projects/harvester-service/tools" "/usr/local/google_appengine/" "/usr/local/google_appengine/lib/webob-1.1.1" "/usr/local/google_appengine/lib/webapp2-2.5.2" "/usr/local/google_appengine/lib/jinja2-2.6")
+     (python-shell-extra-pythonpaths "/Users/jguenther/Projects/CS/" "/Users/jguenther/Projects/CS/src/" "/Users/jguenther/Projects/CS/src/lib/" "/Users/jguenther/Projects/CS/test/" "/Users/jguenther/Projects/CS/test/lib/" "/Users/jguenther/Projects/CS/tools/" "/usr/local/google_appengine/" "/usr/local/google_appengine/lib/webob-1.2.3/" "/usr/local/google_appengine/lib/webapp2-2.5.2/" "/usr/local/google_appengine/lib/jinja2-2.6/" "/usr/local/google_appengine/lib/lxml-2.3/")
      (flycheck-pylintrc . "/Users/jguenther/Projects/CS/tools/vbuild/pylintrc")
      (python-shell-extra-pythonpaths "/Users/jguenther/Projects/VBC" "/Users/jguenther/Projects/VBC/src" "/Users/jguenther/Projects/VBC/src/lib" "/Users/jguenther/Projects/VBC/tools" "/Users/jguenther/Projects/VBC/tools/coverage-3.5.1" "/Users/jguenther/Projects/VBC/tools/minimock" "/usr/local/google_appengine" "/usr/local/google_appengine/lib/webob-1.1.1" "/usr/local/google_appengine/lib/webapp2-2.5.1" "/usr/local/google_appengine/lib/jinja2-2.6" "/usr/local/google_appengine/lib/simplejson" "/usr/local/google_appengine/lib/yaml/lib" "/usr/local/google_appengine/lib/fancy_urllib" "/usr/local/google_appengine/lib/protorpc-1.0")
      (python-shell-extra-pythonpaths "/Users/jguenther/Projects/CS/" "/Users/jguenther/Projects/CS/src/" "/Users/jguenther/Projects/CS/src/lib/" "/Users/jguenther/Projects/CS/test/lib/" "/Users/jguenther/Projects/CS/tools/" "/usr/local/google_appengine/" "/usr/local/google_appengine/lib/webob-1.2.3/" "/usr/local/google_appengine/lib/webapp2-2.5.2/" "/usr/local/google_appengine/lib/jinja2-2.6/" "/usr/local/google_appengine/lib/lxml-2.3/")

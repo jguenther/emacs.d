@@ -191,6 +191,9 @@
   (autoload 'avy-goto-word-or-subword-1 "avy")
   (global-set-key (kbd "C-M-;") 'avy-goto-word-or-subword-1))
 
+(when (maybe-require-package 'ace-isearch)
+  (global-ace-isearch-mode +1))
+
 (require-package 'multiple-cursors)
 ;; multiple-cursors
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
