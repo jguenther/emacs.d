@@ -45,6 +45,7 @@
 ;; display ido lists vertically
 (require-package 'ido-vertical-mode)
 (require 'ido-vertical-mode)
+(setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
 (ido-vertical-mode t)
 
 (require-package 'ido-describe-bindings)
