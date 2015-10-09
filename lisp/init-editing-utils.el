@@ -384,12 +384,12 @@ With arg N, insert N newlines."
 (require-package 'which-key)
 (require 'which-key)
 (which-key-mode)
+(which-key-setup-side-window-right-bottom)
 
 (setq-default
  which-key-show-remaining-keys t
- which-key-side-window-location (quote (right bottom))
  which-key-sort-order (quote which-key-description-order)
- which-key-idle-delay 2.0
+ which-key-idle-delay 1.5
  )
 
 
