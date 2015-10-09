@@ -40,14 +40,25 @@
 (setq ido-default-file-method 'selected-window)
 
 ;; http://www.reddit.com/r/emacs/comments/21a4p9/use_recentf_and_ido_together/cgbprem
-(add-hook 'ido-setup-hook (lambda () (define-key ido-completion-map [up] 'previous-history-element)))
+(add-hook 'ido-setup-hook
+          (defun tak/setup-ido ()
+            (define-key ido-completion-map [up] #'previous-history-element)
+            (define-key ido-completion-map [down] #'next-history-element)
+            (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
+            (define-key ido-completion-map (kbd "C-p") 'ido-prev-match)
+            (define-key ido-completion-map (kbd "C-c C-t") 'ido-toggle-prefix)
+            (define-key ido-completion-map [left] 'ido-prev-match)
+            (define-key ido-completion-map [right] 'ido-next-match)))
 
 ;; display ido lists vertically
 (require-package 'ido-vertical-mode)
 (require 'ido-vertical-mode)
-(setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
+
 (ido-vertical-mode t)
 
 (require-package 'ido-describe-bindings)
+
+
+
 
 (provide 'init-ido)
