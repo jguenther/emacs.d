@@ -974,7 +974,9 @@ supply a positive argument once more with C-u C-SPC."
 
 
 
+;; diffview init
 (require-package 'diffview)
+;; TODO find sensible bindings for diffview-current, -region, -message
 
 
 
@@ -999,5 +1001,6 @@ supply a positive argument once more with C-u C-SPC."
 (define-key mode-specific-map (kbd "q") #'quit-window)
 
 
+
 
 (provide 'init-local)

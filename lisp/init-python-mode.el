@@ -334,7 +334,6 @@ variable."
 
 (defun tak/hack-python-locals ()
   (when (eq major-mode 'python-mode)
-    ;; (message "%s: in tak/hack-python-locals" (buffer-name))
     (set (make-local-variable 'process-environment)
          (tak/compute-local-python-environment))
     (add-hook 'python-mode-hook 'jedi:setup nil t)

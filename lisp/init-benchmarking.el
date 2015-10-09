@@ -77,7 +77,14 @@ FUNCTION to run `elp-results' after FUNCTION returns."
   (elp-restore-all)
   (elp-reset-all))
 
-(tak/profile-package "magit") ; 'magit-status
+(dolist (package '("magit"
+                   "ido"
+                   "ido-ubiquitous"
+                   "ido-everywhere"
+                   "ido-vertical-mode"
+                   ))
+  (tak/profile-package package))
+
 
 
 
