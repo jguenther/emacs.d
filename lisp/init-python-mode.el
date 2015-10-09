@@ -203,7 +203,7 @@ running."
       (message "ERROR: elpy-test-at-point returned nil")))
   )
 
-(defvar tak/elpy-pytest-pdb-runner-args (list "-x" "--pdb" "-s" "--color=yes"))
+(defvar tak/elpy-pytest-pdb-runner-args (list "--pdb" "-s" "--color=yes")) ;  "-x"
 (defvar tak/pdb-wrapper-script (expand-file-name "~/code/scripts/run_pytest.sh"))
 
 (defun elpy-test-pytest-pdb-runner (top file module test)
