@@ -667,6 +667,65 @@ Sets TERM=xterm-256color"
 
 
 
+;; quelpa -- local ELPA repo tool
+(require-package 'quelpa)
+
+
+
+;; popup-keys
+
+(quelpa '(popup-keys :fetcher file :path "~/code/popup-keys/"))
+
+(require 'popup-keys)
+(require 'popup-keys-examples)
+
+(global-set-key (kbd "C-x M-/") 'popup-keys:run-findtool)
+
+(eval-after-load "vc-hooks"
+  '(progn
+     ;; move original keymap
+     (define-key ctl-x-map "V" 'vc-prefix-map)
+     ;; run popup on original key
+     (define-key ctl-x-map "v" 'popup-keys:run-vc)
+     ))
+(global-set-key (kbd "C-x v") 'popup-keys:run-vc)
+
+(setq projectile-keymap-prefix (kbd "C-c p"))
+(global-set-key (kbd "C-c p") 'popup-keys:run-projectile)
+
+(global-set-key (kbd "C-x C-k")   'popup-keys:run-kmacro)
+(global-set-key (kbd "C-x C-S-k") 'kmacro-keymap)
+
+(global-set-key (kbd "C-x r") 'popup-keys:run-registers)
+(global-set-key (kbd "C-x R") ctl-x-r-map)
+;; undo-tree annoyingly binds to the C-x r prefix and overrides the above.
+(eval-after-load "undo-tree"
+  '(define-key undo-tree-map (kbd "C-x r") nil))
+
+(add-hook 'dired-mode-hook
+          (lambda ()
+            (require 'dired-x)
+            (define-key dired-mode-map (kbd "?") 'popup-keys:run-dired)
+            (define-key dired-mode-map (kbd "%") 'popup-keys:run-dired-regexp)
+            (define-key dired-mode-map (kbd "*") 'popup-keys:run-dired-mark)))
+
+(eval-after-load "ibuffer"
+  '(progn
+     (define-key ibuffer-mode-map (kbd "?") 'popup-keys:run-ibuffer)
+     (define-key ibuffer-mode-map (kbd "*") 'popup-keys:run-ibuffer-mark)
+     (define-key ibuffer-mode-map (kbd "/") 'popup-keys:run-ibuffer-filter)
+     ))
+
+(eval-after-load "undo-tree"
+  '(define-key undo-tree-visualizer-mode-map (kbd "?") 'popup-keys:run-undo-tree))
+
+(after-load 'org
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (define-key org-mode-map (kbd "M-S-s") 'popup-keys:run-org-speed))))
+
+
+
 ;; exclude dirs from auto-revert-notify that cause slowdowns
 (setq-default auto-revert-notify-exclude-dir-regexp
               (concat auto-revert-notify-exclude-dir-regexp "\\|/blib/"))
