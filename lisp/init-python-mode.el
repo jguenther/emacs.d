@@ -27,6 +27,8 @@
 ;;;
 ;;; elpy setup
 
+(quelpa '(elpy :fetcher file :path "~/code/elpy/"))
+
 (after-load 'elpy
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
   (setq elpy-modules (delq 'elpy-module-highlight-indentation elpy-modules))

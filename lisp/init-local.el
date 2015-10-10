@@ -613,6 +613,9 @@ Sets TERM=xterm-256color"
 ;; discovery modes
 
 (require-package 'discover)
+
+(quelpa '(discover-my-major :fetcher file :path "~/code/discover-my-major/"))
+
 (require-package 'discover-my-major)
 (require 'discover-my-major)
 
