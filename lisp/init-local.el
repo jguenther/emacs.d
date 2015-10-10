@@ -1035,5 +1035,13 @@ supply a positive argument once more with C-u C-SPC."
 
 
 
+;; eshell
+(setq
+ eshell-prompt-regexp "^\\[[0-9]{4}(-[0-9]{2}){2} [0-9]{2}(:[0-9]{2}){2}\\]\n\\[[^\\]]+\\]\n> *[#$]
+*"
+ shell-prompt-pattern eshell-prompt-regexp)
+
+
+
 
 (provide 'init-local)
