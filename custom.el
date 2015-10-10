@@ -145,6 +145,7 @@
      (left-fringe . 0)
      (vertical-scroll-bars))))
  '(standard-indent 2)
+ '(tramp-connection-timeout 30)
  '(vc-follow-symlinks t)
  '(whitespace-cleanup-mode-ignore-modes
    (quote
