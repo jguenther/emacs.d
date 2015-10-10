@@ -17,6 +17,8 @@
   (setq flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-list)
 
   (setq-default flycheck-temp-prefix (expand-file-name "flycheck/_flycheck_" temporary-file-directory))
+
+  ;;(add-hook 'flycheck-mode-hook 'tak/disable-flycheck-outside-home-dir)
   )
 
 
