@@ -394,18 +394,23 @@ With arg N, insert N newlines."
 
 
 ;; from http://emacswiki.org/emacs/DeletingWhitespace
-(defun whack-whitespace ()
+(defun whack-whitespace (&optional arg)
   "Delete all white space from point to the next word.
 
-   The only danger in this is that you don't have to actually be at
-the end of a word to make it work.  It skips over to the next
-whitespace and then whacks it all to the next word."
-  (interactive)
-  (let ((regexp "[ \t\n]+"))
+   With prefix ARG, delete all whitespace before and after point to
+   the next word. The only danger in this is that you don't have to
+   actually be at the end of a word to make it work. It skips over to
+   the next whitespace and then whacks it all to the next word."
+  (interactive "P")
+  (let ((regexp "[ \r\t\n]+"))
     (re-search-forward regexp nil t)
-    (replace-match "" nil nil)))
+    (replace-match "" nil nil)
+    (when arg
+      (re-search-backward regexp nil t)
+      (replace-match "" nil nil))))
 
 (global-set-key (kbd "C-S-D") #'whack-whitespace)
+(global-set-key (kbd "C-x C-S-O") #'delete-blank-lines)
 
 
 
