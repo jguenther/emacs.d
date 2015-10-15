@@ -461,5 +461,51 @@ sys.path."
 
 
 
+(require-package 'nose)
+
+(defun tak/nose-project-root-p (dirname)
+  "Returns t if DIRNAME is a `projectile-project-root', and nil otherwise."
+  (let* ((absdir (directory-file-name (expand-file-name dirname)))
+         (default-directory absdir)
+         (projectile-root (directory-file-name (projectile-project-root))))
+    (string= absdir projectile-root)
+    ))
+
+(defun tak/setup-nose ()
+  (let ((setup-string (shell-command-to-string
+                       (expand-file-name
+                        (format "~/code/scripts/run_pytest.sh -C %s -i"
+                                (projectile-project-root))))))
+    (setq tak/python-shell-setup-string setup-string)
+    (add-to-list 'python-shell-setup-codes 'tak/python-shell-setup-string)
+    (add-hook 'hack-local-variables-hook 'tak/hack-python-locals nil t)
+    ))
+
+(defun tak/chdir-to-project-root (orig-function &rest args)
+  "Advise `run-nose' to set `default-directory' to the project root."
+  (let* ((project-root (projectile-project-root))
+         (default-directory project-root)
+         (result (apply orig-function args))
+         result)))
+
+(advice-add 'run-nose :around #'tak/chdir-to-project-root)
+
+(after-load 'python
+  (require 'nose)
+  (add-hook 'python-mode-hook #'nose-mode)
+  (setq nose-project-root-test #'tak/nose-project-root-p)
+  (define-key nose-mode-map "\C-ca" #'nosetests-all)
+  (define-key nose-mode-map "\C-cm" #'nosetests-module)
+  (define-key nose-mode-map "\C-c'" #'nosetests-one)
+  (define-key nose-mode-map "\C-c," #'nosetests-again)
+  (define-key nose-mode-map "\C-cA" #'nosetests-pdb-all)
+  (define-key nose-mode-map "\C-cM" #'nosetests-pdb-module)
+  (define-key nose-mode-map "\C-c." #'nosetests-pdb-one)
+  (add-hook 'compilation-mode-hook #'tak/hack-python-locals)
+  )
+
+
+
+
 
 (provide 'init-python-mode)
