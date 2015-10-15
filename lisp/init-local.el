@@ -748,14 +748,21 @@ Sets TERM=xterm-256color"
 
 
 (require-package 'flx)
-;;(require-package 'flx-ido)
+(require-package 'flx-ido)
 (require-package 'flx-isearch)
+
 (require-package 'projectile)
 (require-package 'org-projectile)
 
-;; (after-load 'ido
-;;   (require 'flx-ido)
-;;   (flx-ido-mode 1))
+(after-load 'ido
+  (require 'flx-ido)
+  (flx-ido-mode 1)
+  (setq ido-enable-flex-matching t)
+  ;; disable ido faces to see flx highlights.
+  ;; (setq ido-use-faces nil)
+  ;; disable ido-flx highlights
+  ;; (setq flx-ido-use-faces nil)
+  )
 
 (after-load 'projectile
   (add-to-list 'projectile-project-root-files "tasks.py" t)
