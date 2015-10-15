@@ -201,7 +201,7 @@ running."
   (interactive)
   (let ((test (elpy-test-at-point)))
     (if test
-        (kill-new (test))
+        (kill-new test)
       (message "ERROR: elpy-test-at-point returned nil")))
   )
 
