@@ -461,7 +461,8 @@ sys.path."
 
 
 
-(require-package 'nose)
+;;(require-package 'nose)
+(quelpa '(nose :fetcher file :path "~/code/nosemacs/"))
 
 (defun tak/nose-project-root-p (dirname)
   "Returns t if DIRNAME is a `projectile-project-root', and nil otherwise."
@@ -481,13 +482,27 @@ sys.path."
     (add-hook 'hack-local-variables-hook 'tak/hack-python-locals nil t)
     ))
 
-(defun tak/chdir-to-project-root (orig-function &rest args)
+(defun tak/compute-nose-extra-args ()
+  (--map (format "--with-path=%s" (file-truename (concat it "/")))
+         python-shell-extra-pythonpaths)
+  )
+
+(defun tak/run-nose-advice (orig-function &rest args)
+  "Advise `run-nose' to set `default-directory' to the project root
+and add extra args to `nose-extra-args'."
+  (let* ((project-root (projectile-project-root))
+         (default-directory project-root)
+         (nose-extra-args (tak/compute-nose-extra-args))
+         (result (apply orig-function args))
+         result)))
+(advice-add 'run-nose :around #'tak/run-nose-advice)
+
+(defun tak/set-nose-extra-args (orig-function &rest args)
   "Advise `run-nose' to set `default-directory' to the project root."
   (let* ((project-root (projectile-project-root))
          (default-directory project-root)
          (result (apply orig-function args))
          result)))
-
 (advice-add 'run-nose :around #'tak/chdir-to-project-root)
 
 (after-load 'python
