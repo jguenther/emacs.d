@@ -15,7 +15,6 @@
 (require-package 'pip-requirements)
 (add-hook 'pip-requirements-mode-hook #'pip-requirements-auto-complete-setup)
 
-(require-package 'elpy)
 (require-package 'yasnippet)
 
 (require-package 'indent-guide)
@@ -28,6 +27,7 @@
 ;;; elpy setup
 
 (quelpa '(elpy :fetcher file :path "~/code/elpy/"))
+;;(require-package 'elpy)
 
 (after-load 'elpy
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
