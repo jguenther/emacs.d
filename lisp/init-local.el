@@ -241,8 +241,7 @@ Moves point to the end of the inserted text. Does not change mark."
               ;;       '(ac-source-perl-completion))
               )))
 
-;; (after-load 'cperl-mode
-;;   (require 'init-perlysense))
+
 
 ;; arma script syntax is very similar to c
 (add-to-list 'auto-mode-alist '("\\.sq[fm]$" . c-mode))
