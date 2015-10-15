@@ -77,11 +77,11 @@ FUNCTION to run `elp-results' after FUNCTION returns."
   (elp-restore-all)
   (elp-reset-all))
 
-(dolist (package '(
-                   "magit"
-                   ;; "ido"
-                   ))
-  (tak/profile-package package))
+;; (dolist (package '(
+;;                    "magit"
+;;                    "ido"
+;;                    ))
+;;   (tak/profile-package package))
 
 
 
