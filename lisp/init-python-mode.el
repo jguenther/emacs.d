@@ -35,6 +35,7 @@
   
   ;; use jedi completion instead
   (setq elpy-modules (delq 'elpy-module-company elpy-modules))
+  ;; if using company, require company-jedi instead of jedi
 
   (elpy-use-ipython)
 
