@@ -155,11 +155,19 @@ The issue number is parsed from the branch name."
   (add-hook 'git-commit-setup-hook 'tak/insert-git-commit-prefix t))
 
 
+
 (after-load 'magit
   (define-key magit-revision-mode-map (kbd "M-<left>") 'magit-go-backward)
   (define-key magit-revision-mode-map (kbd "M-<right>") 'magit-go-forward)
   (define-key magit-status-mode-map (kbd "C-x g") 'magit-refresh)
   )
+
+
+
+;; speedup
+(after-load 'magit
+  (remove-hook 'magit-refs-sections-hook 'magit-insert-tags))
+
 
 
 ;; so git-wip-mode doesn't depend on running magit-status first
