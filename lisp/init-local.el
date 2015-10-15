@@ -670,11 +670,6 @@ Sets TERM=xterm-256color"
 
 
 
-;; quelpa -- local ELPA repo tool
-(require-package 'quelpa)
-
-
-
 ;; popup-keys
 
 (quelpa '(popup-keys :fetcher file :path "~/code/popup-keys/"))

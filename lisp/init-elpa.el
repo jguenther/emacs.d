@@ -109,5 +109,21 @@ locate PACKAGE."
 
 (add-hook 'package-menu-mode-hook 'sanityinc/maybe-widen-package-menu-columns)
 
+
+
+;; quelpa -- local ELPA repo tool
+(require-package 'quelpa)
+
+;; ;; TODO advise package-build--checkout-file (defined in quelpa.el) to add
+;; ;; snippets/ dir to package-build-default-files-spec
+;; (defun tak/quelpa-add-snippets (orig-function &rest args)
+;;   (let* ((orig-spec package-build-default-files-spec)
+;;          (new-spec (append (file-expand-wildcards "~/code/elpy/snippets/*/*") orig-spec))
+;;          (package-build-default-files-spec new-spec))
+;;     (apply orig-function args)))
+
+;; (advice-add #'package-build--checkout-file :around #'tak/quelpa-add-snippets)
+
+
 
 (provide 'init-elpa)
