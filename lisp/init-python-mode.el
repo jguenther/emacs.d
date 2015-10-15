@@ -392,12 +392,15 @@ sys.path."
     (define-key python-mode-map (kbd "C-c s w") 'python-skeleton-while)
     
     ;; python-x
-    (define-key python-mode-map (kbd "C-c ! C-j") 'python-shell-send-line)
-    (define-key python-mode-map (kbd "C-c ! C-n") 'python-shell-send-line-and-step)
-    (define-key python-mode-map (kbd "C-c ! C-f") 'python-shell-send-defun)
-    (define-key python-mode-map (kbd "C-c ! C-b") 'python-shell-send-buffer)
-    (define-key python-mode-map (kbd "C-c ! C-c") 'python-shell-send-dwim)
-    (define-key python-mode-map (kbd "C-c ! p") 'python-shell-print-region-or-symbol)
+    (define-key python-mode-map (kbd "C-c e C-j") 'python-shell-send-line)
+    (define-key python-mode-map (kbd "C-c e l") 'python-shell-send-line)
+    (define-key python-mode-map (kbd "C-c e C-n") 'python-shell-send-line-and-step)
+    (define-key python-mode-map (kbd "C-c e C-f") 'python-shell-send-defun)
+    (define-key python-mode-map (kbd "C-c e f") 'python-shell-send-defun)
+    (define-key python-mode-map (kbd "C-c e C-b") 'python-shell-send-buffer)
+    (define-key python-mode-map (kbd "C-c e b") 'python-shell-send-buffer)
+    (define-key python-mode-map (kbd "C-c e C-c") 'python-shell-send-dwim)
+    (define-key python-mode-map (kbd "C-c e p") 'python-shell-print-region-or-symbol)
 
     ;; jedi
     (define-key python-mode-map (kbd "C-c J t") 'jedi:toggle-log-traceback)
