@@ -336,6 +336,13 @@ Moves point to the end of the inserted text. Does not change mark."
     (select-frame-set-input-focus new-frame)
     (paradox-list-packages no-fetch)))
 
+(defun tak/toggle-visual-line-mode ()
+  (interactive)
+  (visual-line-mode (if (not visual-line-mode)
+                        t
+                      -1))
+  )
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; launcher keymap
 (define-key launcher-map "c" #'calc)
 (define-key launcher-map "d" #'ediff-buffers)
@@ -358,8 +365,8 @@ Moves point to the end of the inserted text. Does not change mark."
 (define-key endless/toggle-map "d" #'toggle-debug-on-error)
 (define-key endless/toggle-map "e" #'toggle-debug-on-error)
 (define-key endless/toggle-map "f" #'auto-fill-mode)
-(define-key endless/toggle-map "l" #'toggle-truncate-lines)
-(define-key endless/toggle-map "t" #'toggle-truncate-lines)
+(define-key endless/toggle-map "t" #'tak/toggle-visual-line-mode)
+                                        ; instead of truncate-line-mode
 (define-key endless/toggle-map "q" #'toggle-debug-on-quit)
 (define-key endless/toggle-map "g" #'toggle-debug-on-quit)
 (define-key endless/toggle-map "S" #'dired-toggle-sudo)
