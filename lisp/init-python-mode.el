@@ -370,17 +370,18 @@ sys.path."
     (define-key python-mode-map [C-tab] #'jedi:complete)
     
     ;; elpy--remove unnecessary binds
-    (cl-dolist (key '(
+    (after-load 'elpy
+      (cl-dolist (key '(
                                         ; elpy-flymake-next-error
-                      "C-c C-n"
+                        "C-c C-n"
                                         ; elpy-flymake-previous-error
-                      "C-c C-p"
+                        "C-c C-p"
                                         ; elpy-check
-                      "C-c C-v"
+                        "C-c C-v"
                                         ; run-python
-                      "C-c C-p"
-                      ))
-      (define-key elpy-mode-map (kbd key) nil))
+                        "C-c C-p"
+                        ))
+        (define-key elpy-mode-map (kbd key) nil)))
     
     ;; Skeletons
     (define-key python-mode-map (kbd "C-c s c") 'python-skeleton-class)
