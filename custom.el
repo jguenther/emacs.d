@@ -41,6 +41,7 @@
    (quote
     (emacs-lisp-checkdoc perl-perlcritic html-tidy python-flake8 python-pycompile)))
  '(flycheck-keymap-prefix "`")
+ '(gc-cons-threshold 100000000)
  '(git-commit-finish-query-functions nil)
  '(hl-line-inhibit-highlighting-for-modes (quote (custom-mode)))
  '(ido-auto-merge-delay-time 2)
