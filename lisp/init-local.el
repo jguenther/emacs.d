@@ -1041,5 +1041,13 @@ supply a positive argument once more with C-u C-SPC."
 
 
 
+;; shell-pop
+;; TODO fix split window cmd--splits bottom window then opens shell in right split window
+(require-package 'shell-pop)
+(setq shell-pop-universal-key "C-t")
+(require 'shell-pop)
+
+
+
 
 (provide 'init-local)
