@@ -784,6 +784,12 @@ Sets TERM=xterm-256color"
 
 
 
+;; ido-other-window
+(quelpa '(ido-other-window :fetcher github :repo "gvalkov/ido-other-window"))
+(require 'ido-other-window)
+
+
+
 (global-set-key (kbd "M-g o") 'occur)
 (global-set-key (kbd "M-g C-o") 'occur)
 
