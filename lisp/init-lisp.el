@@ -21,11 +21,12 @@
   (define-key emacs-lisp-mode-map (kbd "C-x C-e") 'sanityinc/eval-last-sexp-or-region)
   (define-key emacs-lisp-mode-map (kbd "C-x M-p") 'eval-print-last-sexp))
 
-(defadvice pp-display-expression (after sanityinc/make-read-only (expression out-buffer-name) activate)
+(defun sanityinc/make-read-only (orig-function &rest args)
   "Enable `view-mode' in the output buffer - if any - so it can be closed with `\"q\"."
   (when (get-buffer out-buffer-name)
     (with-current-buffer out-buffer-name
       (view-mode 1))))
+(advice-add #'pp-display-expression :after #'sanityinc/make-read-only)
 
 
 
@@ -123,11 +124,12 @@
 (require-package 'hl-sexp)
 
 ;; Prevent flickery behaviour due to hl-sexp-mode unhighlighting before each command
-(after-load 'hl-sexp
-  (defadvice hl-sexp-mode (after unflicker (&optional turn-on) activate)
-    (when turn-on
-      (remove-hook 'pre-command-hook #'hl-sexp-unhighlight))))
+(defun hl-sexp-unflicker (orig-function &rest args)
+  (when turn-on
+    (remove-hook 'pre-command-hook #'hl-sexp-unhighlight)))
 
+(after-load 'hl-sexp
+  (advice-add #'hl-sexp-mode :after #'hl-sexp-unflicker))
 
 
 ;;; Support byte-compilation in a sub-process, as
@@ -219,7 +221,7 @@
 (defvar sanityinc/vc-reverting nil
   "Whether or not VC or Magit is currently reverting buffers.")
 
-(defadvice revert-buffer (after sanityinc/maybe-remove-elc activate)
+(defun sanityinc/maybe-remove-elc (orig-function &rest args)
   "If reverting from VC, delete any .elc file that will now be out of sync."
   (when sanityinc/vc-reverting
     (when (and (eq 'emacs-lisp-mode major-mode)
@@ -229,14 +231,14 @@
         (when (file-exists-p elc)
           (message "Removing out-of-sync elc file %s" (file-name-nondirectory elc))
           (delete-file elc))))))
+(advice-add #'revert-buffer :after #'sanityinc/maybe-remove-elc)
 
-(defadvice magit-revert-buffers (around sanityinc/reverting activate)
+(defun sanityinc/reverting (orig-function &rest args)
   (let ((sanityinc/vc-reverting t))
-    ad-do-it))
-(defadvice vc-revert-buffer-internal (around sanityinc/reverting activate)
-  (let ((sanityinc/vc-reverting t))
-    ad-do-it))
+    (apply orig-function args)))
 
+(advice-add #'magit-revert-buffers :around #'sanityinc/reverting)
+(advice-add #'vc-revert-buffer-internal :around #'sanityinc/reverting)
 
 
 (require-package 'macrostep)

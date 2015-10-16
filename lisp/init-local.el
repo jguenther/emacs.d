@@ -431,11 +431,11 @@ between `nil` and `t` no matter the original value of
 
 (require 'init-private nil t)
 
-;; enable disabled commands in custom.el instead of init.el
-(defadvice en/disable-command (around put-in-custom-file activate)
-  "Put declarations in `custom-file'."
+(advice-add #'en/disable-command :around #'put-disabled-commands-in-custom-file)
+(defun put-disabled-commands-in-custom-file (orig-function &rest args)
+  "Put disabled command declarations in `custom-file'."
   (let ((user-init-file custom-file))
-    ad-do-it))
+    (apply orig-function args)))
 
 ;; adapted from http://www.emacswiki.org/emacs/DisabledCommands
 (defun enable-all-disabled-commands (&optional just-list-them)
@@ -571,15 +571,14 @@ See also: `enable-all-disabled-commands'."
 
 ;; shell-mode init
 
-;; use color term for shell
-(defadvice tak/shell-setup-environment (around shell activate)
+(defun tak/shell-setup-environment (orig-function &rest args)
   "Setup environment for shell.
-
 Sets TERM=xterm-256color"
   (let ((term (getenv "TERM")))
     (setenv "TERM" "xterm-256color")
-    ad-do-it)
+    (apply orig-function args))
   (setenv "TERM" term))
+(advice-add #'shell :around #'tak/shell-setup-environment)
 
 ;; bash-completion for shell-mode
 ;; from https://github.com/szermatt/emacs-bash-completion

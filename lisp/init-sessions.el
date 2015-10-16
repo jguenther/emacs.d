@@ -7,10 +7,10 @@
     (desktop-save-mode 1)
   (desktop-save-mode 0))
 
-(defadvice desktop-read (around time-restore activate)
+(defun time-desktop-read (orig-function &rest args)
   (let ((start-time (current-time)))
     (prog1
-        ad-do-it
+        (apply orig-function args)
       (message "Desktop restored in %.2fms"
                (sanityinc/time-subtract-millis (current-time)
                                                start-time)))))
@@ -25,6 +25,7 @@
 ;;                                                start-time)
 ;;                (when filename
 ;; 		 (abbreviate-file-name filename))))))
+(advice-add #'desktop-read #'around #'time-desktop-read)
 
 ;;----------------------------------------------------------------------------
 ;; Restore histories and registers after saving
