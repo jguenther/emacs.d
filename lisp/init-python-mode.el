@@ -493,17 +493,16 @@ sys.path."
 and add extra args to `nose-extra-args'."
   (let* ((project-root (projectile-project-root))
          (default-directory project-root)
-         (nose-extra-args (tak/compute-nose-extra-args))
-         (result (apply orig-function args))
-         result)))
+         (nose-extra-args (tak/compute-nose-extra-args)))
+    (apply orig-function args)))
+
 (advice-add 'run-nose :around #'tak/run-nose-advice)
 
 (defun tak/set-nose-extra-args (orig-function &rest args)
   "Advise `run-nose' to set `default-directory' to the project root."
   (let* ((project-root (projectile-project-root))
-         (default-directory project-root)
-         (result (apply orig-function args))
-         result)))
+         (default-directory project-root))
+    (apply orig-function args)))
 (advice-add 'run-nose :around #'tak/chdir-to-project-root)
 
 (after-load 'python

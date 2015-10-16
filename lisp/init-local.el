@@ -431,11 +431,11 @@ between `nil` and `t` no matter the original value of
 
 (require 'init-private nil t)
 
-(advice-add #'en/disable-command :around #'put-disabled-commands-in-custom-file)
 (defun put-disabled-commands-in-custom-file (orig-function &rest args)
   "Put disabled command declarations in `custom-file'."
   (let ((user-init-file custom-file))
     (apply orig-function args)))
+(advice-add #'en/disable-command :around #'put-disabled-commands-in-custom-file)
 
 ;; adapted from http://www.emacswiki.org/emacs/DisabledCommands
 (defun enable-all-disabled-commands (&optional just-list-them)

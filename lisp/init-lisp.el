@@ -23,10 +23,14 @@
 
 (defun sanityinc/make-read-only (orig-function &rest args)
   "Enable `view-mode' in the output buffer - if any - so it can be closed with `\"q\"."
-  (when (get-buffer out-buffer-name)
-    (with-current-buffer out-buffer-name
-      (view-mode 1))))
-(advice-add #'pp-display-expression :after #'sanityinc/make-read-only)
+  (let* ((expression (car args))
+         (out-buffer-name (cadr args)))
+    (message (buffer-file-name))
+    (apply orig-function args)
+    (when (get-buffer out-buffer-name)
+      (with-current-buffer out-buffer-name
+        (view-mode 1)))))
+(advice-add #'pp-display-expression :around #'sanityinc/make-read-only)
 
 
 

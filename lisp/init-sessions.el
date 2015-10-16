@@ -14,7 +14,7 @@
       (message "Desktop restored in %.2fms"
                (sanityinc/time-subtract-millis (current-time)
                                                start-time)))))
-(advice-add #'desktop-read #'around #'time-desktop-read)
+(advice-add #'desktop-read :around #'time-desktop-read)
 
 ;;----------------------------------------------------------------------------
 ;; Restore histories and registers after saving

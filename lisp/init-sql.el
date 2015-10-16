@@ -20,7 +20,6 @@
     (defun sanityinc/maybe-set-dash-db-docset ()
       (when (eq sql-product 'postgres)
         (set (make-local-variable 'dash-at-point-docset) "psql")))
-
     (add-hook 'sql-mode-hook 'sanityinc/maybe-set-dash-db-docset)
     (add-hook 'sql-interactive-mode-hook 'sanityinc/maybe-set-dash-db-docset)
     (advice-add #'sql-set-product :after #'sanityinc/maybe-set-dash-db-docset)))

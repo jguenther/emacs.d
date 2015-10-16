@@ -103,13 +103,14 @@
 
 (defun sanityinc/find-prev-compilation (orig-function &rest args)
   "Find the previous compilation buffer, if present, and recompile there."
-  (if (and (null edit-command)
-           (not (derived-mode-p 'compilation-mode))
-           sanityinc/last-compilation-buffer
-           (buffer-live-p (get-buffer sanityinc/last-compilation-buffer)))
-      (with-current-buffer sanityinc/last-compilation-buffer
-        (apply orig-function args))
-    (apply orig-function args)))
+  (let* ((edit-command (car args)))
+    (if (and (null edit-command)
+             (not (derived-mode-p 'compilation-mode))
+             sanityinc/last-compilation-buffer
+             (buffer-live-p (get-buffer sanityinc/last-compilation-buffer)))
+        (with-current-buffer sanityinc/last-compilation-buffer
+          (apply orig-function args))
+      (apply orig-function args))))
 
 (after-load 'compile
   (advice-add #'compilation-start :after #'sanityinc/save-compilation-buffer)
