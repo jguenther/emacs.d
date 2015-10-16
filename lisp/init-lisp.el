@@ -305,11 +305,15 @@
 (after-load 'paredit
   (define-key paredit-mode-map (kbd "M-s") nil)
   (define-key paredit-mode-map (kbd "C-M-S-s") #'paredit-splice-sexp)
+  (define-key paredit-mode-map (kbd "M-<backspace>") #'paredit-backward-kill-word)
+  (define-key paredit-mode-map (kbd "C-<backspace>") #'paredit-backward-kill-word)
   )
 
 (after-load 'paredit-everywhere
   (define-key paredit-everywhere-mode-map (kbd "M-s") nil)
   (define-key paredit-everywhere-mode-map (kbd "C-M-S-s") #'paredit-splice-sexp)
+  (define-key paredit-everywhere-mode-map (kbd "M-<backspace>") #'paredit-backward-kill-word)
+  (define-key paredit-everywhere-mode-map (kbd "C-<backspace>") #'paredit-backward-kill-word)
   )
 
 
