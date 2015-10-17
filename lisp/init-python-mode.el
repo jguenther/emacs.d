@@ -2,6 +2,7 @@
                                         ("SConscript\\'" . python-mode))
                                       auto-mode-alist)
               python-indent-offset 4
+              python--prettify-symbols-alist '(("lambda" . 955))
               elpy-rpc-backend "jedi"
               indent-guide-recursive nil
               jedi:setup-keys t
