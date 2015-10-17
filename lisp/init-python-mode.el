@@ -209,7 +209,7 @@ running."
          (test-name (cadddr test-at-point))
          (test (if test-name
                    (concat test-module "." test-name)
-                 (test-module))))
+                 test-module)))
     (kill-new test)
     (message test)))
 
