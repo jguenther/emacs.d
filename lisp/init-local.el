@@ -177,6 +177,7 @@
 (require-package 'back-button)
 (require 'back-button)
 (back-button-mode 1)
+(diminish 'back-button-mode)
 
 
 ;; iedit
@@ -293,7 +294,7 @@ Moves point to the end of the inserted text. Does not change mark."
   (magit-wip-before-change-mode 1)
   
   (diminish 'magit-wip-before-change-mode)
-  (diminish 'magit-wip-after-save-local-mode "wip")
+  (diminish 'magit-wip-after-save-local-mode)
 
   (global-magit-file-buffer-mode)
   )

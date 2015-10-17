@@ -1,7 +1,7 @@
 (require-package 'elisp-slime-nav)
 (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
   (add-hook hook 'turn-on-elisp-slime-nav-mode))
-
+(diminish 'elisp-slime-nav-mode)
 (require-package 'lively)
 
 
@@ -162,6 +162,8 @@
 
 (require-package 'ipretty)
 (maybe-require-package 'aggressive-indent)
+(when (fboundp 'aggressive-indent-mode)
+  (diminish 'aggressive-indent-mode))
 
 (defun sanityinc/lisp-setup ()
   "Enable features useful in any Lisp mode."

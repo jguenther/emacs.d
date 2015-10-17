@@ -187,7 +187,8 @@
   (global-set-key (kbd "C-M-;") 'avy-goto-word-or-subword-1))
 
 (when (maybe-require-package 'ace-isearch)
-  (global-ace-isearch-mode +1))
+  (global-ace-isearch-mode +1)
+  (diminish 'ace-isearch-mode))
 
 (require-package 'multiple-cursors)
 ;; multiple-cursors
@@ -386,6 +387,7 @@ With arg N, insert N newlines."
 (require-package 'which-key)
 (require 'which-key)
 (which-key-mode)
+(diminish 'which-key-mode)
 (which-key-setup-side-window-right-bottom)
 
 (setq-default
