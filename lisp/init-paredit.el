@@ -20,7 +20,13 @@
   (define-key paredit-mode-map [remap backward-kill-sentence] nil)
 
   ;; Allow my global binding of M-? to work when paredit is active
-  (define-key paredit-mode-map (kbd "M-?") nil))
+  (define-key paredit-mode-map (kbd "M-?") nil)
+
+  (define-key paredit-mode-map (kbd "M-s") nil)
+  (define-key paredit-mode-map (kbd "C-M-S-s") #'paredit-splice-sexp)
+  (define-key paredit-mode-map (kbd "M-<backspace>") #'paredit-backward-kill-word)
+  (define-key paredit-mode-map (kbd "C-<backspace>") #'paredit-backward-kill-word)
+  )
 
 
 ;; Compatibility with other modes
@@ -53,6 +59,12 @@
 (add-hook 'prog-mode-hook 'paredit-everywhere-mode)
 (add-hook 'css-mode-hook 'paredit-everywhere-mode)
 (after-load 'paredit-everywhere
-  (define-key paredit-everywhere-mode-map [remap kill-sentence] 'paredit-kill))
+  (define-key paredit-everywhere-mode-map [remap kill-sentence] 'paredit-kill)
+  (paredit-everywhere-mode)
+  (define-key paredit-everywhere-mode-map (kbd "M-s") nil)
+  (define-key paredit-everywhere-mode-map (kbd "C-M-S-s") #'paredit-splice-sexp)
+  (define-key paredit-everywhere-mode-map (kbd "M-<backspace>") #'paredit-backward-kill-word)
+  (define-key paredit-everywhere-mode-map (kbd "C-<backspace>") #'paredit-backward-kill-word)
+  )
 
 (provide 'init-paredit)
