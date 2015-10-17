@@ -199,6 +199,11 @@ running."
 ;;; py.test pdb
 ;; c.f. https://bitbucket.org/hpk42/py-trunk/commits/1d7b0838917f
 
+(defun elpy-name-thing-at-point ()
+  "Print the name of the thing at point to the echo area."
+  (interactive)
+  (message (jedi:get-full-name-sync)))
+
 (defun elpy-copy-test-at-point ()
   "Copy test at point to kill-ring"
   (interactive)
@@ -222,7 +227,7 @@ running."
     (kill-new module)
     (message module)))
 
-(defun elpy-copy-at-point-dwim ()
+(defun elpy-copy-thing-at-point ()
   "Return the package/module path to the thing at point."
   (interactive)
   (let* ((top (elpy-library-root))
@@ -230,20 +235,19 @@ running."
          (module (elpy-test--module-name-for-file top file))
          (function-name (python-info-current-defun))
          (symbol (python-info-current-symbol))
-         (full-name (jedi:get-full-name-sync))
          (result (or full-name
                      symbol
-                     function-name
-                     module)))
+                     (and module (concat module "." function-name)))))
     (message "top=%s\nfile=%s\nmodule=%s\nfunction=%s\nsymbol=%s\nfull-name=%s\nresult=%s" top file module function-name symbol full-name result)
     (kill-new result)
                                         ;(message result)
     ))
 
 (after-load 'elpy
-  (define-key elpy-mode-map (kbd "C-c M-w") #'elpy-copy-at-point-dwim)
+  (define-key elpy-mode-map (kbd "C-c M-w") #'elpy-copy-thing-at-point)
   (define-key elpy-mode-map (kbd "C-c M-t") #'elpy-copy-test-at-point)
   (define-key elpy-mode-map (kbd "C-c M-m") #'elpy-copy-buffer-file-module)
+  (define-key elpy-mode-map (kbd "C-c M-n") #'elpy-name-thing-at-point)
   )
 
 (defvar tak/elpy-pytest-pdb-runner-args (list "--pdb" "-s" "--color=yes")) ;  "-x"
