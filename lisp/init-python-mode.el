@@ -99,7 +99,8 @@ running."
                                   (indent-guide-mode)))
          (result (apply orig-function args))
          (guide-result-after (if guide-active
-                                 (indent-guide-mode))))))
+                                 (indent-guide-mode))))
+    result))
 
 (advice-add 'jedi:complete :around #'tak/disable-indent-guide-when-completing)
 
