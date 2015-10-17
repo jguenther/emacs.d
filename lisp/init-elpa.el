@@ -78,6 +78,7 @@ locate PACKAGE."
 (require-package 'paradox)
 (require-package 'hydra)
 (require 'paradox)
+(require 'hydra)
 (setq paradox-automatically-star t)
 (paradox-enable)
 (fullframe paradox-list-packages paradox-quit-and-close)
