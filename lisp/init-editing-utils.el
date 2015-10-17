@@ -2,8 +2,7 @@
 
 (when (fboundp 'electric-pair-mode)
   (electric-pair-mode))
-(when (eval-when-compile (version< "24.4" emacs-version))
-  (electric-indent-mode 1))
+(electric-indent-mode 1)
 
 ;;----------------------------------------------------------------------------
 ;; Some basic preferences
@@ -71,13 +70,6 @@
   (newline-and-indent))
 
 (global-set-key (kbd "S-<return>") 'sanityinc/newline-at-end-of-line)
-
-
-
-(when (eval-when-compile (string< "24.3.1" emacs-version))
-  ;; https://github.com/purcell/emacs.d/issues/138
-  (after-load 'subword
-    (diminish 'subword-mode)))
 
 
 
