@@ -202,10 +202,48 @@ running."
 (defun elpy-copy-test-at-point ()
   "Copy test at point to kill-ring"
   (interactive)
-  (let ((test (elpy-test-at-point)))
-    (if test
-        (kill-new test)
-      (message "ERROR: elpy-test-at-point returned nil")))
+  (let* ((test-at-point (elpy-test-at-point))
+         (topdir (car test-at-point))
+         (test-file (cadr test-at-point))
+         (test-module (caddr test-at-point))
+         (test-name (cadddr test-at-point))
+         (test (if test-name
+                   (concat test-module "." test-name)
+                 (test-module))))
+    (kill-new test)
+    (message test)))
+
+(defun elpy-copy-buffer-file-module (&optional filename)
+  "Copy module path for `filename', or the current buffer's file."
+  (interactive)
+  (let* ((top (elpy-library-root))
+         (file buffer-file-name)
+         (module (elpy-test--module-name-for-file top file)))
+    (kill-new module)
+    (message module)))
+
+(defun elpy-copy-at-point-dwim ()
+  "Return the package/module path to the thing at point."
+  (interactive)
+  (let* ((top (elpy-library-root))
+         (file buffer-file-name)
+         (module (elpy-test--module-name-for-file top file))
+         (function-name (python-info-current-defun))
+         (symbol (python-info-current-symbol))
+         (full-name (jedi:get-full-name-sync))
+         (result (or full-name
+                     symbol
+                     function-name
+                     module)))
+    (message "top=%s\nfile=%s\nmodule=%s\nfunction=%s\nsymbol=%s\nfull-name=%s\nresult=%s" top file module function-name symbol full-name result)
+    (kill-new result)
+                                        ;(message result)
+    ))
+
+(after-load 'elpy
+  (define-key elpy-mode-map (kbd "C-c M-w") #'elpy-copy-at-point-dwim)
+  (define-key elpy-mode-map (kbd "C-c M-t") #'elpy-copy-test-at-point)
+  (define-key elpy-mode-map (kbd "C-c M-m") #'elpy-copy-buffer-file-module)
   )
 
 (defvar tak/elpy-pytest-pdb-runner-args (list "--pdb" "-s" "--color=yes")) ;  "-x"
