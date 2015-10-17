@@ -418,5 +418,11 @@ With arg N, insert N newlines."
 
 
 
+;; highlight the cursor whenever window scrolls
+(require-package 'beacon)
+(beacon-mode 1)
+(diminish 'beacon-mode)
+
+
 
 (provide 'init-editing-utils)
