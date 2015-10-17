@@ -372,4 +372,19 @@ Will work on both org-mode and any mode that accepts plain html."
 (after-load 'org
   (define-key org-mode-map "\C-ck" #'endless/insert-key))
 
+
+;; paste HTML and convert to org markup
+;; from https://emacs.stackexchange.com/questions/12121/org-mode-parsing-rich-html-directly-when-pasting/12124#12124
+(defun kdm/html2org-clipboard ()
+  "Convert clipboard contents from HTML to Org and then paste (yank)."
+  (interactive)
+  (let* ((cmd (if *is-a-mac*
+                  "osascript -e 'the clipboard as \"HTML\"' | perl -ne 'print chr foreach unpack(\"C*\",pack(\"H*\",substr($_,11,-3)))' | pandoc -f html -t json | pandoc -f json -t org"
+                "xclip -o -t TARGETS | grep -q text/html && (xclip -o -t text/html | pandoc -f html -t json | pandoc -f json -t org) || xclip -o")))
+    (kill-new (shell-command-to-string cmd)))
+  (yank))
+
+
+
+
 (provide 'init-org)
