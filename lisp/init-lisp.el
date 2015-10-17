@@ -1,7 +1,8 @@
 (require-package 'elisp-slime-nav)
 (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
   (add-hook hook 'turn-on-elisp-slime-nav-mode))
-(diminish 'elisp-slime-nav-mode)
+(after-load 'elisp-slime-nav
+ (diminish 'elisp-slime-nav-mode))
 (require-package 'lively)
 
 
@@ -162,15 +163,14 @@
 
 (require-package 'ipretty)
 (maybe-require-package 'aggressive-indent)
-(when (fboundp 'aggressive-indent-mode)
-  (diminish 'aggressive-indent-mode))
 
 (defun sanityinc/lisp-setup ()
   "Enable features useful in any Lisp mode."
   (rainbow-delimiters-mode t)
   (enable-paredit-mode)
   (when (fboundp 'aggressive-indent-mode)
-    (aggressive-indent-mode))
+    (aggressive-indent-mode)
+    (diminish 'aggressive-indent-mode))
   (turn-on-eldoc-mode)
   (redshank-mode)
   (ipretty-mode 1)
@@ -308,20 +308,5 @@
       (aggressive-indent-indent-defun))))
 
 
-
-;; change default paredit binds
-(define-key paredit-mode-map (kbd "M-s") nil)
-(define-key paredit-mode-map (kbd "C-M-S-s") #'paredit-splice-sexp)
-(define-key paredit-mode-map (kbd "M-<backspace>") #'paredit-backward-kill-word)
-(define-key paredit-mode-map (kbd "C-<backspace>") #'paredit-backward-kill-word)
-
-(define-key paredit-everywhere-mode-map (kbd "M-s") nil)
-(define-key paredit-everywhere-mode-map (kbd "C-M-S-s") #'paredit-splice-sexp)
-(define-key paredit-everywhere-mode-map (kbd "M-<backspace>") #'paredit-backward-kill-word)
-(define-key paredit-everywhere-mode-map (kbd "C-<backspace>") #'paredit-backward-kill-word)
-
-
-
-
 
 (provide 'init-lisp)
