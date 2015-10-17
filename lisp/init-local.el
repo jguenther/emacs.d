@@ -770,7 +770,6 @@ Sets TERM=xterm-256color"
   )
 
 (after-load 'projectile
-  (add-to-list 'projectile-project-root-files "tasks.py" t)
   (add-to-list 'projectile-project-root-files "pytest.ini"))
 
 (projectile-global-mode)
