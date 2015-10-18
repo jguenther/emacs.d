@@ -3,19 +3,25 @@
 (require-package 'projectile)
 (require-package 'perspective)
 (require-package 'persp-projectile)
+(require-package 'nameframe)
+(require-package 'nameframe-perspective)
+
 (setq projectile-keymap-prefix (kbd "C-c p"))
 
 (require 'projectile)
 (require 'perspective)
 (require 'persp-projectile)
+(require 'nameframe)
+(require 'nameframe-perspective)
 (projectile-global-mode)
+
 ;; doesn't seem to work without deferring it
 (add-hook 'after-init-hook #'persp-mode)
 (add-hook 'desktop-after-read-hook #'persp-mode)
-
 (define-key projectile-mode-map (kbd "s-p") 'projectile-persp-switch-project)
-(require-package 'org-projectile)
+(nameframe-perspective-mode t)
 
+(require-package 'org-projectile)
 (require-package 'speedbar)
 (require-package 'sr-speedbar)
 (require-package 'project-persist-drawer)
