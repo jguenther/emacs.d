@@ -170,14 +170,14 @@
 
 
 
-;; (require-package 'imenu)
-;; (require-package 'imenu+)
-;; (require-package 'imenu-anywhere)
+(require-package 'imenu)
+(require-package 'imenu+)
+(require-package 'imenu-anywhere)
 
 (defun try-to-add-imenu ()
   (condition-case nil (imenu-add-to-menubar "imenu") (error nil)))
 
-;; (add-hook 'font-lock-mode-hook 'try-to-add-imenu)
+(add-hook 'font-lock-mode-hook 'try-to-add-imenu)
 
 ;; imenu bindings
 (global-set-key [S-mouse-3] 'imenu)
