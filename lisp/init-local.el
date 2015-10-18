@@ -91,10 +91,9 @@
                                                        magit-log-mode))
 (global-hl-line-mode)
 
-
-;; (require-package 'bookmark+)
-;; (after-load 'bookmark
-;;   (require 'bookmark+))
+(require-package 'bookmark+)
+(after-load 'bookmark
+  (require 'bookmark+))
 
 ;; (require-package 'doremi)
 ;; (require 'doremi)
