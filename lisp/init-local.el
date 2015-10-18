@@ -47,7 +47,7 @@
  ;;browse-url-generic-program "chrome-open-url"
 
  ;; disable display reordering by default for performance reasons
- ;;bidi-display-reordering nil
+ bidi-display-reordering nil
 
  ;; use this instead for now, is recommended way of doing this -- test and see
  ;; if it helps perf in large files with long lines
