@@ -70,6 +70,7 @@
       (indent-guide-mode)))
 
 (after-load 'python
+  (require 'indent-guide)
   (add-hook 'python-mode-hook 'superword-mode)
   (add-hook 'python-mode-hook 'indent-guide-mode)
   (add-hook 'magit-blame-mode-hook 'tak/indent-guide-mode-off)
