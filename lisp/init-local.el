@@ -640,7 +640,7 @@ Sets TERM=xterm-256color"
  :context-menu '(isearch
                  (description "Isearch, occur and highlighting")
                  (lisp-switches
-                  ("-cf" "Case should fold search" case-fold-search t nil))
+                  ("-i" "Case should fold search" case-fold-search t nil))
                  (lisp-arguments
                   ("=l" "context lines to show (occur)"
                    "list-matching-lines-default-context-lines"
