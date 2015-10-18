@@ -85,16 +85,12 @@
 ;;(toggle-hl-line-when-idle 1)
 ;;(hl-line-when-idle-interval 2)
 (setq-default hl-line-face 'highlight
-              hl-line-inhibit-highlighting-for-modes '(custom-mode magit-status-mode magit-diff-mode magit-log-mode))
+              hl-line-inhibit-highlighting-for-modes '(custom-mode
+                                                       magit-status-mode
+                                                       magit-diff-mode
+                                                       magit-log-mode))
 (global-hl-line-mode)
 
-;;scroll-restore seems to cause more problems than it's worth
-;; (require-package 'scroll-restore)
-;; (require 'scroll-restore)
-;; (scroll-restore-mode 1)
-;;                                         ; make cursor invisible when offscreen
-;; (dolist (cmd '(scroll-left scroll-right))
-;;   (add-to-list 'scroll-restore-commands cmd))
 
 ;; (require-package 'bookmark+)
 ;; (after-load 'bookmark
@@ -107,9 +103,6 @@
 ;; (require-package 'doremi-cmd)
 ;; (require 'doremi-cmd)
 ;; (autoload 'define-doremi "doremi-mac" "Define a Do Re Mi command." nil 'macro)
-
-;;(require-package 'thumb-frm)
-;;(require 'thumb-frm)
 
 (require-package 'menu-bar+)
 (after-load 'menu-bar
