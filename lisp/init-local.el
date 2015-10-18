@@ -637,6 +637,7 @@ Sets TERM=xterm-256color"
                    ("o" "occur" occur))
                   ("More"
                                         ; local change
+                   ("a" "search and replace in bookmark targets" makey-key-mode-popup-isearch-bookmarks)
                    ("M-w" "search for words using eww" eww-search-words)
                    ("h" "highlighters ..." makey-key-mode-popup-isearch-highlight))))
  :bind "M-s")
@@ -657,6 +658,30 @@ Sets TERM=xterm-256color"
                   ("Store"
                    ("f" "hi lock find patterns" hi-lock-find-patterns)
                    ("w" "hi lock write interactive patterns" hi-lock-write-interactive-patterns)))))
+
+(discover-add-context-menu
+ :context-menu '(isearch-bookmarks
+                 (lisp-switches
+                  ("-i" "Case should fold search" case-fold-search t nil)
+                  ("-a" "Search in all bookmarks" current-prefix-arg 4 nil)
+                  ;; ("-s" "Display only bookmarks that are icycles search hits"
+                  ;;  bmkp-bmenu-show-only-icicles-search-hits-bookmarks )
+                  )
+                 (actions
+                  ("Bookmarks"
+                                        ; isearch
+                   ("C-s" "regexp-isearch marked bookmarks"
+                    bmkp-bmenu-isearch-marked-bookmarks-regexp)
+                   ("C-M-s" "isearch marked bookmarks"
+                    bmkp-bmenu-isearch-marked-bookmarks)
+                   ("M-s" "regexp-search marked bookmarks"
+                    bmkp-bmenu-search-marked-bookmarks-regexp)
+                                        ; query-replace
+                   ("M-%" "query-replace-regexp marked bookmarks"
+                    bmkp-bmenu-query-replace-marked-bookmarks-regexp)
+                   ("C-M-%" "query-replace-regexp marked bookmarks"
+                    bmkp-bmenu-query-replace-marked-bookmarks-regexp))
+                  )))
 
 
 
