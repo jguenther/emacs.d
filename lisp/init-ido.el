@@ -6,7 +6,7 @@
   (define-key ido-file-dir-completion-map (kbd "C-l") nil)
   (define-key ido-common-completion-map (kbd "C-l") 'ido-toggle-literal)
   )
-;;(add-hook 'ido-setup-hook 'tak/ido-setup)
+(add-hook 'ido-setup-hook 'tak/ido-setup)
 
 (ido-mode t)
 (ido-everywhere t)
