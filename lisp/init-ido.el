@@ -1,10 +1,4 @@
 ;; Use C-f during file selection to switch to regular find-file
-(require 'ido)
-
-;; suppress warnings
-(defvar ido-cur-item nil)
-(defvar ido-default-item nil)
-(defvar ido-cur-list nil)
 
 (defun tak/ido-setup ()
                                         ; common keys
