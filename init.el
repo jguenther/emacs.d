@@ -80,6 +80,7 @@
 (require 'init-darcs)
 (require 'init-git)
 (require 'init-github)
+(require 'init-projects)
 
 (require 'init-compile)
 (require 'init-crontab)

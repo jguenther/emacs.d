@@ -694,8 +694,7 @@ Sets TERM=xterm-256color"
      ))
 (global-set-key (kbd "C-x v") 'popup-keys:run-vc)
 
-(setq projectile-keymap-prefix (kbd "C-c p"))
-(global-set-key (kbd "C-c p") 'popup-keys:run-projectile)
+(define-key mode-specific-map (kbd "p") 'popup-keys:run-projectile)
 
 (global-set-key (kbd "C-x C-k")   'popup-keys:run-kmacro)
 (global-set-key (kbd "C-x C-S-k") 'kmacro-keymap)
@@ -757,9 +756,6 @@ Sets TERM=xterm-256color"
 (require-package 'flx-ido)
 (require-package 'flx-isearch)
 
-(require-package 'projectile)
-(require-package 'org-projectile)
-
 (after-load 'ido
   (require 'flx-ido)
   (flx-ido-mode 1)
@@ -769,17 +765,6 @@ Sets TERM=xterm-256color"
   ;; disable ido-flx highlights
   ;; (setq flx-ido-use-faces nil)
   )
-
-(after-load 'projectile
-  (add-to-list 'projectile-project-root-files "pytest.ini"))
-
-(projectile-global-mode)
-
-(require-package 'speedbar)
-(require-package 'sr-speedbar)
-(require-package 'project-persist-drawer)
-(require-package 'ppd-sr-speedbar)
-(project-persist-drawer-mode t)
 
 
 
