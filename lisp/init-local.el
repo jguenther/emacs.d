@@ -577,8 +577,8 @@ See also: `enable-all-disabled-commands'."
 Sets TERM=xterm-256color"
   (let ((term (getenv "TERM")))
     (setenv "TERM" "xterm-256color")
-    (apply orig-function args))
-  (setenv "TERM" term))
+    (apply orig-function args)
+    (setenv "TERM" term)))
 (advice-add #'shell :around #'tak/shell-setup-environment)
 
 ;; bash-completion for shell-mode
