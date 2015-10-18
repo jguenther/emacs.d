@@ -95,14 +95,6 @@
 (after-load 'bookmark
   (require 'bookmark+))
 
-;; (require-package 'doremi)
-;; (require 'doremi)
-;; (require-package 'doremi-frm)
-;; (require 'doremi-frm)
-;; (require-package 'doremi-cmd)
-;; (require 'doremi-cmd)
-;; (autoload 'define-doremi "doremi-mac" "Define a Do Re Mi command." nil 'macro)
-
 (require-package 'menu-bar+)
 (after-load 'menu-bar
   (require 'menu-bar+))
