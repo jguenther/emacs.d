@@ -18,6 +18,7 @@
 ;; doesn't seem to work without deferring it
 (add-hook 'after-init-hook #'persp-mode)
 (add-hook 'desktop-after-read-hook #'persp-mode)
+(global-set-key (kbd "s-p") nil)
 (define-key projectile-mode-map (kbd "s-p") 'projectile-persp-switch-project)
 (nameframe-perspective-mode t)
 
