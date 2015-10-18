@@ -134,8 +134,11 @@ The issue number is parsed from the branch name."
                         (-> (concat rebase-dir "head-name") magit-git-dir magit-file-line)
                       branch))
          (head-name (or (magit-rev-name head-name "refs/heads/*") head-name))
-         (ticket-id (if (and head-name (string-match "^\\([A-Z]+-[0-9]+\\)" head-name))
+         (ticket-id (if (and head-name
+                             (let ((case-fold-search nil))
+                               (string-match "^\\([A-Z]+-[0-9]+\\)" head-name)))
                         (match-string 1 head-name)))
+         (case-fold-search case-fold-search-orig)
          (len (length ticket-id))
          (prefix (if ticket-id
                      (format "%s: " ticket-id)))
