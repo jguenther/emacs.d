@@ -10,6 +10,7 @@
     (dolist (direction '("right" "left"))
       (global-set-key (read-kbd-macro (concat "<" multiple "wheel-" direction ">")) 'ignore)))
   (global-set-key (kbd "M-`") 'ns-next-frame)
+  (global-set-key (kbd "s-;") 'ns-next-frame)
   ;; (global-set-key (kbd "M-h") 'ns-do-hide-emacs)
   ;; (global-set-key (kbd "M-˙") 'ns-do-hide-others)
   ;; (after-load 'nxml-mode
