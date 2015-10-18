@@ -33,26 +33,28 @@
                                   nil
                                   (expand-file-name "~/code/scripts/run_pytest.sh")
                                   nil)
-;; py.test project type
-(projectile-register-project-type 'python-vbuild
-                                  '("tasks.py")
-                                  nil
-                                  (list "invoke" "test" "-i")
-                                  nil)
 
 (defun tak/projectile-test-suffix-pytest (project-type)
   "Advise `projectile-test-suffix-function' for pytest project type."
   (cond
    ((member project-type '(python-pytest)) "_test")))
 
+(add-function :before-until
+              projectile-test-suffix-function
+              #'tak/projectile-test-suffix-pytest)
+
+;; vbuild project type
+(projectile-register-project-type 'python-vbuild
+                                  '("tasks.py")
+                                  nil
+                                  (list "invoke" "test" "-i")
+                                  nil)
+
 (defun tak/projectile-test-suffix-vbuild (project-type)
   "Advise `projectile-test-suffix-function' for vbuild project type."
   (cond
    ((member project-type '(python-vbuild)) "_test")))
 
-(add-function :before-until
-              projectile-test-suffix-function
-              #'tak/projectile-test-suffix-pytest)
 (add-function :before-until
               projectile-test-suffix-function
               #'tak/projectile-test-suffix-vbuild)
