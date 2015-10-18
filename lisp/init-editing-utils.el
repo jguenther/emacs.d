@@ -353,6 +353,12 @@ With arg N, insert N newlines."
 (beacon-mode 1)
 (diminish 'beacon-mode)
 
+(setq-default beacon-blink-delay 0.5
+              beacon-blink-when-point-moves 10
+              beacon-push-mark 10
+              beacon-size 50
+              column-number-mode t)
+
 
 
 (provide 'init-editing-utils)
