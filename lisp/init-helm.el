@@ -2,7 +2,6 @@
 
 (require-package 'helm-bind-key)
 (require-package 'helm-descbinds)
-(require-package 'helm-dired-recent)
 ;;(require-package 'helm-flycheck)
 (require-package 'helm-fuzzy-find)
 ;;(require-package 'helm-git)
@@ -20,7 +19,9 @@
   (require-package 'helm-dash))
 
 ;;; http://emacs.stackexchange.com/questions/2867/how-should-i-change-my-workflow-when-moving-from-ido-to-helm
-
+(let ((data-dir (expand-file-name "data" user-emacs-directory)))
+  (unless (file-exists-p data-dir)
+    (make-directory data-dir)))
 (setq-default helm-ff-transformer-show-only-basename nil
               helm-adaptive-history-file             "~/.emacs.d/data/helm-history"
               helm-yank-symbol-first                 t
@@ -73,7 +74,8 @@
       (interactive)
       (helm-ag (projectile-project-root))))
 
-(define-key org-mode-map (kbd "C-x c o h") #'helm-org-headlines)
+(after-load 'org
+  (define-key org-mode-map (kbd "C-x c o h") #'helm-org-headlines))
 
 ;;; https://github.com/thierryvolpiatto/emacs-tv-config/blob/master/init-helm-thierry.el
 ;;;

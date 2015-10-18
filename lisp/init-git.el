@@ -11,7 +11,7 @@
 (setq-default
  magit-process-popup-time 10
  magit-diff-refine-hunk t
- magit-completing-read-function 'magit-ido-completing-read)
+ magit-completing-read-function 'helm-completing-read-with-cands-in-buffer)
 
 ;; Hint: customize `magit-repo-dirs' so that you can use C-u M-F12 to
 ;; quickly open magit on any one of your projects.
