@@ -10,18 +10,22 @@
               projectile-enable-caching t)
 
 (require 'projectile)
-(require 'perspective)
-(require 'persp-projectile)
-(require 'nameframe)
-(require 'nameframe-perspective)
-(projectile-global-mode)
+(defun tak/init-perspective ()
+  (require 'perspective)
+  (require 'persp-projectile)
+  (require 'nameframe)
+  (require 'nameframe-perspective)
+  (projectile-global-mode)
+  (persp-mode)
+  (nameframe-perspective-mode t)
+
+  (global-set-key (kbd "s-p") nil)
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-persp-switch-project)
+  )
+(add-hook 'after-init-hook #'tak/init-perspective)
 
 ;; doesn't seem to work without deferring it
-(add-hook 'after-init-hook #'persp-mode)
-(add-hook 'desktop-after-read-hook #'persp-mode)
-(global-set-key (kbd "s-p") nil)
-(define-key projectile-mode-map (kbd "s-p") 'projectile-persp-switch-project)
-(nameframe-perspective-mode t)
+(add-hook 'desktop-after-read-hook #'tak/init-perspective)
 
 (require-package 'org-projectile)
 (require-package 'speedbar)
