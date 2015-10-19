@@ -14,7 +14,7 @@
 (define-prefix-command 'launcher-map)
 ;; C-x l is `count-lines-page' by default. If you
 ;; use that, you can try s-l or <C-return>.
-(define-key ctl-x-map "l" 'launcher-map)
+(define-key ctl-x-map (kbd "l") 'launcher-map)
 ;;(global-set-key (kbd "s-l") 'launcher-map)
 
 
@@ -26,11 +26,11 @@
 (define-prefix-command 'endless/toggle-map)
 ;; The manual recommends C-c for user keys, but C-x t is
 ;; always free, whereas C-c t is used by some modes.
-(define-key ctl-x-map "t" 'endless/toggle-map)
+(define-key ctl-x-map (kbd "t") 'endless/toggle-map)
 
 ;; `vc-mode'-related toggle keymap
 (define-prefix-command 'tak/vc-toggle-map)
-(define-key endless/toggle-map "v" #'tak/vc-toggle-map)
+(define-key endless/toggle-map (kbd "v") #'tak/vc-toggle-map)
 
 ;;; need to preload so anzu binds are properly remapped
 
