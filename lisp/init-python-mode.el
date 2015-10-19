@@ -12,7 +12,6 @@
 
               ;; run flycheck-mode after hack-local-vars-hook
               flycheck-global-modes '(not python-mode))
-
 (require-package 'pip-requirements)
 (add-hook 'pip-requirements-mode-hook #'pip-requirements-auto-complete-setup)
 
@@ -26,6 +25,9 @@
 
 ;;;
 ;;; elpy setup
+
+;; needed to prevent missing org-babel-header-args-safe-fn error
+(require 'init-org)
 
 (quelpa '(elpy :fetcher file :path "~/code/elpy/"))
 ;;(require-package 'elpy)
