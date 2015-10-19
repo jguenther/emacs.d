@@ -75,6 +75,9 @@
  blink-cursor-interval 0.8
  )
 
+(if *is-a-mac*
+    ;; visual bug on el capitan
+    (setq visible-bell nil))
 (blink-cursor-mode t)
 
 (defvar user-home-directory (expand-file-name "~")
