@@ -227,7 +227,7 @@
 (defvar sanityinc/vc-reverting nil
   "Whether or not VC or Magit is currently reverting buffers.")
 
-(defun sanityinc/maybe-remove-elc ()
+(defun sanityinc/maybe-remove-elc (orig-function &rest args)
   "If reverting from VC, delete any .elc file that will now be out of sync."
   (apply orig-function args)
   (when sanityinc/vc-reverting
