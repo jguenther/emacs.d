@@ -109,9 +109,9 @@
 (require 'init-lisp)
 (require 'init-slime)
 ;; causing slowdowns on OSX
-;; (unless (version<= emacs-version "24.2")
-;;   (require 'init-clojure)
-;;   (require 'init-clojure-cider))
+(unless (version<= emacs-version "24.2")
+  (require 'init-clojure)
+  (require 'init-clojure-cider))
 (require 'init-common-lisp)
 
 (when *spell-check-support-enabled*
@@ -158,6 +158,7 @@
 ;; Locales (setting them earlier in this file doesn't work in X)
 ;;----------------------------------------------------------------------------
 (require 'init-locales)
+(require 'init-discovery)
 
 (add-hook 'after-init-hook
           (lambda ()
