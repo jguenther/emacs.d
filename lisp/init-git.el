@@ -139,7 +139,6 @@ The issue number is parsed from the branch name."
                              (let ((case-fold-search nil))
                                (string-match "^\\([A-Z]+-[0-9]+\\)" head-name)))
                         (match-string 1 head-name)))
-         (case-fold-search case-fold-search-orig)
          (len (length ticket-id))
          (prefix (if ticket-id
                      (format "%s: " ticket-id)))
