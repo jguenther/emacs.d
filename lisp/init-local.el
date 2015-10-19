@@ -31,6 +31,8 @@
  scroll-step 1
  scroll-conservatively 10000
  scroll-preserve-screen-position 1
+ scroll-up-aggressively 0.01
+ scroll-down-aggressively 0.01
 
  ;; shell-mode
  shell-completion-execonly nil
