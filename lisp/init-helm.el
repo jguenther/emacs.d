@@ -61,8 +61,6 @@
 (global-set-key (kbd "C-x c:")   #'helm-eval-expression-with-eldoc)
 (define-key helm-map (kbd "M-o") #'helm-previous-source)
 
-(global-set-key (kbd "M-s s")   #'helm-ag)
-
 (require 'helm-projectile)
 (setq helm-projectile-sources-list (cons 'helm-source-projectile-files-list
                                          (remove 'helm-source-projectile-files-list
@@ -113,5 +111,22 @@
 (define-key global-map [remap xref-find-definitions] 'helm-etags-select)
 (define-key shell-mode-map (kbd "M-p")               'helm-comint-input-ring) ; shell history.
 
+(setq-default helm-for-files-preferred-list
+              '(helm-source-buffers-list
+                helm-source-recentf
+                helm-source-bookmarks
+                helm-source-file-cache
+                helm-source-files-in-current-dir
+                helm-source-locate
+                helm-source-projectile-files-list
+                helm-source-projectile-recentf-list
+                helm-source-projectile-directories-and-dired-list
+                helm-source-projectile-projects
+                helm-source-moccur
+                helm-source-locate
+                helm-source-grep
+                helm-source-occur
+                helm-source-grep-ag
+                ))
 
 (provide 'init-helm)
