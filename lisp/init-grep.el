@@ -2,7 +2,10 @@
               grep-scroll-output t)
 
 (when *is-a-mac*
-  (setq-default locate-command "mdfind"))
+  (setq-default locate-command "mdfind")
+  (if (executable-find "glocate")
+      (setq locate-command "glocate")))
+
 
 (when (executable-find "ag")
   (require-package 'ag)
