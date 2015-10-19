@@ -27,13 +27,18 @@
                  (lisp-arguments
                   ("=l" "context lines to show (occur)"
                    "list-matching-lines-default-context-lines"
-                   (lambda (dummy) (interactive) (read-number "Number of context lines to show: "))))
+                   (lambda (dummy) (interactive) (read-number "Number of context lines: "))))
                  (actions
-                  ("Isearch"
+                  ("isearch"
                    ("_" "isearch forward symbol" isearch-forward-symbol)
                    ("w" "isearch forward word" isearch-forward-word))
                   ("Occur"
                    ("o" "occur" occur))
+                  ("Grep"
+                   ("s" "ag (the_silver_searcher)" #'helm-ag)
+                   ("F" "ag (the_silver_searcher)" #'helm-ag)
+                   ("g" "grep" #'helm-grep)
+                   ("G" "git-grep" #'helm-git-grep))
                   ("More"
                                         ; local change
                    ("a" "search and replace in bookmark targets" makey-key-mode-popup-isearch-bookmarks)
