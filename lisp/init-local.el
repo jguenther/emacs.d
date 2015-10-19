@@ -341,7 +341,7 @@ Moves point to the end of the inserted text. Does not change mark."
                         t
                       -1))
   )
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;;; launcher keymap
 (define-key launcher-map "c" #'calc)
 (define-key launcher-map "d" #'ediff-buffers)
@@ -374,27 +374,6 @@ Moves point to the end of the inserted text. Does not change mark."
 (define-key endless/toggle-map "#" #'comment-or-uncomment-region)
 
 
-
-;;doesn't work well with multimonitor setup -- doesn't maximize window, instead
-;;it resizes it offscreen
-;;
-;;(require 'tabula-rasa)
-;;(define-key endless/toggle-map "D" #'tabula-rasa-mode)
-
-;; darkroom seems to be causing problems
-;;(require-package 'darkroom)
-;;(autoload 'darkroom-tentative-mode "darkroom" nil t)
-;;(define-key endless/toggle-map "D" #'darkroom-tentative-mode)
-
-;;(require-package 'minimap)
-;;(autoload 'minimap-toggle "minimap" nil t)
-;; (after-load 'minimap
-;;   (setq-default minimap-resizes-buffer t)
-;;   (setq-default minimap-width-fraction 0.17))
-;; (define-key endless/toggle-map "m" #'minimap-toggle)
-
-;; can't find defun for endless/toggle-theme
-;;(define-key endless/toggle-map "t" #'endless/toggle-theme)
 
 ;;; Generalized version of `read-only-mode'.
 (define-key endless/toggle-map "r" #'dired-toggle-read-only)
