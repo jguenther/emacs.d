@@ -227,8 +227,9 @@
 (defvar sanityinc/vc-reverting nil
   "Whether or not VC or Magit is currently reverting buffers.")
 
-(defun sanityinc/maybe-remove-elc (orig-function &rest args)
+(defun sanityinc/maybe-remove-elc ()
   "If reverting from VC, delete any .elc file that will now be out of sync."
+  (apply orig-function args)
   (when sanityinc/vc-reverting
     (when (and (eq 'emacs-lisp-mode major-mode)
                buffer-file-name
@@ -237,7 +238,7 @@
         (when (file-exists-p elc)
           (message "Removing out-of-sync elc file %s" (file-name-nondirectory elc))
           (delete-file elc))))))
-(advice-add #'revert-buffer :after #'sanityinc/maybe-remove-elc)
+(advice-add #'revert-buffer :around #'sanityinc/maybe-remove-elc)
 
 (defun sanityinc/reverting (orig-function &rest args)
   (let ((sanityinc/vc-reverting t))
