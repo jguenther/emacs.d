@@ -6,7 +6,8 @@
 (require-package 'nameframe)
 (require-package 'nameframe-perspective)
 
-(setq projectile-keymap-prefix (kbd "C-c p"))
+(setq-default projectile-keymap-prefix (kbd "C-c p")
+              projectile-enable-caching t)
 
 (require 'projectile)
 (require 'perspective)
