@@ -558,7 +558,7 @@ and add extra args to `nose-extra-args'."
   (setq nose-project-root-test #'tak/nose-project-root-p)
   (define-key nose-mode-map "\C-ca" #'nosetests-all)
   (define-key nose-mode-map "\C-cm" #'nosetests-module)
-  (define-key nose-mode-map "\C-c'" #'nosetests-one)
+  (define-key nose-mode-map "\C-ct" #'nosetests-one)
   (define-key nose-mode-map "\C-c," #'nosetests-again)
   (define-key nose-mode-map "\C-cA" #'nosetests-pdb-all)
   (define-key nose-mode-map "\C-cM" #'nosetests-pdb-module)
