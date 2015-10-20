@@ -353,11 +353,29 @@ With arg N, insert N newlines."
 (beacon-mode 1)
 (diminish 'beacon-mode)
 
+(setq beacon-dont-blink-minor-modes
+      (list 'magit-blame-mode))
+
+(defun tak/current-buffer-has-dont-blink-minor-modes-p ()
+  "Predicate for checking for beacon unwanted minor modes.
+Returns non-nil if `current-buffer' has any of
+  `beacon-dont-blink-minor-modes enabled."
+  (-any?
+   (lambda (it)
+     (let* ((symbol-name (if (symbolp it)
+                             (symbol-name it)
+                           it))
+            (symbol (intern symbol-name)))
+       (bound-and-true-p symbol)))
+   beacon-dont-blink-minor-modes))
+
 (setq-default beacon-blink-delay 0.5
               beacon-blink-when-point-moves 10
               beacon-push-mark 10
               beacon-size 50
-              column-number-mode t)
+              column-number-mode t
+              beacon-dont-blink-major-modes '(magit-status-mode
+                                              magit-blame-mode))
 
 
 
