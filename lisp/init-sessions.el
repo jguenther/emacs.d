@@ -23,6 +23,38 @@
 (savehist-mode t)
 
 (require-package 'session)
+(require-package 'psession)
+(psession-mode 1)
+
+(setq psession-object-to-save-alist
+      (append '((comint-input-ring . "comint-input-ring.el")
+                (compile-history . "compile-history.el")
+                (desktop-missing-file-warning . "esktop-missing-file-warning.el")
+                (extended-command-history . "extended-command-history.el")
+                (face-name-history . "face-name-history.el")
+                (file-name-history . "file-name-history.el")
+                (grep-find-history . "grep-find-history.el")
+                (grep-history . "grep-history.el")
+                (ido-buffer-history . "ido-buffer-history.el")
+                (ido-last-directory-list . "ido-last-directory-list.el")
+                (ido-work-directory-list . "ido-work-directory-list.el")
+                (ido-work-file-list . "ido-work-file-list.el")
+                (magit-read-rev-history . "magit-read-rev-history.el")
+                (minibuffer-history . "minibuffer-history.el")
+                (org-clock-history . "org-clock-history.el")
+                (org-refile-history . "org-refile-history.el")
+                (org-tags-history . "org-tags-history.el")
+                (query-replace-history . "query-replace-history.el")
+                (read-expression-history . "read-expression-history.el")
+                (regexp-history . "regexp-history.el")
+                (regexp-search-ring . "regexp-search-ring.el")
+                (register-alist . "egister-alist.el")
+                (shell-command-history . "shell-command-history.el")
+                (tak/last-makefile-target . "tak.el")
+                (tak/makefile-hist        . "tak.el")
+                (tags-file-name . "tags-file-name.el")
+                (tags-table-list . "tags-table-list.el"))
+              psession-object-to-save-alist))
 
 (setq session-save-file (expand-file-name ".session" user-emacs-directory))
 (setq session-name-disable-regexp "\\(?:\\`'/tmp\\|\\.git/[A-Z_]+\\'\\)")
@@ -33,7 +65,7 @@
 (setq desktop-globals-to-save
       (append '((comint-input-ring        . 50)
                 (compile-history          . 30)
-                desktop-missing-file-warning
+                (desktop-missing-file-warning . 50)
                 (dired-regexp-history     . 20)
                 (extended-command-history . 30)
                 (face-name-history        . 20)
@@ -53,13 +85,14 @@
                 (read-expression-history  . 60)
                 (regexp-history           . 60)
                 (regexp-search-ring       . 20)
-                register-alist
+                (register-alist           . 100)
                 (search-ring              . 20)
                 (shell-command-history    . 50)
-                tak/last-makefile-target
+                (tak/last-makefile-target . 20)
                 (tak/makefile-hist        . 20)
-                tags-file-name
-                tags-table-list)))
+                (tags-file-name           . 50)
+                (tags-table-list          . 50))
+              desktop-globals-to-save))
 
 (after-load 'session
  (setq-default session-set-file-name-exclude-regexp
