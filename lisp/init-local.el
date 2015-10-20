@@ -117,24 +117,6 @@
   (interactive)
   (auto-revert-mode -1))
 
-(when *is-a-mac*
-  ;; rebind home/end for macos
-  (global-set-key (kbd "<home>") 'move-beginning-of-line)
-  (global-set-key (kbd "<end>") 'move-end-of-line)
-  
-  ;; unbind CMD-w kill-frame
-  (global-unset-key (kbd "s-w"))
-
-  (global-set-key (kbd "s-/") 'hippie-expand)
-
-  ;; paste utf-8
-  (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
-
-  ;; disable global-auto-revert-mode due to corruption bug
-  ;;   fixed in 25?
-  ;;(add-hook 'find-file-hook 'tak/auto-revert-mode-off)
-  )
-
 
 
 (require 'mmm-auto)
