@@ -45,6 +45,14 @@
 
   (elpy-use-ipython)
 
+  ;; copy elpy snippets dir if it doesn't exist (due to quelpa not copying it)
+  (let* ((elpy-lib-dir (file-name-directory (locate-library "elpy")))
+         (elpy-snippets-dir        (expand-file-name "snippets" elpy-lib-dir))
+         (elpy-snippets-source-dir (expand-file-name "snippets" "~/code/elpy/")))
+    (if (and (not (file-directory-p elpy-snippets-dir))
+             (file-directory-p elpy-snippets-source-dir))
+        (copy-directory elpy-snippets-source-dir elpy-snippets-dir)))
+  
   (unless (require 'yasnippet nil t)
     (setq elpy-modules (delq 'elpy-module-yasnippet elpy-modules)))
 
