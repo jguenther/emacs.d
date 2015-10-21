@@ -331,7 +331,6 @@ typical word processor."
     (define-key org-mode-map (kbd "M-h") nil)
     (define-key org-mode-map (kbd "C-c g") 'org-mac-grab-link)))
 
-(require-package 'ob-perl)
 (require-package 'ob-browser)  ; render html
 (require-package 'ob-http)     ; make http requests
 
