@@ -502,24 +502,14 @@ See also: `enable-all-disabled-commands'."
   (org-bullets-mode 1)
   )
 
-
 (after-load 'org
   (dolist (element '(
                      org-bullets
-                     ;;org-cliplink
-                     ;;org-elisp-help
                      org-fstree
-                     
-                     ;;org-gcal
-                     
                      orgit
                      orglink
-                     
-                     ;; disabled -- don't use anything.el/helm.el yet
-                     ;;org-linkany
-                     
-                     org-repo-todo
-                                        ;org-trello
+                     org-linkany
+                     ;; org-trello
                      ))
     (if (maybe-require-package element)
         (add-to-list 'org-modules element t)))
