@@ -331,19 +331,26 @@ typical word processor."
     (define-key org-mode-map (kbd "M-h") nil)
     (define-key org-mode-map (kbd "C-c g") 'org-mac-grab-link)))
 
+(require-package 'ob-perl)
+(require-package 'ob-browser)  ; render html
+(require-package 'ob-http)     ; make http requests
+
 (after-load 'org
   (org-babel-do-load-languages
    'org-babel-load-languages
    `((R . t)
+     (browser . t)
      (ditaa . t)
      (dot . t)
      (emacs-lisp . t)
      (gnuplot . t)
      (haskell . nil)
+     (http . t)
      (latex . t)
      (ledger . t)
      (ocaml . nil)
      (octave . t)
+     (perl . t)
      (python . t)
      (ruby . t)
      (screen . nil)
