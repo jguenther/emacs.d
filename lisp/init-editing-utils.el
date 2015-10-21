@@ -379,4 +379,11 @@ Returns non-nil if `current-buffer' has any of
 
 
 
+;; zop-to-char
+(require-package 'zop-to-char)
+(global-set-key [remap zap-to-char] 'zop-to-char)
+
+
+
+
 (provide 'init-editing-utils)
