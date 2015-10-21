@@ -16,6 +16,10 @@
 (require-package 'helm-orgcard)
 ;;(require-package 'helm-psession)
 
+(quelpa '(helm-ipython :fetcher github :repo "thierryvolpiatto/helm-ipython"))
+(after-load 'helm-config
+  (require 'helm-ipython))
+
 (when (sanityinc/dash-installed-p)
   (require-package 'helm-dash))
 
