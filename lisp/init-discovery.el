@@ -35,10 +35,10 @@
                   ("Occur"
                    ("o" "occur" occur))
                   ("Grep"
-                   ("s" "ag (the_silver_searcher)" #'helm-ag)
-                   ("F" "ag (the_silver_searcher)" #'helm-ag)
-                   ("g" "grep" #'helm-grep)
-                   ("G" "git-grep" #'helm-git-grep))
+                   ("s" "ag project" #'helm-projectile-ag)
+                   ("F" "ag" #'helm-do-ag)
+                   ("g" "grep-ag" #'helm-do-grep-ag)
+                   ("G" "git-grep" #'helm-grep-do-git-grep))
                   ("More"
                                         ; local change
                    ("a" "search and replace in bookmark targets" makey-key-mode-popup-isearch-bookmarks)
