@@ -39,8 +39,9 @@
 
 
 
-(global-set-key (kbd "C-x v f") 'vc-git-grep)
-(global-set-key (kbd "C-x v g") 'magit-blame)
+(global-set-key (kbd "C-x v f") #'vc-git-grep)
+(global-set-key (kbd "C-x v F") #'helm-do-ag)
+(global-set-key (kbd "C-x v g") #'magit-blame)
 
 
 
@@ -93,13 +94,6 @@
     ))
 
 (add-hook 'magit-mode-hook #'endless/add-PR-fetch)
-
-
-
-;; silver-searcher
-(require-package 'ag)
-(after-load 'init-helm
-  (global-set-key (kbd "C-x V F") 'helm-ag))
 
 
 
