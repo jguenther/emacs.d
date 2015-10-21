@@ -2,7 +2,6 @@
                                         ("SConscript\\'" . python-mode))
                                       auto-mode-alist)
               python-indent-offset 4
-              python--prettify-symbols-alist '(("lambda" . 955))
               elpy-rpc-backend "jedi"
               indent-guide-recursive nil
               jedi:setup-keys t
@@ -12,6 +11,10 @@
 
               ;; run flycheck-mode after hack-local-vars-hook
               flycheck-global-modes '(not python-mode))
+
+(after-load 'python
+  (setq python--prettify-symbols-alist '(("lambda" . 955))))
+
 (require-package 'pip-requirements)
 (add-hook 'pip-requirements-mode-hook #'pip-requirements-auto-complete-setup)
 
@@ -250,6 +253,7 @@ running."
   (define-key elpy-mode-map (kbd "C-c M-w") #'elpy-copy-thing-at-point)
   (define-key elpy-mode-map (kbd "C-c M-t") #'elpy-copy-test-at-point)
   (define-key elpy-mode-map (kbd "C-c M-m") #'elpy-copy-buffer-file-module)
+  (define-key elpy-mode-map (kbd "C-c M-.") #'elpy-copy-buffer-file-module)
   (define-key elpy-mode-map (kbd "C-c M-n") #'elpy-name-thing-at-point)
   )
 
@@ -459,6 +463,7 @@ sys.path."
     (define-key python-mode-map (kbd "C-c C-.") 'jedi:goto-definition-push-marker)
     (define-key python-mode-map (kbd "M-.")     'jedi:goto-definition)
     (define-key elpy-mode-map   (kbd "M-.")     nil)
+    (define-key python-mode-map (kbd "M-,")     'jedi:goto-definition-pop-marker)
 
     ;; jedi-direx
     (define-key python-mode-map (kbd "C-c x") 'jedi-direx:pop-to-buffer)
