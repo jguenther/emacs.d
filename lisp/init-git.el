@@ -98,7 +98,7 @@
 
 ;; silver-searcher
 (require-package 'ag)
-(after-load 'helm
+(after-load 'init-helm
   (global-set-key (kbd "C-x V F") 'helm-ag))
 
 
