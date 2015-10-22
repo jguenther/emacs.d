@@ -249,12 +249,10 @@ running."
          (module (elpy-test--module-name-for-file top file))
          (function-name (python-info-current-defun))
          (symbol (python-info-current-symbol))
-         (result (or full-name
-                     symbol
-                     (and module (concat module "." function-name)))))
-    (message "top=%s\nfile=%s\nmodule=%s\nfunction=%s\nsymbol=%s\nfull-name=%s\nresult=%s" top file module function-name symbol full-name result)
+         (result (or symbol
+                     (and module function-name (concat module "." function-name)))))
     (kill-new result)
-                                        ;(message result)
+    (message result)
     ))
 
 (after-load 'elpy
