@@ -77,6 +77,47 @@ FUNCTION to run `elp-results' after FUNCTION returns."
   (elp-restore-all)
   (elp-reset-all))
 
+
+(require 'profiler)
+
+(defun tak/wanted-profilers ()
+  (interactive)
+  (if tak/want-cpu-profiler-p
+      (if tak/want-memory-profiler-p
+          'cpu+mem
+        'cpu)
+    (if tak/want-memory-profiler-p
+        'mem)))
+
+(defun tak/profiler-start ()
+  (interactive)
+  (profiler-start (tak/wanted-profilers)))
+
+(defun tak/profiler-report ()
+  (interactive)
+  (if (profiler-running-p)
+      (profiler-report)
+    (error "Profiler is not currently running.")))
+
+(defvar tak/want-cpu-profiler-p t)
+(defvar tak/want-memory-profiler-p nil)
+
+(with-eval-after-load 'discover
+  (discover-add-context-menu
+   :context-menu '(profiler
+                   (description "Profiler and debugging")
+                   (lisp-switches
+                    ("-c" "Profile CPU" tak/want-cpu-profiler-p t nil)
+                    ("-m" "Profile memory" tak/want-memory-profiler-p t nil))
+                   (actions
+                    ("Common"
+                     ("r" "profiler report" tak/profiler-report)
+                     ("e" "reset profiler" profiler-reset)
+                     ("p" "start profiler" tak/profiler-start)
+                     ("s" "stop profiler" profiler-stop))
+                    ))
+   :bind "C-x M-d"))
+
 ;; (dolist (package '(
 ;;                    "magit"
 ;;                    "ido"
