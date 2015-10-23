@@ -360,5 +360,10 @@ With arg N, insert N newlines."
               column-number-mode t)
 
 
+;; focus-mode
+(require-package 'focus)
+(define-key endless/toggle-map (kbd "F") #'focus-mode)
+
+
 
 (provide 'init-editing-utils)
