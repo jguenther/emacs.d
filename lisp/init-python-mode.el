@@ -189,7 +189,9 @@ running."
   (let ((setup-string (shell-command-to-string
                        (expand-file-name
                         (format "~/code/scripts/run_pytest.sh -C %s -i"
-                                (projectile-project-root))))))
+                                (if (projectile-project-p)
+                                    (projectile-project-root)
+                                  "."))))))
     (setq tak/python-shell-setup-string setup-string)
     (add-to-list 'python-shell-setup-codes 'tak/python-shell-setup-string)
     ))
