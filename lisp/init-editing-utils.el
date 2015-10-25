@@ -1,3 +1,5 @@
+(require 'dash)
+
 (require-package 'unfill)
 
 (when (fboundp 'electric-pair-mode)
@@ -378,10 +380,9 @@ Returns non-nil if `current-buffer' has any of
   (add-to-list 'beacon-dont-blink-major-modes mode))
 
 (setq-default beacon-blink-delay 0.5
-              beacon-blink-when-point-moves 10
-              beacon-push-mark 20
+              beacon-blink-when-point-moves 20
+              beacon-push-mark 30
               beacon-size 50
-              column-number-mode t
               )
 
 
