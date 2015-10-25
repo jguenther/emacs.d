@@ -145,7 +145,7 @@ running."
 ;; ipython setup
 (setq python-shell-interpreter "ipython"
       python-shell-interpreter-args "-i"
-      python-shell-prompt-regexp "In \\[[0-9]+\\]: "
+      python-shell-prompt-regexp "\\(In \\[[0-9]+\\]:\\|([Pp]db)\\|ipdb>\\) "
       python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
       )
 
@@ -309,17 +309,21 @@ This requires the pytest package to be installed."
 (defun elpy-test-run-pdb (working-directory command &rest args)
   "Run COMMAND with ARGS in WORKING-DIRECTORY as a test command using pdb."
 
-  (setq comint-process-echoes t
-        comint-use-prompt-regexp t
-        gud-chdir-before-run nil
-        gud-pdb-command-name tak/pdb-wrapper-script)
-  
-  (let* ((default-directory working-directory)
+  (let* ((comint-process-echoes t)
+         (comint-use-prompt-regexp t)
+         (comint-prompt-regexp "^\\(ipdb>\\|[(]+[Pp]db[)]+\\) ") 
+         (gud-chdir-before-run nil)
+         (gud-pdb-command-name tak/pdb-wrapper-script)
+         (default-directory working-directory)
          (cmdline (combine-and-quote-strings (cons command args)))
          (process-environment (tak/compute-local-python-environment))
          )
-    ;; (add-hook 'comint-output-filter-functions 'python-pdbtrack-comint-output-filter-function)
-    ;; (message "running pdb: `%s'" cmdline)
+
+    (setf (gethash "prompt" realgud:pdb-pat-hash)
+          (make-realgud-loc-pat
+           :regexp   "i?[(]*[Pp]db[)>]* "
+           ))
+    (setf (gethash "pdb" realgud-pat-hash) realgud:pdb-pat-hash)
     ;; realgud:cmdbuf-associate
     (pdb cmdline)))
 
