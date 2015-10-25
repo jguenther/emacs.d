@@ -280,7 +280,7 @@ running."
                               "i" "")))
          (args (list pdb-arg "-s" "--color=yes"))
          )
-    (if elpy-pytest-pdb-capturelog-enabled
+    (if (not elpy-pytest-pdb-capturelog-enabled)
         (add-to-list 'args "--nocapturelog" t))
     args))
 
