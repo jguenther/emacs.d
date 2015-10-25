@@ -556,19 +556,20 @@ Sets TERM=xterm-256color"
 (setq-default comint-prompt-read-only t)
 (defun tak/comint-setup ()
   (define-key comint-mode-map [remap kill-region] 'comint-kill-region)
-  (define-key comint-mode-map [remap kill-whole-line] 'comint-kill-whole-line))
+  (define-key comint-mode-map [remap kill-whole-line] 'comint-kill-whole-line)
+  (define-key comint-mode-map [remap beginning-of-line] #'comint-bol-or-process-mark)
+  (define-key comint-mode-map [remap move-beginning-of-line] #'comint-bol-or-process-mark)
+  )
 
 (add-hook 'comint-mode-hook 'tak/comint-setup)
-(add-hook 'comint-mode-hook 'ansi-color-for-comint-mode-on)
 
 ;; translate ANSI color control sequences into text properties
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+(add-hook 'comint-mode-hook 'ansi-color-for-comint-mode-on)
 
 
 
 (global-set-key (kbd "C-S-o") 'sanityinc/open-line-with-reindent)
-
-
 
 
 
