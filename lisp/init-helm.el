@@ -42,10 +42,11 @@
               helm-buffers-fuzzy-matching            t
               helm-ff-auto-update-initial-value      t
               helm-ls-git-status-command             'magit-status-internal
-              ido-use-virtual-buffers                t  ; Needed in helm-buffers-list
+              ido-use-virtual-buffers                t   ; Needed in helm-buffers-list
               helm-org-headings-fontify              t
-              helm-autoresize-max-height             80 ; %
-              helm-autoresize-min-height             20 ; %
+
+              helm-autoresize-max-height             80  ; %
+              helm-autoresize-min-height             20  ; %
               helm-buffers-to-resize-on-pa           '("*helm apropos*" "*helm ack-grep*"
                                                        "*helm grep*" "*helm occur*" "*helm ag*"
                                                        "*helm multi occur*" "*helm git-grep*"
@@ -180,6 +181,7 @@
 (global-set-key (kbd "<f2>")                         #'helm-execute-kmacro)
 (define-key mode-specific-map (kbd "I")              #'helm-imenu-in-all-buffers)
 (define-key global-map [remap jump-to-register]      #'helm-buffers-list)
+
 (define-key global-map [remap dabbrev-expand]        #'helm-dabbrev)
 (define-key global-map [remap find-tag]              #'helm-etags-select)
 (define-key global-map [remap xref-find-definitions] #'helm-etags-select)
