@@ -263,7 +263,23 @@ running."
   (define-key elpy-mode-map (kbd "C-c M-n") #'elpy-name-thing-at-point)
   )
 
-(defvar tak/elpy-pytest-pdb-runner-args (list "--pdb" "-s" "--color=yes")) ;  "-x"
+(defvar elpy-pytest-pdb-capturelog-enabled nil)
+
+(defun elpy-pytest-pdb-toggle-capturelog ()
+  (interactive)
+  (setq elpy-pytest-pdb-capturelog-enabled
+        (not elpy-pytest-pdb-capturelog-enabled)))
+
+(defun tak/elpy-pytest-pdb-runner-args ()
+  (let* ((pdb-arg (format "--%spdb"
+                          (if (string-equal python-shell-interpreter "ipython")
+                              "i" "")))
+         (args (list pdb-arg "-s" "--color=yes"))
+         )
+    (if elpy-pytest-pdb-capturelog-enabled
+        (add-to-list 'args "--nocapturelog" t))
+    args))
+
 (defvar tak/pdb-wrapper-script (expand-file-name "~/code/scripts/run_pytest.sh"))
 
 (defun elpy-test-pytest-pdb-runner (top file module test)
