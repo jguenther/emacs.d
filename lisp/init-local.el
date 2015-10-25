@@ -547,6 +547,8 @@ Sets TERM=xterm-256color"
 (add-hook 'shell-command-complete-functions
           'bash-completion-dynamic-complete)
 
+(setq bash-completion-prog (executable-find "bash"))
+
 
 
 ;;; comint setup
