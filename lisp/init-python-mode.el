@@ -333,8 +333,6 @@ i?[(]*[Pp]db[)>]* "
     (setf (gethash "shell" realgud:pdb-command-hash) python-shell-interpreter)
     (setf (gethash "eval"  realgud:pdb-command-hash) "pp %s")
     (setf (gethash "pdb" realgud-command-hash) realgud:pdb-command-hash)
-
-    ;; realgud:cmdbuf-associate
     (pdb cmdline)))
 
 (after-load 'elpy
