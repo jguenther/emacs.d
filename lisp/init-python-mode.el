@@ -278,25 +278,27 @@ running."
   (setq elpy-pytest-capturelog-enabled
         (not elpy-pytest-capturelog-enabled)))
 
-(defun tak/elpy-pytest-pdb-runner-args ()
+(defun tak/elpy-pytest-runner-args (&optional debugger-arg)
   (let* ((pdb-arg (format "--%spdb"
                           (if (string-equal python-shell-interpreter "ipython")
                               "i" "")))
-         (args (list pdb-arg "-s" "--color=yes"))
+         (debugger-arg (if debugger-arg
+                           debugger-arg
+                         pdb-arg))
+         (args (list debugger-arg "-s" "--color=yes"))
          )
     (if (not elpy-pytest-capturelog-enabled)
         (add-to-list 'args "--nocapturelog" t))
     args))
 
-(defvar tak/pdb-wrapper-script (expand-file-name "~/code/scripts/run_pytest.sh"))
+(defvar tak/pytest-wrapper-script (expand-file-name "~/code/scripts/run_pytest.sh"))
 
 (defun elpy-test-pytest-pdb-runner (top file module test)
-  "Test the project using the py.test test runner with --pdb -s (capture disabled).
-
+  "Test the project using the py.test test runner with --pdb/--ipdb.
 This requires the pytest package to be installed."
   (interactive (elpy-test-at-point))
-  (let ((runner-command (list tak/pdb-wrapper-script))
-        (runner-args (cons "--" (tak/elpy-pytest-pdb-runner-args))))
+  (let ((runner-command (list tak/pytest-wrapper-script))
+        (runner-args (cons "--" (tak/elpy-pytest-runner-args))))
     (cond
      (test
       (let ((test-list (split-string test "\\.")))
@@ -319,9 +321,8 @@ This requires the pytest package to be installed."
 
   (let* ((comint-process-echoes t)
          (comint-use-prompt-regexp t)
-         (comint-prompt-regexp "^\\(ipdb>\\|[(]+[Pp]db[)]+\\) ") 
          (gud-chdir-before-run nil)
-         (gud-pdb-command-name tak/pdb-wrapper-script)
+         (gud-pdb-command-name tak/pytest-wrapper-script)
          (default-directory working-directory)
          (cmdline (combine-and-quote-strings (cons command args)))
          (process-environment (tak/compute-local-python-environment))
