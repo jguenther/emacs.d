@@ -871,6 +871,7 @@ supply a positive argument once more with C-u C-SPC."
 
 (require-package 'achievements)
 (achievements-mode)
+(diminish 'achievements-mode)
 
 
 
