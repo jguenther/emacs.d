@@ -214,8 +214,7 @@ running."
 
 
 
-;;; py.test pdb
-;; c.f. https://bitbucket.org/hpk42/py-trunk/commits/1d7b0838917f
+;; thing-at-pt functions for elpy
 
 (defun elpy-name-thing-at-point ()
   "Print the name of the thing at point to the echo area."
@@ -266,6 +265,11 @@ running."
   (define-key elpy-mode-map (kbd "C-c M-.") #'elpy-copy-buffer-file-module)
   (define-key elpy-mode-map (kbd "C-c M-n") #'elpy-name-thing-at-point)
   )
+
+
+
+;;; py.test pdb
+;; c.f. https://bitbucket.org/hpk42/py-trunk/commits/1d7b0838917f
 
 (defvar elpy-pytest-pdb-capturelog-enabled nil)
 
