@@ -371,13 +371,18 @@ Returns non-nil if `current-buffer' has any of
 
 (add-hook 'beacon-dont-blink-predicates 'tak/current-buffer-beacon-inhibited-p)
 
+(dolist (mode '(magit-status-mode
+                magit-blame-mode
+                magit-popup-mode
+                Custom-mode))
+  (add-to-list 'beacon-dont-blink-major-modes mode))
+
 (setq-default beacon-blink-delay 0.5
               beacon-blink-when-point-moves 10
-              beacon-push-mark 10
+              beacon-push-mark 20
               beacon-size 50
               column-number-mode t
-              beacon-dont-blink-major-modes '(magit-status-mode
-                                              magit-blame-mode))
+              )
 
 
 
