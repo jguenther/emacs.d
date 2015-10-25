@@ -75,6 +75,8 @@
  blink-cursor-interval 0.8
  )
 
+(defalias 'basename 'file-name-directory)
+
 (if *is-a-mac*
     ;; visual bug on el capitan
     (setq visible-bell nil))
