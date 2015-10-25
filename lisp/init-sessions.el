@@ -58,7 +58,7 @@
 
 (setq session-save-file (expand-file-name ".session" user-emacs-directory))
 (setq session-name-disable-regexp "\\(?:\\`'/tmp\\|\\.git/[A-Z_]+\\'\\)")
-
+(setq comint-input-ring-file-name (expand-file-name ".comint-history.el" user-emacs-directory))
 ;; save a bunch of variables to the desktop file
 ;; for lists specify the len of the maximal saved data also
 (setq desktop-globals-to-save
