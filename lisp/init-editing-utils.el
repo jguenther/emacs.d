@@ -354,20 +354,22 @@ With arg N, insert N newlines."
 (diminish 'beacon-mode)
 
 (setq beacon-dont-blink-minor-modes
-      (list 'magit-blame-mode))
+      '(magit-blame-mode))
 
-(defun tak/current-buffer-has-dont-blink-minor-modes-p ()
+(defun tak/current-buffer-beacon-inhibited-p ()
   "Predicate for checking for beacon unwanted minor modes.
 Returns non-nil if `current-buffer' has any of
-  `beacon-dont-blink-minor-modes enabled."
+  `beacon-dont-blink-minor-modes' enabled."
   (-any?
    (lambda (it)
-     (let* ((symbol-name (if (symbolp it)
-                             (symbol-name it)
-                           it))
-            (symbol (intern symbol-name)))
-       (bound-and-true-p symbol)))
+     (let* ((symbol (if (symbolp it)
+                        it
+                      (intern it))))
+       (and (boundp symbol)
+            (symbol-value symbol))))
    beacon-dont-blink-minor-modes))
+
+(add-hook 'beacon-dont-blink-predicates 'tak/current-buffer-beacon-inhibited-p)
 
 (setq-default beacon-blink-delay 0.5
               beacon-blink-when-point-moves 10
@@ -383,7 +385,7 @@ Returns non-nil if `current-buffer' has any of
 (require-package 'zop-to-char)
 (global-set-key [remap zap-to-char] 'zop-to-char)
 
-
 
+
 
 (provide 'init-editing-utils)
