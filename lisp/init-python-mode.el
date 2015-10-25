@@ -442,6 +442,26 @@ sys.path."
 
     ;; setup python-mode keybinds
 
+    ;; nav rebinds
+    (define-key python-mode-map [remap forward-sexp] #'python-nav-forward-sexp-safe)
+    (define-key python-mode-map [remap backward-sexp] #'python-nav-backward-sexp-safe)
+    (define-key python-mode-map [remap up-list] #'python-nav-up-list)
+    (define-key python-mode-map [remap backward-up-list] #'python-nav-backward-up-list)
+    (define-key python-mode-map [remap end-of-block] #'python-nav-end-of-block)
+    (define-key python-mode-map [remap beginning-of-block] #'beginning-of-block)
+    (define-key python-mode-map [remap beginning-of-defun] #'python-nav-beginning-of-defun)
+    (define-key python-mode-map [remap end-of-defun] #'python-nav-end-of-defun)
+    (define-key python-mode-map [remap forward-defun] #'python-nav-forward-defun)
+    (define-key python-mode-map [remap backward-defun] #'python-nav-backward-defun)
+    (define-key python-mode-map [remap end-of-statement] #'python-nav-end-of-statement)
+    (define-key python-mode-map [remap beginning-of-statement] #'python-nav-beginning-of-statement)
+    (define-key python-mode-map [remap forward-statement] #'python-nav-forward-statement)
+    (define-key python-mode-map [remap backward-statement] #'python-nav-backward-statement)
+
+    
+    (define-key python-mode-map [remap mark-defun] 'python-mark-defun)
+    
+
     ;; local binds
     (define-key python-mode-map (kbd "C-c C-<SPC>") 'python-add-breakpoint)
     (define-key python-mode-map (kbd "C-c M-p") #'run-python)
