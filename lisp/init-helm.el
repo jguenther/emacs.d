@@ -177,7 +177,7 @@
 (global-set-key (kbd "C-h i")                        #'helm-info-at-point)
 (global-set-key (kbd "C-x C-d")                      #'helm-browse-project)
 (global-set-key (kbd "<f1>")                         #'helm-resume)
-(global-set-key (kbd "C-h C-f")                      #'helm-apropos)
+(global-set-key (kbd "C-h C-f")                      #'find-function)
 (global-set-key (kbd "<f2>")                         #'helm-execute-kmacro)
 (global-set-key [remap jump-to-register]             #'helm-buffers-list)
 (global-set-key [remap dabbrev-expand]               #'helm-dabbrev)
