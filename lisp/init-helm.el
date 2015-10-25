@@ -179,12 +179,12 @@
 (global-set-key (kbd "<f1>")                         #'helm-resume)
 (global-set-key (kbd "C-h C-f")                      #'helm-apropos)
 (global-set-key (kbd "<f2>")                         #'helm-execute-kmacro)
-(define-key mode-specific-map (kbd "I")              #'helm-imenu-in-all-buffers)
-(define-key global-map [remap jump-to-register]      #'helm-buffers-list)
-
-(define-key global-map [remap dabbrev-expand]        #'helm-dabbrev)
-(define-key global-map [remap find-tag]              #'helm-etags-select)
-(define-key global-map [remap xref-find-definitions] #'helm-etags-select)
+(global-set-key [remap jump-to-register]             #'helm-buffers-list)
+(global-set-key [remap dabbrev-expand]               #'helm-dabbrev)
+(when (featurep 'hippie-exp)
+  (global-set-key [remap hippie-expand]              #'helm-dabbrev))
+(global-set-key [remap find-tag]                     #'helm-etags-select)
+(global-set-key [remap xref-find-definitions]        #'helm-etags-select)
 (global-set-key (kbd "C-h a")                        #'helm-apropos)
 (global-set-key (kbd "C-h i")                        #'helm-info-emacs)
 (global-set-key (kbd "C-h b")                        #'helm-descbinds)
@@ -201,9 +201,12 @@
 (global-set-key (kbd "M-s /")                        #'helm-multi-swoop)
 (global-set-key (kbd "C-x c!")                       #'helm-calcul-expression)
 (global-set-key (kbd "C-x c:")                       #'helm-eval-expression-with-eldoc)
-
 (global-set-key (kbd "M-g a")                        #'helm-do-grep-ag)
 (global-set-key (kbd "M-g f")                        #'helm-grep-do-git-grep)
+
+;;; mode-specific-map
+;;
+(define-key mode-specific-map (kbd "I")              #'helm-imenu-in-all-buffers)
 
 
 
