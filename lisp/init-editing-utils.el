@@ -355,6 +355,10 @@ With arg N, insert N newlines."
 (beacon-mode 1)
 (diminish 'beacon-mode)
 
+(dolist (cmd '(helm-dabbrev
+                ))
+  (add-to-list 'beacon-dont-blink-commands cmd))
+
 (setq beacon-dont-blink-minor-modes
       '(magit-blame-mode
         comint-mode))
