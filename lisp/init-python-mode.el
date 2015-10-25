@@ -288,7 +288,7 @@ running."
 This requires the pytest package to be installed."
   (interactive (elpy-test-at-point))
   (let ((runner-command (list tak/pdb-wrapper-script))
-        (runner-args (cons "--" tak/elpy-pytest-pdb-runner-args)))
+        (runner-args (cons "--" (tak/elpy-pytest-pdb-runner-args))))
     (cond
      (test
       (let ((test-list (split-string test "\\.")))
