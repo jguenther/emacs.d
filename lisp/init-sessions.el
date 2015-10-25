@@ -22,7 +22,6 @@
 (setq-default history-length 1000)
 (savehist-mode t)
 
-(require-package 'session)
 (require-package 'psession)
 (add-hook 'after-init-hook #'psession-mode)
 
@@ -59,7 +58,6 @@
 
 (setq session-save-file (expand-file-name ".session" user-emacs-directory))
 (setq session-name-disable-regexp "\\(?:\\`'/tmp\\|\\.git/[A-Z_]+\\'\\)")
-(add-hook 'after-init-hook 'session-initialize)
 
 ;; save a bunch of variables to the desktop file
 ;; for lists specify the len of the maximal saved data also
