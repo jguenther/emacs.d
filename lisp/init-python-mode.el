@@ -271,12 +271,12 @@ running."
 ;;; py.test pdb
 ;; c.f. https://bitbucket.org/hpk42/py-trunk/commits/1d7b0838917f
 
-(defvar elpy-pytest-pdb-capturelog-enabled nil)
+(defvar elpy-pytest-capturelog-enabled nil)
 
-(defun elpy-pytest-pdb-toggle-capturelog ()
+(defun elpy-pytest-toggle-capturelog ()
   (interactive)
-  (setq elpy-pytest-pdb-capturelog-enabled
-        (not elpy-pytest-pdb-capturelog-enabled)))
+  (setq elpy-pytest-capturelog-enabled
+        (not elpy-pytest-capturelog-enabled)))
 
 (defun tak/elpy-pytest-pdb-runner-args ()
   (let* ((pdb-arg (format "--%spdb"
@@ -284,7 +284,7 @@ running."
                               "i" "")))
          (args (list pdb-arg "-s" "--color=yes"))
          )
-    (if (not elpy-pytest-pdb-capturelog-enabled)
+    (if (not elpy-pytest-capturelog-enabled)
         (add-to-list 'args "--nocapturelog" t))
     args))
 
