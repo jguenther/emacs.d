@@ -204,10 +204,12 @@ running."
 
 (defun tak/realgud-setup ()
   (define-key realgud:shortkey-mode-map (kbd "C-c C-<SPC>") 'python-add-breakpoint)
+  (setq-local paragraph-separate nil)
   )
 
 (after-load 'realgud
   (add-hook 'realgud-short-key-mode-hook 'tak/realgud-setup)
+  (add-hook 'realgud-track-mode-hook 'tak/realgud-setup)
   )
 
 
@@ -323,9 +325,15 @@ This requires the pytest package to be installed."
 
     (setf (gethash "prompt" realgud:pdb-pat-hash)
           (make-realgud-loc-pat
-           :regexp   "i?[(]*[Pp]db[)>]* "
+           :regexp   "
+i?[(]*[Pp]db[)>]* "
            ))
     (setf (gethash "pdb" realgud-pat-hash) realgud:pdb-pat-hash)
+    
+    (setf (gethash "shell" realgud:pdb-command-hash) python-shell-interpreter)
+    (setf (gethash "eval"  realgud:pdb-command-hash) "pp %s")
+    (setf (gethash "pdb" realgud-command-hash) realgud:pdb-command-hash)
+
     ;; realgud:cmdbuf-associate
     (pdb cmdline)))
 
