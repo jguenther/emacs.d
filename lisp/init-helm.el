@@ -202,8 +202,15 @@
 (global-set-key (kbd "C-x c!")                       #'helm-calcul-expression)
 (global-set-key (kbd "C-x c:")                       #'helm-eval-expression-with-eldoc)
 
-(define-key global-map (kbd "M-g a")                 #'helm-do-grep-ag)
-(define-key global-map (kbd "M-g f")                 #'helm-grep-do-git-grep)
+(global-set-key (kbd "M-g a")                        #'helm-do-grep-ag)
+(global-set-key (kbd "M-g f")                        #'helm-grep-do-git-grep)
+
+
+
+;; silver-searcher
+(require-package 'ag)
+(after-load 'init-helm
+  (global-set-key (kbd "C-x V F") 'helm-do-ag))
 
 (setq-default helm-for-files-preferred-list
               '(helm-source-buffers-list
