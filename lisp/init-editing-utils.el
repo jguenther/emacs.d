@@ -356,7 +356,8 @@ With arg N, insert N newlines."
 (diminish 'beacon-mode)
 
 (setq beacon-dont-blink-minor-modes
-      '(magit-blame-mode))
+      '(magit-blame-mode
+        comint-mode))
 
 (defun tak/current-buffer-beacon-inhibited-p ()
   "Predicate for checking for beacon unwanted minor modes.
