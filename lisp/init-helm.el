@@ -181,8 +181,9 @@
 (global-set-key (kbd "<f2>")                         #'helm-execute-kmacro)
 (global-set-key [remap jump-to-register]             #'helm-buffers-list)
 (global-set-key [remap dabbrev-expand]               #'helm-dabbrev)
-(when (featurep 'hippie-exp)
-  (global-set-key [remap hippie-expand]              #'helm-dabbrev))
+(add-hook 'after-init-hook
+          (lambda ()
+            (global-set-key [remap hippie-expand]    #'helm-dabbrev)))
 (global-set-key [remap find-tag]                     #'helm-etags-select)
 (global-set-key [remap xref-find-definitions]        #'helm-etags-select)
 (global-set-key (kbd "C-h a")                        #'helm-apropos)
