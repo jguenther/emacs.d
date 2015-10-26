@@ -59,6 +59,8 @@
               helm-input-idle-delay 0.1
               helm-persistent-action-use-special-display t
               helm-quick-update t
+
+              helm-dabbrev-cycle-threshold 1
               )
 
 (add-to-list 'completion-ignored-extensions ".gvfs/")
