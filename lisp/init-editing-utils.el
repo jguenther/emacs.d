@@ -356,7 +356,7 @@ With arg N, insert N newlines."
 (diminish 'beacon-mode)
 
 (dolist (cmd '(helm-dabbrev
-                ))
+               ))
   (add-to-list 'beacon-dont-blink-commands cmd))
 
 (setq beacon-dont-blink-minor-modes
@@ -402,28 +402,27 @@ Returns non-nil if `current-buffer' has any of
 ;; emacs doesn't actually save undo history with revert-buffer
 ;; see http://lists.gnu.org/archive/html/bug-gnu-emacs/2011-04/msg00151.html
 ;; fix that.
-(defun revert-buffer-keep-history (&optional IGNORE-AUTO NOCONFIRM PRESERVE-MODES)
+(defun revert-buffer-keep-history (&optional ignore-auto noconfirm preserve-modes)
   (interactive)
   (widen)
+  (if (bound-and-true-p read-only-mode)
+      (error "Buffer is read-only: %s" (current-buffer)))
   (when (buffer-file-name)
     (let ((old-point (point))
-          (old-mark  (mark)))
-
+          (old-mark  (mark))
+                                        ; suppress echo area message
+          (message-log-max nil))
       ;; tell Emacs the modtime is fine, so we can edit the buffer
-      (clear-visited-file-modtime)
+      ;;(clear-visited-file-modtime)
 
       ;; insert the current contents of the file on disk
       (delete-region (point-min) (point-max))
       (insert-file-contents (buffer-file-name))
-
-      ;; mark the buffer as not modified
       (not-modified)
       (set-visited-file-modtime)
-
       (goto-char old-point)
       (set-mark old-mark)
-      ))
-  )
+      )))
 (setq revert-buffer-function #'revert-buffer-keep-history)
 
 
