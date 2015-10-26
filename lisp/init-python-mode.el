@@ -600,8 +600,8 @@ sys.path."
   (add-hook 'python-mode-hook 'tak/python-setup)
   )
 
-;; (after-load 'realgud
-;;   (add-hook 'realgud-short-key-mode-hook 'tak/python-setup))
+(after-load 'realgud
+  (add-hook 'realgud-short-key-mode-hook #'realgud-cmdbuf-stay-in-source-toggle))
 
 (elpy-enable)
 
