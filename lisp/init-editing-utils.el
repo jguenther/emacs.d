@@ -413,7 +413,7 @@ Returns non-nil if `current-buffer' has any of
                                         ; suppress echo area message
           (message-log-max nil))
       ;; tell Emacs the modtime is fine, so we can edit the buffer
-      ;;(clear-visited-file-modtime)
+      (clear-visited-file-modtime)
 
       ;; insert the current contents of the file on disk
       (delete-region (point-min) (point-max))
