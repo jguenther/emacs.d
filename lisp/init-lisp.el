@@ -11,15 +11,12 @@
 (require-package 'eval-sexp-fu)
 (require 'eval-sexp-fu)
 
+(setq-default eval-sexp-fu-flash-face 'highlight-symbol-face)
+
 (dolist (hook '(lisp-mode-hook
                 inferior-lisp-mode-hook
                 emacs-lisp-mode-hook))
   (add-hook hook #'turn-on-eval-sexp-fu-flash-mode))
-
-(define-eval-sexp-fu-flash-command sanityinc/eval-last-sexp-or-region
-  (eval-sexp-fu-flash (when (ignore-errors (preceding-sexp))
-                        (with-esf-end-of-sexp
-                          (bounds-of-thing-at-point 'sexp)))))
 
 
 ;; Make C-x C-e run 'eval-region if the region is active
