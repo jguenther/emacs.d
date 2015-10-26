@@ -667,16 +667,15 @@ and add extra args to `nose-extra-args'."
   (require 'nose)
   (add-hook 'python-mode-hook #'nose-mode)
   (setq nose-project-root-test #'tak/nose-project-root-p)
-  (define-key nose-mode-map "\C-ca" #'nosetests-all)
-  (define-key nose-mode-map "\C-cm" #'nosetests-module)
-  (define-key nose-mode-map "\C-ct" #'nosetests-one)
-  (define-key nose-mode-map "\C-c," #'nosetests-again)
-  (define-key nose-mode-map "\C-cA" #'nosetests-pdb-all)
-  (define-key nose-mode-map "\C-cM" #'nosetests-pdb-module)
-  (define-key nose-mode-map "\C-c." #'nosetests-pdb-one)
+  (define-key nose-mode-map (kbd "C-c a") #'nosetests-all)
+  (define-key nose-mode-map (kbd "C-c m") #'nosetests-module)
+  (define-key nose-mode-map (kbd "C-c t") #'nosetests-one)
+  (define-key nose-mode-map (kbd "C-c ,") #'nosetests-again)
+  (define-key nose-mode-map (kbd "C-c A") #'nosetests-pdb-all)
+  (define-key nose-mode-map (kbd "C-c M") #'nosetests-pdb-module)
+  (define-key nose-mode-map (kbd "C-c .") #'nosetests-pdb-one)
   (add-hook 'compilation-mode-hook #'tak/hack-python-locals)
   )
-
 
 
 
