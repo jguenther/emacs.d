@@ -399,5 +399,33 @@ Returns non-nil if `current-buffer' has any of
 
 
 
+;; emacs doesn't actually save undo history with revert-buffer
+;; see http://lists.gnu.org/archive/html/bug-gnu-emacs/2011-04/msg00151.html
+;; fix that.
+(defun revert-buffer-keep-history (&optional IGNORE-AUTO NOCONFIRM PRESERVE-MODES)
+  (interactive)
+  (when (buffer-file-name)
+    (let ((old-point (point))
+          (old-mark  (mark)))
+
+      ;; tell Emacs the modtime is fine, so we can edit the buffer
+      (clear-visited-file-modtime)
+
+      ;; insert the current contents of the file on disk
+      (widen)
+      (delete-region (point-min) (point-max))
+      (insert-file-contents (buffer-file-name))
+
+      ;; mark the buffer as not modified
+      (not-modified)
+      (set-visited-file-modtime)
+
+      (set-mark old-mark)
+      (posn-set-point old-point)))
+  )
+(setq revert-buffer-function #'revert-buffer-keep-history)
+
+
+
 
 (provide 'init-editing-utils)
