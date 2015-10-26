@@ -151,13 +151,8 @@ running."
 
 
 
-;;; testing setup
+;;; realgud / pydbgr setup
 
-;;; emacs-dbgr / realgud
-
-;; realgud: use pdb, trepan2, or pydbgr
-
-;; TODO make realgud-trepan2 work with elpy-test
 (require-package 'realgud)
 
 (after-load 'python
@@ -195,8 +190,8 @@ running."
 
 (after-load 'python
   (add-hook 'python-mode-hook #'tak/setup-python-shell)
-  (add-hook 'python-mode-hook 'annotate-pdb-breakpoints)
-  (add-hook 'python-mode-hook 'ipretty-mode)
+  (add-hook 'python-mode-hook #'annotate-pdb-breakpoints)
+  (add-hook 'python-mode-hook #'ipretty-mode)
   )
 
 (defun tak/realgud-setup ()
@@ -205,8 +200,8 @@ running."
   )
 
 (after-load 'realgud
-  (add-hook 'realgud-short-key-mode-hook 'tak/realgud-setup)
-  (add-hook 'realgud-track-mode-hook 'tak/realgud-setup)
+  (add-hook 'realgud-short-key-mode-hook #'tak/realgud-setup)
+  (add-hook 'realgud-track-mode-hook #'tak/realgud-setup)
   )
 
 
@@ -265,8 +260,7 @@ running."
 
 
 
-;;; py.test pdb
-;; c.f. https://bitbucket.org/hpk42/py-trunk/commits/1d7b0838917f
+;; elpy pytest runner functions
 
 (defvar elpy-pytest-capturelog-enabled nil)
 
