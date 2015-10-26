@@ -404,6 +404,7 @@ Returns non-nil if `current-buffer' has any of
 ;; fix that.
 (defun revert-buffer-keep-history (&optional IGNORE-AUTO NOCONFIRM PRESERVE-MODES)
   (interactive)
+  (widen)
   (when (buffer-file-name)
     (let ((old-point (point))
           (old-mark  (mark)))
@@ -412,7 +413,6 @@ Returns non-nil if `current-buffer' has any of
       (clear-visited-file-modtime)
 
       ;; insert the current contents of the file on disk
-      (widen)
       (delete-region (point-min) (point-max))
       (insert-file-contents (buffer-file-name))
 
@@ -420,8 +420,9 @@ Returns non-nil if `current-buffer' has any of
       (not-modified)
       (set-visited-file-modtime)
 
+      (goto-char old-point)
       (set-mark old-mark)
-      (posn-set-point old-point)))
+      ))
   )
 (setq revert-buffer-function #'revert-buffer-keep-history)
 
