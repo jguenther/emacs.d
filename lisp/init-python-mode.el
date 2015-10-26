@@ -284,70 +284,6 @@ running."
 
 (defvar tak/pytest-wrapper-script (expand-file-name "~/code/scripts/run_pytest.sh"))
 
-(defun elpy-test-pytest-pdb-runner (top file module test)
-  "Test the project using the py.test test runner with --pdb/--ipdb.
-This requires the pytest package to be installed."
-  (interactive (elpy-test-at-point))
-  (let ((runner-command (list tak/pytest-wrapper-script))
-        (runner-args (cons "--" (tak/elpy-pytest-runner-args))))
-    (cond
-     (test
-      (let ((test-list (split-string test "\\.")))
-        (apply #'elpy-test-run-pdb
-               top
-               (append runner-command
-                       (cons file
-                             (cons "-t"
-                                   (cons (mapconcat #'identity test-list "::")
-                                         runner-args)))))))
-     (module
-      (apply #'elpy-test-run-pdb top (append runner-command
-                                             (cons file runner-args))))
-     (t
-      (apply #'elpy-test-run-pdb top (append runner-command
-                                             runner-args))))))
-
-(defun elpy-test-run-pdb (working-directory command &rest args)
-  "Run COMMAND with ARGS in WORKING-DIRECTORY as a test command using pdb."
-
-  (let* ((comint-process-echoes t)
-         (comint-use-prompt-regexp t)
-         (gud-chdir-before-run nil)
-         (gud-pdb-command-name tak/pytest-wrapper-script)
-         (default-directory working-directory)
-         (cmdline (combine-and-quote-strings (cons command args)))
-         (process-environment (tak/compute-local-python-environment))
-         )
-
-    (setf (gethash "prompt" realgud:pdb-pat-hash)
-          (make-realgud-loc-pat
-           :regexp   "
-i?[(]*[Pp]db[)>]* "
-           ))
-    (setf (gethash "pdb" realgud-pat-hash) realgud:pdb-pat-hash)
-    
-    (setf (gethash "shell" realgud:pdb-command-hash) python-shell-interpreter)
-    (setf (gethash "eval"  realgud:pdb-command-hash) "pp %s")
-    (setf (gethash "pdb" realgud-command-hash) realgud:pdb-command-hash)
-    (pdb cmdline)))
-
-(after-load 'elpy
-  (put 'elpy-test-pytest-pdb-runner 'elpy-test-runner-p t)
-  (set 'elpy-test-runner 'elpy-test-pytest-pdb-runner)
-  )
-
-(defun tak/munge-pdb-buffer-name (orig-function &rest args)
-  "Advise `realgud-exec-shell' to remove `py.test'
-class/method/function specifiers from the resulting buffer name."
-  (let* ((buffer (apply orig-function args))
-         (old-buffer-name (buffer-name buffer))
-         (old-buffer-name-components (s-split "::" old-buffer-name))
-         (old-buffer-car (car old-buffer-name-components))
-         (new-buffer-name (format "%s shell*" old-buffer-car)))
-    (with-current-buffer buffer
-      (rename-buffer new-buffer-name t))))
-;;(advice-add 'realgud-exec-shell :around #'tak/munge-pdb-buffer-name)
-
 
 
 ;; pytest with trepan2 debugger
