@@ -1,7 +1,24 @@
 (when *is-a-mac*
   (setq mac-command-modifier 'super)
   (setq mac-option-modifier 'meta)
+  (setq mac-function-modifier 'hyper)
+
+  (defun swap-super-and-meta ()
+    "Swaps the super and meta modifier keys."
+    (interactive)
+    (if (eq mac-command-modifier 'super)
+        (progn
+          (message "option = super, cmd = meta")
+          (setq mac-command-modifier 'meta
+                mac-option-modifier 'super))
+      (message "cmd = super, option = meta")
+      (setq mac-command-modifier 'super
+            mac-option-modifier 'meta))
+    )
+  (global-set-key (kbd "s-m") #'swap-super-and-meta)
+
   (setq default-input-method "MacOSX")
+
   ;; Make mouse wheel / trackpad scrolling less jerky
   (setq mouse-wheel-scroll-amount '(1
                                     ((shift) . 5)
