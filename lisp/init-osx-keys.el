@@ -40,8 +40,6 @@
   ;; unbind CMD-w kill-frame
   (global-unset-key (kbd "s-w"))
 
-  (global-set-key (kbd "s-/") 'hippie-expand)
-
   ;; paste utf-8
   (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
   )
