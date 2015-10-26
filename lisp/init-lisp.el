@@ -2,9 +2,24 @@
 (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
   (add-hook hook 'turn-on-elisp-slime-nav-mode))
 (after-load 'elisp-slime-nav
- (diminish 'elisp-slime-nav-mode))
+  (diminish 'elisp-slime-nav-mode))
 (require-package 'lively)
 
+
+
+;; highlight sexps under evaluation
+(require-package 'eval-sexp-fu)
+(require 'eval-sexp-fu)
+
+(dolist (hook '(lisp-mode-hook
+                inferior-lisp-mode-hook
+                emacs-lisp-mode-hook))
+  (add-hook hook #'turn-on-eval-sexp-fu-flash-mode))
+
+(define-eval-sexp-fu-flash-command sanityinc/eval-last-sexp-or-region
+  (eval-sexp-fu-flash (when (ignore-errors (preceding-sexp))
+                        (with-esf-end-of-sexp
+                          (bounds-of-thing-at-point 'sexp)))))
 
 
 ;; Make C-x C-e run 'eval-region if the region is active
@@ -13,8 +28,17 @@
   "Eval region from BEG to END if active, otherwise the last sexp."
   (interactive "P")
   (if (and (mark) (use-region-p))
-      (eval-region (min (point) (mark)) (max (point) (mark)))
+      (let ((start (min (point) (mark)))
+            (end   (max (point) (mark))))
+        (prog1
+            (eval-region start end)
+          (eval-sexp-fu-flash '(start . end))))
     (pp-eval-last-sexp prefix)))
+
+(define-eval-sexp-fu-flash-command pp-eval-last-sexp
+  (eval-sexp-fu-flash (when (ignore-errors (preceding-sexp))
+                        (with-esf-end-of-sexp
+                          (bounds-of-thing-at-point 'sexp)))))
 
 (global-set-key (kbd "M-:") 'pp-eval-expression)
 
