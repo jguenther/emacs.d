@@ -359,6 +359,53 @@ class/method/function specifiers from the resulting buffer name."
 
 
 
+;; pytest with trepan2 debugger
+
+(defun elpy-test-pytest-trepan2-runner (top file module test)
+  "Test the project using the py.test test runner with --trepan.
+This requires the pytest package to be installed."
+  (interactive (elpy-test-at-point))
+  (let ((runner-command (list tak/pytest-wrapper-script))
+        (runner-args (cons "--" (tak/elpy-pytest-runner-args "--trepan"))))
+    (cond
+     (test
+      (let ((test-list (split-string test "\\.")))
+        (apply #'elpy-test-run-trepan2
+               top
+               (append runner-command
+                       (cons file
+                             (cons "-t"
+                                   (cons (mapconcat #'identity test-list "::")
+                                         runner-args)))))))
+     (module
+      (apply #'elpy-test-run-trepan2 top (append runner-command
+                                                 (cons file runner-args))))
+     (t
+      (apply #'elpy-test-run-trepan2 top (append runner-command
+                                                 runner-args))))))
+
+(defun elpy-test-run-trepan2 (working-directory command &rest args)
+  "Run COMMAND with ARGS in WORKING-DIRECTORY as a test command using trepan2."
+  (let* ((gud-chdir-before-run nil)
+         (gud-trepan2-command-name tak/pytest-wrapper-script)
+         (default-directory working-directory)
+         (cmdline (combine-and-quote-strings (cons command args)))
+         (process-environment (tak/compute-local-python-environment))
+         )
+    
+    (setf (gethash "shell" realgud:trepan2-command-hash) python-shell-interpreter)
+    (setf (gethash "eval"  realgud:trepan2-command-hash) "pp %s")
+    (setf (gethash "trepan2" realgud-command-hash) realgud:trepan2-command-hash)
+    (trepan2 cmdline)))
+
+(after-load 'elpy
+  (put 'elpy-test-pytest-trepan2-runner 'elpy-test-runner-p t)
+  (set 'elpy-test-runner 'elpy-test-pytest-trepan2-runner)
+  )
+
+
+
+
 ;;; from https://github.com/russell/dotfiles/blob/master/emacs.d/init-programming.d/python.el
 ;; (defvar python-source-setup-code
 ;;   "def source(filename):
