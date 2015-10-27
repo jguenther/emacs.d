@@ -131,11 +131,14 @@ running."
 
 (require-package 'pydoc)
 (require-package 'python-docstring)
-;;(require-package 'python-info)
+(require-package 'python-info)
 (require-package 'pydoc-info)
 
-;; (after-load 'python
-;;   (require 'pydoc-info))
+(after-load 'python
+  (require 'python-info)
+  (require 'pydoc-info)
+  (require 'python-docstring)
+  (require 'pydoc))
 
 
 
