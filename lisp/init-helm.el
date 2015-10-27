@@ -100,15 +100,23 @@
   (setq helm-split-window-in-side-p t)
   (helm-autoresize-mode -1)
   (add-hook 'helm-minibuffer-set-up-hook 'helm-hide-minibuffer-maybe)
+  (helm-refresh)
   )
 
 (defun helm/turn-off-header-line ()
   (interactive)
   (setq helm-echo-input-in-header-line nil)
-  ;;(helm-autoresize-mode 1)
+  (helm-autoresize-mode 1)
   (setq helm-split-window-in-side-p nil)
   (remove-hook 'helm-minibuffer-set-up-hook 'helm-hide-minibuffer-maybe)
+  (helm-refresh)
   )
+
+(defun helm/toggle-header-line ()
+  (interactive)
+  (if helm-echo-input-in-header-line
+      (helm/turn-off-header-line)
+    (helm/turn-on-header-line)))
 
 ;;; Psession windows
 ;;
