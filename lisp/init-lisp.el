@@ -331,4 +331,11 @@
 
 
 
+(defun display-prefix (arg)
+  "Display the value of the raw prefix arg."
+  (interactive "P")
+  (message "%s" arg))
+
+
+
 (provide 'init-lisp)
