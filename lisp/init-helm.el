@@ -2,19 +2,17 @@
 
 (require-package 'helm-bind-key)
 (require-package 'helm-descbinds)
-;;(require-package 'helm-flycheck)
+(require-package 'helm-flycheck)
 (require-package 'helm-fuzzy-find)
-;;(require-package 'helm-git)
 (require-package 'helm-git-grep)
 (require-package 'helm-ls-git)
-;;(require-package 'helm-make)
 (require-package 'helm-orgcard)
 (require-package 'helm-projectile)
 (require-package 'helm-pydoc)
 (require-package 'wgrep-helm)
 (require-package 'helm-ag)
 (require-package 'helm-orgcard)
-;;(require-package 'helm-psession)
+(require-package 'helm-psession)
 
 (quelpa '(helm-ipython :fetcher github :repo "thierryvolpiatto/helm-ipython"))
 (after-load 'helm-config
@@ -61,6 +59,8 @@
               helm-quick-update t
 
               helm-dabbrev-cycle-threshold 1
+
+              helm-ag-insert-at-point 'symbol
               )
 
 (add-to-list 'completion-ignored-extensions ".gvfs/")
@@ -69,17 +69,21 @@
 (autoload 'helm-eshell-history "helm-eshell"    t)
 (autoload 'helm-esh-pcomplete  "helm-eshell"    t)
 
-(add-hook 'eshell-mode-hook
-          #'(lambda ()
-              (define-key eshell-mode-map (kbd "TAB")     #'helm-esh-pcomplete)
-              (define-key eshell-mode-map (kbd "C-c C-l") #'helm-eshell-history)))
+(after-load 'eshell
+  (define-key eshell-mode-map (kbd "TAB")     #'helm-esh-pcomplete)
+  (define-key eshell-mode-map (kbd "C-c C-l") #'helm-eshell-history))
+
+(after-load 'flycheck
+  (define-key flycheck-mode-map (kbd "C-c ! h") 'helm-flycheck))
 
 ;;; helm-projectile
 ;;;
-(require 'helm-projectile)
-(setq helm-projectile-sources-list (cons 'helm-source-projectile-files-list
-                                         (remove 'helm-source-projectile-files-list
-                                                 helm-projectile-sources-list)))
+(after-load 'projectile
+  (require 'helm-projectile)
+  (setq-default helm-projectile-sources-list (cons 'helm-source-projectile-files-list
+                                                   (remove 'helm-source-projectile-files-list
+                                                           helm-projectile-sources-list))))
+
 (helm-projectile-on)
 
 (define-key projectile-mode-map (kbd "C-c p /")
@@ -157,6 +161,7 @@
 (define-key helm-command-map (kbd "I")   'helm-imenu-in-all-buffers)
 
 (define-key helm-map (kbd "M-o") #'helm-previous-source)
+(define-key helm-map (kbd "M-h") #'helm/toggle-header-line)
 
 (define-key shell-mode-map (kbd "C-M-p")             'helm-comint-input-ring) ; shell history.
 
@@ -169,7 +174,6 @@
 (global-set-key (kbd "M-x")                          #'undefined)
 (global-set-key (kbd "M-x")                          #'helm-M-x)
 (global-set-key (kbd "M-y")                          #'helm-show-kill-ring)
-(global-set-key (kbd "C-c f")                        #'helm-recentf)
 (global-set-key (kbd "C-x C-f")                      #'helm-find-files)
 (global-set-key (kbd "C-c <SPC>")                    #'helm-all-mark-rings)
 (global-set-key (kbd "C-x r b")                      #'helm-filtered-bookmarks)
@@ -197,42 +201,62 @@
 (global-set-key (kbd "C-x C-f")                      #'helm-find-files)
 (global-set-key (kbd "C-x C-r")                      #'helm-recentf)
 (global-set-key (kbd "C-x r l")                      #'helm-filtered-bookmarks)
-(global-set-key (kbd "M-y")                          #'helm-show-kill-ring)
-(global-set-key (kbd "M-s o")                        #'helm-swoop)
-(global-set-key (kbd "M-s /")                        #'helm-multi-swoop)
+(add-hook
+ 'after-init-hook (lambda ()
+                    (global-set-key (kbd "M-y")      #'helm-show-kill-ring)
+                    (global-set-key (kbd "C-x V F")  #'helm-ag)))
 (global-set-key (kbd "C-x c!")                       #'helm-calcul-expression)
 (global-set-key (kbd "C-x c:")                       #'helm-eval-expression-with-eldoc)
-(global-set-key (kbd "M-g a")                        #'helm-do-grep-ag)
-(global-set-key (kbd "M-g f")                        #'helm-grep-do-git-grep)
 
-;;; mode-specific-map
-;;
+;;; mode-specific-map                         
+;;                         
 (define-key mode-specific-map (kbd "I")              #'helm-imenu-in-all-buffers)
+
+;; helm-swoop and grep-related commands
+(global-set-key (kbd "M-g a")                        #'helm-do-grep-ag)
+(global-set-key (kbd "M-g f")                        #'helm-git-grep)
+(global-set-key (kbd "M-g g")                        #'helm-swoop)
+(global-set-key (kbd "M-g b")                        #'helm-ag-buffers)
+(global-set-key (kbd "M-s o")                        #'helm-swoop)
+(global-set-key (kbd "M-s C-o")                      #'helm-multi-swoop-org)
+(global-set-key (kbd "M-s /")                        #'helm-multi-swoop)
+(global-set-key (kbd "C-c M-i")                      #'helm-multi-swoop)
+(global-set-key (kbd "M-s C-/")                      #'helm-multi-swoop-all)
+(global-set-key (kbd "C-x M-i")                      #'helm-multi-swoop-all)
+(global-set-key (kbd "M-i")                          #'helm-swoop)
+(global-set-key (kbd "s-i")                          #'helm-multi-swoop)
+(global-set-key (kbd "M-I")                          #'helm-swoop-back-to-last-point)
+(global-set-key (kbd "M-s m")                        #'helm-multi-swoop-current-mode)
+(global-set-key (kbd "M-s M-m")                      #'helm-multi-swoop-current-mode)
+(global-set-key (kbd "M-s M")                        #'helm-multi-swoop-by-mode)
+(global-set-key (kbd "M-s m")                        #'helm-multi-swoop-current-mode)
+
+(define-key helm-swoop-map    (kbd "C-m")            #'helm-multi-swoop-current-mode-from-helm-swoop)
 
 
 
 ;; silver-searcher
 (require-package 'ag)
-(after-load 'init-helm
-  (global-set-key (kbd "C-x V F") 'helm-do-ag))
 
-(setq-default helm-for-files-preferred-list
-              '(helm-source-buffers-list
-                helm-source-recentf
-                helm-source-bookmarks
-                helm-source-file-cache
-                helm-source-files-in-current-dir
-                helm-source-locate
-                helm-source-projectile-files-list
-                helm-source-projectile-recentf-list
-                helm-source-projectile-directories-and-dired-list
-                helm-source-projectile-projects
-                helm-source-moccur
-                helm-source-locate
-                helm-source-grep
-                helm-source-occur
-                helm-source-grep-ag
-                ))
+(dolist (source 
+         '(helm-source-buffers-list
+           helm-source-recentf
+           helm-source-bookmarks
+           helm-source-file-cache
+           helm-source-files-in-current-dir
+           helm-source-locate
+           helm-source-projectile-files-list
+           helm-source-projectile-recentf-list
+           helm-source-projectile-directories-and-dired-list
+           helm-source-projectile-projects
+           helm-source-moccur
+           helm-source-locate
+           helm-source-grep
+           helm-source-occur
+           helm-source-grep-ag
+           ))
+  (add-to-list 'helm-for-files-preferred-list source))
+
 ;; Use default-as-input in grep
 (add-to-list 'helm-sources-using-default-as-input 'helm-source-grep)
 (add-to-list 'helm-sources-using-default-as-input 'helm-source-grep-ag)
