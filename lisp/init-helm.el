@@ -242,7 +242,8 @@
 (global-set-key (kbd "M-s M")                        #'helm-multi-swoop-by-mode)
 (global-set-key (kbd "M-s m")                        #'helm-multi-swoop-current-mode)
 
-(define-key helm-swoop-map    (kbd "C-m")            #'helm-multi-swoop-current-mode-from-helm-swoop)
+(after-load 'helm-swoop
+  (define-key helm-swoop-map (kbd "C-m")             #'helm-multi-swoop-current-mode-from-helm-swoop))
 
 
 
@@ -271,5 +272,8 @@
 ;; Use default-as-input in grep
 (add-to-list 'helm-sources-using-default-as-input 'helm-source-grep)
 (add-to-list 'helm-sources-using-default-as-input 'helm-source-grep-ag)
+
+
+
 
 (provide 'init-helm)
