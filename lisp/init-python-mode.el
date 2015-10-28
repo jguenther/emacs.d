@@ -460,14 +460,15 @@ sys.path."
     ;; elpy--remove unnecessary binds
     (after-load 'elpy
       (cl-dolist (key '(
-                                        ; elpy-flymake-next-error
-                        "C-c C-n"
-                                        ; elpy-flymake-previous-error
-                        "C-c C-p"
-                                        ; elpy-check
-                        "C-c C-v"
-                                        ; run-python
-                        "C-c C-p"
+                        "C-c C-n"  ; elpy-flymake-next-error
+                        
+                        "C-c C-p"  ; elpy-flymake-previous-error
+                        
+                        "C-c C-v"  ; elpy-check
+                        
+                        "C-c C-p"  ; run-python
+                        
+                        "C-c C-s"  ; elpy-rgrep-symbol
                         ))
         (define-key elpy-mode-map (kbd key) nil)))
     
