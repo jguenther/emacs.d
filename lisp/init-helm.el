@@ -93,10 +93,7 @@
 
 (helm-projectile-on)
 
-(define-key projectile-mode-map (kbd "C-c p /")
-  #'(lambda ()
-      (interactive)
-      (helm-ag (projectile-project-root))))
+(define-key projectile-mode-map (kbd "C-c p /") #'helm-do-ag-project-root)
 
 ;;; https://github.com/thierryvolpiatto/emacs-tv-config/blob/master/init-helm-thierry.el
 ;;;
