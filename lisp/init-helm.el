@@ -12,7 +12,7 @@
 (require-package 'wgrep-helm)
 (require-package 'helm-ag)
 (require-package 'helm-orgcard)
-(require-package 'helm-psession)
+(require-package 'helm-fuzzier)
 
 (quelpa '(helm-ipython :fetcher github :repo "thierryvolpiatto/helm-ipython"))
 (after-load 'helm-config
@@ -72,6 +72,9 @@
 (after-load 'eshell
   (define-key eshell-mode-map (kbd "TAB")     #'helm-esh-pcomplete)
   (define-key eshell-mode-map (kbd "C-c C-l") #'helm-eshell-history))
+
+(require 'helm-fuzzier)
+(helm-fuzzier-mode 1)
 
 (after-load 'flycheck
   (define-key flycheck-mode-map (kbd "C-c ! h") 'helm-flycheck))
