@@ -890,6 +890,11 @@ supply a positive argument once more with C-u C-SPC."
 (require 'shell-pop)
 
 
+(setq keyfreq-autosave-mode t
+      keyfreq-file (expand-file-name ".keyfreq.el" user-emacs-directory)
+      keyfreq-mode t)
+
+
 
 
 (provide 'init-local)
