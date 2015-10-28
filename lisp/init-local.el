@@ -108,7 +108,8 @@
 (global-hl-line-mode)
 
 (require-package 'bookmark+)
-(setq-default bmkp-last-as-first-bookmark-file (expand-file-name "bookmarks" user-emacs-directory))
+(setq-default bmkp-last-as-first-bookmark-file
+              (expand-file-name ".bookmarks.el" user-emacs-directory))
 (after-load 'bookmark
   (require 'bookmark+))
 
