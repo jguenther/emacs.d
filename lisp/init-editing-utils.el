@@ -402,30 +402,32 @@ Returns non-nil if `current-buffer' has any of
 ;; emacs doesn't actually save undo history with revert-buffer
 ;; see http://lists.gnu.org/archive/html/bug-gnu-emacs/2011-04/msg00151.html
 ;; fix that.
-(defun revert-buffer-keep-history (arg &rest args)
+(defun revert-buffer-keep-history (&optional ignore-auto noconfirm preserve-modes)
   (interactive "P")
   (cond
-   (arg (message "Calling default revert-buffer: %s." arg)
-        (apply #'revert-buffer--default args))
-   (t   (if (bound-and-true-p read-only-mode)
-            (error "Buffer is read-only: %s" (current-buffer)))
-        (when (buffer-file-name)
-          (let ((old-point (point))
-                (old-mark  (mark))
+   (current-prefix-arg
+    (message "Calling default revert-buffer: %s." current-prefix-arg)
+    (apply #'revert-buffer--default ignore-auto noconfirm preserve-modes))
+   (t
+    (if (bound-and-true-p read-only-mode)
+        (error "Buffer is read-only: %s" (current-buffer)))
+    (when (buffer-file-name)
+      (let ((old-point (point))
+            (old-mark  (mark))
                                         ; suppress echo area message
-                (message-log-max nil))
-            (widen)
-            ;; tell Emacs the modtime is fine, so we can edit the buffer
-            (clear-visited-file-modtime)
+            (message-log-max nil))
+        (widen)
+        ;; tell Emacs the modtime is fine, so we can edit the buffer
+        (clear-visited-file-modtime)
 
-            ;; insert the current contents of the file on disk
-            (delete-region (point-min) (point-max))
-            (insert-file-contents (buffer-file-name))
-            (not-modified)
-            (set-visited-file-modtime)
-            (goto-char old-point)
-            (set-mark old-mark)
-            )))))
+        ;; insert the current contents of the file on disk
+        (delete-region (point-min) (point-max))
+        (insert-file-contents (buffer-file-name))
+        (not-modified)
+        (set-visited-file-modtime)
+        (goto-char old-point)
+        (set-mark old-mark)
+        )))))
 (global-set-key (kbd "s-u")   #'revert-buffer-keep-history)
 (global-set-key (kbd "S-s-U") #'revert-buffer)
 
