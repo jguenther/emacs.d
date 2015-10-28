@@ -6,12 +6,10 @@
   (if (executable-find "glocate")
       (setq locate-command "glocate")))
 
-
 (when (executable-find "ag")
   (require-package 'ag)
   (require-package 'wgrep-ag)
-  (setq-default ag-highlight-search t)
-  (global-set-key (kbd "M-?") 'ag-project))
+  (add-to-list 'ag-arguments "--search-zip"))
 
 (after-load 'grep
 					; avoid rgrep matching ELPA archives

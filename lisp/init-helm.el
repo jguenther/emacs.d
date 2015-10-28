@@ -61,6 +61,10 @@
               helm-dabbrev-cycle-threshold 1
 
               helm-ag-insert-at-point 'symbol
+              helm-ag-command-option "--search-zip"
+              helm-ag-use-grep-ignore-list t
+                                        ; remove --color
+              helm-grep-ag-command "ag --line-numbers -S --hidden --nogroup %s %s"
               )
 
 (add-to-list 'completion-ignored-extensions ".gvfs/")
