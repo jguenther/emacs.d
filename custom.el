@@ -7,7 +7,6 @@
  ;; If there is more than one, they won't work right.
  '(auto-save-timeout 120)
  '(backup-directory-alist (quote (("." . "~/.emacs.d/saves"))))
- '(blink-cursor-mode t)
  '(comint-input-ignoredups t)
  '(compilation-ask-about-save nil)
  '(cperl-close-paren-offset -2)
@@ -19,7 +18,6 @@
  '(custom-safe-themes
    (quote
     ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" default)))
- '(delete-by-moving-to-trash t)
  '(delete-old-versions t)
  '(desktop-auto-save-timeout 600)
  '(desktop-lazy-idle-delay 2)
@@ -95,7 +93,7 @@
  '(org-use-sub-superscripts (quote {}))
  '(package-selected-packages
    (quote
-    (org-linkany ob-perl helm-ipython ob-http ob-sh zop-to-char psession clojure-quick-repl clonjure-quick-repl clojure-mode-extra-font-locking clojure-cheatsheet cljr-helm imenu-anywhere imenu+ bookmark+ persp-projectile helm-dash helm-ag wgrep-helm helm-pydoc helm-projectile helm-orgcard helm-ls-git helm-git-grep helm-fuzzy-find helm-dired-recent helm-descbinds helm-bind-key angularjs-mode ido-other-window yasnippet pyvenv highlight-indentation find-file-in-project swiper company shell-pop nose flappymacs pymacs emacs-for-python anaconda-mode anaconda popup-keys quelpa restclient iedit back-button visual-mark achievements magit-tramp diffview string-inflection git-gutter+ god-mode project-persist-drawer sr-speedbar flx-ido flx git-gutter magit-find-file eshell-did-you-mean org-bullets orgit yari yaml-mode yagist win-switch whole-line-or-region whitespace-cleanup-mode which-key wgrep-ag vc-darcs unfill undo-tree tidy textile-mode tagedit switch-window sql-indent smex smarty-mode skewer-less session second-sel scss-mode scratch sass-mode ruby-hash-syntax robe rinari regex-tool redshank realgud rainbow-mode rainbow-delimiters python-x python-docstring pydoc-info pydoc project-local-variables ppd-sr-speedbar pip-requirements php-mode paredit-everywhere paradox page-break-lines osx-location orglink org-repo-todo org-projectile org-pomodoro org-plus-contrib org-mac-link org-mac-iCal org-jira org-fstree org-cliplink ob-browser mwe-log-commands multiple-cursors move-dup mmm-mode mkdown menu-bar+ matlab-mode magit-svn magit-gh-pulls macrostep lua-mode lively less-css-mode ledger-mode json-mode js-comint jquery-doc jira-markup-mode jinja2-mode jedi-direx isearch+ ipretty info+ indent-guide ido-ubiquitous ido-describe-bindings ibuffer-vc ibuffer-projectile htmlize hl-sexp hl-line+ hippie-expand-slime highlight-symbol highlight-quoted highlight-escape-sequences help-mode+ help-fns+ help+ hayoo guide-key goto-last-change gnuplot gitignore-mode github-clone github-browse-file gitconfig-mode git-wip-timemachine git-timemachine git-messenger git-gutter-fringe git-blame ghci-completion fullframe free-keys flycheck-package flycheck-ledger flycheck-hdevtools flycheck-haskell flx-isearch fill-column-indicator expand-region exec-path-from-shell ess erlang elpy elisp-slime-nav dsvn discover-my-major discover dired-toggle-sudo dired-sort-menu dired-sort dired-imenu dired-filter dired+ diminish diff-hl default-text-scale dash-at-point darcsum cursor-chg csv-nav csv-mode css-eldoc crontab-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized coffee-mode cl-lib-highlight bug-reference-github browse-kill-ring+ bash-completion avy auto-compile anzu aggressive-indent ag ace-jump-mode ac-slime ac-js2 ac-inf-ruby ac-haskell-process)))
+    (helm-fuzzier eval-sexp-fu python-info org-linkany ob-perl helm-ipython ob-http ob-sh zop-to-char psession clojure-quick-repl clonjure-quick-repl clojure-mode-extra-font-locking clojure-cheatsheet cljr-helm imenu-anywhere imenu+ bookmark+ persp-projectile helm-dash helm-ag wgrep-helm helm-pydoc helm-projectile helm-orgcard helm-ls-git helm-git-grep helm-fuzzy-find helm-dired-recent helm-descbinds helm-bind-key angularjs-mode ido-other-window yasnippet pyvenv highlight-indentation find-file-in-project swiper company shell-pop nose flappymacs pymacs emacs-for-python anaconda-mode anaconda popup-keys quelpa restclient iedit back-button visual-mark achievements magit-tramp diffview string-inflection git-gutter+ god-mode project-persist-drawer sr-speedbar flx-ido flx git-gutter magit-find-file eshell-did-you-mean org-bullets orgit yari yaml-mode yagist win-switch whole-line-or-region whitespace-cleanup-mode which-key wgrep-ag vc-darcs unfill undo-tree tidy textile-mode tagedit switch-window sql-indent smex smarty-mode skewer-less session second-sel scss-mode scratch sass-mode ruby-hash-syntax robe rinari regex-tool redshank realgud rainbow-mode rainbow-delimiters python-x pydoc-info pydoc project-local-variables ppd-sr-speedbar pip-requirements php-mode paredit-everywhere paradox page-break-lines osx-location orglink org-repo-todo org-projectile org-pomodoro org-plus-contrib org-mac-link org-mac-iCal org-jira org-fstree org-cliplink ob-browser mwe-log-commands multiple-cursors move-dup mmm-mode mkdown menu-bar+ matlab-mode magit-svn magit-gh-pulls macrostep lua-mode lively less-css-mode ledger-mode json-mode js-comint jquery-doc jira-markup-mode jinja2-mode jedi-direx isearch+ ipretty info+ indent-guide ido-ubiquitous ido-describe-bindings ibuffer-vc ibuffer-projectile htmlize hl-sexp hl-line+ hippie-expand-slime highlight-symbol highlight-quoted highlight-escape-sequences help-mode+ help-fns+ help+ hayoo guide-key goto-last-change gnuplot gitignore-mode github-clone github-browse-file gitconfig-mode git-wip-timemachine git-timemachine git-messenger git-gutter-fringe git-blame ghci-completion fullframe free-keys flycheck-package flycheck-ledger flycheck-hdevtools flycheck-haskell flx-isearch fill-column-indicator expand-region exec-path-from-shell ess erlang elpy elisp-slime-nav dsvn discover-my-major discover dired-toggle-sudo dired-sort-menu dired-sort dired-imenu dired-filter dired+ diminish diff-hl default-text-scale dash-at-point darcsum cursor-chg csv-nav csv-mode css-eldoc crontab-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized coffee-mode cl-lib-highlight bug-reference-github browse-kill-ring+ bash-completion avy auto-compile anzu aggressive-indent ag ace-jump-mode ac-slime ac-js2 ac-inf-ruby ac-haskell-process)))
  '(projectile-global-mode t)
  '(python-fill-docstring-style (quote django))
  '(python-indent-guess-indent-offset-verbose nil)
@@ -133,11 +131,9 @@
      (ruby-compilation-executable . "jruby"))))
  '(scroll-bar-mode (quote right))
  '(scroll-preserve-screen-position nil)
- '(send-mail-function (quote sendmail-send-it))
  '(session-use-package t nil (session))
  '(sh-basic-offset 2)
  '(sh-indentation 2)
- '(show-trailing-whitespace nil)
  '(speedbar-default-position (quote left))
  '(speedbar-frame-parameters
    (quote
@@ -164,6 +160,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ediff-fine-diff-B ((t (:background "#22aa22" :foreground "black"))))
+ '(nav-flash-face ((t (:inherit highlight :foreground "keyboardFocusIndicatorColor"))))
  '(realgud-backtrace-number ((t (:inherit highlight-symbol-face :weight bold))))
  '(smerge-refined-added ((t (:inherit smerge-refined-change :background "#22aa22" :foreground "black")))))
 (put 'erase-buffer 'disabled nil)

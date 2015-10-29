@@ -28,7 +28,7 @@
 
  redisplay-dont-pause t
  scroll-margin 1
- scroll-step 1
+ scroll-step 5
  scroll-conservatively 10000
  scroll-preserve-screen-position 1
  scroll-up-aggressively 0.01
@@ -73,6 +73,12 @@
  blink-cursor-blinks 5
  blink-cursor-delay 1
  blink-cursor-interval 0.8
+
+ debug-on-event 'sigusr1
+ delete-by-moving-to-trash t
+ frame-resize-pixelwise t
+ nav-flash-use-pulse (quote gui-only)
+ window-resize-pixelwise t
  )
 
 (defalias 'basename 'file-name-directory)
@@ -281,6 +287,8 @@ Moves point to the end of the inserted text. Does not change mark."
   (diminish 'magit-wip-after-save-local-mode)
 
   (global-magit-file-buffer-mode)
+
+  (setq-default magit-revision-show-gravatars '(nil . "^Commit:     "))
   )
 
 
