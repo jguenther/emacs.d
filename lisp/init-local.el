@@ -288,7 +288,7 @@ Moves point to the end of the inserted text. Does not change mark."
 
   (global-magit-file-buffer-mode)
 
-  (setq-default magit-revision-show-gravatars '(nil . "^Commit:     "))
+  (setq-default magit-revision-show-gravatars '("^Author:     " . "^Commit:     "))
   )
 
 
