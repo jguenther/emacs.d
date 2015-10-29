@@ -61,7 +61,6 @@
               helm-dabbrev-cycle-threshold 1
 
               helm-ag-insert-at-point 'symbol
-              helm-ag-command-option "--search-zip"
               helm-ag-use-grep-ignore-list t
               )
 
@@ -69,6 +68,9 @@
   (setq helm-grep-ag-command
         (replace-regexp-in-string "--color" "--nocolor" helm-grep-ag-command))
   )
+
+(after-load 'helm-ag
+  (add-to-list 'helm-ag-command-option "--search-zip"))
 
 (add-to-list 'completion-ignored-extensions ".gvfs/")
 

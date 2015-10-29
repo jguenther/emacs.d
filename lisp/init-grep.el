@@ -9,7 +9,8 @@
 (when (executable-find "ag")
   (require-package 'ag)
   (require-package 'wgrep-ag)
-  (add-to-list 'ag-arguments "--search-zip"))
+  (after-load 'ag
+    (add-to-list 'ag-arguments "--search-zip")))
 
 (after-load 'grep
 					; avoid rgrep matching ELPA archives
