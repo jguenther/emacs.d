@@ -78,10 +78,6 @@
 (autoload 'helm-eshell-history "helm-eshell"    t)
 (autoload 'helm-esh-pcomplete  "helm-eshell"    t)
 
-(after-load 'esh-mode
-  (define-key eshell-mode-map (kbd "TAB")     #'helm-esh-pcomplete)
-  (define-key eshell-mode-map (kbd "C-c C-l") #'helm-eshell-history))
-
 (require 'helm-fuzzier)
 (helm-fuzzier-mode 1)
 
