@@ -25,7 +25,7 @@
 (helm-mode t)
 (helm-adaptative-mode t)
 (helm-push-mark-mode 1)
-(helm-descbinds-install)
+(helm-descbinds-mode)
 
 
 ;;; http://emacs.stackexchange.com/questions/2867/how-should-i-change-my-workflow-when-moving-from-ido-to-helm
@@ -63,9 +63,12 @@
               helm-ag-insert-at-point 'symbol
               helm-ag-command-option "--search-zip"
               helm-ag-use-grep-ignore-list t
-                                        ; remove --color
-              helm-grep-ag-command "ag --line-numbers -S --hidden --nogroup %s %s"
               )
+
+(after-load 'helm-grep
+  (setq helm-grep-ag-command
+        (replace-regexp-in-string "--color" "--nocolor" helm-grep-ag-command))
+  )
 
 (add-to-list 'completion-ignored-extensions ".gvfs/")
 
@@ -73,7 +76,7 @@
 (autoload 'helm-eshell-history "helm-eshell"    t)
 (autoload 'helm-esh-pcomplete  "helm-eshell"    t)
 
-(after-load 'eshell
+(after-load 'esh-mode
   (define-key eshell-mode-map (kbd "TAB")     #'helm-esh-pcomplete)
   (define-key eshell-mode-map (kbd "C-c C-l") #'helm-eshell-history))
 
