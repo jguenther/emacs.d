@@ -130,14 +130,15 @@ running."
 ;;; documentation setup
 
 (require-package 'pydoc)
-(require-package 'python-docstring)
+;; broken package
+;;(require-package 'python-docstring)
 (require-package 'python-info)
 (require-package 'pydoc-info)
 
 (after-load 'python
   (require 'python-info)
   (require 'pydoc-info)
-  (require 'python-docstring)
+  ;;(require 'python-docstring)
   (require 'pydoc))
 
 
