@@ -449,31 +449,31 @@ See also: `enable-all-disabled-commands'."
 
 ;; set initial and default frame parameters
 
-;; (dolist (parameter '((width . 90)
-;;                      (height . 55)))
-;;   (add-to-list 'default-frame-alist parameter)
-;;   (add-to-list 'initial-frame-alist parameter)
-;;   )
+(dolist (parameter '((width . 100)
+                     (height . 55)))
+  (add-to-list 'default-frame-alist parameter)
+  )
 
-(dolist (parameter '((left . -10)
-                     (top . 23)
-                     (user-position . t)))
-  (add-to-list 'initial-frame-alist parameter))
-
-(defun tak/set-default-frame-parameters ()
-  (interactive)
-  (let* ((params-mac     '((width . 100)
+(defun tak/set-default-frame-parameters (&optional arg)
+  "Sets some parameters for the current frame.
+If prefix ARG is non-nil, sets parameters appropriate for a frame with
+2 fullsize vertical windows."
+  (interactive "P")
+  (let* ((params-mac     '((width . 110)
                            (height . 55)
-                           (left . -1)
-                           (top . 23)))
-         
+                           ;;(left . 0)
+                           ;;(top . 0)
+                           ))
          (params-default '((width . 90)
                            (height . 50)
-                           (left . -10)
-                           (top . 35)))
-         (params (if *is-a-mac*
-                     params-mac
-                   params-default)))
+                           ;;(left . -10)
+                           ;;(top . 35)
+                           ))
+         (params-2window '((width . 220)
+                           (height . 55)))
+         (params (cond (arg        params-2window)
+                       (*is-a-mac* params-mac)
+                       (t          params-default))))
     (dolist (parameter params)
       (set-frame-parameter nil (car parameter) (cdr parameter))
       )))
