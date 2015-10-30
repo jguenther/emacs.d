@@ -9,13 +9,14 @@
                (shell-command-to-string
                 (concat lsregister " -dump|grep com.kapeli.dash")))))))
 
-(when (and *is-a-mac* (not (package-installed-p 'dash-at-point)))
+(when (and *is-a-mac* (not (package-installed-p #'dash-at-point)))
   (message "Checking whether Dash is installed")
   (when (sanityinc/dash-installed-p)
     (require-package 'dash-at-point)))
 
-(when (package-installed-p 'dash-at-point)
-  (define-key mode-specific-map (kbd "D") 'dash-at-point)
-  (define-key mode-specific-map (kbd "E") 'dash-at-point-with-docset))
+(when (and (package-installed-p 'dash-at-point)
+           (sanityinc/dash-installed-p))
+  (define-key mode-specific-map (kbd "D") #'dash-at-point)
+  (define-key mode-specific-map (kbd "E") #'dash-at-point-with-docset))
 
 (provide 'init-dash)
