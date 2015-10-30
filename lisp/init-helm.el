@@ -27,7 +27,6 @@
 (helm-push-mark-mode 1)
 (helm-descbinds-mode)
 
-
 ;;; http://emacs.stackexchange.com/questions/2867/how-should-i-change-my-workflow-when-moving-from-ido-to-helm
 (let ((data-dir (expand-file-name "data" user-emacs-directory)))
   (unless (file-exists-p data-dir)

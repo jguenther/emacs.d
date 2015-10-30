@@ -56,8 +56,6 @@
                   (tags-table-list . "tags-table-list.el"))
                 psession-object-to-save-alist)))
 
-(setq session-save-file (expand-file-name ".session" user-emacs-directory))
-(setq session-name-disable-regexp "\\(?:\\`'/tmp\\|\\.git/[A-Z_]+\\'\\)")
 (setq comint-input-ring-file-name (expand-file-name ".comint-history.el" user-emacs-directory))
 ;; save a bunch of variables to the desktop file
 ;; for lists specify the len of the maximal saved data also
@@ -92,12 +90,6 @@
                 (tags-file-name           . 50)
                 (tags-table-list          . 50))
               desktop-globals-to-save))
-
-(after-load 'session
- (setq-default session-set-file-name-exclude-regexp
-              (concat session-set-file-name-exclude-regexp
-                      "\\|\\.emacs\\.d/elpa/"
-                      "\\|/\\.git/\\(COMMIT\\|MERGE\\)_\\(EDIT\\)?MSG")))
 
 (after-load 'desktop
   (dolist (mode '(

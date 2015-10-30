@@ -7,14 +7,14 @@
  vc-make-backup-files nil
  delete-old-versions t
  fill-column 79
- 
+
  kept-new-versions 6
  kept-old-versions 2
 
  ;; magit
  git-gutter-fr+-side 'right-fringe
  git-gutter-fr:side 'right-fringe
- 
+
  magit-diff-refine-hunk t
  magit-diff-highlight-trailing nil
  magit-repository-directories (quote ("~/.emacs.d"
@@ -44,11 +44,11 @@
  flycheck-check-syntax-automatically '(idle-change mode-enabled)
  flycheck-idle-change-delay 3
  flycheck-perlcritic-severity 4
- 
+
  ;; org-mode
  org-replace-disputed-keys t
  org-agenda-files '("~/org")
- 
+
  ;; open new remote tabs in chrome using chrome-open-url script
  ;; not yet working
  ;;browse-url-browser-function 'browse-url-generic
@@ -133,9 +133,9 @@
 (mmm-add-classes
  `((shell-script-python
     :submode python-mode
-    :front ,(concat "^[	 ]*#?[	 ]*%{" (mmm-regexp-opt '("begin_python")) "}%
+    :front ,(concat "^[  ]*#?[   ]*%{" (mmm-regexp-opt '("begin_python")) "}%
 ")
-    :back ,(concat "^[	 ]*#?[	 ]*%{" (mmm-regexp-opt '("end_python")) "}%")
+    :back ,(concat "^[   ]*#?[   ]*%{" (mmm-regexp-opt '("end_python")) "}%")
     :front-offset 0
     :back-offset 0
     :save-matches 0
@@ -251,14 +251,14 @@ Moves point to the end of the inserted text. Does not change mark."
 (require-package 'git-gutter-fringe)
 
 (after-load 'git-gutter+
-  
+
   ;; (global-git-gutter-mode t)
   (global-git-gutter+-mode t)
   (diminish 'git-gutter+-mode)
-  
+
   ;; workaround visual bug with git-gutter and org-indent-mode
   (add-to-list 'git-gutter:disabled-modes 'org-mode)
-  
+
   ;;(global-set-key (kbd "C-c u t") 'git-gutter+:toggle)
   (global-set-key (kbd "C-x v =") 'git-gutter+-popup-hunk)
   (define-key mode-specific-map (kbd "u =") 'git-gutter+-popup-hunk)
@@ -282,7 +282,7 @@ Moves point to the end of the inserted text. Does not change mark."
 
   (magit-wip-after-save-mode 1)
   (magit-wip-before-change-mode 1)
-  
+
   (diminish 'magit-wip-before-change-mode)
   (diminish 'magit-wip-after-save-local-mode)
 
@@ -385,7 +385,7 @@ new value to `magit-diff-highlight-trailing`. Does not currently
 differentiate `t` from `status` in this variable, and will toggle
 between `nil` and `t` no matter the original value of
 `magit-diff-highlight-trailing`."
-  (interactive)   
+  (interactive)
   (let ((highlight (setq tak/magit-diff-highlight-trailing
                          (not tak/magit-diff-highlight-trailing))))
     (setq magit-diff-highlight-trailing highlight)
@@ -524,7 +524,7 @@ If prefix ARG is non-nil, sets parameters appropriate for a frame with
                      ))
     (if (maybe-require-package element)
         (add-to-list 'org-modules element t)))
-  
+
   (org-load-modules-maybe t)
   (add-hook 'org-mode-hook 'tak/org-mode-setup)
   )
@@ -546,7 +546,7 @@ Sets TERM=xterm-256color"
 ;; from https://github.com/szermatt/emacs-bash-completion
 (require-package 'bash-completion)
 
-(autoload 'bash-completion-dynamic-complete 
+(autoload 'bash-completion-dynamic-complete
   "bash-completion"
   "BASH completion hook")
 
