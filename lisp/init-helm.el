@@ -69,7 +69,7 @@
   )
 
 (after-load 'helm-ag
-  (add-to-list 'helm-ag-command-option "--search-zip"))
+  (setq-default helm-ag-command-option "--search-zip"))
 
 (add-to-list 'completion-ignored-extensions ".gvfs/")
 
@@ -165,6 +165,7 @@
             helm-grep-default-recurse-command
             "ack-grep -H --smart-case --no-group %e %p %f"))
     (message "Switched to %s" (helm-grep-command))))
+
 ;;; Helm-command-map
 ;;
 ;;
