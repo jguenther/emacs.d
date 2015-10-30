@@ -49,11 +49,6 @@
  org-replace-disputed-keys t
  org-agenda-files '("~/org")
 
- ;; open new remote tabs in chrome using chrome-open-url script
- ;; not yet working
- ;;browse-url-browser-function 'browse-url-generic
- ;;browse-url-generic-program "chrome-open-url"
-
  ;; disable display reordering by default for performance reasons
  bidi-display-reordering nil
 
@@ -94,18 +89,10 @@
 (defvar user-home-directory (expand-file-name "~")
   "The absolute path to the user's home directory `~'.")
 
-;;(dolist (path '("/home/jguenther/.emacs-lisp"
-;;                "/usr/local/share/emacs/site-lisp"
-;;                "/home/jguenther/share/emacs/site-lisp"
-;;                "/usr/share/emacs/site-lisp"))
-;;  (add-to-list 'load-path path))
-
 (mouse-wheel-mode 1)
 
 (require-package 'hl-line+)
 (require 'hl-line+)
-;;(toggle-hl-line-when-idle 1)
-;;(hl-line-when-idle-interval 2)
 (setq-default hl-line-face 'highlight
               hl-line-inhibit-highlighting-for-modes '(custom-mode
                                                        magit-status-mode
@@ -204,12 +191,6 @@
 Moves point to the end of the inserted text. Does not change mark."
   (interactive) (insert (x-get-selection 'SECONDARY)))
 
-;;(require-package 'cursor-chg)
-;;(require 'cursor-chg)
-;;(toggle-cursor-type-when-idle 1) ; Turn on cursor change when Emacs is idle
-;;(change-cursor-mode 1)           ; Turn on change for overwrite, read-only, and
-                                        ; input mode
-
 (require-package 'cperl-mode)
 (defalias 'perl-mode 'cperl-mode)
 
@@ -227,9 +208,6 @@ Moves point to the end of the inserted text. Does not change mark."
           (lambda ()
             (when (require 'auto-complete nil t)
               (auto-complete-mode t)
-              ;;(make-variable-buffer-local 'ac-sources)
-              ;; (setq ac-sources
-              ;;       '(ac-source-perl-completion))
               )))
 
 
@@ -252,14 +230,12 @@ Moves point to the end of the inserted text. Does not change mark."
 
 (after-load 'git-gutter+
 
-  ;; (global-git-gutter-mode t)
   (global-git-gutter+-mode t)
   (diminish 'git-gutter+-mode)
 
   ;; workaround visual bug with git-gutter and org-indent-mode
   (add-to-list 'git-gutter:disabled-modes 'org-mode)
 
-  ;;(global-set-key (kbd "C-c u t") 'git-gutter+:toggle)
   (global-set-key (kbd "C-x v =") 'git-gutter+-popup-hunk)
   (define-key mode-specific-map (kbd "u =") 'git-gutter+-popup-hunk)
 
@@ -278,7 +254,6 @@ Moves point to the end of the inserted text. Does not change mark."
 (after-load 'magit
   (require 'git-gutter)
   (require 'git-gutter+)
-  ;; (require 'git-gutter-fringe)
 
   (magit-wip-after-save-mode 1)
   (magit-wip-before-change-mode 1)
