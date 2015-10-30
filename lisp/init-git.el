@@ -157,6 +157,7 @@ The issue number is parsed from the branch name."
   (define-key magit-revision-mode-map (kbd "M-<left>") 'magit-go-backward)
   (define-key magit-revision-mode-map (kbd "M-<right>") 'magit-go-forward)
   (define-key magit-status-mode-map (kbd "C-x g") 'magit-refresh)
+  (define-key ctl-x-map (kbd "g") #'magit-status)
   )
 
 
