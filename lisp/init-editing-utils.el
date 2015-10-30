@@ -407,27 +407,28 @@ Returns non-nil if `current-buffer' has any of
   (cond
    (current-prefix-arg
     (message "Calling default revert-buffer: %s." current-prefix-arg)
-    (apply #'revert-buffer--default ignore-auto noconfirm preserve-modes))
+    (apply #'revert-buffer ignore-auto noconfirm preserve-modes))
    (t
     (if (bound-and-true-p read-only-mode)
         (error "Buffer is read-only: %s" (current-buffer)))
-    (when (buffer-file-name)
-      (let ((old-point (point))
-            (old-mark  (mark))
+    (if (not (buffer-file-name))
+        (error "Buffer is not associated with any file: %s" (current-buffer)))
+    (let ((old-point (point))
+          (old-mark  (mark))
                                         ; suppress echo area message
-            (message-log-max nil))
-        (widen)
-        ;; tell Emacs the modtime is fine, so we can edit the buffer
-        (clear-visited-file-modtime)
+          (message-log-max nil))
+      (widen)
+      ;; tell Emacs the modtime is fine, so we can edit the buffer
+      (clear-visited-file-modtime)
 
-        ;; insert the current contents of the file on disk
-        (delete-region (point-min) (point-max))
-        (insert-file-contents (buffer-file-name))
-        (not-modified)
-        (set-visited-file-modtime)
-        (goto-char old-point)
-        (set-mark old-mark)
-        )))))
+      ;; insert the current contents of the file on disk
+      (delete-region (point-min) (point-max))
+      (insert-file-contents (buffer-file-name))
+      (not-modified)
+      (set-visited-file-modtime)
+      (goto-char old-point)
+      (set-mark old-mark)
+      ))))
 (global-set-key (kbd "s-u")   #'revert-buffer-keep-history)
 (global-set-key (kbd "S-s-U") #'revert-buffer)
 
