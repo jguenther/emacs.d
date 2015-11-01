@@ -9,6 +9,7 @@
 (require-package 'helm-projectile)
 (require-package 'helm-pydoc)
 (require-package 'wgrep-helm)
+(require-package 'ag)
 (require-package 'helm-ag)
 (require-package 'helm-orgcard)
 (require-package 'helm-fuzzier)
@@ -17,6 +18,7 @@
 (require-package 'ace-jump-helm-line)
 
 (quelpa '(helm-ipython :fetcher github :repo "thierryvolpiatto/helm-ipython"))
+
 (after-load 'helm-config
   (require 'helm-ipython)
   (require 'ace-jump-helm-line)
@@ -28,7 +30,7 @@
 
 (require 'helm-config)
 (helm-mode t)
-(helm-adaptative-mode t)
+(helm-adaptive-mode t)
 (helm-push-mark-mode 1)
 (helm-descbinds-mode)
 
@@ -241,12 +243,11 @@
 (global-set-key (kbd "M-I")                          #'helm-swoop-back-to-last-point)
 
 (after-load 'helm-swoop
-  (define-key helm-swoop-map (kbd "C-m")             #'helm-multi-swoop-current-mode-from-helm-swoop))
+  (define-key helm-swoop-map (kbd "C-m")             #'helm-multi-swoop-current-mode-from-helm-swoop)
+  (define-key helm-swoop-edit-map (kbd "C-k")        #'helm-swoop--edit-cancel)
+  )
 
 
-
-;; silver-searcher
-(require-package 'ag)
 
 (dolist (source
          '(helm-source-buffers-list
