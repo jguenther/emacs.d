@@ -69,7 +69,7 @@
 
 (after-load 'helm-grep
   (setq helm-grep-ag-command
-        (replace-regexp-in-string "--color" "--nocolor" helm-grep-ag-command))
+        (replace-regexp-in-string "--color" "--nocolor --ignore '.git'" helm-grep-ag-command))
   )
 
 (after-load 'helm-ag
@@ -221,7 +221,7 @@
 (add-hook
  'after-init-hook (lambda ()
                     (global-set-key (kbd "M-y")      #'helm-show-kill-ring)
-                    (global-set-key (kbd "C-x V F")  #'helm-ag)))
+                    (global-set-key (kbd "C-x V F")  #'helm-do-grep-ag)))
 (global-set-key (kbd "C-x c!")                       #'helm-calcul-expression)
 (global-set-key (kbd "C-x c:")                       #'helm-eval-expression-with-eldoc)
 
