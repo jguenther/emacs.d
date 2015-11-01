@@ -225,8 +225,8 @@
 (global-set-key (kbd "C-x c!")                       #'helm-calcul-expression)
 (global-set-key (kbd "C-x c:")                       #'helm-eval-expression-with-eldoc)
 
-;;; mode-specific-map                         
-;;                         
+;;; mode-specific-map
+;;
 (define-key mode-specific-map (kbd "I")              #'helm-imenu-in-all-buffers)
 
 ;; helm-swoop and grep-related commands
@@ -256,7 +256,7 @@
 ;; silver-searcher
 (require-package 'ag)
 
-(dolist (source 
+(dolist (source
          '(helm-source-buffers-list
            helm-source-recentf
            helm-source-bookmarks
