@@ -606,7 +606,19 @@ Sets TERM=xterm-256color"
   (add-to-list 'free-keys-modifiers "s" t))
 
 
+;; custom
+(require-package 'cus-edit+)
+(require 'cus-edit+)
+(toggle-customize-outside-change-updates +1)
 (global-set-key (kbd "C-h M-c")   nil)
+(global-set-key (kbd "C-h M-c u") #'customize-unsaved)
+(global-set-key (kbd "C-h M-c b") #'customize-browse)
+(global-set-key (kbd "C-h M-c o") #'customize-option)
+(global-set-key (kbd "C-h M-c C-c") #'customize-changed)
+(global-set-key (kbd "C-h M-c C") #'customize-customized)
+(global-set-key (kbd "C-h M-c s") #'customize-saved)
+(global-set-key (kbd "C-h M-c r") #'customize-rogue)
+(global-set-key (kbd "C-h M-c t") #'customize-themes)
 (global-set-key (kbd "C-h M-c g") #'customize-group)
 (global-set-key (kbd "C-h M-c c") #'customize-variable)
 (global-set-key (kbd "C-h M-c f") #'customize-face)
