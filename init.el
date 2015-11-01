@@ -67,7 +67,7 @@
 (require 'init-dash)
 (require 'init-helm)
 (require 'init-hippie-expand)
-(require 'init-auto-complete)
+(require 'init-company)
 (require 'init-windows)
 (require 'init-sessions)
 (require 'init-fonts)
