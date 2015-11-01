@@ -30,10 +30,19 @@
                    (lambda (dummy) (interactive) (read-number "Number of context lines: "))))
                  (actions
                   ("isearch"
+                   ("M-s" "isearch forward symbol" isearch-forward-symbol)
                    ("_" "isearch forward symbol" isearch-forward-symbol)
                    ("w" "isearch forward word" isearch-forward-word))
                   ("Occur"
-                   ("o" "occur" occur))
+                   ("o" "occur" helm-occur)
+                   ("o" "helm-swoop" helm-swoop)
+                   ("C-/" "helm-swoop (all)" helm-multi-swoop-all)
+                   ("C-o" "helm-swoop (org)" helm-multi-swoop-org)
+                   ("/" "helm-swoop (multi)" helm-multi-swoop)
+                   ("m" "helm-swoop (current-mode)" helm-multi-swoop-current-mode)
+                   ("M-m" "helm-swoop (mode)" helm-multi-swoop-by-mode)
+                   )
+
                   ("Grep"
                    ("s" "ag project" #'helm-projectile-ag)
                    ("F" "ag" #'helm-do-ag)
