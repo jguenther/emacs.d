@@ -605,6 +605,12 @@ Sets TERM=xterm-256color"
 (when *is-a-mac*
   (add-to-list 'free-keys-modifiers "s" t)
   (add-to-list 'free-keys-modifiers "H" t))
+
+
+;; unbound
+(require-package 'unbound)
+(require 'unbound)
+(global-set-key (kbd "C-h C-u") #'describe-unbound-keys)
 
 
 ;; custom
