@@ -5,7 +5,6 @@
 (require-package 'helm-flycheck)
 (require-package 'helm-fuzzy-find)
 (require-package 'helm-git-grep)
-(require-package 'helm-ls-git)
 (require-package 'helm-orgcard)
 (require-package 'helm-projectile)
 (require-package 'helm-pydoc)
@@ -38,7 +37,6 @@
               helm-move-to-line-cycle-in-source      t
               helm-buffers-fuzzy-matching            t
               helm-ff-auto-update-initial-value      t
-              helm-ls-git-status-command             'magit-status-internal
               ido-use-virtual-buffers                t   ; Needed in helm-buffers-list
               helm-org-headings-fontify              t
 
