@@ -12,10 +12,16 @@
 (require-package 'helm-ag)
 (require-package 'helm-orgcard)
 (require-package 'helm-fuzzier)
+(require-package 'helm-google)
+(require-package 'helm-themes)
+(require-package 'ace-jump-helm-line)
 
 (quelpa '(helm-ipython :fetcher github :repo "thierryvolpiatto/helm-ipython"))
 (after-load 'helm-config
-  (require 'helm-ipython))
+  (require 'helm-ipython)
+  (require 'ace-jump-helm-line)
+  (after-load 'helm-config
+    (define-key helm-map (kbd "C-'") 'ace-jump-helm-line)))
 
 (when (sanityinc/dash-installed-p)
   (require-package 'helm-dash))
