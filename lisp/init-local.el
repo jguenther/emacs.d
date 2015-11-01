@@ -611,10 +611,11 @@ Sets TERM=xterm-256color"
   (add-to-list 'free-keys-modifiers "s" t))
 
 
-(global-set-key (kbd "C-h M-c") nil)
-(global-set-key (kbd "C-h M-c g") 'customize-group)
-(global-set-key (kbd "C-h M-c c") 'customize-variable)
-(global-set-key (kbd "C-h M-c v") 'customize-variable)
+(global-set-key (kbd "C-h M-c")   nil)
+(global-set-key (kbd "C-h M-c g") #'customize-group)
+(global-set-key (kbd "C-h M-c c") #'customize-variable)
+(global-set-key (kbd "C-h M-c f") #'customize-face)
+(global-set-key (kbd "C-h M-c v") #'customize-variable)
 
 
 
