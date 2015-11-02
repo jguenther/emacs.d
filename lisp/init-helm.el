@@ -16,6 +16,7 @@
 (require-package 'helm-google)
 (require-package 'helm-themes)
 (require-package 'ace-jump-helm-line)
+(require-package 'helm-grepint)
 
 (quelpa '(helm-ipython :fetcher github :repo "thierryvolpiatto/helm-ipython"))
 
@@ -231,9 +232,12 @@
 ;;
 (define-key mode-specific-map (kbd "I")              #'helm-imenu-in-all-buffers)
 
+(require 'helm-grepint)
+(helm-grepint-set-default-config)
+
 ;; helm-swoop and grep-related commands
-(global-set-key (kbd "M-g a")                        #'helm-do-grep-ag)
-(global-set-key (kbd "M-g f")                        #'helm-git-grep)
+(global-set-key (kbd "M-g a")                        #'helm-grepint-grep)
+(global-set-key (kbd "M-g f")                        #'helm-do-grep-ag)
 (global-set-key (kbd "M-g g")                        #'helm-swoop)
 (global-set-key (kbd "M-g b")                        #'helm-ag-buffers)
 (global-set-key (kbd "C-c M-i")                      #'helm-multi-swoop)
