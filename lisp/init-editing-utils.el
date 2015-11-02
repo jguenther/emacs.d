@@ -326,6 +326,7 @@ With arg N, insert N newlines."
  which-key-show-remaining-keys t
  which-key-sort-order (quote which-key-description-order)
  which-key-idle-delay 1.5
+ which-key-side-window-max-width 0.4
  )
 
 
