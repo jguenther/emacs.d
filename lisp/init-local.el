@@ -73,9 +73,24 @@
  delete-by-moving-to-trash t
  frame-resize-pixelwise t
  nav-flash-use-pulse (quote gui-only)
- window-resize-pixelwise t
+
+ visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow)
  )
 
+(defface tak/fringe-bitmap
+  '((((class color) (background light))
+     :foreground "green")
+    (((class color) (background dark))
+     :foreground "green")
+    (t
+     :foreground "green"))
+  "Face for fringe bitmaps."
+  :group 'frames
+  :group 'basic-faces)
+
+(dolist (bmp '(left-curly-arrow right-curly-arrow))
+  (set-fringe-bitmap-face bmp 'tak/fringe-bitmap))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defalias 'basename 'file-name-directory)
 
 (if *is-a-mac*
