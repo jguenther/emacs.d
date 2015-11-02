@@ -108,11 +108,12 @@
 
 (require-package 'hl-line+)
 (require 'hl-line+)
-(setq-default hl-line-face 'highlight
-              hl-line-inhibit-highlighting-for-modes '(custom-mode
-                                                       magit-status-mode
-                                                       magit-diff-mode
-                                                       magit-log-mode))
+(setq-default hl-line-face 'highlight)
+(dolist (mode '(custom-mode
+                magit-status-mode
+                magit-diff-mode
+                magit-log-mode))
+  (add-to-list 'hl-line-inhibit-highlighting-for-modes mode))
 (global-hl-line-mode)
 
 (require-package 'bookmark+)
