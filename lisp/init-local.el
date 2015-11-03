@@ -922,5 +922,28 @@ supply a positive argument once more with C-u C-SPC."
 
 
 
+;; background process runner
+(require-package 'bpr)
+(require 'bpr)
+
+;; Set global config for bpr.
+;; Variables below would be applied to all processes.
+(setq bpr-colorize-output t)
+(setq bpr-close-after-success t)
+
+;; ;; define function for running desired process
+;; (defun run-tests ()
+;;   "Spawns 'grunt test' process"
+;;   (interactive)
+;;   ;; Set dynamic config for process.
+;;   ;; Variables below would be applied only to particular process
+;;   (let* ((bpr-scroll-direction -1))
+;;     (bpr-spawn "grunt test --color")))
+
+;; ;; set key-binding
+;; (define-key global-map "\C-ct" 'run-tests)
+
+
+
 
 (provide 'init-local)
