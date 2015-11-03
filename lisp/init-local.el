@@ -903,16 +903,12 @@ supply a positive argument once more with C-u C-SPC."
 ;; TODO fix split window cmd--splits bottom window then opens shell in right split window
 (require-package 'shell-pop)
 
-(setq shell-pop-universal-key [f8])
-(shell-pop-set-internal-mode "ansi-term")
-(shell-pop-set-window-height 60)        ; the number for the percentage of the
-                                        ; selected window. if 100, shell-pop
-                                        ; use the whole of selected window,
-                                        ; not spliting.
-
-(shell-pop-set-window-position "bottom"); shell-pop-up position. You can
-                                        ; choose "top" or "bottom".
-
+(setq-default
+ shell-pop-universal-key "<f8>"
+ shell-pop-shell-type '("ansi-term" "*ansi-term*" (lambda nil (ansi-term shell-pop-term-shell)))
+ shell-pop-window-height 60
+ shell-pop-window-position "bottom"
+ )
 (require 'shell-pop)
 
 
