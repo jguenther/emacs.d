@@ -395,5 +395,56 @@ Will work on both org-mode and any mode that accepts plain html."
 
 
 
+;; Todo-rules
+;; (find-node "(org)Fast access to TODO states")
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "|" "INPROGRESS(i)" "DONE(d)" "CANCELED(c)" "DEFERRED(s)")))
+
+(setq org-todo-keyword-faces
+      '(("TODO"      .  ((:foreground "red")))
+        ("INPROGRESS" . ((:foreground "yellow")))
+        ("BUGREPORT" . ((:foreground "VioletRed4" :weight bold)))
+        ("FIXED" . ((:foreground "SpringGreen4" :weight bold)))
+        ("DEFERRED"  . shadow)
+        ("CANCELED"  . ((:foreground "blue" :weight bold)))))
+
+;; Todo-rules
+;; (find-node "(org)Fast access to TODO states")
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "|" "INPROGRESS(i)" "DONE(d)" "CANCELED(c)" "DEFERRED(s)")))
+
+(setq org-todo-keyword-faces
+      '(("TODO"      .  ((:foreground "red")))
+        ("INPROGRESS" . ((:foreground "yellow")))
+        ("BUGREPORT" . ((:foreground "VioletRed4" :weight bold)))
+        ("FIXED" . ((:foreground "SpringGreen4" :weight bold)))
+        ("DEFERRED"  . shadow)
+        ("CANCELED"  . ((:foreground "blue" :weight bold)))))
+
+;; org-annotation-helper
+(require-package 'org-annotation-helper)
+(require-package 'appt)
+
+;; Diary-integration-in-org
+(setq org-agenda-include-diary t) ; show also content of regular diary file.
+
+;; Subtasks
+(defun org-summary-todo (n-done n-not-done)
+  "Switch entry to DONE when all subentries are done, to TODO otherwise."
+  (let (org-log-done org-log-states)   ; turn off logging
+    (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+
+(add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
+
+;; leave-a-blank-line-when-insert-new-item
+(setq org-blank-before-new-entry '((heading . t)
+                                   (plain-list-item . nil)))
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (define-key org-mode-map (kbd "<f11> o") 'helm-org-in-buffer-headings)))
+
+
+
 
 (provide 'init-org)
