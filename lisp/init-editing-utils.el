@@ -390,6 +390,7 @@ Returns non-nil if `current-buffer' has any of
               beacon-blink-when-point-moves 20
               beacon-push-mark 30
               beacon-size 50
+              beacon-blink-when-window-scrolls nil
               )
 
 
