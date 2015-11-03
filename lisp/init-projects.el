@@ -16,11 +16,11 @@
   (require 'nameframe)
   (require 'nameframe-perspective)
   (projectile-global-mode)
-  (persp-mode)
-  (nameframe-perspective-mode t)
+  ;;(persp-mode)
+  ;;(nameframe-perspective-mode t)
 
-  (global-set-key (kbd "s-p") nil)
-  (define-key projectile-mode-map (kbd "s-p") 'projectile-persp-switch-project)
+  ;;(global-set-key (kbd "s-p") nil)
+  ;;(define-key projectile-mode-map (kbd "s-p") 'projectile-persp-switch-project)
   )
 (add-hook 'after-init-hook #'tak/init-perspective)
 
