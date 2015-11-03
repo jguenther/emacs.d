@@ -76,7 +76,20 @@
   )
 
 (after-load 'helm-ag
-  (setq-default helm-ag-command-option "--search-zip"))
+  (setq-default helm-ag-command-option nil)
+  (define-key endless/toggle-map (kbd "z") #'tak/toggle-helm-ag-search-zip)
+  )  ; "--search-zip"
+
+;; TODO don't clobber other args in this variable
+(defun tak/toggle-helm-ag-search-zip ()
+  (interactive)
+  (cond (helm-ag-command-option
+         (setq helm-ag-command-option nil)
+         (message "Disabled --search-zip in helm-ag"))
+        (t
+         (setq helm-ag-command-option "--search-zip")
+         (message "Enabled --search-zip in helm-ag")))
+  )
 
 (add-to-list 'completion-ignored-extensions ".gvfs/")
 
