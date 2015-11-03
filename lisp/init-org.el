@@ -408,22 +408,6 @@ Will work on both org-mode and any mode that accepts plain html."
         ("DEFERRED"  . shadow)
         ("CANCELED"  . ((:foreground "blue" :weight bold)))))
 
-;; Todo-rules
-;; (find-node "(org)Fast access to TODO states")
-(setq org-todo-keywords
-      '((sequence "TODO(t)" "|" "INPROGRESS(i)" "DONE(d)" "CANCELED(c)" "DEFERRED(s)")))
-
-(setq org-todo-keyword-faces
-      '(("TODO"      .  ((:foreground "red")))
-        ("INPROGRESS" . ((:foreground "yellow")))
-        ("BUGREPORT" . ((:foreground "VioletRed4" :weight bold)))
-        ("FIXED" . ((:foreground "SpringGreen4" :weight bold)))
-        ("DEFERRED"  . shadow)
-        ("CANCELED"  . ((:foreground "blue" :weight bold)))))
-
-;; Diary-integration-in-org
-(setq org-agenda-include-diary t) ; show also content of regular diary file.
-
 ;; Subtasks
 (defun org-summary-todo (n-done n-not-done)
   "Switch entry to DONE when all subentries are done, to TODO otherwise."
