@@ -3,6 +3,7 @@
   (add-hook hook 'turn-on-elisp-slime-nav-mode))
 (after-load 'elisp-slime-nav
   (diminish 'elisp-slime-nav-mode))
+
 (require-package 'lively)
 
 
@@ -17,6 +18,8 @@
                 inferior-lisp-mode-hook
                 emacs-lisp-mode-hook))
   (add-hook hook #'turn-on-eval-sexp-fu-flash-mode))
+
+(add-hook 'emacs-lisp-mode-hook (lambda () (setq mode-name "ELisp")))
 
 
 ;; Make C-x C-e run 'eval-region if the region is active

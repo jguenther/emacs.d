@@ -400,6 +400,11 @@ Returns non-nil if `current-buffer' has any of
 (global-set-key [remap zap-to-char] 'zop-to-char)
 
 
+;; focus-mode
+(require-package 'focus)
+(define-key endless/toggle-map (kbd "F") #'focus-mode)
+
+
 
 ;; emacs doesn't actually save undo history with revert-buffer
 ;; see http://lists.gnu.org/archive/html/bug-gnu-emacs/2011-04/msg00151.html
