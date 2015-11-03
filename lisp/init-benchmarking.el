@@ -13,11 +13,10 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
     (prog1
         (apply orig-function feature args)
       (when (and (not already-loaded) (memq feature features))
-        (add-to-list 'sanityinc/require-times
-                     (cons feature
-                           (sanityinc/time-subtract-millis (current-time)
-                                                           require-start-time))
-                     t)))))
+        (let ((time (sanityinc/time-subtract-millis (current-time) require-start-time)))
+          (add-to-list 'sanityinc/require-times
+                       (cons feature time)
+                       t))))))
 (advice-add #'require :around #'build-require-times)
 
 (defun tak/print-require-times ()
