@@ -421,10 +421,6 @@ Will work on both org-mode and any mode that accepts plain html."
         ("DEFERRED"  . shadow)
         ("CANCELED"  . ((:foreground "blue" :weight bold)))))
 
-;; org-annotation-helper
-(require-package 'org-annotation-helper)
-(require-package 'appt)
-
 ;; Diary-integration-in-org
 (setq org-agenda-include-diary t) ; show also content of regular diary file.
 
