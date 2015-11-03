@@ -15,12 +15,15 @@
                 comint-mode-hook
                 compilation-mode-hook
                 twittering-mode-hook
-                minibuffer-setup-hook))
+                minibuffer-setup-hook
+                ))
   (add-hook hook #'sanityinc/no-trailing-whitespace))
-
 
 (require-package 'whitespace-cleanup-mode)
 (global-whitespace-cleanup-mode t)
+(after-load 'whitespace-cleanup-mode
+  (add-to-list 'whitespace-cleanup-mode-ignore-modes 'which-key-mode)
+  )
 
 (global-set-key [remap just-one-space] 'cycle-spacing)
 
