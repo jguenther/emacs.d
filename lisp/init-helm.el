@@ -195,6 +195,9 @@
 
 (define-key helm-map (kbd "M-o") #'helm-previous-source)
 (define-key helm-map (kbd "M-h") #'helm/toggle-header-line)
+(define-key helm-map (kbd "s-k") #'helm-buffer-run-kill-persistent)
+(define-key helm-map (kbd "s-d") #'helm-buffer-run-kill-buffers)
+(define-key helm-map (kbd "s-D") #'helm-buffer-run-kill-buffers)
 
 (define-key shell-mode-map (kbd "C-M-p")             'helm-comint-input-ring) ; shell history.
 
