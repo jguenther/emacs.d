@@ -1,4 +1,4 @@
-(setq-default show-trailing-whitespace t)
+(setq-default show-trailing-whitespace nil)
 
 
 ;;; Whitespace
@@ -16,6 +16,7 @@
                 compilation-mode-hook
                 twittering-mode-hook
                 minibuffer-setup-hook
+                org-mode-hook
                 ))
   (add-hook hook #'sanityinc/no-trailing-whitespace))
 
