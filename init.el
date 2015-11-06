@@ -16,9 +16,8 @@
 ;; Temporarily reduce garbage collection during startup
 ;;----------------------------------------------------------------------------
 (setq gc-cons-threshold (* 512 1024 1024))
-(defconst sanityinc/initial-gc-cons-threshold gc-cons-threshold
+(defconst sanityinc/initial-gc-cons-threshold (* 128 1024 1024)
   "Initial value of `gc-cons-threshold' at start-up time.")
-(setq gc-cons-threshold (* 256 1024 1024))
 (add-hook 'after-init-hook
           (lambda () (setq gc-cons-threshold sanityinc/initial-gc-cons-threshold)))
 
