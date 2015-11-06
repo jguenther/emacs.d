@@ -148,7 +148,7 @@ running."
 
 ;; ipython setup
 (setq python-shell-interpreter "ipython"
-      python-shell-interpreter-args "-i"
+      python-shell-interpreter-args ""
       python-shell-prompt-regexp "\\(In \\[[0-9]+\\]:\\|([Pp]db)\\|ipdb>\\|[(]+trepan2:?.+[)]+\\) "
       python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
       )
