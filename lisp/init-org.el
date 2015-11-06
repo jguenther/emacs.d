@@ -416,10 +416,6 @@ Will work on both org-mode and any mode that accepts plain html."
 
 (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
 
-;; leave-a-blank-line-when-insert-new-item
-(setq org-blank-before-new-entry '((heading . t)
-                                   (plain-list-item . nil)))
-
 (add-hook 'org-mode-hook
           (lambda ()
             (define-key org-mode-map (kbd "<f11> o") 'helm-org-in-buffer-headings)))
