@@ -2,6 +2,10 @@
                                         ("SConscript\\'" . python-mode))
                                       auto-mode-alist)
               python-indent-offset 4
+              python-indent-guess-indent-offset nil
+              python-indent-guess-indent-offset-verbose nil
+              python-fill-docstring-style (quote django)
+              
               elpy-rpc-backend "jedi"
               indent-guide-recursive nil
               jedi:setup-keys t
