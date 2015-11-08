@@ -65,6 +65,8 @@
 
               helm-ag-insert-at-point 'symbol
               helm-ag-use-grep-ignore-list t
+
+              helm-google-tld "ca"
               )
 
 (after-load 'helm-grep
@@ -75,7 +77,7 @@
 (after-load 'helm-ag
   (setq-default helm-ag-command-option nil)
   (define-key endless/toggle-map (kbd "z") #'tak/toggle-helm-ag-search-zip)
-  )  ; "--search-zip"
+  )
 
 ;; TODO don't clobber other args in this variable
 (defun tak/toggle-helm-ag-search-zip ()
@@ -89,7 +91,8 @@
   )
 
 (dolist (ext '(".gvfs/"
-               ".elc"))
+               ".elc"
+               ".pyc"))
   (add-to-list 'completion-ignored-extensions ext))
 
 (require 'helm-fuzzier)
@@ -207,6 +210,8 @@
 (define-key helm-command-map (kbd "A")       #'helm-do-ag)
 (define-key helm-command-map (kbd "F")       #'helm-do-ag-this-file)
 (define-key helm-command-map (kbd "M-g g")   #'helm-git-grep)
+(define-key helm-command-map (kbd "M-g G")   #'helm-google)
+(define-key helm-command-map (kbd "M-g S")   #'helm-google-suggest)
 (define-key helm-command-map (kbd "M-g z")   #'helm-do-zgrep)
 (define-key helm-command-map (kbd "M-g F")   #'helm-do-ag-this-file)
 (define-key helm-command-map (kbd "M-g b")   #'helm-do-ag-buffers)
@@ -256,7 +261,6 @@
 (global-set-key (kbd "<f1>")                         #'helm-resume)
 (global-set-key (kbd "C-h C-f")                      #'find-function)
 (global-set-key (kbd "<f2>")                         #'helm-execute-kmacro)
-(global-set-key [remap jump-to-register]             #'helm-buffers-list)
 (global-set-key [remap dabbrev-expand]               #'helm-dabbrev)
 (global-set-key (kbd "M-/")                          #'helm-dabbrev)
 (global-set-key [remap find-tag]                     #'helm-etags-select)
@@ -299,6 +303,8 @@
 (global-set-key (kbd "M-g g")   #'helm-git-grep)
 (global-set-key (kbd "M-g p")   #'helm-do-ag-project-root)
 (global-set-key (kbd "M-g z")   #'helm-do-zgrep)
+(global-set-key (kbd "M-g G")   #'helm-google)
+(global-set-key (kbd "M-g S")   #'helm-google-suggest)
 
 (after-load 'helm-swoop
   (define-key helm-swoop-map (kbd "C-m")             #'helm-multi-swoop-current-mode-from-helm-swoop)
