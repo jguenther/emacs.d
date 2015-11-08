@@ -1,9 +1,7 @@
 (require-package 'helm)
 
-(require-package 'helm-bind-key)
 (require-package 'helm-descbinds)
 (require-package 'helm-flycheck)
-(require-package 'helm-fuzzy-find)
 (require-package 'helm-git-grep)
 (require-package 'helm-orgcard)
 (require-package 'helm-projectile)
@@ -11,7 +9,6 @@
 (require-package 'wgrep-helm)
 (require-package 'ag)
 (require-package 'helm-ag)
-(require-package 'helm-orgcard)
 (require-package 'helm-fuzzier)
 (require-package 'helm-google)
 (require-package 'helm-themes)
@@ -59,12 +56,12 @@
               helm-autoresize-mode t
               helm-candidate-separator (make-string 20 ?\x2015)
               helm-follow-mode-persistent t
-              helm-idle-delay 0.1
-              helm-input-idle-delay 0.1
+              helm-idle-delay 0.01
+              helm-input-idle-delay 0.01
               helm-persistent-action-use-special-display t
               helm-quick-update t
 
-              helm-dabbrev-cycle-threshold 1
+              helm-dabbrev-cycle-threshold 2
 
               helm-ag-insert-at-point 'symbol
               helm-ag-use-grep-ignore-list t
@@ -91,17 +88,24 @@
          (message "Enabled --search-zip in helm-ag")))
   )
 
-(add-to-list 'completion-ignored-extensions ".gvfs/")
-
-(autoload 'helm-descbinds      "helm-descbinds" t)
-(autoload 'helm-eshell-history "helm-eshell"    t)
-(autoload 'helm-esh-pcomplete  "helm-eshell"    t)
+(dolist (ext '(".gvfs/"
+               ".elc"))
+  (add-to-list 'completion-ignored-extensions ext))
 
 (require 'helm-fuzzier)
 (helm-fuzzier-mode 1)
 
+(require 'helm-grepint)
+(helm-grepint-set-default-config)
+
 (after-load 'flycheck
-  (define-key flycheck-mode-map (kbd "C-c ! h") 'helm-flycheck))
+  (add-to-list 'flycheck-global-modes 'helm-command-mode t)
+  (define-key flycheck-mode-map (kbd "C-c ! h") #'helm-flycheck)
+  (define-key helm-command-map (kbd "!") #'helm-flycheck))
+
+(setq projectile-keymap-prefix (kbd "C-c P"))
+(after-load 'popup-keys-examples
+  (global-set-key (kbd "C-c p") 'popup-keys:run-projectile))
 
 ;;; helm-projectile
 ;;;
@@ -186,12 +190,41 @@
             "ack-grep -H --smart-case --no-group %e %p %f"))
     (message "Switched to %s" (helm-grep-command))))
 
+(defun tak/disable-kill-buffer-query-functions (orig-function &rest args)
+  (let ((kill-buffer-query-functions))
+    (apply orig-function args)))
+
+(advice-add #'helm-buffer-run-kill-persistent :around #'tak/disable-kill-buffer-query-functions)
+(advice-add #'helm-buffer-run-kill-buffers :around #'tak/disable-kill-buffer-query-functions)
+
 ;;; Helm-command-map
 ;;
 ;;
-(define-key helm-command-map (kbd "w")   'helm-psession)
-(define-key helm-command-map (kbd "z")   'helm-complex-command-history)
-(define-key helm-command-map (kbd "I")   'helm-imenu-in-all-buffers)
+(define-key helm-command-map (kbd "w")       #'helm-psession)
+(define-key helm-command-map (kbd "z")       #'helm-complex-command-history)
+(define-key helm-command-map (kbd "I")       #'helm-imenu-in-all-buffers)
+(define-key helm-command-map (kbd "a")       #'helm-ag)
+(define-key helm-command-map (kbd "A")       #'helm-do-ag)
+(define-key helm-command-map (kbd "F")       #'helm-do-ag-this-file)
+(define-key helm-command-map (kbd "M-g g")   #'helm-git-grep)
+(define-key helm-command-map (kbd "M-g z")   #'helm-do-zgrep)
+(define-key helm-command-map (kbd "M-g F")   #'helm-do-ag-this-file)
+(define-key helm-command-map (kbd "M-g b")   #'helm-do-ag-buffers)
+(define-key helm-command-map (kbd "M-g p")   #'helm-do-ag-project-root)
+(define-key helm-command-map (kbd "M-g o")   #'helm-swoop)
+
+(define-key helm-command-map (kbd "M-i")     #'helm-swoop)
+(define-key helm-command-map (kbd "s-i")     #'helm-multi-swoop)
+(define-key helm-command-map (kbd "M-I")     #'helm-swoop-back-to-last-point)
+(define-key helm-command-map (kbd "C-c M-i") #'helm-multi-swoop)
+(define-key helm-command-map (kbd "C-x M-i") #'helm-multi-swoop-all)
+
+(define-key helm-command-map (kbd "M-g M-i") #'helm-multi-swoop)
+(define-key helm-command-map (kbd "M-g M-I") #'helm-multi-swoop-all)
+
+(define-key helm-command-map (kbd "B")       #'helm-descbinds)
+(define-key helm-command-map (kbd "C-x C-b") #'helm-buffers-list)
+(define-key helm-command-map (kbd "D")       #'helm-dash-at-point)
 
 (define-key helm-map (kbd "M-o") #'helm-previous-source)
 (define-key helm-map (kbd "M-h") #'helm/toggle-header-line)
@@ -199,16 +232,18 @@
 (define-key helm-map (kbd "s-d") #'helm-buffer-run-kill-buffers)
 (define-key helm-map (kbd "s-D") #'helm-buffer-run-kill-buffers)
 
-(define-key shell-mode-map (kbd "C-M-p")             'helm-comint-input-ring) ; shell history.
+(define-key shell-mode-map (kbd "C-M-p")             #'helm-comint-input-ring) ; shell history.
 
 (after-load 'org
-  (define-key org-mode-map (kbd "C-x c o h") #'helm-org-headlines))
+  (define-key org-mode-map (kbd "C-x c o h")         #'helm-org-headlines))
 
 ;;; Global-map
 ;;
 ;;
 (global-set-key (kbd "M-x")                          #'undefined)
 (global-set-key (kbd "M-x")                          #'helm-M-x)
+(global-set-key (kbd "C-x C-m")                      #'helm-M-x)
+(global-set-key (kbd "C-x RET")                      #'helm-M-x)
 (global-set-key (kbd "M-y")                          #'helm-show-kill-ring)
 (global-set-key (kbd "C-x C-f")                      #'helm-find-files)
 (global-set-key (kbd "C-c <SPC>")                    #'helm-all-mark-rings)
@@ -231,9 +266,6 @@
 (global-set-key (kbd "C-h b")                        #'helm-descbinds)
 (global-set-key (kbd "C-x b")                        #'helm-mini)
 (global-set-key (kbd "C-x C-b")                      #'helm-buffers-list)
-(global-set-key (kbd "C-x C-m")                      #'helm-M-x)
-(global-set-key (kbd "C-x RET")                      #'helm-M-x)
-(global-set-key (kbd "M-x")                          #'helm-M-x)
 (global-set-key (kbd "C-x C-f")                      #'helm-find-files)
 (global-set-key (kbd "C-x C-r")                      #'helm-recentf)
 (global-set-key (kbd "C-x r l")                      #'helm-filtered-bookmarks)
@@ -241,26 +273,32 @@
  'after-init-hook (lambda ()
                     (global-set-key (kbd "M-y")      #'helm-show-kill-ring)
                     (global-set-key (kbd "C-x V F")  #'helm-do-grep-ag)))
-(global-set-key (kbd "C-x c!")                       #'helm-calcul-expression)
-(global-set-key (kbd "C-x c:")                       #'helm-eval-expression-with-eldoc)
+(global-set-key (kbd "C-x c C-!")                    #'helm-calcul-expression)
+(global-set-key (kbd "C-x c :")                      #'helm-eval-expression-with-eldoc)
 
 ;;; mode-specific-map
 ;;
 (define-key mode-specific-map (kbd "I")              #'helm-imenu-in-all-buffers)
 
-(require 'helm-grepint)
-(helm-grepint-set-default-config)
-
 ;; helm-swoop and grep-related commands
-(global-set-key (kbd "M-g a")                        #'helm-grepint-grep)
-(global-set-key (kbd "M-g f")                        #'helm-do-grep-ag)
-(global-set-key (kbd "M-g g")                        #'helm-swoop)
-(global-set-key (kbd "M-g b")                        #'helm-ag-buffers)
-(global-set-key (kbd "C-c M-i")                      #'helm-multi-swoop)
-(global-set-key (kbd "C-x M-i")                      #'helm-multi-swoop-all)
-(global-set-key (kbd "M-i")                          #'helm-swoop)
-(global-set-key (kbd "s-i")                          #'helm-multi-swoop)
-(global-set-key (kbd "M-I")                          #'helm-swoop-back-to-last-point)
+
+(global-set-key (kbd "M-i")     #'helm-swoop)
+(global-set-key (kbd "s-i")     #'helm-multi-swoop)
+(global-set-key (kbd "M-I")     #'helm-swoop-back-to-last-point)
+(global-set-key (kbd "M-g o")   #'helm-swoop)
+(global-set-key (kbd "C-c M-i") #'helm-multi-swoop)
+(global-set-key (kbd "C-x M-i") #'helm-multi-swoop-all)
+
+(global-set-key (kbd "M-g M-i") #'helm-multi-swoop)
+(global-set-key (kbd "M-g M-I") #'helm-multi-swoop-all)
+
+(global-set-key (kbd "M-g a")   #'helm-grepint-grep)
+(global-set-key (kbd "M-g F")   #'helm-do-ag-this-file)
+(global-set-key (kbd "M-g b")   #'helm-do-ag-buffers)
+(global-set-key (kbd "M-g f")   #'helm-do-grep-ag)
+(global-set-key (kbd "M-g g")   #'helm-git-grep)
+(global-set-key (kbd "M-g p")   #'helm-do-ag-project-root)
+(global-set-key (kbd "M-g z")   #'helm-do-zgrep)
 
 (after-load 'helm-swoop
   (define-key helm-swoop-map (kbd "C-m")             #'helm-multi-swoop-current-mode-from-helm-swoop)
