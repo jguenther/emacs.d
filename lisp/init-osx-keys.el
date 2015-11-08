@@ -37,8 +37,9 @@
   (global-set-key (kbd "<home>") 'move-beginning-of-line)
   (global-set-key (kbd "<end>") 'move-end-of-line)
 
-  ;; unbind CMD-w kill-frame
+  ;; unbind CMD-w kill-frame and CMD-q save-buffers-kill-emacs
   (global-unset-key (kbd "s-w"))
+  (global-unset-key (kbd "s-q"))
 
   ;; paste utf-8
   (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
