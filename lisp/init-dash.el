@@ -16,7 +16,7 @@
 
 (when (and (package-installed-p 'dash-at-point)
            (sanityinc/dash-installed-p))
-  (define-key mode-specific-map (kbd "D") #'dash-at-point)
-  (define-key mode-specific-map (kbd "E") #'dash-at-point-with-docset))
+  (define-key mode-specific-map (kbd "D") #'helm-dash-at-point)
+  (define-key mode-specific-map (kbd "E") #'helm-dash))
 
 (provide 'init-dash)
