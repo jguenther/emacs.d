@@ -14,7 +14,7 @@
               jedi-direx:hide-imports t
 
               ;; run flycheck-mode after hack-local-vars-hook
-              flycheck-global-modes '(not python-mode))
+              flycheck-global-modes '(not helm-command-mode python-mode))
 
 (after-load 'python
   (setq python--prettify-symbols-alist '(("lambda" . 955))))
