@@ -949,5 +949,17 @@ supply a positive argument once more with C-u C-SPC."
 
 
 
+;; conway's game of life
+(require-package 'xbm-life)
+(setq-default xbm-life-default-delay 0.5
+              xbm-life-default-grid nil
+              xbm-life-default-grid-size 80
+              xbm-life-delay-minimum 0.1
+              xbm-life-delay-step 0.1
+              xbm-life-grid-minimum 64
+              )
+
+
+
 
 (provide 'init-local)
