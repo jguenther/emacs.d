@@ -327,6 +327,13 @@ Moves point to the end of the inserted text. Does not change mark."
                       -1))
   )
 
+(defun tak/toggle-linum-mode ()
+  (interactive)
+  (linum-mode (if (not linum-mode)
+                  t
+                -1))
+  )
+
 ;;; launcher keymap
 (define-key launcher-map "c" #'calc)
 (define-key launcher-map "d" #'ediff-buffers)
@@ -348,6 +355,7 @@ Moves point to the end of the inserted text. Does not change mark."
 (define-key endless/toggle-map "c" #'column-number-mode)
 (define-key endless/toggle-map "d" #'toggle-debug-on-error)
 (define-key endless/toggle-map "e" #'toggle-debug-on-error)
+(define-key endless/toggle-map "l" #'tak/toggle-linum-mode)
 (define-key endless/toggle-map "f" #'auto-fill-mode)
 (define-key endless/toggle-map "t" #'tak/toggle-visual-line-mode)
                                         ; instead of truncate-line-mode
