@@ -1,13 +1,11 @@
 ;;; init-projects
-
 (require-package 'projectile)
 (require-package 'perspective)
 (require-package 'persp-projectile)
 (require-package 'nameframe)
 (require-package 'nameframe-perspective)
 
-(setq-default projectile-keymap-prefix (kbd "C-c p")
-              projectile-enable-caching t)
+(setq-default projectile-enable-caching t)
 
 (require 'projectile)
 (defun tak/init-perspective ()

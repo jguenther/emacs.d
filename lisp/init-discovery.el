@@ -1,10 +1,6 @@
 ;;; discovery modes
 ;; discover, popup-keys, etc.
 
-(require-package 'discover)
-
-(quelpa '(discover-my-major :fetcher file :path "~/code/discover-my-major/"))
-
 (require-package 'discover-my-major)
 (require 'discover-my-major)
 
@@ -12,89 +8,80 @@
 (global-set-key (kbd "C-h C-M-m") 'discover-my-mode)
 (global-set-key (kbd "C-h M-M") 'discover-my-mode)
 
-(require 'discover)
-(global-discover-mode 1)
+(global-set-key (kbd "C-x D") 'popup-keys:run-debug-commands)
 
 (defun tak/unhighlight-symbol-at-point ()
   (interactive)
   (highlight-symbol-remove-symbol (highlight-symbol-get-symbol)))
 
-(discover-add-context-menu
- :context-menu '(isearch
-                 (description "Isearch, occur and highlighting")
-                 (lisp-switches
-                  ("-i" "Case should fold search" case-fold-search t nil))
-                 (lisp-arguments
-                  ("=l" "context lines to show (occur)"
-                   "list-matching-lines-default-context-lines"
-                   (lambda (dummy) (interactive) (read-number "Number of context lines: "))))
-                 (actions
-                  ("isearch"
-                   ("M-s" "isearch forward symbol" isearch-forward-symbol)
-                   ("_" "isearch forward symbol" isearch-forward-symbol)
-                   ("w" "isearch forward word" isearch-forward-word))
-                  ("Occur"
-                   ("o" "occur" helm-occur)
-                   ("o" "helm-swoop" helm-swoop)
-                   ("C-/" "helm-swoop (all)" helm-multi-swoop-all)
-                   ("C-o" "helm-swoop (org)" helm-multi-swoop-org)
-                   ("/" "helm-swoop (multi)" helm-multi-swoop)
-                   ("m" "helm-swoop (current-mode)" helm-multi-swoop-current-mode)
-                   ("M-m" "helm-swoop (mode)" helm-multi-swoop-by-mode)
-                   )
+(popup-keys:new
+ 'popup-keys:run-isearch
+ :buf-name "*isearch*"
+ :more-help (popup-keys:info-node "(emacs) Incremental search")
+ :actions `(
+            ;; (lisp-switches
+            ;;  ("-i" "Case should fold search" case-fold-search t nil))
+            ;; (lisp-arguments
+            ;;  ("=l" "context lines to show (occur)"
+            ;;   "list-matching-lines-default-context-lines"
+            ;;   (lambda (dummy) (interactive) (read-number "Number of context lines: "))))
+            ("M-s" "isearch forward symbol" isearch-forward-symbol)
+            ("_" "isearch forward symbol" isearch-forward-symbol)
+            ("w" "isearch forward word" isearch-forward-word)
+            ("o" "helm-swoop" helm-swoop)
+            ("/" "helm-swoop (multi)" helm-multi-swoop)
+            ("m" "helm-swoop (current-mode)" helm-multi-swoop-current-mode)
+            ("C-/" "helm-swoop (all)" helm-multi-swoop-all)
+            ("C-o" "helm-swoop (org)" helm-multi-swoop-org)
+            ("M-m" "helm-swoop (mode)" helm-multi-swoop-by-mode)
+            ("s" "ag project" #'helm-projectile-ag)
+            ("F" "ag" #'helm-do-ag)
+            ("g" "grep-ag" #'helm-do-grep-ag)
+            ("G" "git-grep" #'helm-grep-do-git-grep)
+            ("a" "isearch bookmarks" popup-keys:run-isearch-bookmarks)
+            ("M-w" "search for words using eww" eww-search-words)
+            ("h" "highlighters ..." popup-keys:run-isearch-highlight)
+            ))
+(global-set-key (kbd "M-s") #'popup-keys:run-isearch)
 
-                  ("Grep"
-                   ("s" "ag project" #'helm-projectile-ag)
-                   ("F" "ag" #'helm-do-ag)
-                   ("g" "grep-ag" #'helm-do-grep-ag)
-                   ("G" "git-grep" #'helm-grep-do-git-grep))
-                  ("More"
-                                        ; local change
-                   ("a" "search and replace in bookmark targets" makey-key-mode-popup-isearch-bookmarks)
-                   ("M-w" "search for words using eww" eww-search-words)
-                   ("h" "highlighters ..." makey-key-mode-popup-isearch-highlight))))
- :bind "M-s")
+(popup-keys:new
+ 'popup-keys:run-isearch-highlight
+ :buf-name "*isearch highlight*"
+ :actions `(
+            ("." "highlight symbol at point" highlight-symbol-at-point)
+            ("," "unhighlight symbol at point" tak/unhighlight-symbol-at-point)
 
-(discover-add-context-menu
- :context-menu '(isearch-highlight
-                 (actions
-                  ("Highlight"
-                                        ; local changes
-                   ("." "highlight symbol at point" highlight-symbol-at-point)
-                   ("," "unhighlight symbol at point" tak/unhighlight-symbol-at-point)
+            ("l" "highlight lines matching regexp" highlight-lines-matching-regexp)
+            ("p" "highlight phrase" highlight-phrase)
+            ("r" "highlight regexp" highlight-regexp)
+            ("u" "unhighlight regexp" unhighlight-regexp)
+            ("f" "hi lock find patterns" hi-lock-find-patterns)
+            ("w" "hi lock write interactive patterns" hi-lock-write-interactive-patterns)))
 
-                   ("l" "highlight lines matching regexp" highlight-lines-matching-regexp)
-                   ("p" "highlight phrase" highlight-phrase)
-                   ("r" "highlight regexp" highlight-regexp)
-                   ("u" "unhighlight regexp" unhighlight-regexp))
+(popup-keys:new
+ 'popup-keys:run-isearch-bookmarks
+ :buf-name "*isearch bookmarks*"
 
-                  ("Store"
-                   ("f" "hi lock find patterns" hi-lock-find-patterns)
-                   ("w" "hi lock write interactive patterns" hi-lock-write-interactive-patterns)))))
+ ;; (lisp-switches
+ ;;  ("-i" "Case should fold search" case-fold-search t nil)
+ ;;  ("-a" "Search in all bookmarks" current-prefix-arg 4 nil)
+ ;;  ;; ("-s" "Display only bookmarks that are icycles search hits"
+ ;;  ;;  bmkp-bmenu-show-only-icicles-search-hits-bookmarks )
+ ;;  )
 
-(discover-add-context-menu
- :context-menu '(isearch-bookmarks
-                 (lisp-switches
-                  ("-i" "Case should fold search" case-fold-search t nil)
-                  ("-a" "Search in all bookmarks" current-prefix-arg 4 nil)
-                  ;; ("-s" "Display only bookmarks that are icycles search hits"
-                  ;;  bmkp-bmenu-show-only-icicles-search-hits-bookmarks )
-                  )
-                 (actions
-                  ("Bookmarks"
-                                        ; isearch
-                   ("C-s" "regexp-isearch marked bookmarks"
-                    bmkp-bmenu-isearch-marked-bookmarks-regexp)
-                   ("C-M-s" "isearch marked bookmarks"
-                    bmkp-bmenu-isearch-marked-bookmarks)
-                   ("M-s" "regexp-search marked bookmarks"
-                    bmkp-bmenu-search-marked-bookmarks-regexp)
+ :actions `(
+            ("C-s" "regexp-isearch marked bookmarks"
+             bmkp-bmenu-isearch-marked-bookmarks-regexp)
+            ("C-M-s" "isearch marked bookmarks"
+             bmkp-bmenu-isearch-marked-bookmarks)
+            ("M-s" "regexp-search marked bookmarks"
+             bmkp-bmenu-search-marked-bookmarks-regexp)
                                         ; query-replace
-                   ("M-%" "query-replace-regexp marked bookmarks"
-                    bmkp-bmenu-query-replace-marked-bookmarks-regexp)
-                   ("C-M-%" "query-replace-regexp marked bookmarks"
-                    bmkp-bmenu-query-replace-marked-bookmarks-regexp))
-                  )))
+            ("M-%" "query-replace-regexp marked bookmarks"
+             bmkp-bmenu-query-replace-marked-bookmarks-regexp)
+            ("C-M-%" "query-replace-regexp marked bookmarks"
+             bmkp-bmenu-query-replace-marked-bookmarks-regexp)
+            ))
 
 
 
@@ -113,15 +100,29 @@
      (define-key ctl-x-map "V" 'vc-prefix-map)
      ;; run popup on original key
      (define-key ctl-x-map "v" 'popup-keys:run-vc)
+     (popup-keys:add-thing 'popup-keys:run-vc
+                           'action
+                           "p" "helm projectile ag" 'helm-projectile-ag
+                           )
+     (popup-keys:add-thing 'popup-keys:run-vc
+                           'action
+                           "F" "helm grep-ag" 'helm-do-grep-ag
+                           )
      ))
 (global-set-key (kbd "C-x v") 'popup-keys:run-vc)
 
-(define-key mode-specific-map (kbd "p") 'popup-keys:run-projectile)
+(global-set-key (kbd "C-c p") 'popup-keys:run-projectile)
 
 (global-set-key (kbd "C-x C-k")   'popup-keys:run-kmacro)
 (global-set-key (kbd "C-x C-S-k") 'kmacro-keymap)
 
 (global-set-key (kbd "C-x r") 'popup-keys:run-registers)
+(global-set-key (kbd "C-x r") 'popup-keys:run-registers)
+(global-set-key (kbd "C-x R") ctl-x-r-map)
+;; undo-tree annoyingly binds to the C-x r prefix and overrides the above.
+(after-load 'undo-tree
+  (define-key undo-tree-map (kbd "C-x r") nil))
+
 (global-set-key (kbd "C-x R") ctl-x-r-map)
 ;; undo-tree annoyingly binds to the C-x r prefix and overrides the above.
 (eval-after-load "undo-tree"
