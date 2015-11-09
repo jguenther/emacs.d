@@ -123,10 +123,12 @@
 
 (defun sanityinc/shell-command-in-view-mode (orig-function &rest args)
   "Put \"*Shell Command Output*\" buffers into view-mode."
-  (unless output-buffer
-    (with-current-buffer "*Shell Command Output*"
-      (view-mode 1))))
-(advice-add #'shell-command-on-region :after #'sanityinc/shell-command-in-view-mode)
+  (prog1
+      (apply orig-function args)
+    (unless (nthcdr 4 args)  ; output-buffer
+      (with-current-buffer "*Shell Command Output*"
+        (view-mode)))))
+(advice-add #'shell-command-on-region :around #'sanityinc/shell-command-in-view-mode)
 
 (after-load 'compile
   (require 'ansi-color)
