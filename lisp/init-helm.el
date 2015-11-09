@@ -210,8 +210,12 @@
 (define-key helm-command-map (kbd "A")       #'helm-do-ag)
 (define-key helm-command-map (kbd "F")       #'helm-do-ag-this-file)
 (define-key helm-command-map (kbd "M-g g")   #'helm-git-grep)
-(define-key helm-command-map (kbd "M-g G")   #'helm-google)
-(define-key helm-command-map (kbd "M-g S")   #'helm-google-suggest)
+
+(after-load 'helm-google
+  (define-key helm-command-map (kbd "M-g G") #'helm-google)
+  (define-key helm-command-map (kbd "M-g S") #'helm-google-suggest)
+  )
+
 (define-key helm-command-map (kbd "M-g z")   #'helm-do-zgrep)
 (define-key helm-command-map (kbd "M-g F")   #'helm-do-ag-this-file)
 (define-key helm-command-map (kbd "M-g b")   #'helm-do-ag-buffers)
@@ -303,8 +307,11 @@
 (global-set-key (kbd "M-g g")   #'helm-git-grep)
 (global-set-key (kbd "M-g p")   #'helm-do-ag-project-root)
 (global-set-key (kbd "M-g z")   #'helm-do-zgrep)
-(global-set-key (kbd "M-g G")   #'helm-google)
-(global-set-key (kbd "M-g S")   #'helm-google-suggest)
+
+(after-load 'helm-google
+  (global-set-key (kbd "M-g G") #'helm-google)
+  (global-set-key (kbd "M-g S") #'helm-google-suggest)
+  )
 
 (after-load 'helm-swoop
   (define-key helm-swoop-map (kbd "C-m")             #'helm-multi-swoop-current-mode-from-helm-swoop)
