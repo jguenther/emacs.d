@@ -275,7 +275,12 @@ running."
 (defun elpy-pytest-toggle-capturelog ()
   (interactive)
   (setq elpy-pytest-capturelog-enabled
-        (not elpy-pytest-capturelog-enabled)))
+        (not elpy-pytest-capturelog-enabled))
+  (message "Set pytest capturelog %s" (if elpy-pytest-capturelog-enabled
+                                          "on"
+                                        "off")))
+
+(define-key endless/toggle-map (kbd "L") #'elpy-pytest-toggle-capturelog)
 
 (defun tak/elpy-pytest-runner-args (&optional debugger-arg)
   (let* ((pdb-arg (format "--%spdb"
