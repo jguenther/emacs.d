@@ -421,5 +421,10 @@ Will work on both org-mode and any mode that accepts plain html."
 
 
 
+;; open local html files in emacs instead of launching browser
+(after-load 'org
+  (add-to-list 'org-file-apps '("\\.x?html?\\'" . emacs)))
+
+
 
 (provide 'init-org)
