@@ -1005,14 +1005,14 @@ supply a positive argument once more with C-u C-SPC."
 
 
 
-;; background process runner
-(require-package 'bpr)
-(require 'bpr)
+;; ;; background process runner
+;; (require-package 'bpr)
+;; (require 'bpr)
 
-;; Set global config for bpr.
-;; Variables below would be applied to all processes.
-(setq bpr-colorize-output t)
-(setq bpr-close-after-success t)
+;; ;; Set global config for bpr.
+;; ;; Variables below would be applied to all processes.
+;; (setq bpr-colorize-output t)
+;; (setq bpr-close-after-success t)
 
 ;; ;; define function for running desired process
 ;; (defun run-tests ()
