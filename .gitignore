@@ -12,6 +12,9 @@
 /projectile.cache
 /async-bytecomp.log
 /semanticdb/
+emacs-recompile*.log
+/.trello/
+/elisp-objects/
 
 /url/cache
 /.emacs.desktop
