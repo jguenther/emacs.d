@@ -499,6 +499,7 @@ If prefix ARG is non-nil, sets parameters appropriate for a frame with
 
 
 
+(require-package 'el-mock)
 (require-package 'org-trello)
 
 ;; org-trello
