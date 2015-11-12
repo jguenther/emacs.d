@@ -1040,5 +1040,19 @@ supply a positive argument once more with C-u C-SPC."
 
 
 
+;; neotree
+(require-package 'neotree)
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
+
+(defun tak/projectile-switch-project ()
+  (neotree-projectile-action)
+  (magit-status))
+
+(setq projectile-switch-project-action #'tak/projectile-switch-project
+      neo-theme 'nerd)
+
+
+
 
 (provide 'init-local)
