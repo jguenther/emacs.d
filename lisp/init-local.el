@@ -497,10 +497,7 @@ If prefix ARG is non-nil, sets parameters appropriate for a frame with
 
 (require-package 'org-plus-contrib)
 
-(defun tak/org-mode-setup ()
-  (define-key org-mode-map (kbd "C-M-<return>") 'org-insert-todo-heading)
-  (org-bullets-mode 1)
-  )
+
 
 (after-load 'org
   (dolist (element '(
@@ -515,7 +512,8 @@ If prefix ARG is non-nil, sets parameters appropriate for a frame with
         (add-to-list 'org-modules element t)))
 
   (org-load-modules-maybe t)
-  (add-hook 'org-mode-hook 'tak/org-mode-setup)
+  (add-hook 'org-mode-hook #'org-bullets-mode)
+  (define-key org-mode-map (kbd "C-M-<return>") 'org-insert-todo-heading)
   )
 
 
