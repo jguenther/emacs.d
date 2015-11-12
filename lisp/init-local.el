@@ -569,6 +569,23 @@ If prefix ARG is non-nil, sets parameters appropriate for a frame with
   (add-hook 'org-mode-hook #'tak/maybe-enable-org-trello-mode))
 
 
+
+;; org-time-budgets
+(require-package 'org-time-budgets)
+(after-load 'org
+  (require 'org-time-budgets))
+(setq-default
+ org-time-budgets '((:title "Vendasta" :tags "+vendasta" :budget "30:00" :block 'workweek)
+                    (:title "Jamtime" :tags "+jamtime" :budget "3:00" :block 'workweek)
+                    (:title "Exercise" :tags "+exercise" :budget "3:00" :block 'week)
+                    ))
+
+(add-to-list 'org-agenda-custom-commands
+             '(("a" "Agenda"
+                ((agenda "" ((org-agenda-sorting-strategy '(habit-down time-up priority-down category-keep user-defined-up))))
+                 (org-time-budgets-for-agenda)))))
+
+
 (after-load 'org
   (dolist (element '(
                      org-bullets
