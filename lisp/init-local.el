@@ -77,6 +77,10 @@
  visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow)
  )
 
+;; set default frame font globally
+(add-to-list 'default-frame-alist '(font . "Office Code Pro-12"))
+(set-face-attribute 'default t :font "Office Code Pro-12")
+
 (defalias 'basename 'file-name-directory)
 
 (if *is-a-mac*
