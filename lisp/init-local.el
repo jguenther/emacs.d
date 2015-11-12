@@ -991,7 +991,7 @@ supply a positive argument once more with C-u C-SPC."
 (require-package 'shell-pop)
 
 (setq-default
- shell-pop-universal-key "<f8>"
+ shell-pop-universal-key "<f12>"
  shell-pop-shell-type '("ansi-term" "*ansi-term*" (lambda nil (ansi-term shell-pop-term-shell)))
  shell-pop-window-height 60
  shell-pop-window-position "bottom"
