@@ -262,11 +262,7 @@ Moves point to the end of the inserted text. Does not change mark."
   (require 'git-gutter+)
 
   (magit-wip-after-save-mode 1)
-  (magit-wip-before-change-mode 1)
-
-  (diminish 'magit-wip-before-change-mode)
   (diminish 'magit-wip-after-save-local-mode)
-
   (global-magit-file-buffer-mode)
 
   (setq-default magit-revision-show-gravatars '("^Author:     " . "^Commit:     "))
