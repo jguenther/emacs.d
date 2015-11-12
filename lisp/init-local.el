@@ -716,7 +716,7 @@ Sets TERM=xterm-256color"
 ;; custom
 (require-package 'cus-edit+)
 (require 'cus-edit+)
-(toggle-customize-outside-change-updates +1)
+(toggle-customize-outside-change-updates -1)
 (global-set-key (kbd "C-h M-c")     nil)
 (global-set-key (kbd "C-h M-c C")   #'customize-customized)
 (global-set-key (kbd "C-h M-c C-c") #'customize-changed)
