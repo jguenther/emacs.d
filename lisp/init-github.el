@@ -2,12 +2,13 @@
 
 (maybe-require-package 'yagist)
 (require-package 'github-browse-file)
+(magit-define-popup-action 'magit-file-popup
+  ?o "Open on GitHub" 'github-browse-file)
+
 (require-package 'bug-reference-github)
 (add-hook 'prog-mode-hook 'bug-reference-prog-mode)
 
 (maybe-require-package 'github-clone)
-;; (if (maybe-require-package 'magit-gh-pulls)
-;;     (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
 
 
 (provide 'init-github)
