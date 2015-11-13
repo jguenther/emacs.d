@@ -9,6 +9,7 @@
 (require-package 'ag)
 (require-package 'helm-ag)
 (require-package 'helm-fuzzier)
+(require-package 'helm-flx)
 (require-package 'helm-google)
 (require-package 'helm-themes)
 (require-package 'ace-jump-helm-line)
@@ -88,7 +89,9 @@
                ".pyc"))
   (add-to-list 'completion-ignored-extensions ext))
 
+(require 'helm-flx)
 (require 'helm-fuzzier)
+(helm-flx-mode +1)
 (helm-fuzzier-mode 1)
 
 (after-load 'flycheck
