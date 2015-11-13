@@ -5,7 +5,12 @@
 (require-package 'nameframe)
 (require-package 'nameframe-perspective)
 
-(setq-default projectile-enable-caching t)
+(setq-default projectile-enable-caching t
+              rojectile-keymap-prefix (kbd "C-c P")
+              )
+
+(after-load 'popup-keys-examples
+  (global-set-key (kbd "C-c p") 'popup-keys:run-projectile))
 
 (require 'projectile)
 (defun tak/init-perspective ()
@@ -13,13 +18,13 @@
   (require 'persp-projectile)
   (require 'nameframe)
   (require 'nameframe-perspective)
-  (projectile-global-mode)
   ;;(persp-mode)
   ;;(nameframe-perspective-mode t)
 
-  ;;(global-set-key (kbd "s-p") nil)
-  ;;(define-key projectile-mode-map (kbd "s-p") 'projectile-persp-switch-project)
+  (global-set-key (kbd "s-p") #'projectile-persp-switch-project)
+  (projectile-global-mode)
   )
+
 (add-hook 'after-init-hook #'tak/init-perspective)
 
 ;; doesn't seem to work without deferring it

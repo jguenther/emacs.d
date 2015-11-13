@@ -5,7 +5,6 @@
 (require-package 'helm-git-grep)
 (require-package 'helm-orgcard)
 (require-package 'helm-projectile)
-(require-package 'helm-pydoc)
 (require-package 'wgrep-helm)
 (require-package 'ag)
 (require-package 'helm-ag)
@@ -13,15 +12,6 @@
 (require-package 'helm-google)
 (require-package 'helm-themes)
 (require-package 'ace-jump-helm-line)
-(require-package 'helm-grepint)
-
-(quelpa '(helm-ipython :fetcher github :repo "thierryvolpiatto/helm-ipython"))
-
-(after-load 'helm-config
-  (require 'helm-ipython)
-  (require 'ace-jump-helm-line)
-  (after-load 'helm-config
-    (define-key helm-map (kbd "C-'") 'ace-jump-helm-line)))
 
 (when (sanityinc/dash-installed-p)
   (require-package 'helm-dash))
@@ -31,6 +21,9 @@
 (helm-adaptive-mode t)
 (helm-push-mark-mode 1)
 (helm-descbinds-mode)
+
+(require 'ace-jump-helm-line)
+(define-key helm-map (kbd "C-'") 'ace-jump-helm-line)
 
 ;;; http://emacs.stackexchange.com/questions/2867/how-should-i-change-my-workflow-when-moving-from-ido-to-helm
 (let ((data-dir (expand-file-name "data" user-emacs-directory)))
@@ -98,17 +91,9 @@
 (require 'helm-fuzzier)
 (helm-fuzzier-mode 1)
 
-(require 'helm-grepint)
-(helm-grepint-set-default-config)
-
 (after-load 'flycheck
-  (add-to-list 'flycheck-global-modes 'helm-command-mode t)
   (define-key flycheck-mode-map (kbd "C-c ! h") #'helm-flycheck)
   (define-key helm-command-map (kbd "!") #'helm-flycheck))
-
-(setq projectile-keymap-prefix (kbd "C-c P"))
-(after-load 'popup-keys-examples
-  (global-set-key (kbd "C-c p") 'popup-keys:run-projectile))
 
 ;;; helm-projectile
 ;;;
@@ -300,7 +285,7 @@
 (global-set-key (kbd "M-g M-i") #'helm-multi-swoop)
 (global-set-key (kbd "M-g M-I") #'helm-multi-swoop-all)
 
-(global-set-key (kbd "M-g a")   #'helm-grepint-grep)
+(global-set-key (kbd "M-g a")   #'helm-do-ag)
 (global-set-key (kbd "M-g F")   #'helm-do-ag-this-file)
 (global-set-key (kbd "M-g b")   #'helm-do-ag-buffers)
 (global-set-key (kbd "M-g f")   #'helm-do-grep-ag)
