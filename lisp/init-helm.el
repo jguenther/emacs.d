@@ -194,8 +194,8 @@
 (define-key helm-command-map (kbd "w")       #'helm-psession)
 (define-key helm-command-map (kbd "z")       #'helm-complex-command-history)
 (define-key helm-command-map (kbd "I")       #'helm-imenu-in-all-buffers)
-(define-key helm-command-map (kbd "a")       #'helm-ag)
-(define-key helm-command-map (kbd "A")       #'helm-do-ag)
+(define-key helm-command-map (kbd "a")       #'helm-do-ag)
+(define-key helm-command-map (kbd "A")       #'helm-ag)
 (define-key helm-command-map (kbd "F")       #'helm-do-ag-this-file)
 (define-key helm-command-map (kbd "M-g g")   #'helm-git-grep)
 
