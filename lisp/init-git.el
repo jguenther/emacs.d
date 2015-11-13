@@ -173,4 +173,34 @@ The issue number is parsed from the branch name."
 
 
 
+;; customize magit popups
+;;
+;; c.f. https://github.com/magit/magit/wiki/Additional-proposed-infix-arguments-and-suffix-commands
+;;
+(magit-define-popup-action 'magit-log-popup
+  ?w "Wip" 'magit-wip-log-current)
+
+(defun tak/magit-diff-current (arg)
+  "Call `magit-diff` on current buffer."
+  (interactive "P")
+  (let* ((file (buffer-file-name))
+         (magit-diff-arguments (magit-popup-import-file-args
+                                (default-value 'magit-diff-arguments)
+                                (list file)))
+         )
+    (magit-invoke-popup 'magit-diff-popup nil arg)
+    ))
+
+(magit-define-popup-action 'magit-file-popup
+  ?d "Diff" 'tak/magit-diff-current
+  )
+
+(magit-define-popup-switch 'magit-log-popup
+  ?m "Omit merge commits" "--no-merges")
+
+
+
+
+
+
 (provide 'init-git)
