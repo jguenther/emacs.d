@@ -1051,5 +1051,14 @@ supply a positive argument once more with C-u C-SPC."
 
 
 
+;; alt-tab-like buffer-switching
+(require-package 'key-chord)
+(require-package 'buffer-flip)
+
+(setq-default buffer-flip-keys "u8*")
+(key-chord-mode +1)
+(buffer-flip-mode +1)
+
+
 
 (provide 'init-local)
