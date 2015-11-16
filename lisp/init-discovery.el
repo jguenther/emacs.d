@@ -8,6 +8,71 @@
 (global-set-key (kbd "C-h C-M-m") 'discover-my-mode)
 (global-set-key (kbd "C-h M-M") 'discover-my-mode)
 
+;; popup-keys
+
+(quelpa '(popup-keys :fetcher file :path "~/code/popup-keys/"))
+
+(require 'popup-keys)
+(require 'popup-keys-examples)
+
+(global-set-key (kbd "C-x M-/") 'popup-keys:run-findtool)
+
+(eval-after-load "vc-hooks"
+  '(progn
+     ;; move original keymap
+     (define-key ctl-x-map "V" 'vc-prefix-map)
+     ;; run popup on original key
+     (define-key ctl-x-map "v" 'popup-keys:run-vc)
+     (popup-keys:add-thing 'popup-keys:run-vc
+                           'action
+                           "p" "helm projectile ag" 'helm-projectile-ag
+                           )
+     (popup-keys:add-thing 'popup-keys:run-vc
+                           'action
+                           "F" "helm grep-ag" 'helm-do-grep-ag
+                           )
+     ))
+(global-set-key (kbd "C-x v") 'popup-keys:run-vc)
+
+(global-set-key (kbd "C-c p") 'popup-keys:run-projectile)
+
+(global-set-key (kbd "C-x C-k")   'popup-keys:run-kmacro)
+(global-set-key (kbd "C-x C-S-k") 'kmacro-keymap)
+
+(global-set-key (kbd "C-x r") 'popup-keys:run-registers)
+(global-set-key (kbd "C-x r") 'popup-keys:run-registers)
+(global-set-key (kbd "C-x R") ctl-x-r-map)
+;; undo-tree annoyingly binds to the C-x r prefix and overrides the above.
+(after-load 'undo-tree
+  (define-key undo-tree-map (kbd "C-x r") nil))
+
+(global-set-key (kbd "C-x R") ctl-x-r-map)
+;; undo-tree annoyingly binds to the C-x r prefix and overrides the above.
+(eval-after-load "undo-tree"
+  '(define-key undo-tree-map (kbd "C-x r") nil))
+
+(add-hook 'dired-mode-hook
+          (lambda ()
+            (require 'dired-x)
+            (define-key dired-mode-map (kbd "?") 'popup-keys:run-dired)
+            (define-key dired-mode-map (kbd "%") 'popup-keys:run-dired-regexp)
+            (define-key dired-mode-map (kbd "*") 'popup-keys:run-dired-mark)))
+
+(eval-after-load "ibuffer"
+  '(progn
+     (define-key ibuffer-mode-map (kbd "?") 'popup-keys:run-ibuffer)
+     (define-key ibuffer-mode-map (kbd "*") 'popup-keys:run-ibuffer-mark)
+     (define-key ibuffer-mode-map (kbd "/") 'popup-keys:run-ibuffer-filter)
+     ))
+
+(eval-after-load "undo-tree"
+  '(define-key undo-tree-visualizer-mode-map (kbd "?") 'popup-keys:run-undo-tree))
+
+(after-load 'org
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (define-key org-mode-map (kbd "M-S-s") 'popup-keys:run-org-speed))))
+
 (global-set-key (kbd "C-x D") 'popup-keys:run-debug-commands)
 
 (defun tak/unhighlight-symbol-at-point ()
@@ -85,69 +150,5 @@
 
 
 
-;; popup-keys
-
-(quelpa '(popup-keys :fetcher file :path "~/code/popup-keys/"))
-
-(require 'popup-keys)
-(require 'popup-keys-examples)
-
-(global-set-key (kbd "C-x M-/") 'popup-keys:run-findtool)
-
-(eval-after-load "vc-hooks"
-  '(progn
-     ;; move original keymap
-     (define-key ctl-x-map "V" 'vc-prefix-map)
-     ;; run popup on original key
-     (define-key ctl-x-map "v" 'popup-keys:run-vc)
-     (popup-keys:add-thing 'popup-keys:run-vc
-                           'action
-                           "p" "helm projectile ag" 'helm-projectile-ag
-                           )
-     (popup-keys:add-thing 'popup-keys:run-vc
-                           'action
-                           "F" "helm grep-ag" 'helm-do-grep-ag
-                           )
-     ))
-(global-set-key (kbd "C-x v") 'popup-keys:run-vc)
-
-(global-set-key (kbd "C-c p") 'popup-keys:run-projectile)
-
-(global-set-key (kbd "C-x C-k")   'popup-keys:run-kmacro)
-(global-set-key (kbd "C-x C-S-k") 'kmacro-keymap)
-
-(global-set-key (kbd "C-x r") 'popup-keys:run-registers)
-(global-set-key (kbd "C-x r") 'popup-keys:run-registers)
-(global-set-key (kbd "C-x R") ctl-x-r-map)
-;; undo-tree annoyingly binds to the C-x r prefix and overrides the above.
-(after-load 'undo-tree
-  (define-key undo-tree-map (kbd "C-x r") nil))
-
-(global-set-key (kbd "C-x R") ctl-x-r-map)
-;; undo-tree annoyingly binds to the C-x r prefix and overrides the above.
-(eval-after-load "undo-tree"
-  '(define-key undo-tree-map (kbd "C-x r") nil))
-
-(add-hook 'dired-mode-hook
-          (lambda ()
-            (require 'dired-x)
-            (define-key dired-mode-map (kbd "?") 'popup-keys:run-dired)
-            (define-key dired-mode-map (kbd "%") 'popup-keys:run-dired-regexp)
-            (define-key dired-mode-map (kbd "*") 'popup-keys:run-dired-mark)))
-
-(eval-after-load "ibuffer"
-  '(progn
-     (define-key ibuffer-mode-map (kbd "?") 'popup-keys:run-ibuffer)
-     (define-key ibuffer-mode-map (kbd "*") 'popup-keys:run-ibuffer-mark)
-     (define-key ibuffer-mode-map (kbd "/") 'popup-keys:run-ibuffer-filter)
-     ))
-
-(eval-after-load "undo-tree"
-  '(define-key undo-tree-visualizer-mode-map (kbd "?") 'popup-keys:run-undo-tree))
-
-(after-load 'org
-  (add-hook 'org-mode-hook
-            (lambda ()
-              (define-key org-mode-map (kbd "M-S-s") 'popup-keys:run-org-speed))))
 
 (provide 'init-discovery)
