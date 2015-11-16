@@ -20,5 +20,7 @@
                                         ; coverage testing results files
   (add-to-list 'grep-find-ignored-directories "htmlcov"))
 
+(when (executable-find "sift")
+  (require-package 'sift))
 
 (provide 'init-grep)
