@@ -33,7 +33,8 @@
     (ibuffer-set-up-projectile-filters))
   )
 
-(define-key ibuffer-mode-map (kbd "P") 'ibuffer-toggle-filters)
+(after-load 'ibuffer
+  (define-key ibuffer-mode-map (kbd "P") 'ibuffer-toggle-filters))
 
 (add-hook 'ibuffer-hook 'ibuffer-set-up-preferred-filters)
 
