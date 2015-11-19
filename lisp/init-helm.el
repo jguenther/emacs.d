@@ -63,6 +63,9 @@
               helm-google-tld "ca"
               )
 
+(after-load 'semantic
+  (require 'helm-semantic))
+
 (after-load 'helm-grep
   (setq helm-grep-ag-command
         (replace-regexp-in-string "--color" "--nocolor --ignore '.git'" helm-grep-ag-command))

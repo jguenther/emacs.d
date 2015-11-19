@@ -1064,4 +1064,19 @@ supply a positive argument once more with C-u C-SPC."
 
 
 
+;; semantic bovinator
+(require-package 'stickyfunc-enhance)
+(require 'semantic)
+(require 'stickyfunc-enhance)
+(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
+
+(global-semantic-stickyfunc-mode +1)
+(global-semantic-idle-scheduler-mode +1)
+(global-semanticdb-minor-mode +1)
+;;(global-semantic-idle-summary-mode +1) -- covered by eldoc mode ?
+(semantic-mode +1)
+
+
+
+
 (provide 'init-local)
