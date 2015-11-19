@@ -178,10 +178,7 @@
 
 (add-hook 'font-lock-mode-hook 'try-to-add-imenu)
 
-;; imenu bindings
-(global-set-key [S-mouse-3] 'imenu)
-(global-set-key (kbd "C-'") 'imenu-anywhere)
-(global-set-key (kbd "C-S-i") 'imenu)
+;;(global-set-key (kbd "C-'") 'imenu-anywhere)
 
 
 

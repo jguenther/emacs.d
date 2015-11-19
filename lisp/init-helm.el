@@ -64,7 +64,9 @@
               )
 
 (after-load 'semantic
-  (require 'helm-semantic))
+  (require 'helm-semantic)
+  (global-set-key (kbd "C-'") #'helm-semantic-or-imenu)
+  )
 
 (after-load 'helm-grep
   (setq helm-grep-ag-command
