@@ -1064,6 +1064,12 @@ supply a positive argument once more with C-u C-SPC."
 
 
 
+;; logfile packages
+(require-package 'syslog-mode)
+(require-package 'itail)
+(require 'itail)
+
+
 ;; semantic bovinator
 (require-package 'stickyfunc-enhance)
 (require 'semantic)
