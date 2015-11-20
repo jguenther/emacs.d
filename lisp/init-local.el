@@ -1074,23 +1074,24 @@ supply a positive argument once more with C-u C-SPC."
 (require 'stickyfunc-enhance)
 (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
 
-(defvar tak/semantic-unwanted-filetypes '("html?")
-  "A list of regular expressions matching the extensions of file types
-  that should not be processed by semantic")
+(defvar tak/semantic-unwanted-file-patterns '("html?\\'"
+                                              "\\`timemachine:")
+  "A list of regular expressions.
+If any of these expressions match the basename of a buffer's file, the
+file will not be processed by semantic")
 
-(defun tak/inhibit-unwanted-semantic-filetypes ()
-  "Inhibits semantic-mode for inappropriate filetypes.
-Unwanted file types are found by matching the buffer's file extension
-with the patterns in `tak/semantic-unwanted-filetypes'."
+(defun tak/inhibit-unwanted-semantic-files ()
+  "Inhibits semantic-mode for inappropriate files.
+Unwanted file types are found by matching the buffer's file basename
+with the patterns in `tak/semantic-unwanted-file-patterns'."
   (require 'dash)
   (when (buffer-file-name)
     (let* ((file (buffer-file-name))
-           (ext (file-name-extension file))
+           (basename (file-name-nondirectory file))
            (case-fold-search t))
-      (when ext
-        (-any? (lambda (x)
-                 (string-match x ext))
-               tak/semantic-unwanted-filetypes)))))
+      (-any? (lambda (x)
+               (string-match x basename))
+             tak/semantic-unwanted-file-patterns))))
 
 (add-to-list 'semantic-inhibit-functions #'tak/inhibit-unwanted-semantic-filetypes)
 
