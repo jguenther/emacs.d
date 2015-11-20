@@ -1073,6 +1073,26 @@ supply a positive argument once more with C-u C-SPC."
 (require 'stickyfunc-enhance)
 (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
 
+(defvar tak/semantic-unwanted-filetypes '("html?")
+  "A list of regular expressions matching the extensions of file types
+  that should not be processed by semantic")
+
+(defun tak/inhibit-unwanted-semantic-filetypes ()
+  "Inhibits semantic-mode for inappropriate filetypes.
+Unwanted file types are found by matching the buffer's file extension
+with the patterns in `tak/semantic-unwanted-filetypes'."
+  (require 'dash)
+  (when (buffer-file-name)
+    (let* ((file (buffer-file-name))
+           (ext (file-name-extension file))
+           (case-fold-search t))
+      (when ext
+        (-any? (lambda (x)
+                 (string-match x ext))
+               tak/semantic-unwanted-filetypes)))))
+
+(add-to-list 'semantic-inhibit-functions #'tak/inhibit-unwanted-semantic-filetypes)
+
 (global-semantic-stickyfunc-mode +1)
 (global-semantic-idle-scheduler-mode +1)
 (global-semanticdb-minor-mode +1)
