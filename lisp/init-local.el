@@ -81,7 +81,8 @@
 (add-to-list 'default-frame-alist '(font . "Office Code Pro-12"))
 (set-face-attribute 'default t :font "Office Code Pro-12")
 
-(defalias 'basename 'file-name-directory)
+(defalias 'dirname 'file-name-directory)
+(defalias 'basename 'file-name-nondirectory)
 
 (if *is-a-mac*
     ;; visual bug on el capitan
