@@ -1021,7 +1021,7 @@ with the patterns in `tak/semantic-unwanted-file-patterns'."
                (string-match x basename))
              tak/semantic-unwanted-file-patterns))))
 
-(add-to-list 'semantic-inhibit-functions #'tak/inhibit-unwanted-semantic-filetypes)
+(add-to-list 'semantic-inhibit-functions #'tak/inhibit-unwanted-semantic-files)
 
 (global-semantic-stickyfunc-mode +1)
 (global-semantic-idle-scheduler-mode +1)
