@@ -228,6 +228,9 @@
 (define-key helm-command-map (kbd "C-x C-b") #'helm-buffers-list)
 (define-key helm-command-map (kbd "D")       #'helm-dash-at-point)
 
+(define-key helm-command-map (kbd "<SPC>")   #'helm-all-mark-rings)
+
+
 (define-key helm-map (kbd "M-o") #'helm-previous-source)
 (define-key helm-map (kbd "M-h") #'helm/toggle-header-line)
 (define-key helm-map (kbd "s-k") #'helm-buffer-run-kill-persistent)
