@@ -663,8 +663,18 @@ Sets TERM=xterm-256color"
 
 
 (require-package 'ace-jump-mode)
+
+;; "C-;" ==> ace-jump-word-mode
+;; enter first character of a word, select the highlighted key to move to it.
+
+;; "C-u C-;" ==> ace-jump-char-mode
+;; enter a character for query, select the highlighted key to move to it.
+
+;; "C-u C-u C-;" ==> ace-jump-line-mode
+;; each non-empty line will be marked, select the highlighted key to move to it.
+
 (global-set-key (kbd "C-;") 'ace-jump-mode)
-(global-set-key (kbd "C-:") 'ace-jump-word-mode)
+(global-set-key (kbd "C-:") 'ace-jump-line-mode)
 
 
 ;; from http://stackoverflow.com/questions/3393834/how-to-move-forward-and-backward-in-emacs-mark-ring/3399064#3399064
