@@ -550,7 +550,7 @@ sys.path."
 
 
 ;;; pylint setup
-
+(require 'generic-x)
 (define-derived-mode pylintrc-mode
     samba-generic-mode "pylintrc"
   "A mode for editing pylintrc files.
