@@ -10,7 +10,7 @@
 
 ;; popup-keys
 
-(quelpa '(popup-keys :fetcher file :path "~/code/popup-keys/"))
+(quelpa '(popup-keys :fetcher file :path (expand-file-name "popup-keys" "~/code")))
 
 (require 'popup-keys)
 (require 'popup-keys-examples)
