@@ -2,8 +2,6 @@
 (require-package 'projectile)
 (require-package 'perspective)
 (require-package 'persp-projectile)
-(require-package 'nameframe)
-(require-package 'nameframe-perspective)
 
 (setq-default projectile-enable-caching t
               rojectile-keymap-prefix (kbd "C-c P")
@@ -16,11 +14,6 @@
 (defun tak/init-perspective ()
   (require 'perspective)
   (require 'persp-projectile)
-  (require 'nameframe)
-  (require 'nameframe-perspective)
-  ;;(persp-mode)
-  ;;(nameframe-perspective-mode t)
-
   (global-set-key (kbd "s-p") #'projectile-persp-switch-project)
   (projectile-global-mode)
   )

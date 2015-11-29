@@ -602,7 +602,7 @@ and add extra args to `nose-extra-args'."
   (let* ((project-root (projectile-project-root))
          (default-directory project-root))
     (apply orig-function args)))
-(advice-add 'run-nose :around #'tak/chdir-to-project-root)
+(advice-add 'run-nose :around #'tak/set-nose-extra-args)
 
 (after-load 'python
   (require 'nose)

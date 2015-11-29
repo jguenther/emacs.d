@@ -26,9 +26,6 @@
   (setq smex-save-file (expand-file-name ".smex-items" user-emacs-directory))
   (global-set-key [remap execute-extended-command] 'smex))
 
-;; (require-package 'idomenu)
-;; (autoload 'idomenu "idomenu" nil t)
-
 ;; Allow the same buffer/file to be open in different frames
 (setq ido-default-buffer-method 'selected-window)
 (setq ido-default-file-method 'selected-window)

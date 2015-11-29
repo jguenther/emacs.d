@@ -81,7 +81,8 @@
 (add-to-list 'default-frame-alist '(font . "Office Code Pro-12"))
 (set-face-attribute 'default t :font "Office Code Pro-12")
 
-(defalias 'basename 'file-name-directory)
+(defalias 'dirname 'file-name-directory)
+(defalias 'basename 'file-name-nondirectory)
 
 (if *is-a-mac*
     ;; visual bug on el capitan
@@ -178,10 +179,7 @@
 
 (add-hook 'font-lock-mode-hook 'try-to-add-imenu)
 
-;; imenu bindings
-(global-set-key [S-mouse-3] 'imenu)
-(global-set-key (kbd "C-'") 'imenu-anywhere)
-(global-set-key (kbd "C-S-i") 'imenu)
+;;(global-set-key (kbd "C-'") 'imenu-anywhere)
 
 
 
@@ -991,5 +989,47 @@ supply a positive argument once more with C-u C-SPC."
 (buffer-flip-mode +1)
 
 
+
+;; logfile packages
+(require-package 'syslog-mode)
+(require-package 'itail)
+(require 'itail)
+
+
+;; semantic bovinator
+(require-package 'stickyfunc-enhance)
+(require 'semantic)
+(require 'stickyfunc-enhance)
+(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
+
+(defvar tak/semantic-unwanted-file-patterns '("html?\\'"
+                                              "\\`timemachine:")
+  "A list of regular expressions.
+If any of these expressions match the basename of a buffer's file, the
+file will not be processed by semantic")
+
+(defun tak/inhibit-unwanted-semantic-files ()
+  "Inhibits semantic-mode for inappropriate files.
+Unwanted file types are found by matching the buffer's file basename
+with the patterns in `tak/semantic-unwanted-file-patterns'."
+  (require 'dash)
+  (when (buffer-file-name)
+    (let* ((file (buffer-file-name))
+           (basename (file-name-nondirectory file))
+           (case-fold-search t))
+      (-any? (lambda (x)
+               (string-match x basename))
+             tak/semantic-unwanted-file-patterns))))
+
+(add-to-list 'semantic-inhibit-functions #'tak/inhibit-unwanted-semantic-filetypes)
+
+(global-semantic-stickyfunc-mode +1)
+(global-semantic-idle-scheduler-mode +1)
+(global-semanticdb-minor-mode +1)
+;;(global-semantic-idle-summary-mode +1) -- covered by eldoc mode ?
+(semantic-mode +1)
+
+
+
 
 (provide 'init-local)

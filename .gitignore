@@ -60,3 +60,4 @@ site-lisp/package/
 /quelpa
 /data/
 /.keyfreq.el
+/request/
