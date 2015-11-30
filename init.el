@@ -5,12 +5,20 @@
   (when (version< emacs-version minver)
     (error "Your Emacs is too old -- this config requires v%s or higher" minver)))
 
+(setq debug-on-error t)
+
 (defvar tak/init-load-complete nil
   "Variable that is set to t after init.el has been completely loaded.")
 
+(add-hook 'desktop-after-read-hook
+          (lambda ()
+            (setq debug-on-error nil))
+          t)
+
 (add-hook 'after-init-hook
           (lambda ()
-            (unless tak/init-load-complete
+            (if tak/init-load-complete
+                (message "Initialization completed successfully.")
               (error "Load of init.el did not complete successfully.")))
           t)
 
