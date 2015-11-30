@@ -213,11 +213,11 @@
 (define-key helm-command-map (kbd "M-g F")   #'helm-do-ag-this-file)
 (define-key helm-command-map (kbd "M-g b")   #'helm-do-ag-buffers)
 (define-key helm-command-map (kbd "M-g p")   #'helm-do-ag-project-root)
-(define-key helm-command-map (kbd "M-g o")   #'helm-swoop)
+(define-key helm-command-map (kbd "M-g o")   #'tak/helm-swoop-dispatch)
 
-(define-key helm-command-map (kbd "M-i")     #'helm-swoop)
-(define-key helm-command-map (kbd "s-i")     #'helm-multi-swoop)
-(define-key helm-command-map (kbd "M-I")     #'helm-swoop-back-to-last-point)
+(define-key helm-command-map (kbd "M-i")     #'tak/helm-swoop-dispatch)
+(define-key helm-command-map (kbd "s-i")     #'helm-multi-swoop-all)
+(define-key helm-command-map (kbd "M-I")     #'helm-multi-swoop)
 (define-key helm-command-map (kbd "C-c M-i") #'helm-multi-swoop)
 (define-key helm-command-map (kbd "C-x M-i") #'helm-multi-swoop-all)
 
@@ -286,10 +286,18 @@
 
 ;; helm-swoop and grep-related commands
 
-(global-set-key (kbd "M-i")     #'helm-swoop)
-(global-set-key (kbd "s-i")     #'helm-multi-swoop)
-(global-set-key (kbd "M-I")     #'helm-swoop-back-to-last-point)
-(global-set-key (kbd "M-g o")   #'helm-swoop)
+(defun tak/helm-swoop-dispatch (&optional arg)
+  "Calls `helm-swoop', or `helm-swoop-back-to-last-point' with a prefix arg."
+  (interactive "P")
+  (if current-prefix-arg
+      (funcall #'helm-swoop-back-to-last-point)
+    (funcall #'helm-swoop))
+  )
+
+(global-set-key (kbd "M-i")     #'tak/helm-swoop-dispatch)
+(global-set-key (kbd "M-I")     #'helm-multi-swoop)
+(global-set-key (kbd "s-i")     #'helm-multi-swoop-all)
+(global-set-key (kbd "M-g o")   #'tak/helm-swoop-dispatch)
 (global-set-key (kbd "C-c M-i") #'helm-multi-swoop)
 (global-set-key (kbd "C-x M-i") #'helm-multi-swoop-all)
 
