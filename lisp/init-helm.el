@@ -318,6 +318,8 @@
 (after-load 'helm-swoop
   (define-key helm-swoop-map (kbd "C-m")             #'helm-multi-swoop-current-mode-from-helm-swoop)
   (define-key helm-swoop-edit-map (kbd "C-k")        #'helm-swoop--edit-cancel)
+  (define-key helm-swoop-edit-map (kbd "C-c C-k")    #'helm-swoop--edit-cancel)
+  (define-key helm-swoop-edit-map (kbd "C-c C-c")    #'helm-swoop--edit-complete)
   )
 
 
