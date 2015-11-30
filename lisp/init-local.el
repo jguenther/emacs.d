@@ -481,7 +481,9 @@ If prefix ARG is non-nil, sets parameters appropriate for a frame with
 
 
 (require-package 'goto-last-change)
-(global-set-key (kbd "C-x C-\\") 'goto-last-change)
+(global-set-key (kbd "C-x C-\\") #'goto-last-change)
+(global-set-key (kbd "C-\\")     #'goto-last-change)
+
 
 
 
