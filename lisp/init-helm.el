@@ -312,10 +312,8 @@
 (global-set-key (kbd "M-g p")   #'helm-do-ag-project-root)
 (global-set-key (kbd "M-g z")   #'helm-do-zgrep)
 
-(after-load 'helm-google
-  (global-set-key (kbd "M-g G") #'helm-google)
-  (global-set-key (kbd "M-g S") #'helm-google-suggest)
-  )
+(global-set-key (kbd "M-g G")   #'helm-google)
+(global-set-key (kbd "M-g S")   #'helm-google-suggest)
 
 (after-load 'helm-swoop
   (define-key helm-swoop-map (kbd "C-m")             #'helm-multi-swoop-current-mode-from-helm-swoop)
