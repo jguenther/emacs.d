@@ -27,35 +27,40 @@
 
 (after-load 'psession
   (setq psession-object-to-save-alist
-        (append '((comint-input-ring . "comint-input-ring.el")
-                  (compile-history . "compile-history.el")
-                  (desktop-missing-file-warning . "esktop-missing-file-warning.el")
-                  (extended-command-history . "extended-command-history.el")
-                  (face-name-history . "face-name-history.el")
-                  (file-name-history . "file-name-history.el")
-                  (grep-find-history . "grep-find-history.el")
-                  (grep-history . "grep-history.el")
-                  (magit-read-rev-history . "magit-read-rev-history.el")
-                  (minibuffer-history . "minibuffer-history.el")
-                  (org-clock-history . "org-clock-history.el")
-                  (org-refile-history . "org-refile-history.el")
-                  (org-tags-history . "org-tags-history.el")
-                  (query-replace-history . "query-replace-history.el")
-                  (read-expression-history . "read-expression-history.el")
-                  (regexp-history . "regexp-history.el")
-                  (regexp-search-ring . "regexp-search-ring.el")
-                  (register-alist . "egister-alist.el")
-                  (shell-command-history . "shell-command-history.el")
-                  (tak/last-makefile-target . "tak.el")
-                  (tak/makefile-hist        . "tak.el")
-                  (tags-file-name . "tags-file-name.el")
-                  (tags-table-list . "tags-table-list.el")
-                  (dired-regexp-history . "dired-regexp-history.el")
-                  (search-ring . "search-ring.el"))
+        (append '((comint-input-ring            . "comint-input-ring.el")
+                  (compile-history              . "compile-history.el")
+                  (dired-regexp-history         . "dired-regexp-history.el")
+                  (extended-command-history     . "extended-command-history.el")
+                  (face-name-history            . "face-name-history.el")
+                  (file-name-history            . "file-name-history.el")
+                  (grep-find-history            . "grep-find-history.el")
+                  (grep-history                 . "grep-history.el")
+                  (magit-revision-history       . "magit-read-rev-history.el")
+                  (org-clock-history            . "org-clock-history.el")
+                  (org-refile-history           . "org-refile-history.el")
+                  (org-tags-history             . "org-tags-history.el")
+                  (query-replace-history        . "query-replace-history.el")
+                  (read-expression-history      . "read-expression-history.el")
+                  (regexp-history               . "regexp-history.el")
+                  (regexp-search-ring           . "regexp-search-ring.el")
+                  (register-alist               . "register-alist.el")
+                  (search-ring                  . "search-ring.el")
+                  (shell-command-history        . "shell-command-history.el")
+                  (tak/last-makefile-target     . "tak.el")
+                  (tak/makefile-hist            . "tak.el")
+                  (tags-file-name               . "tags-file-name.el")
+                  (tags-table-list              . "tags-table-list.el"))
                 psession-object-to-save-alist)
 
         psession-save-buffers-unwanted-buffers-regexp
         ".*[.]org$\\|diary$\\|[.]newsticker-cache$\\|[.]dir-locals.el$"))
+
+;; save a bunch of variables to the desktop file
+;; for lists specify the len of the maximal saved data also
+(setq desktop-globals-to-save '(desktop-missing-file-warning
+                                (minibuffer-history . 50)
+                                tags-file-name
+                                tags-table-list))
 
 (after-load 'desktop
   (dolist (mode '(
