@@ -5,6 +5,15 @@
   (when (version< emacs-version minver)
     (error "Your Emacs is too old -- this config requires v%s or higher" minver)))
 
+(defvar tak/init-load-complete nil
+  "Variable that is set to t after init.el has been completely loaded.")
+
+(add-hook 'after-init-hook
+          (lambda ()
+            (unless tak/init-load-complete
+              (error "Load of init.el did not complete successfully.")))
+          t)
+
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
 (require 'init-benchmarking) ;; Measure startup time
@@ -166,6 +175,7 @@
 (unless (server-running-p)
   (server-start))
 
+(setq tak/init-load-complete t)
 
 (provide 'init)
 
