@@ -51,7 +51,7 @@
  '(jedi:tooltip-method (quote (pos-tip)))
  '(jedi:use-shortcuts t)
  '(js-indent-level 4)
- '(js2-basic-offset 4 t)
+ '(js2-basic-offset 4)
  '(magit-push-always-verify t)
  '(magit-revert-buffers 2)
  '(magit-save-repository-buffers (quote dontask))
