@@ -100,6 +100,7 @@
 
 (require-package 'jinja2-mode)
 (require-package 'jquery-doc)
-(require-package 'angularjs-mode)
+(require-package 'angular-mode)
+(require-package 'angular-snippets)
 
 (provide 'init-javascript)
