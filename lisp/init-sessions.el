@@ -53,7 +53,7 @@
                 psession-object-to-save-alist)
 
         psession-save-buffers-unwanted-buffers-regexp
-        ".*[.]org$\\|diary$\\|[.]newsticker-cache$\\|[.]dir-locals.el$"))
+        ".*[.]org$\\|diary$\\|[.]newsticker-cache$\\|[.]dir-locals.el$\\|/Projects/\\|/Library/Python/"))
 
 ;; save a bunch of variables to the desktop file
 ;; for lists specify the len of the maximal saved data also
