@@ -5,15 +5,20 @@
   (when (version< emacs-version minver)
     (error "Your Emacs is too old -- this config requires v%s or higher" minver)))
 
-(setq debug-on-error t)
+(setq debug-on-error t
+      debug-on-quit t
+      )
 
 (defvar tak/init-load-complete nil
   "Variable that is set to t after init.el has been completely loaded.")
 
-(add-hook 'desktop-after-read-hook
-          (lambda ()
-            (setq debug-on-error nil))
-          t)
+(let ((turn-off-debug (lambda ()
+                        (setq debug-on-error nil)
+                        (setq debug-on-quit nil)
+                        t)))
+  (dolist (hook '(desktop-after-read-hook
+                  desktop-not-loaded-hook))
+    (add-hook hook turn-off-debug)))
 
 (add-hook 'after-init-hook
           (lambda ()
