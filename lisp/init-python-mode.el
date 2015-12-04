@@ -172,19 +172,21 @@ running."
           gud-pdb-command-name pdb-executable
           tak/elpy-pytest-pdb-runner-args (list (format "--%spdb" prefix) "-s" "--color=yes"))))
 
+(defvar tak/python-breakpoint-string "import trepan.api; trepan.api.debug()"
+  "String that enables a breakpoint in the python debugger.")
+
 (defun annotate-pdb-breakpoints ()
   (interactive)
-  (highlight-lines-matching-regexp "import trepan.api; *trepan.api.debug()"))
+  (highlight-lines-matching-regexp tak/python-breakpoint-string))
 
 (defun python-add-breakpoint ()
   (interactive)
-  (let* ((breakpoint-string "import trepan.api; trepan.api.debug()"))
-    (beginning-of-line)
-    (newline-and-indent)
-    (previous-line)
-    (beginning-of-line)
-    (insert breakpoint-string)
-    (indent-according-to-mode)))
+  (beginning-of-line)
+  (newline-and-indent)
+  (previous-line)
+  (beginning-of-line)
+  (insert tak/python-breakpoint-string)
+  (indent-according-to-mode))
 
 (defun tak/setup-python-shell ()
   (let ((setup-string (shell-command-to-string
