@@ -204,10 +204,11 @@
 (define-key helm-command-map (kbd "F")       #'helm-do-ag-this-file)
 (define-key helm-command-map (kbd "M-g g")   #'helm-git-grep)
 
-(after-load 'helm-google
-  (define-key helm-command-map (kbd "M-g G") #'helm-google)
-  (define-key helm-command-map (kbd "M-g S") #'helm-google-suggest)
-  )
+(require 'helm-google)
+(define-key helm-command-map (kbd "M-g G") #'helm-google)
+(define-key helm-command-map (kbd "G")     #'helm-google)
+(define-key helm-command-map (kbd "M-g S") #'helm-google-suggest)
+(define-key helm-command-map (kbd "g")     #'helm-google-suggest)
 
 (define-key helm-command-map (kbd "M-g z")   #'helm-do-zgrep)
 (define-key helm-command-map (kbd "M-g F")   #'helm-do-ag-this-file)
