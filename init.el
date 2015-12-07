@@ -17,7 +17,8 @@
                         (setq debug-on-quit nil)
                         t)))
   (dolist (hook '(desktop-after-read-hook
-                  desktop-not-loaded-hook))
+                  desktop-not-loaded-hook
+                  desktop-no-desktop-file-hook))
     (add-hook hook turn-off-debug)))
 
 (add-hook 'after-init-hook
