@@ -526,6 +526,10 @@ If prefix ARG is non-nil, sets parameters appropriate for a frame with
                      org-linkany
                      org-trello
                      org-time-budgets
+
+                     ox-mediawiki
+                     ox-gfm
+                     ox-rst
                      ))
     (if (maybe-require-package element)
         (add-to-list 'org-modules element t)))

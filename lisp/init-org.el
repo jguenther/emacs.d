@@ -1,4 +1,8 @@
 (require-package 'org-fstree)
+(require-package 'ox-mediawiki)
+(require-package 'ox-rst)
+(require-package 'ox-gfm)
+
 (when *is-a-mac*
   (require-package 'org-mac-link)
   (autoload 'org-mac-grab-link "org-mac-link" nil t)
