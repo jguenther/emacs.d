@@ -123,31 +123,6 @@
 
 
 
-(require 'mmm-auto)
-(mmm-add-classes
- `((shell-script-python
-    :submode python-mode
-    :front ,(concat "^[  ]*#?[   ]*%{" (mmm-regexp-opt '("begin_python")) "}%
-")
-    :back ,(concat "^[   ]*#?[   ]*%{" (mmm-regexp-opt '("end_python")) "}%")
-    :front-offset 0
-    :back-offset 0
-    :save-matches 0
-    )))
-
-(add-to-list
- 'mmm-mode-ext-classes-alist
- '(sh-mode "\\.sh\\'" shell-script-python))
-
-(defun tak/shell-script-mmm-on ()
-  (message "shell-script-mmm-on")
-  (setq-local mmm-submode-decoration-level 2)
-  (mmm-ify-by-class 'shell-script-python))
-
-(add-hook 'shell-script-mode-hook #'tak/shell-script-mmm-on)
-
-
-
 ;; Default key bindings:
 
 ;; C-x C-<SPC>    go back in `global-mark-ring', respects prefix arg
