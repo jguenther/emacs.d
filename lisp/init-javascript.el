@@ -38,7 +38,6 @@
       (set (make-local-variable 'js2-mode-show-parse-errors) t)
       (set (make-local-variable 'js2-mode-show-strict-warnings) t)))
   (add-hook 'js2-mode-hook 'sanityinc/disable-js2-checks-if-flycheck-active)
-
   (add-hook 'js2-mode-hook (lambda () (setq mode-name "JS2")))
 
   (after-load 'js2-mode
@@ -55,7 +54,9 @@
 
 (require-package 'rainbow-delimiters)
 (dolist (hook '(js2-mode-hook js-mode-hook json-mode-hook))
-  (add-hook hook 'rainbow-delimiters-mode))
+  (add-hook hook 'rainbow-delimiters-mode)
+  (add-hook hook #'linum-mode)
+  )
 
 
 

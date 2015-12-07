@@ -203,6 +203,7 @@ running."
   (add-hook 'python-mode-hook #'tak/setup-python-shell)
   (add-hook 'python-mode-hook #'annotate-pdb-breakpoints)
   (add-hook 'python-mode-hook #'ipretty-mode)
+  (add-hook 'python-mode-hook #'linum-mode)
   )
 
 (defun tak/realgud-setup ()
