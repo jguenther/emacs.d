@@ -141,6 +141,8 @@
 
 ;; iedit
 (require-package 'iedit)
+;; don't use C-; default, manually bind it
+(setq iedit-toggle-key-default nil)
 (define-key mode-specific-map (kbd ";") #'iedit-mode)
 
 
