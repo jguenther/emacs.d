@@ -23,7 +23,14 @@
 (savehist-mode t)
 
 (require-package 'psession)
-(add-hook 'after-init-hook #'psession-mode)
+
+(defun tak/psession-but-no-save-buffers-mode ()
+  (psession-mode +1)
+  (dolist (fn '(psession-save-last-winconf
+                psession--dump-some-buffers-to-list))
+    (setq kill-emacs-hook (delete fn kill-emacs-hook))))
+
+(add-hook 'after-init-hook #'tak/psession-but-no-save-buffers-mode)
 
 (after-load 'psession
   (setq psession-object-to-save-alist
