@@ -36,7 +36,7 @@
               helm-yank-symbol-first                 t
               helm-move-to-line-cycle-in-source      t
               helm-buffers-fuzzy-matching            t
-              helm-ff-auto-update-initial-value      t
+              helm-ff-auto-update-initial-value      nil
               ido-use-virtual-buffers                t   ; Needed in helm-buffers-list
               helm-org-headings-fontify              t
 
