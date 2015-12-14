@@ -9,6 +9,10 @@
   (setq-default markdown-css-paths mkdown-css-file-name))
 
 (add-to-list 'auto-mode-alist '("README\\.\\(?:md\\|markdown\\)\\'" . gfm-mode))
-(require-package 'elpy)
+
+(dolist (hook '(markdown-mode-hook
+                gfm-mode-hook))
+  (add-hook hook (lambda ()
+                   (setq-local electric-indent-inhibit t))))
 
 (provide 'init-markdown)

@@ -419,9 +419,10 @@ Will work on both org-mode and any mode that accepts plain html."
 
 (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
 
-(add-hook 'org-mode-hook
-          (lambda ()
-            (define-key org-mode-map (kbd "<f11> o") 'helm-org-in-buffer-headings)))
+(after-load 'org
+  (define-key org-mode-map (kbd "<f11> o") #'helm-org-in-buffer-headings)
+  (define-key org-mode-map (kbd "M-n")     #'outline-next-visible-heading)
+  (define-key org-mode-map (kbd "M-p")     #'outline-previous-visible-heading))
 
 
 
