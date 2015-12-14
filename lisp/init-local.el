@@ -337,6 +337,15 @@ Moves point to the end of the inserted text. Does not change mark."
 (autoload 'dired-toggle-read-only "dired" nil t)
 (define-key endless/toggle-map "w" #'whitespace-mode)
 
+(defun tak/toggle-highlight-symbol-nav-mode ()
+  (interactive)
+  (let ((arg (if highlight-symbol-nav-mode
+                 -1
+               +1)))
+    (highlight-symbol-nav-mode arg)))
+
+(define-key endless/toggle-map "n" #'tak/toggle-highlight-symbol-nav-mode)
+
 (defvar tak/magit-diff-highlight-trailing magit-diff-highlight-trailing
   "Enable or disable whitespace highlighting in `magit-mode`.
 Used by `tak/toggle-magit-diff-highlight-trailing`.")
@@ -1017,7 +1026,7 @@ with the patterns in `tak/semantic-unwanted-file-patterns'."
 (add-to-list 'semantic-inhibit-functions #'tak/inhibit-unwanted-semantic-files)
 
 (global-semantic-stickyfunc-mode +1)
-(global-semantic-idle-scheduler-mode +1)
+(global-semantic-idle-scheduler-mode -1)
 (global-semanticdb-minor-mode +1)
 ;;(global-semantic-idle-summary-mode +1) -- covered by eldoc mode ?
 (semantic-mode +1)

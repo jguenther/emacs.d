@@ -60,8 +60,7 @@
 (require-package 'highlight-symbol)
 (dolist (hook '(prog-mode-hook html-mode-hook css-mode-hook))
   (add-hook hook 'highlight-symbol-mode)
-  (add-hook hook 'highlight-symbol-nav-mode))
-(add-hook 'org-mode-hook 'highlight-symbol-nav-mode)
+  )
 
 (defun sanityinc/maybe-suppress (orig-function &rest args)
   "Suppress symbol highlighting while isearching."
