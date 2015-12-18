@@ -8,6 +8,7 @@
 (require-package 'go-eldoc)
 (require-package 'go-errcheck)
 (require-package 'go-complete)
+(require-package 'go-playground)
 
 ;; (require-package 'go-autocomplete)
 
@@ -20,6 +21,9 @@
     (add-to-list 'exec-path-from-shell-variables var)))
 
 (after-load 'go-mode
+  (add-hook 'go-mode-hook #'linum-mode)
+
+  (require 'go-playground)
   (require 'go-complete)
   (add-hook 'completion-at-point-functions 'go-complete-at-point)
 
