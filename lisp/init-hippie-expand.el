@@ -1,4 +1,5 @@
-(global-set-key (kbd "s-/") 'hippie-expand)
+(global-set-key [remap dabbrev-expand] #'hippie-expand)
+(global-set-key (kbd "M-/") #'hippie-expand)
 
 (setq hippie-expand-try-functions-list
       '(try-complete-file-name-partially
