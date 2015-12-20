@@ -13,16 +13,21 @@
     (when sql-buffer
       (sanityinc/pop-to-sqli-buffer))))
 
+(defun sanityinc/maybe-set-dash-db-docset ()
+  (when (and
+         (sanityinc/dash-installed-p)
+         sql-product
+         (eq sql-product 'postgres))
+    (set (make-local-variable 'dash-at-point-docset) "psql")))
+
 (after-load 'sql
   (define-key sql-mode-map (kbd "C-c C-z") 'sanityinc/pop-to-sqli-buffer)
   (add-hook 'sql-interactive-mode-hook 'sanityinc/never-indent)
   (when (package-installed-p 'dash-at-point)
-    (defun sanityinc/maybe-set-dash-db-docset ()
-      (when (eq sql-product 'postgres)
-        (set (make-local-variable 'dash-at-point-docset) "psql")))
     (add-hook 'sql-mode-hook 'sanityinc/maybe-set-dash-db-docset)
     (add-hook 'sql-interactive-mode-hook 'sanityinc/maybe-set-dash-db-docset)
-    (advice-add #'sql-set-product :after #'sanityinc/maybe-set-dash-db-docset)))
+    (advice-add #'sql-set-product :after #'sanityinc/maybe-set-dash-db-docset)
+    ))
 
 (setq-default sql-input-ring-file-name
               (expand-file-name ".sqli_history" user-emacs-directory))
