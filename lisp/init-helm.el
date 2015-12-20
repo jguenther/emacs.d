@@ -231,6 +231,9 @@
 
 (define-key helm-command-map (kbd "<SPC>")   #'helm-all-mark-rings)
 
+(define-key helm-command-map (kbd "M-c")     #'helm-colors)
+(define-key helm-command-map (kbd "c")     #'helm-calcul-expression)
+
 
 (define-key helm-map (kbd "M-o") #'helm-previous-source)
 (define-key helm-map (kbd "M-h") #'helm/toggle-header-line)
@@ -267,7 +270,6 @@
 (global-set-key [remap find-tag]                     #'helm-etags-select)
 (global-set-key [remap xref-find-definitions]        #'helm-etags-select)
 (global-set-key (kbd "C-h a")                        #'helm-apropos)
-(global-set-key (kbd "C-h i")                        #'helm-info-emacs)
 (global-set-key (kbd "C-h b")                        #'helm-descbinds)
 (global-set-key (kbd "C-x b")                        #'helm-mini)
 (global-set-key (kbd "C-x C-b")                      #'helm-buffers-list)
