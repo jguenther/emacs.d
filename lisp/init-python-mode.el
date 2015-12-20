@@ -120,7 +120,7 @@ running."
                                  (indent-guide-mode))))
     result))
 
-(advice-add 'jedi:complete :around #'tak/disable-indent-guide-when-completing)
+;; (advice-add 'jedi:complete :around #'tak/disable-indent-guide-when-completing)
 
 ;; pungi (jedi and virtualenv compat)
 ;;(require-package 'pungi)
@@ -524,6 +524,7 @@ sys.path."
 
     ;; override company-mode backend (even though it's disabled)
     (define-key elpy-mode-map (kbd "C-M-i") 'jedi:complete)
+    (define-key python-mode-map (kbd "C-M-i") 'jedi:complete)
     
     ;;
     ;; Use the regular major mode hook to add a buffer-local hack-local-variables-hook
