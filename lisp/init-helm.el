@@ -271,6 +271,7 @@
 (global-set-key (kbd "C-h b")                        #'helm-descbinds)
 (global-set-key (kbd "C-x b")                        #'helm-mini)
 (global-set-key (kbd "C-x C-b")                      #'helm-buffers-list)
+(global-set-key (kbd "C-x M-b")                      #'ibuffer)
 (global-set-key (kbd "C-x C-f")                      #'helm-find-files)
 (global-set-key (kbd "C-x C-r")                      #'helm-recentf)
 (global-set-key (kbd "C-x r l")                      #'helm-filtered-bookmarks)
