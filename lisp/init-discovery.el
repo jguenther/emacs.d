@@ -36,7 +36,7 @@
      ))
 (global-set-key (kbd "C-x v") 'popup-keys:run-vc)
 
-(global-set-key (kbd "C-c p") 'popup-keys:run-projectile)
+(global-set-key (kbd "C-c P") 'popup-keys:run-projectile)
 
 (global-set-key (kbd "C-x C-k")   'popup-keys:run-kmacro)
 (global-set-key (kbd "C-x C-S-k") 'kmacro-keymap)

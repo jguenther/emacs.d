@@ -4,7 +4,8 @@
 (require-package 'persp-projectile)
 
 (setq-default projectile-enable-caching t
-              rojectile-keymap-prefix (kbd "C-c P")
+              projectile-keymap-prefix (kbd "C-c p")
+              projectile-enable-caching nil
               )
 
 (after-load 'popup-keys-examples
