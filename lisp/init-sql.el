@@ -13,7 +13,7 @@
     (when sql-buffer
       (sanityinc/pop-to-sqli-buffer))))
 
-(defun sanityinc/maybe-set-dash-db-docset ()
+(defun sanityinc/maybe-set-dash-db-docset (&rest args)
   (when (and
          (sanityinc/dash-installed-p)
          sql-product
