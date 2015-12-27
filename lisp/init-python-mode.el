@@ -425,10 +425,13 @@ variable."
   (when (eq major-mode 'python-mode)
     (set (make-local-variable 'process-environment)
          (tak/compute-local-python-environment))
-    (add-hook 'python-mode-hook 'jedi:setup nil t)
-    ;;(add-hook 'python-mode-hook 'flycheck-mode nil t)
-    )
-  )
+    (jedi:setup)
+
+    (when tak/flycheck-enabled
+      (require 'flycheck)
+      (flycheck-select-checker 'python-pylint)
+      (flycheck-mode)
+      )))
 
 (defun tak/python-setup ()
   "Setup python-mode in buffers where this mode is active.
@@ -437,13 +440,6 @@ Adds and modifies keybinds and uses hack-local-variables-hook to setup
 sys.path."
 
   (when (eq major-mode 'python-mode)
-    ;; (message "%s: in tak/python-setup" (buffer-name))
-
-    (when tak/flycheck-enabled
-      (require 'flycheck)
-      (flycheck-select-checker 'python-pylint)
-      )
-
     ;; setup python-mode keybinds
 
     ;; nav rebinds
