@@ -51,7 +51,12 @@
 (add-hook 'after-init-hook
 	  (lambda ()
 	    (load custom-file)))
-	  
+
+;; workaround for "incomprehensible buffer" issue when loading org repo
+(when (>= emacs-major-version 25)
+  (load-library "url-handlers")
+  (message "Loaded url-handlers lib"))
+
 (require 'init-compat)
 (require 'init-utils)
 (require 'init-site-lisp) ;; Must come before elpa, as it may provide package.el
