@@ -26,9 +26,12 @@
 
 (defun tak/psession-but-no-save-buffers-mode ()
   (psession-mode +1)
-  (dolist (fn '(psession-save-last-winconf
-                psession--dump-some-buffers-to-list))
-    (setq kill-emacs-hook (delete fn kill-emacs-hook))))
+  (dolist (fn '(psession--dump-some-buffers-to-list
+                psession--restore-some-buffers
+                psession-save-last-winconf
+                psession-restore-last-winconf))
+    (remove-hook 'kill-emacs-hook fn)
+    (remove-hook 'emacs-startup-hook fn)))
 
 (add-hook 'after-init-hook #'tak/psession-but-no-save-buffers-mode)
 
