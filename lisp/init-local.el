@@ -11,10 +11,6 @@
  kept-new-versions 6
  kept-old-versions 2
 
- ;; magit
- git-gutter-fr+-side 'right-fringe
- git-gutter-fr:side 'right-fringe
-
  magit-diff-refine-hunk t
  magit-diff-highlight-trailing nil
  magit-repository-directories (quote ("~/.emacs.d"
@@ -205,37 +201,7 @@ Moves point to the end of the inserted text. Does not change mark."
 (require-package 'git-timemachine)
 (require-package 'git-wip-timemachine)
 
-(require-package 'git-gutter)
-(require-package 'git-gutter+)
-(require-package 'git-gutter-fringe)
-
-(after-load 'git-gutter+
-
-  (global-git-gutter+-mode t)
-  (diminish 'git-gutter+-mode)
-
-  ;; workaround visual bug with git-gutter and org-indent-mode
-  (add-to-list 'git-gutter:disabled-modes 'org-mode)
-
-  (global-set-key (kbd "C-x v =") 'git-gutter+-popup-hunk)
-  (define-key git-gutter+-mode-map (kbd "C-c u =") 'git-gutter+-popup-hunk)
-
-  ;; Jump to next/previous hunk
-  (define-key git-gutter+-mode-map (kbd "C-c u p") 'git-gutter+-previous-hunk)
-  (define-key git-gutter+-mode-map (kbd "C-c u n") 'git-gutter+-next-hunk)
-
-  ;; Stage current hunk
-  (define-key git-gutter+-mode-map (kbd "C-c u s") 'git-gutter+-stage-hunks)
-
-  ;; Revert current hunk
-  (define-key git-gutter+-mode-map (kbd "C-c u r") 'git-gutter+-revert-hunk)
-
-  )
-
 (after-load 'magit
-  (require 'git-gutter)
-  (require 'git-gutter+)
-
   (magit-wip-after-save-mode 1)
   (magit-wip-before-change-mode -1)
   (magit-wip-after-apply-mode -1)

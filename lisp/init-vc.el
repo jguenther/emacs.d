@@ -1,13 +1,19 @@
-;; (require-package 'diff-hl)
+(require-package 'diff-hl)
 
-;; (add-hook 'prog-mode-hook 'turn-on-diff-hl-mode)
-;; (add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode)
+(diminish 'diff-hl-mode)
+(setq diff-hl-command-prefix "^Xu")
 
-;; (defun tak/add-diff-hl-toggle-command ()
-;;   (define-key tak/vc-toggle-map "d" 'diff-hl-mode))
+(add-hook 'prog-mode-hook 'turn-on-diff-hl-mode t)
+(add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode t)
 
-;; (add-hook 'prog-mode-hook 'tak/add-diff-hl-toggle-command)
-;; (add-hook 'vc-dir-mode-hook 'tak/add-diff-hl-toggle-command)
+(add-hook 'prog-mode-hook 'diff-hl-flydiff-mode t)
+(add-hook 'vc-dir-mode-hook 'diff-hl-flydiff-mode t)
 
+(after-load 'diff-hl
+  (define-key diff-hl-mode-map (kbd "C-x u =") #'diff-hl-diff-goto-hunk)
+  (define-key diff-hl-mode-map (kbd "C-x u v") #'diff-hl-revert-hunk)
+  (define-key diff-hl-mode-map (kbd "C-x u p") #'diff-hl-previous-hunk)
+  (define-key diff-hl-mode-map (kbd "C-x u n") #'diff-hl-next-hunk)
+  )
 
 (provide 'init-vc)
