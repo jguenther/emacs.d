@@ -389,7 +389,8 @@ Returns non-nil if `current-buffer' has any of
                 magit-status-mode
                 magit-blame-mode
                 magit-popup-mode
-                Custom-mode))
+                Custom-mode
+                undo-tree-visualizer-mode))
   (add-to-list 'beacon-dont-blink-major-modes mode))
 
 (setq-default beacon-blink-delay 0.5
