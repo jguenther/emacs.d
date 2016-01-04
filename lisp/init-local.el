@@ -1,6 +1,6 @@
 (setq-default
  auto-revert-verbose t
- revert-without-query (quote (".*"))
+ revert-without-query '(".*")
  backup-by-copying t
  backup-directory-alist '(("." . "~/.emacs.d/saves"))
  make-backup-files t
@@ -13,11 +13,11 @@
 
  magit-diff-refine-hunk t
  magit-diff-highlight-trailing nil
- magit-repository-directories (quote ("~/.emacs.d"
-                                      "~/org"
-                                      "~/code/scripts"
-                                      "~/dotfiles"
-                                      ))
+ magit-repository-directories '("~/.emacs.d"
+                                "~/org"
+                                "~/code/scripts"
+                                "~/dotfiles"
+                                )
  message-log-max 10000
 
  scroll-restore-handle-cursor nil
@@ -93,6 +93,10 @@
 
 (mouse-wheel-mode 1)
 
+
+
+;;; hl-line
+
 (require-package 'hl-line+)
 (require 'hl-line+)
 (setq-default hl-line-face 'highlight)
@@ -102,6 +106,8 @@
                 magit-log-mode))
   (add-to-list 'hl-line-inhibit-highlighting-for-modes mode))
 (global-hl-line-mode)
+
+
 
 (require-package 'bookmark+)
 (setq-default bmkp-last-as-first-bookmark-file

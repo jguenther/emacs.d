@@ -43,15 +43,12 @@
 
 (global-set-key (kbd "C-x r") 'popup-keys:run-registers)
 (global-set-key (kbd "C-x r") 'popup-keys:run-registers)
-(global-set-key (kbd "C-x R") ctl-x-r-map)
-;; undo-tree annoyingly binds to the C-x r prefix and overrides the above.
+
 (after-load 'undo-tree
   (define-key undo-tree-map (kbd "C-x r") nil))
 
+;; undo-tree annoyingly binds to the C-x r prefix and overrides this
 (global-set-key (kbd "C-x R") ctl-x-r-map)
-;; undo-tree annoyingly binds to the C-x r prefix and overrides the above.
-(eval-after-load "undo-tree"
-  '(define-key undo-tree-map (kbd "C-x r") nil))
 
 (add-hook 'dired-mode-hook
           (lambda ()
