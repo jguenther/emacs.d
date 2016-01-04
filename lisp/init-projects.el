@@ -3,15 +3,23 @@
 (require-package 'perspective)
 (require-package 'persp-projectile)
 
-(setq-default projectile-enable-caching t
+(setq-default projectile-enable-caching nil
               projectile-keymap-prefix (kbd "C-c p")
-              projectile-enable-caching nil
+              projectile-completion-system 'helm
+              projectile-find-dir-includes-top-level t
+              projectile-switch-project-action #'magit-status
+              projectile-use-git-grep t
               )
 
 (after-load 'popup-keys-examples
   (global-set-key (kbd "C-c p") 'popup-keys:run-projectile))
 
 (require 'projectile)
+
+(dolist (suffix '(".elc"
+                  ".pyc"))
+  (add-to-list 'projectile-globally-ignored-file-suffixes suffix))
+
 (defun tak/init-perspective ()
   (require 'perspective)
   (require 'persp-projectile)
