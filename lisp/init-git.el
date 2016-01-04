@@ -7,7 +7,6 @@
 (require-package 'git-messenger) ;; Though see also vc-annotate's "n" & "p" bindings
 (require-package 'git-timemachine)
 
-(require-package 'magit)
 (setq-default
  magit-process-popup-time 10
  magit-diff-refine-hunk t
@@ -16,7 +15,6 @@
 ;; Hint: customize `magit-repo-dirs' so that you can use C-u M-F12 to
 ;; quickly open magit on any one of your projects.
 (global-set-key [(meta f12)] 'magit-status)
-
 
 (after-load 'magit
   (define-key magit-status-mode-map (kbd "C-M-<up>") 'magit-section-up)
@@ -93,7 +91,9 @@
          fetch-address)))
     ))
 
-(add-hook 'magit-mode-hook #'endless/add-PR-fetch)
+(after-load 'magit
+  (add-hook 'magit-mode-hook #'endless/add-PR-fetch)
+  )
 
 
 
