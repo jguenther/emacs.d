@@ -1003,6 +1003,7 @@ with the patterns in `tak/semantic-unwanted-file-patterns'."
 (require-package 'volatile-highlights)
 (require 'volatile-highlights)
 (volatile-highlights-mode t)
+(diminish 'volatile-highlights-mode)
 
 
 

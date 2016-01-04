@@ -18,6 +18,7 @@
   (require-package 'helm-dash))
 
 (require 'helm-config)
+(diminish 'helm-mode)
 (helm-mode t)
 (helm-adaptive-mode t)
 (helm-push-mark-mode 1)

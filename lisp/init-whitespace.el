@@ -22,6 +22,8 @@
 
 (require-package 'whitespace-cleanup-mode)
 (global-whitespace-cleanup-mode t)
+(diminish 'whitespace-cleanup-mode)
+
 (after-load 'whitespace-cleanup-mode
   (add-to-list 'whitespace-cleanup-mode-ignore-modes 'which-key-mode)
   )
