@@ -309,10 +309,10 @@ Moves point to the end of the inserted text. Does not change mark."
 
 (defun tak/toggle-highlight-symbol-nav-mode ()
   (interactive)
-  (let ((arg (if highlight-symbol-nav-mode
-                 -1
-               +1)))
-    (highlight-symbol-nav-mode arg)))
+  (let* ((arg (if highlight-symbol-nav-mode -1 +1))
+         (msg (if (> 0 arg) "disabled" "enabled")))
+    (highlight-symbol-nav-mode arg)
+    (message "highlight-symbol-nav-mode %s" msg)))
 
 (define-key endless/toggle-map "n" #'tak/toggle-highlight-symbol-nav-mode)
 
