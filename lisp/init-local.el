@@ -480,7 +480,6 @@ If prefix ARG is non-nil, sets parameters appropriate for a frame with
                      orgit
                      orglink
                      org-linkany
-                     org-trello
                      org-time-budgets
 
                      ox-mediawiki
