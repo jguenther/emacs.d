@@ -71,6 +71,9 @@
  nav-flash-use-pulse (quote gui-only)
 
  visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow)
+
+ ;; don't warn about setting env vars in bashrc: bashrc is sourced in bash_profile
+ exec-path-from-shell-check-startup-files nil
  )
 
 ;; set default frame font globally
