@@ -52,11 +52,17 @@
   (global-prettify-symbols-mode))
 
 
+
+;; undo-tree
 (require-package 'undo-tree)
 (global-undo-tree-mode)
 (diminish 'undo-tree-mode)
+(global-set-key (kbd "C-M-_") #'undo-tree-redo)
+(define-key undo-tree-map (kbd "C-x U") #'undo-tree-visualize)
+(define-key undo-tree-map (kbd "C-x u") nil)
 
 
+
 (require-package 'highlight-symbol)
 (dolist (hook '(prog-mode-hook html-mode-hook css-mode-hook))
   (add-hook hook 'highlight-symbol-mode)

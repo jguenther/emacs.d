@@ -239,8 +239,6 @@ Moves point to the end of the inserted text. Does not change mark."
   (define-key Info-mode-map (kbd "<mouse-4>") nil)
   (define-key Info-mode-map (kbd "<mouse-5>") nil))
 
-(global-set-key "\C-\M-_" 'undo-tree-redo)
-
 (add-to-list 'auto-mode-alist
              '("\\(inputrc\\|bashrc\\)\\'" . sh-mode))
 
