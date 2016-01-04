@@ -25,8 +25,15 @@
 (diminish 'whitespace-cleanup-mode)
 
 (after-load 'whitespace-cleanup-mode
-  (add-to-list 'whitespace-cleanup-mode-ignore-modes 'which-key-mode)
-  )
+  (dolist (mode '(markdown-mode
+                  special-mode
+                  view-mode
+                  comint-mode
+                  cider-repl-mode
+                  haskell-interactive-mode
+                  org-mode
+                  which-key-mode))
+    (add-to-list 'whitespace-cleanup-mode-ignore-modes mode)))
 
 (global-set-key [remap just-one-space] 'cycle-spacing)
 

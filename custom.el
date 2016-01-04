@@ -141,9 +141,6 @@
  '(tramp-connection-timeout 30)
  '(vc-follow-symlinks t)
  '(visible-bell nil)
- '(whitespace-cleanup-mode-ignore-modes
-   (quote
-    (markdown-mode special-mode view-mode comint-mode cider-repl-mode haskell-interactive-mode org-mode)))
  '(yas-also-auto-indent-first-line t)
  '(yas-expand-only-for-last-commands (quote (self-insert-command))))
 (custom-set-faces
