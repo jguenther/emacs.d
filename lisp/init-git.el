@@ -89,6 +89,11 @@
   (add-hook 'magit-mode-hook #'endless/add-PR-fetch)
   )
 
+;; gh
+(after-load 'gh
+  ;; don't change '-' to '.' (via gh-api-enterprise-username-filter)
+  (setq gh-api-username-filter nil))
+
 
 
 ;; completing read over all files in repo
