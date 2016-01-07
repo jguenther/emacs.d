@@ -21,6 +21,7 @@
   (add-hook hook #'sanityinc/no-trailing-whitespace))
 
 (require-package 'whitespace-cleanup-mode)
+(setq whitespace-cleanup-mode-only-if-initially-clean nil)
 (global-whitespace-cleanup-mode t)
 (diminish 'whitespace-cleanup-mode)
 
