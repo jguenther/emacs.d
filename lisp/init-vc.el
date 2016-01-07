@@ -1,7 +1,8 @@
 (require-package 'diff-hl)
 
 (diminish 'diff-hl-mode)
-(setq diff-hl-command-prefix "^Xu")
+(setq diff-hl-command-prefix "^Xu"
+      diff-hl-flydiff-delay 0.8)
 
 (add-hook 'prog-mode-hook 'turn-on-diff-hl-mode t)
 (add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode t)
