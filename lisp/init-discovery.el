@@ -1,8 +1,12 @@
 ;;; discovery modes
 ;; discover, popup-keys, etc.
 
+(require-package 'discover)
 (require-package 'discover-my-major)
+(require 'discover)
 (require 'discover-my-major)
+
+(global-discover-mode)
 
 (global-set-key (kbd "C-h M-m") 'discover-my-major)
 (global-set-key (kbd "C-h C-M-m") 'discover-my-mode)
