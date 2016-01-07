@@ -970,6 +970,8 @@ supply a positive argument once more with C-u C-SPC."
 (require 'semantic)
 (require 'stickyfunc-enhance)
 (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-decoration-mode)
+
 
 (defvar tak/semantic-unwanted-file-patterns '("html?\\'"
                                               "\\`timemachine:")
@@ -993,9 +995,10 @@ with the patterns in `tak/semantic-unwanted-file-patterns'."
 (add-to-list 'semantic-inhibit-functions #'tak/inhibit-unwanted-semantic-files)
 
 (global-semantic-stickyfunc-mode +1)
+(global-semantic-decoration-mode +1)
 (global-semantic-idle-scheduler-mode -1)
 (global-semanticdb-minor-mode +1)
-;;(global-semantic-idle-summary-mode +1) -- covered by eldoc mode ?
+
 (semantic-mode +1)
 
 
