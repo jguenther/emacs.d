@@ -13,11 +13,13 @@
 (require-package 'helm-google)
 (require-package 'helm-themes)
 (require-package 'ace-jump-helm-line)
+(require-package 'swiper-helm)
 
 (when (sanityinc/dash-installed-p)
   (require-package 'helm-dash))
 
 (require 'helm-config)
+(require 'helm-easymenu)
 (diminish 'helm-mode)
 (helm-mode t)
 (helm-adaptive-mode t)
@@ -204,6 +206,7 @@
 (define-key helm-command-map (kbd "A")       #'helm-ag)
 (define-key helm-command-map (kbd "F")       #'helm-do-ag-this-file)
 (define-key helm-command-map (kbd "M-g g")   #'helm-git-grep)
+(define-key helm-command-map (kbd "M-g s")   #'swiper-helm)
 
 (require 'helm-google)
 (define-key helm-command-map (kbd "M-g G") #'helm-google)
@@ -318,6 +321,8 @@
 
 (global-set-key (kbd "M-g G")   #'helm-google)
 (global-set-key (kbd "M-g S")   #'helm-google-suggest)
+(global-set-key (kbd "M-g s")   #'swiper-helm)
+
 
 (after-load 'helm-swoop
   (define-key helm-swoop-map (kbd "C-m")             #'helm-multi-swoop-current-mode-from-helm-swoop)
