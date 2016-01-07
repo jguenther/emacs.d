@@ -1,3 +1,4 @@
+
 (defun sanityinc/time-subtract-millis (b a)
   (* 1000.0 (float-time (time-subtract b a))))
 
@@ -99,7 +100,7 @@ FUNCTION to run `elp-results' after FUNCTION returns."
     (error "Profiler is not currently running.")))
 
 (defvar tak/want-cpu-profiler-p t)
-(defvar tak/want-memory-profiler-p nil)
+(defvar tak/want-memory-profiler-p t)
 
 (with-eval-after-load 'discover
   (discover-add-context-menu
