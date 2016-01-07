@@ -884,8 +884,7 @@ supply a positive argument once more with C-u C-SPC."
  shell-prompt-pattern eshell-prompt-regexp)
 
 
-
-;; shell-pop
+;; shell runners
 
 ;; TODO fix split window cmd--splits bottom window then opens shell in right split window
 (require-package 'shell-pop)
@@ -897,6 +896,11 @@ supply a positive argument once more with C-u C-SPC."
  shell-pop-window-position "bottom"
  )
 (require 'shell-pop)
+
+(require-package 'multishell)
+(setq-default multishell-activate-command-key nil)
+(global-set-key (kbd "<f12>") #'multishell-pop-to-shell)
+(autoload #'multishell-pop-to-shell "multishell")
 
 
 (setq keyfreq-autosave-mode t
