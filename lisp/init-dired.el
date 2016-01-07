@@ -28,7 +28,7 @@
 
 (when (maybe-require-package 'diff-hl)
   (after-load 'dired
-    (add-hook 'dired-mode-hook 'diff-hl-dired-mode t)
+    (add-hook 'dired-mode-hook 'turn-on-diff-hl-mode t)
     (add-hook 'dired-mode-hook 'diff-hl-flydiff-mode t)))
 
 (provide 'init-dired)
