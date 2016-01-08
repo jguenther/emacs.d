@@ -45,7 +45,7 @@
 ;; needed to prevent missing org-babel-header-args-safe-fn error
 (require 'init-org)
 
-(quelpa '(elpy :fetcher file :path "~/code/elpy/"))
+(quelpa '(elpy :fetcher file :path (expand-file-name "~/code/elpy/")))
 ;;(require-package 'elpy)
 
 (after-load 'elpy
@@ -567,7 +567,7 @@ sys.path."
 
 
 ;;(require-package 'nose)
-(quelpa '(nose :fetcher file :path "~/code/nosemacs/"))
+(quelpa '(nose :fetcher file :path (expand-file-name "~/code/nosemacs/")))
 
 (defun tak/nose-project-root-p (dirname)
   "Returns t if DIRNAME is a `projectile-project-root', and nil otherwise."
