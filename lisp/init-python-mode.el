@@ -5,7 +5,7 @@
               python-indent-guess-indent-offset nil
               python-indent-guess-indent-offset-verbose nil
               python-fill-docstring-style (quote django)
-              
+
               elpy-rpc-backend "jedi"
               indent-guide-recursive nil
               jedi:setup-keys t
@@ -42,7 +42,7 @@
 (after-load 'elpy
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
   (setq elpy-modules (delq 'elpy-module-highlight-indentation elpy-modules))
-  
+
   ;; use jedi completion instead
   (setq elpy-modules (delq 'elpy-module-company elpy-modules))
   ;; if using company, require company-jedi instead of jedi
@@ -56,19 +56,19 @@
     (if (and (not (file-directory-p elpy-snippets-dir))
              (file-directory-p elpy-snippets-source-dir))
         (copy-directory elpy-snippets-source-dir elpy-snippets-dir)))
-  
+
   (unless (require 'yasnippet nil t)
     (setq elpy-modules (delq 'elpy-module-yasnippet elpy-modules)))
 
   (require 'jedi)
-  
+
   ;; note: this isn't necessary. the jedi epc server only needs to be installed
   ;; in the venv, jedi itself can go in site packages dir
-  
+
   ;; (tak/setup-elpy-rpc)
   )
 
-;; add jedi installdir in venv to elpy-rpc-pythonpath 
+;; add jedi installdir in venv to elpy-rpc-pythonpath
 (defun tak/setup-elpy-rpc ()
   (let* ((env (if jedi:environment-root
                   jedi:environment-root
@@ -336,7 +336,7 @@ This requires the pytest package to be installed."
          (cmdline (combine-and-quote-strings (cons command args)))
          (process-environment (tak/compute-local-python-environment))
          )
-    
+
     (setf (gethash "shell" realgud:trepan2-command-hash) python-shell-interpreter)
     (setf (gethash "eval"  realgud:trepan2-command-hash) "pp %s")
     (setf (gethash "trepan2" realgud-command-hash) realgud:trepan2-command-hash)
@@ -458,38 +458,24 @@ sys.path."
     (define-key python-mode-map [remap forward-statement] #'python-nav-forward-statement)
     (define-key python-mode-map [remap backward-statement] #'python-nav-backward-statement)
 
-    
     (define-key python-mode-map [remap mark-defun] 'python-mark-defun)
-    
 
     ;; local binds
     (define-key python-mode-map (kbd "C-c C-<SPC>") 'python-add-breakpoint)
     (define-key python-mode-map (kbd "C-c M-p") #'run-python)
     (define-key python-mode-map [C-tab] #'jedi:complete)
-    
+
     ;; elpy--remove unnecessary binds
     (after-load 'elpy
       (cl-dolist (key '(
                         "C-c C-n"  ; elpy-flymake-next-error
-                        
                         "C-c C-p"  ; elpy-flymake-previous-error
-                        
                         "C-c C-v"  ; elpy-check
-                        
                         "C-c C-p"  ; run-python
-                        
                         "C-c C-s"  ; elpy-rgrep-symbol
                         ))
         (define-key elpy-mode-map (kbd key) nil)))
-    
-    ;; Skeletons
-    (define-key python-mode-map (kbd "C-c s c") 'python-skeleton-class)
-    (define-key python-mode-map (kbd "C-c s d") 'python-skeleton-def)
-    (define-key python-mode-map (kbd "C-c s f") 'python-skeleton-for)
-    (define-key python-mode-map (kbd "C-c s i") 'python-skeleton-if)
-    (define-key python-mode-map (kbd "C-c s t") 'python-skeleton-try)
-    (define-key python-mode-map (kbd "C-c s w") 'python-skeleton-while)
-    
+
     ;; python-x
     (define-key python-mode-map (kbd "C-c e C-j") 'python-shell-send-line)
     (define-key python-mode-map (kbd "C-c e l") 'python-shell-send-line)
@@ -521,7 +507,7 @@ sys.path."
     ;; override company-mode backend (even though it's disabled)
     (define-key elpy-mode-map (kbd "C-M-i") 'jedi:complete)
     (define-key python-mode-map (kbd "C-M-i") 'jedi:complete)
-    
+
     ;;
     ;; Use the regular major mode hook to add a buffer-local hack-local-variables-hook
     ;;
@@ -535,7 +521,6 @@ sys.path."
     ;;   "Run a hook for the major-mode after the local variables have been processed."
     ;;   (run-hooks (intern (concat (symbol-name major-mode) "-local-vars-hook"))))
     ;; (add-hook 'python-mode-local-vars-hook 'cr/python-mode-shell-setup)
-
     ))
 
 (after-load 'python
