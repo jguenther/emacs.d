@@ -441,9 +441,9 @@ variable."
          (tak/compute-local-python-environment))
     (if tak/debug-python-setup
         (let ((new-pythonpath (getenv "PYTHONPATH")))
-          (message "Computed new PYTHONPATH:\n%s" (if new-pythonpath
-                                                      (replace-regexp-in-string ":" "\n" new-pythonpath)
-                                                    ""))))
+          (message "PYTHONPATH=")
+          (if new-pythonpath
+              (message (replace-regexp-in-string ":" "\n" new-pythonpath)))))
     (jedi:setup)
 
     (when tak/flycheck-enabled
