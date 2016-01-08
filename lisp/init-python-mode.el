@@ -219,9 +219,8 @@ running."
     ))
 
 (defun tak/current-project-root ()
-  (if (projectile-project-p)
-      (projectile-project-root)
-    "."))
+  (cond ((projectile-project-p) (projectile-project-root))
+        (t ".")))
 
 (after-load 'python
   (add-hook 'python-mode-hook #'tak/setup-python-shell)
