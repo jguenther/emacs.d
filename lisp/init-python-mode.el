@@ -14,7 +14,16 @@
               jedi-direx:hide-imports t
 
               ;; run flycheck-mode after hack-local-vars-hook
-              flycheck-global-modes '(not helm-command-mode python-mode))
+              flycheck-global-modes '(not helm-command-mode python-mode)
+
+              ;; defaults to pip site-packages dir
+              elpy-rpc-pythonpath nil)
+
+(defvar tak/debug-python-setup t
+  "If t, prints extra debugging info during initialization of
+  python-mode and related buffers")
+
+(defvar tak/pytest-wrapper-script (expand-file-name "~/code/scripts/run_pytest.sh"))
 
 (after-load 'python
   (setq python--prettify-symbols-alist '(("lambda" . 955))))
@@ -191,13 +200,18 @@ running."
 (defun tak/setup-python-shell ()
   (let ((setup-string (shell-command-to-string
                        (expand-file-name
-                        (format "~/code/scripts/run_pytest.sh -C %s -i"
-                                (if (projectile-project-p)
-                                    (projectile-project-root)
-                                  "."))))))
+                        (format "%s -C %s -i"
+                                tak/pytest-wrapper-script
+                                (tak/current-project-root))))))
     (setq tak/python-shell-setup-string setup-string)
     (add-to-list 'python-shell-setup-codes 'tak/python-shell-setup-string)
+    (add-hook 'hack-local-variables-hook 'tak/hack-python-locals nil t)
     ))
+
+(defun tak/current-project-root ()
+  (if (projectile-project-p)
+      (projectile-project-root)
+    "."))
 
 (after-load 'python
   (add-hook 'python-mode-hook #'tak/setup-python-shell)
@@ -299,8 +313,6 @@ running."
         (add-to-list 'args "--nocapturelog" t))
     args))
 
-(defvar tak/pytest-wrapper-script (expand-file-name "~/code/scripts/run_pytest.sh"))
-
 
 
 ;; pytest with trepan2 debugger
@@ -384,7 +396,7 @@ This requires the pytest package to be installed."
   (let* ((old-paths (if string
                         (s-split path-separator string t)
                       (list)))
-         (paths (if (listp paths) 
+         (paths (if (listp paths)
                     paths
                   (list paths)))
          (new-paths (progn
@@ -407,10 +419,12 @@ This requires the pytest package to be installed."
   "Computes a new `process-environment' that appends absolute paths in
 `python-shell-extra-pythonpaths' to the PYTHONPATH environment
 variable."
-  ;; (message "%s: in tak/compute-local-python-environment" (buffer-name))
+  (if tak/debug-python-setup
+      (message "%s: in tak/compute-local-python-environment" (buffer-name)))
   (let* ((extra-pythonpaths (--map (file-truename (concat it "/"))
                                    python-shell-extra-pythonpaths))
-         (new-pythonpath (tak/append-paths-to-env-var "PYTHONPATH" extra-pythonpaths)))
+         (new-pythonpath (tak/append-paths-to-env-var "PYTHONPATH" extra-pythonpaths))
+         (new-process-environment process-environment))
     ;; (let* ((project-pythonpaths (tak/project-pythonpaths))
     ;;        (all-extra-pythonpaths (append python-shell-extra-pythonpaths project-pythonpaths))
     ;;        (extra-pythonpaths-truenames (--map (file-truename (concat it "/"))
@@ -418,13 +432,18 @@ variable."
     ;;        (new-pythonpath (tak/append-paths-to-env-var "PYTHONPATH" extra-pythonpaths-truenames)))
     (if (> (length new-pythonpath) 0)
         (cons (concat "PYTHONPATH=" new-pythonpath)
-              process-environment)
-      process-environment)))
+              new-process-environment)
+      new-process-environment)))
 
 (defun tak/hack-python-locals ()
   (when (eq major-mode 'python-mode)
     (set (make-local-variable 'process-environment)
          (tak/compute-local-python-environment))
+    (if tak/debug-python-setup
+        (let ((new-pythonpath (getenv "PYTHONPATH")))
+          (message "Computed new PYTHONPATH:\n%s" (if new-pythonpath
+                                                      (replace-regexp-in-string ":" "\n" new-pythonpath)
+                                                    ""))))
     (jedi:setup)
 
     (when tak/flycheck-enabled
@@ -556,16 +575,6 @@ sys.path."
          (default-directory absdir)
          (projectile-root (directory-file-name (projectile-project-root))))
     (string= absdir projectile-root)
-    ))
-
-(defun tak/setup-nose ()
-  (let ((setup-string (shell-command-to-string
-                       (expand-file-name
-                        (format "~/code/scripts/run_pytest.sh -C %s -i"
-                                (projectile-project-root))))))
-    (setq tak/python-shell-setup-string setup-string)
-    (add-to-list 'python-shell-setup-codes 'tak/python-shell-setup-string)
-    (add-hook 'hack-local-variables-hook 'tak/hack-python-locals nil t)
     ))
 
 (defun tak/compute-nose-extra-args ()
