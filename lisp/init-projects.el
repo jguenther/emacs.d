@@ -41,6 +41,13 @@
 
 
 
+;;; project types
+
+;; try top-down-recurring first
+(add-to-ordered-list 'projectile-project-root-files-functions
+                     'projectile-root-top-down-recurring
+                     1)
+
 ;; remove make project type
 (remhash 'make projectile-project-types)
 
@@ -69,6 +76,7 @@
                                   nil)
 
 (add-to-list 'projectile-project-root-files "tasks.py")
+(add-to-list 'projectile-project-root-files-top-down-recurring "tasks.py")
 
 (defun tak/projectile-test-suffix-vbuild (project-type)
   "Advise `projectile-test-suffix-function' for vbuild project type."
