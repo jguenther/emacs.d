@@ -573,22 +573,6 @@ Sets TERM=xterm-256color"
 
 
 
-(require-package 'projectile)
-(require-package 'org-projectile)
-
-(after-load 'projectile
-  (add-to-list 'projectile-project-root-files "pytest.ini"))
-
-(projectile-global-mode)
-
-(require-package 'speedbar)
-(require-package 'sr-speedbar)
-(require-package 'project-persist-drawer)
-(require-package 'ppd-sr-speedbar)
-(project-persist-drawer-mode t)
-
-
-
 (require-package 'free-keys)
 (require 'free-keys)
 

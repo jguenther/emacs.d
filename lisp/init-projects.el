@@ -1,7 +1,13 @@
 ;;; init-projects
 (require-package 'projectile)
+(require-package 'org-projectile)
+
 (require-package 'perspective)
 (require-package 'persp-projectile)
+(require-package 'speedbar)
+(require-package 'sr-speedbar)
+(require-package 'project-persist-drawer)
+(require-package 'ppd-sr-speedbar)
 
 (setq-default projectile-enable-caching nil
               projectile-keymap-prefix (kbd "C-c p")
@@ -25,19 +31,13 @@
   (require 'persp-projectile)
   (global-set-key (kbd "s-p") #'projectile-persp-switch-project)
   (projectile-global-mode)
+  (project-persist-drawer-mode t)
   )
 
 (add-hook 'after-init-hook #'tak/init-perspective)
 
 ;; doesn't seem to work without deferring it
 (add-hook 'desktop-after-read-hook #'tak/init-perspective)
-
-(require-package 'org-projectile)
-(require-package 'speedbar)
-(require-package 'sr-speedbar)
-(require-package 'project-persist-drawer)
-(require-package 'ppd-sr-speedbar)
-(project-persist-drawer-mode t)
 
 
 
@@ -50,6 +50,7 @@
                                   nil
                                   (expand-file-name "~/code/scripts/run_pytest.sh")
                                   nil)
+(add-to-list 'projectile-project-root-files "pytest.ini")
 
 (defun tak/projectile-test-suffix-pytest (project-type)
   "Advise `projectile-test-suffix-function' for pytest project type."
@@ -66,6 +67,8 @@
                                   nil
                                   (list "invoke" "test" "-i")
                                   nil)
+
+(add-to-list 'projectile-project-root-files "tasks.py")
 
 (defun tak/projectile-test-suffix-vbuild (project-type)
   "Advise `projectile-test-suffix-function' for vbuild project type."
