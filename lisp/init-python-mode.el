@@ -19,6 +19,16 @@
               ;; defaults to pip site-packages dir
               elpy-rpc-pythonpath nil)
 
+(defun tak/toggle-debug-python-setup ()
+  (interactive)
+  (setq tak/debug-python-setup (if (not tak/debug-python-setup)
+                                   t nil))
+  (message "python setup debugging %s" (if tak/debug-python-setup "enabled" "disabled"))
+  )
+
+(after-load 'init-local
+  (define-key endless/toggle-map "p" #'tak/toggle-debug-python-setup))
+
 (defvar tak/debug-python-setup t
   "If t, prints extra debugging info during initialization of
   python-mode and related buffers")
