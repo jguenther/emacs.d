@@ -1,3 +1,6 @@
+(require-package 'flycheck)
+(require-package 'buttercup)  ; missing require in flycheck
+
 (defun tak/disable-flycheck-outside-home-dir ()
   "Turns off `flycheck-mode' unless `buffer-file-name' is in the
   user's home directory."
