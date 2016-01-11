@@ -555,6 +555,7 @@ sys.path."
 
 (after-load 'python
   (add-hook 'python-mode-hook 'tak/python-setup)
+  (add-hook 'compilation-mode-hook #'tak/hack-python-locals)
   )
 
 (after-load 'realgud
@@ -574,55 +575,6 @@ sys.path."
 
 (add-to-list 'auto-mode-alist
              '("/\\.?pylintrc[^/]*\\'" . pylintrc-mode))
-
-
-
-;;(require-package 'nose)
-(quelpa '(nose :fetcher file :path (expand-file-name "~/code/nosemacs/")))
-
-(defun tak/nose-project-root-p (dirname)
-  "Returns t if DIRNAME is a `projectile-project-root', and nil otherwise."
-  (let* ((absdir (directory-file-name (expand-file-name dirname)))
-         (default-directory absdir)
-         (projectile-root (directory-file-name (projectile-project-root))))
-    (string= absdir projectile-root)
-    ))
-
-(defun tak/compute-nose-extra-args ()
-  (--map (format "--with-path=%s" (file-truename (concat it "/")))
-         python-shell-extra-pythonpaths)
-  )
-
-(defun tak/run-nose-advice (orig-function &rest args)
-  "Advise `run-nose' to set `default-directory' to the project root
-and add extra args to `nose-extra-args'."
-  (let* ((project-root (projectile-project-root))
-         (default-directory project-root)
-         (nose-extra-args (tak/compute-nose-extra-args)))
-    (apply orig-function args)))
-
-(advice-add 'run-nose :around #'tak/run-nose-advice)
-
-(defun tak/set-nose-extra-args (orig-function &rest args)
-  "Advise `run-nose' to set `default-directory' to the project root."
-  (let* ((project-root (projectile-project-root))
-         (default-directory project-root))
-    (apply orig-function args)))
-(advice-add 'run-nose :around #'tak/set-nose-extra-args)
-
-(after-load 'python
-  (require 'nose)
-  (add-hook 'python-mode-hook #'nose-mode)
-  (setq nose-project-root-test #'tak/nose-project-root-p)
-  (define-key nose-mode-map (kbd "C-c a") #'nosetests-all)
-  (define-key nose-mode-map (kbd "C-c m") #'nosetests-module)
-  (define-key nose-mode-map (kbd "C-c t") #'nosetests-one)
-  (define-key nose-mode-map (kbd "C-c ,") #'nosetests-again)
-  (define-key nose-mode-map (kbd "C-c A") #'nosetests-pdb-all)
-  (define-key nose-mode-map (kbd "C-c M") #'nosetests-pdb-module)
-  (define-key nose-mode-map (kbd "C-c .") #'nosetests-pdb-one)
-  (add-hook 'compilation-mode-hook #'tak/hack-python-locals)
-  )
 
 
 
