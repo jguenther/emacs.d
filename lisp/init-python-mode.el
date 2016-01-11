@@ -361,6 +361,8 @@ This requires the pytest package to be installed."
     (setf (gethash "shell" realgud:trepan2-command-hash) python-shell-interpreter)
     (setf (gethash "eval"  realgud:trepan2-command-hash) "pp %s")
     (setf (gethash "trepan2" realgud-command-hash) realgud:trepan2-command-hash)
+    (setf (gethash "trepan2" realgud:variable-basename-hash) "realgud:trepan2")
+
     (trepan2 cmdline)))
 
 (after-load 'elpy
