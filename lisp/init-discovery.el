@@ -39,6 +39,10 @@
                            )
      (popup-keys:add-thing 'popup-keys:run-vc
                            'action
+                           "p" "popup commit message" #'git-messenger:popup-message
+                           )
+     (popup-keys:add-thing 'popup-keys:run-vc
+                           'action
                            "t" "git-timemachine" 'git-timemachine
                            )
      (popup-keys:add-thing 'popup-keys:run-vc

@@ -40,6 +40,12 @@
 (require-package 'git-messenger)
 (global-set-key (kbd "C-x v p") #'git-messenger:popup-message)
 
+;; TODO: bind popup-close to all other unbound keys
+;;(define-key git-messenger-map (kbd "q") 'git-messenger:popup-close)
+(define-key git-messenger-map (kbd "M-w") 'git-messenger:copy-commit-id)
+(define-key git-messenger-map (kbd "w") 'git-messenger:copy-commit-id)
+(define-key git-messenger-map (kbd "m") 'git-messenger:copy-message)
+
 
 
 (global-set-key (kbd "C-x v t") #'git-timemachine)
