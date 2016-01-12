@@ -55,7 +55,7 @@
 ;; needed to prevent missing org-babel-header-args-safe-fn error
 (require 'init-org)
 
-(quelpa '(elpy :fetcher file :path (expand-file-name "~/code/elpy/")))
+(quelpa `(elpy :fetcher file :path ,(expand-file-name "~/code/elpy/")))
 ;;(require-package 'elpy)
 
 (after-load 'elpy
