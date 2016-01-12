@@ -343,6 +343,10 @@ between `nil` and `t` no matter the original value of
 (define-key tak/vc-toggle-map "h" #'magit-diff-toggle-refine-hunk)
 (define-key tak/vc-toggle-map "w" #'tak/toggle-magit-diff-highlight-trailing)
 
+(define-key tak/vc-toggle-map "t" #'git-timemachine-toggle)
+(define-key tak/vc-toggle-map "T" #'git-wip-timemachine-toggle)
+(define-key tak/vc-toggle-map "W" #'git-wip-timemachine-toggle)
+
 (after-load 'aggressive-indent
   (add-to-list 'aggressive-indent-excluded-modes 'cperl-mode t))
 

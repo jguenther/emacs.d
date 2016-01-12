@@ -42,6 +42,12 @@
 
 
 
+(global-set-key (kbd "C-x v t") #'git-timemachine)
+(global-set-key (kbd "C-x v T") #'git-wip-timemachine)
+(global-set-key (kbd "C-x v w") #'git-wip-timemachine)
+
+
+
 ;; magit-filenotify
 (unless (or (eq system-type 'windows-nt) *is-a-mac*)
                                         ; magit-filenotify is slow on windows

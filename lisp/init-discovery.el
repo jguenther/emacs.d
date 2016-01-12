@@ -37,7 +37,16 @@
                            'action
                            "F" "helm grep-ag" 'helm-do-grep-ag
                            )
+     (popup-keys:add-thing 'popup-keys:run-vc
+                           'action
+                           "t" "git-timemachine" 'git-timemachine
+                           )
+     (popup-keys:add-thing 'popup-keys:run-vc
+                           'action
+                           "T" "git-wip-timemachine" 'git-wip-timemachine
+                           )
      ))
+
 (global-set-key (kbd "C-x v") 'popup-keys:run-vc)
 
 (global-set-key (kbd "C-c P") 'popup-keys:run-projectile)
