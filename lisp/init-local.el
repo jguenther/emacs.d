@@ -1002,5 +1002,9 @@ with the patterns in `tak/semantic-unwanted-file-patterns'."
 
 
 
+(require-package 'markdown-preview-mode)
+
+
+
 
 (provide 'init-local)
