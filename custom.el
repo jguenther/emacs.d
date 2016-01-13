@@ -53,7 +53,6 @@
  '(js-indent-level 4)
  '(js2-basic-offset 4 t)
  '(magit-push-always-verify t)
- '(magit-revert-buffers 2)
  '(magit-save-repository-buffers (quote dontask))
  '(make-backup-files t)
  '(mark-ring-max 32)
