@@ -110,6 +110,19 @@ locate PACKAGE."
 ;; quelpa -- local ELPA repo tool
 (require-package 'quelpa)
 
+(defun tak/quelpa-with-matching-files (package-name source-dir pattern)
+  (let* ((expanded-source-dir (expand-file-name source-dir))
+         (files (directory-files-recursively expanded-source-dir pattern t))
+         (filtered-files (-filter
+                          (lambda (file)
+                            (and (null (string-match-p "^.*/Makefile" file))
+                                 (null (string-match-p "^.*/\\.git" file))))
+                          files)))
+    (quelpa `(,package-name
+              :fetcher file
+              :path ,expanded-source-dir
+              :files ,filtered-files)))
+  )
 ;; ;; TODO advise package-build--checkout-file (defined in quelpa.el) to add
 ;; ;; snippets/ dir to package-build-default-files-spec
 ;; (defun tak/quelpa-add-snippets (orig-function &rest args)
