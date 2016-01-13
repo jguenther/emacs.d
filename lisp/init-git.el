@@ -42,9 +42,11 @@
 
 ;; TODO: bind popup-close to all other unbound keys
 ;;(define-key git-messenger-map (kbd "q") 'git-messenger:popup-close)
-(define-key git-messenger-map (kbd "M-w") 'git-messenger:copy-commit-id)
-(define-key git-messenger-map (kbd "w") 'git-messenger:copy-commit-id)
-(define-key git-messenger-map (kbd "m") 'git-messenger:copy-message)
+(after-load 'git-messenger
+  (define-key git-messenger-map (kbd "M-w") 'git-messenger:copy-commit-id)
+  (define-key git-messenger-map (kbd "w") 'git-messenger:copy-commit-id)
+  (define-key git-messenger-map (kbd "m") 'git-messenger:copy-message)
+  )
 
 
 
