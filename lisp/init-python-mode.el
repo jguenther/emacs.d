@@ -29,7 +29,7 @@
 (after-load 'init-local
   (define-key endless/toggle-map "p" #'tak/toggle-debug-python-setup))
 
-(defvar tak/debug-python-setup t
+(defvar tak/debug-python-setup nil
   "If t, prints extra debugging info during initialization of
   python-mode and related buffers")
 
