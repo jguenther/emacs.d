@@ -195,6 +195,7 @@
 (unless (server-running-p)
   (server-start))
 
+(setq inhibit-startup-echo-area-message "jguenther")
 (setq tak/init-load-complete t)
 
 (provide 'init)
