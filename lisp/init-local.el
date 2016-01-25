@@ -856,6 +856,8 @@ supply a positive argument once more with C-u C-SPC."
                      zone-pgm-random-life
                      ])
 ;;(zone-when-idle 120)
+(require-package 'zone-rainbow)
+(require-package 'zone-select)
 
 
 
